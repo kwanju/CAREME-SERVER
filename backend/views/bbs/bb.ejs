@@ -1,0 +1,216 @@
+<div class="container mt-5">
+  <span id="bb_serial" style="display:none;"></span>
+  <table class="table border">
+
+    <tbody>
+      <tr>
+
+        <td class="text-center bg-dark text-white">
+          글 제목
+        </td>
+        <td class="text-center" id="bb_title">
+          안녕
+        </td>
+        <td class="text-center  bg-dark text-white">
+          작성자
+        </td>
+        <td class="text-center" id="bb_nickname">
+          나야
+        </td>
+
+
+      </tr>
+
+      <tr>
+
+        <td class="text-center bg-dark text-white">
+          작성일자
+        </td>
+        <td class="text-center" id="bb_date">
+          몰라
+        </td>
+      </tr>
+      <tr style="height:350px;">
+        <td colspan="4" id="">
+          <div id="bb_content" style="height:350px;"></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="container">
+    
+    <div style="float:right;">
+      <button class="btn btn-dark" onclick="modify();"><span class="oi oi-pencil mr-1"></span>수정</button>
+      <button class="btn btn-warning" onclick="remove();"><span class="oi oi-trash mr-1"></span>삭제</button>
+    </div>
+    <div style="clear: both;"></div> 
+  </div>
+  
+  <div class="container mt-3" style="padding:10px; background-color:#f9f9f9;">
+    <div class="container" style="display:block;">
+      <div style="float:left; width:10%"><h3>댓글</h3></div>
+      <div style="float:right; width:90%">
+       <div class="p-1" style="float:left; width:85%"><textarea class="form-control" style="width:100%;" name="" id="bb_comment_content" cols="30" rows="1"></textarea></div>
+       <div class="p-1" style="float:right; width:15%"><button class="btn btn-dark" onclick="writeComment();">댓글 쓰기</button></div>   
+      
+     </div>
+    </div>
+    
+    <div style="clear:both;"></div>
+    <ul style="list-style-type: none;" id="bb_comment_ul">
+      
+    </ul>
+  </div>
+</div>
+<div id="bb_ok_modal_container"></div>
+
+<li style="margin:10px; display:none;" class="comment-li">
+  <div class="border rounded" style="padding:5px;">
+    <div class="">
+      <span class="mr-1 comment-nickname" style="font-weight: bold;">닉네임</span>
+      <span class="comment-time">2018:0</span>
+    </div>
+    <p class="comment-comment">안녕하세요</p>
+  </div>
+</li>
+<script src="/javascripts/bbs/init.js"></script>
+<script src="/javascripts/quill.js"></script>
+
+
+<script>
+  var bb = <%- bb %>;
+
+  var mFocus = false;
+
+  
+  var quill = new Quill('#bb_content', {
+    theme: 'snow',
+    modules:{
+      toolbar : false
+    },
+    readOnly:true
+  });
+
+  setBbs(bb);
+  loadComment();
+
+  function writeComment(){
+    var isLogin=false;
+
+    <% if(csession!=0) { %>
+      isLogin=true;
+    <% } %>
+    
+    var bbsSerial = $('#bb_serial').html();
+    var content = $('#bb_comment_content').val();
+    
+    $.ajax({
+       type:"post",
+       url:"/bbs/action/writeComment",
+       data:{
+         bbs_serial:bbsSerial,
+         content : content
+       },
+       success: function(_res){
+        mFocus= true;
+        loadComment();
+       }
+     });
+
+  }
+
+  function loadComment(){
+    $.ajax({
+      type:"post",
+      url:"/bbs/JSON/comments",
+      data:{bbs_serial:$('#bb_serial').html()},
+      success:function(_res){
+        var res = JSON.parse(_res);
+        console.dir(res);
+
+        if(res.result==2){
+
+        }else if(res.result==1){
+          $('#bb_comment_ul').html("");
+          for(var i=0;i<res.list.length;i++){
+            var comment = res.list[i];
+            
+            if(mFocus && i == res.list.length-1){
+              addComment(comment.nickname,comment.content,comment.time,true);
+              mFocus=false;
+            }
+            else
+              addComment(comment.nickname,comment.content,comment.time,false);
+          }
+        }
+      }
+    })
+  }
+
+  function addComment(_nickname,_comment,_time,_isFocus){
+    var cloneLi = $($('.comment-li')[0]).clone()
+    cloneLi.find('.comment-nickname').html(_nickname);
+    cloneLi.find('.comment-comment').html(_comment);
+    cloneLi.find('.comment-time').html(_time);
+    cloneLi.appendTo('#bb_comment_ul');
+    cloneLi.show();
+
+    if(_isFocus){
+      $('html, body').animate({
+        scrollTop: parseInt(cloneLi.offset().top)
+    }, 500);
+    }
+    
+    
+  }
+
+  function setBbs(_bb){
+    $('#bb_serial').html(_bb.serial);
+    $('#bb_title').html(_bb.title);
+    $('#bb_nickname').html(_bb.nickname);
+    $('#bb_date').html(_bb.time);
+    quill.setContents(JSON.parse(_bb.content));    
+  }
+
+  function remove(){
+
+    if($('#bb_ok_modal_container').html()=="")
+      $('#bb_ok_modal_container').load("/utils/modal/ok_modal.html");
+
+    /* ok modal 구현해야함*/
+    setTimeout(function(){
+      showOkModal("게시글 삭제 확인","정말 삭제하시겠습니까?",null,function(){
+      post("/bbs/action/delete",{serial:$('#bb_serial').html()}); //send post message
+    })
+    },100);
+  }
+
+  function modify(){
+    alert("아직 미구현입니다.")
+  }
+  
+  //To send message by post
+  function post(path, params, method) {
+    method = method || "post"; // Set method to post by default if not specified.
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+        }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}
+</script>

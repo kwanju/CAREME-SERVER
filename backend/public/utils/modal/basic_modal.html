@@ -1,0 +1,40 @@
+<div class="modal fade" id="basic_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="basic_modal_title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="basic_modal_body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="basic_modal_close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showBasicModal(_title,_body,_before_callback,_after_callback){
+  
+  $('#basic_modal').unbind("hidden.bs.modal"); // 모달종료 이벤트 제거
+
+  $('#basic_modal_title').html(_title);
+  $('#basic_modal_body').html(_body);
+  $('#basic_modal').modal('show');
+
+  if(typeof _before_callback == 'function') // callback 실행
+    _before_callback();
+
+  if(typeof _after_callback == "function") // 모달 종료 후 callback
+    $('#basic_modal').on("hidden.bs.modal",_after_callback);
+  
+    
+  
+
+}
+</script>

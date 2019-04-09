@@ -1,0 +1,102 @@
+<div class="container" style="width:40%; min-width:500px">
+  <div class="container text-md-center">
+    <h2 class="">회원가입</h2>
+  </div>
+  <hr>
+  <form name="form" action="/user/action/registration" method="POST" onsubmit="return checkForm();">
+    <div class="row">
+
+
+      <label for="id">아이디</label>
+      <div class="input-group mb-3">
+        <input id="registration_id" type="text" name="id" class="form-control" onclick="checkChange();" aria-label="Recipient's username"
+          aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button type="button" class="btn btn-dark" onclick="checkId();"><span class="oi oi-circle-check"></span></button>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="row">
+      <label for="pw">비밀번호</label>
+      <input type="password" id="registration_pw" class="form-control" name="pw">
+    </div>
+    <div class="row">
+      <label for="nickname">닉네임</label>
+      <input type="text" id="registration_nickname" class="form-control" name="nickname">
+    </div>
+
+    <div class="container mt-5" style="text-align: center;">
+      <button class="btn btn-dark" type="submit" style="margin:0 10px; display:inline-block;">회원가입</button>
+    </div>
+  </form>
+</div>
+
+
+<!-- Basic Modal -->
+<div id="registration_basic_modal_container">
+
+</div>
+
+
+<script>
+  var validId = false;
+
+  $('#registration_basic_modal_container').load("/utils/modal/basic_modal.html") // load basic modal
+
+  function checkChange() {
+    validId = false;
+  }
+
+  function checkId() {
+    if (document.forms.form.id.value == '') {
+      showBasicModal("아이디중복확인", "아이디를 입력해주세요.");
+      return;
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: '/user/JSON/checkDupId',
+      data: { id: document.forms.form.id.value },
+      success: function (_data) {
+        if (_data == "false") {//아이디 중복
+          showBasicModal("아이디중복확인", "중복된 아이디입니다.")
+          validId = false;
+        } else { // 아이디 중복아님
+          showBasicModal("아이디중복확인", "사용가능한 아이디입니다.")
+          validId = true;
+        }
+      }
+    })
+  }
+
+  function checkForm() {
+    if (!validId) {
+      showBasicModal("폼 체크", "아이디 중복을 확인해주세요.", null, function () {
+        setTimeout(function () {
+          $('#registration_id').focus();
+        }, 100);
+
+      });
+      return false;
+    }
+    if (document.forms.form.pw.value == '') {
+      showBasicModal("폼 체크", "패스워드를 입력해주세요", null, function () {
+        setTimeout(function () {
+          $('#registration_pw').focus();
+        },100);
+      });
+      return false;
+    }
+    if (document.forms.form.nickname.value == '') {
+      showBasicModal("폼 체크", "닉네임을 입력해주세요",null,function(){
+        setTimeout(function(){
+          $('#registration_nickname').focus();
+        },100);
+      });
+      return false;
+    }
+
+  }
+</script>

@@ -1,0 +1,41 @@
+<div class="modal fade" id="ok_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ok_modal_title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="ok_modal_body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="ok_modal_close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="ok_modal_ok" class="btn btn-dark" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showOkModal(_title,_body,_before_callback,_after_callback){
+  
+  $('#ok_modal_ok').unbind("hidden.bs.modal"); // 모달종료 이벤트 제거
+
+  $('#ok_modal_title').html(_title);
+  $('#ok_modal_body').html(_body);
+  $('#ok_modal').modal('show');
+
+  if(typeof _before_callback == 'function') // callback 실행
+    _before_callback();
+
+  if(typeof _after_callback == "function") // 모달 종료 후 callback
+    $('#ok_modal_ok').on("click",_after_callback);
+  
+    
+  
+
+}
+</script>

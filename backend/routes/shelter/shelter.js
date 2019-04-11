@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-var JSONuser = require('./userJSON');
-var page = require('./userPage');
-var action = require('./userAction');
+var JSONuser = require('./json');
+var page = require('./page');
+var action = require('./action');
 var verbose = require("../../verbose");
 const PATH = "route/user.js"
 

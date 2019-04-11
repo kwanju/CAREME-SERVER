@@ -11,9 +11,9 @@ exports.checkDupId = function (_id, _callback) {
     _conn.query(query, [_id], function (_err, _results) {
       if (_err)
         throw _err;
-      verbose.log(PATH, "id : " + _id);
-      verbose.dir(PATH, _results);
-      verbose.log(PATH, "checkDupId : " + _results.length);
+     // verbose.log(PATH, "id : " + _id);
+     // verbose.dir(PATH, _results);
+     // verbose.log(PATH, "checkDupId : " + _results.length);
 
       if (_results.length > 0) // if id is dup
         _callback(true);

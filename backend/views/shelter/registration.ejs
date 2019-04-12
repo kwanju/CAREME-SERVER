@@ -1,36 +1,56 @@
 <div class="container" style="width:40%; min-width:500px">
-  <div class="container text-md-center">
-    <h2 class="">회원가입</h2>
-  </div>
-  <hr>
-  <form name="form" action="/user/action/registration" method="POST" onsubmit="return checkForm();">
-    <div class="row">
+    <div class="container text-md-center">
+        <h2 class="">보호소 회원가입</h2>
+    </div>
+    <hr>
+    <form name="form" action="/user/action/registration" method="POST" onsubmit="return checkForm();">
+        <div class="row mt-3">
 
 
-      <label for="id">아이디</label>
-      <div class="input-group mb-3">
-        <input id="registration_id" type="text" name="id" class="form-control" onclick="checkChange();" aria-label="Recipient's username"
-          aria-describedby="basic-addon2">
-        <div class="input-group-append">
-          <button type="button" class="btn btn-dark" onclick="checkId();"><span class="oi oi-circle-check"></span></button>
+            <label for="id">아이디</label>
+            <div class="input-group mb-3">
+                <input id="registration_id" type="text" name="id" class="form-control" onclick="checkChange();"
+                    aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-dark" onclick="checkId();"><span
+                            class="oi oi-circle-check"></span></button>
+                </div>
+            </div>
+
+
         </div>
-      </div>
+        <div class="row">
+            <label for="pw">비밀번호</label>
+            <input type="password" id="registration_pw" class="form-control" name="pw">
+        </div>
+
+        <div class="row mt-3">
+            <label for="name">보호소 이름</label>
+            <input type="text" id="registration_name" class="form-control" name="name">
+        </div>
+
+        <div class="row mt-3">
+            <label for="name">보호소 주소</label>
+            <div class="input-group mb-3">
+                <input id="registration_position1" type="text" name="position1" class="form-control"
+                    aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-dark" onclick="getPosition();">주소 찾기</button>
+                </div>
+            </div>
+            <input type="text" id="registration_postiion2" class="form-control" name="position2" placeholder="상세주소">
+        </div>
+
+        <div class="row mt-3">
+            <label for="name">보호소 전화번호</label>
+            <input type="text" id="registration_phone_number" class="form-control" name="phone_number">
+        </div>
 
 
-    </div>
-    <div class="row">
-      <label for="pw">비밀번호</label>
-      <input type="password" id="registration_pw" class="form-control" name="pw">
-    </div>
-    <div class="row">
-      <label for="nickname">닉네임</label>
-      <input type="text" id="registration_nickname" class="form-control" name="nickname">
-    </div>
-
-    <div class="container mt-5" style="text-align: center;">
-      <button class="btn btn-dark" type="submit" style="margin:0 10px; display:inline-block;">회원가입</button>
-    </div>
-  </form>
+        <div class="container mt-5" style="text-align: center;">
+            <button class="btn btn-dark" type="submit" style="margin:0 10px; display:inline-block;">회원가입</button>
+        </div>
+    </form>
 </div>
 
 
@@ -40,63 +60,77 @@
 </div>
 
 
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
-  var validId = false;
+    /*
+        도로명 주소 입력받는 함수.(daum api)
+    */
+    function getPosition() {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                document.getElementById("registration_position1").value = data.roadAddress; // 도로명 주소 입력.
+            }
+        }).open();
+    }
+</script>
 
-  $('#registration_basic_modal_container').load("/utils/modal/basic_modal.html") // load basic modal
+<script>
+    var validId = false;
 
-  function checkChange() {
-    validId = false;
-  }
+    $('#registration_basic_modal_container').load("/utils/modal/basic_modal.html") // load basic modal
 
-  function checkId() {
-    if (document.forms.form.id.value == '') {
-      showBasicModal("아이디중복확인", "아이디를 입력해주세요.");
-      return;
+    function checkChange() {
+        validId = false;
     }
 
-    $.ajax({
-      type: 'POST',
-      url: '/user/JSON/checkDupId',
-      data: { id: document.forms.form.id.value },
-      success: function (_data) {
-        if (_data == "false") {//아이디 중복
-          showBasicModal("아이디중복확인", "중복된 아이디입니다.")
-          validId = false;
-        } else { // 아이디 중복아님
-          showBasicModal("아이디중복확인", "사용가능한 아이디입니다.")
-          validId = true;
+    function checkId() {
+        if (document.forms.form.id.value == '') {
+            showBasicModal("아이디중복확인", "아이디를 입력해주세요.");
+            return;
         }
-      }
-    })
-  }
 
-  function checkForm() {
-    if (!validId) {
-      showBasicModal("폼 체크", "아이디 중복을 확인해주세요.", null, function () {
-        setTimeout(function () {
-          $('#registration_id').focus();
-        }, 100);
-
-      });
-      return false;
-    }
-    if (document.forms.form.pw.value == '') {
-      showBasicModal("폼 체크", "패스워드를 입력해주세요", null, function () {
-        setTimeout(function () {
-          $('#registration_pw').focus();
-        },100);
-      });
-      return false;
-    }
-    if (document.forms.form.nickname.value == '') {
-      showBasicModal("폼 체크", "닉네임을 입력해주세요",null,function(){
-        setTimeout(function(){
-          $('#registration_nickname').focus();
-        },100);
-      });
-      return false;
+        $.ajax({
+            type: 'POST',
+            url: '/user/JSON/checkDupId',
+            data: { id: document.forms.form.id.value },
+            success: function (_data) {
+                if (_data == "false") {//아이디 중복
+                    showBasicModal("아이디중복확인", "중복된 아이디입니다.")
+                    validId = false;
+                } else { // 아이디 중복아님
+                    showBasicModal("아이디중복확인", "사용가능한 아이디입니다.")
+                    validId = true;
+                }
+            }
+        })
     }
 
-  }
+    function checkForm() {
+        if (!validId) {
+            showBasicModal("폼 체크", "아이디 중복을 확인해주세요.", null, function () {
+                setTimeout(function () {
+                    $('#registration_id').focus();
+                }, 100);
+
+            });
+            return false;
+        }
+        if (document.forms.form.pw.value == '') {
+            showBasicModal("폼 체크", "패스워드를 입력해주세요", null, function () {
+                setTimeout(function () {
+                    $('#registration_pw').focus();
+                }, 100);
+            });
+            return false;
+        }
+        if (document.forms.form.nickname.value == '') {
+            showBasicModal("폼 체크", "닉네임을 입력해주세요", null, function () {
+                setTimeout(function () {
+                    $('#registration_nickname').focus();
+                }, 100);
+            });
+            return false;
+        }
+
+    }
 </script>

@@ -21,7 +21,7 @@ router.post('/login', function (_req, _res) {
 });
 
 router.post('/registration', function (_req, _res) {
-  var uc = require('../../controllers/userController');
+  var uc = require('../../controllers/shelterController');
   uc.registration(_req.body, function () {
     _res.redirect('/');
   });

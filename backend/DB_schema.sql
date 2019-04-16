@@ -16,4 +16,14 @@ CREATE TABLE shelter(
     PRIMARY KEY(idx)
 );
 
+CREATE TABLE user(
+    idx int(10) not null AUTO_INCREMENT,
+    id varchar(100) not null,
+    pw varchar(100) not null,
+    phone_number varchar(100),
+    email varchar(100),
+    PRIMARY KEY(idx)
+);
+INSERT INTO user(id,pw,phone_number,email) VALUES('test','test','01012345678','test@test.com');
+
 INSERT INTO shelter(id,pw,name) VALUES('test','test','테스트보호소');

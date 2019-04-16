@@ -6,4 +6,5 @@ router.get("/registration", function(_req,_res){
 
 });
 
+
 module.exports = router;

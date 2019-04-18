@@ -16,15 +16,14 @@ CREATE TABLE shelter(
     PRIMARY KEY(idx)
 );
 
-CREATE TABLE lostAnimal(
+CREATE TABLE user(
     idx int(10) not null AUTO_INCREMENT,
-    dType varchar(100) not null,
-    age int(10) not null,
-    dname varchar(255) not null,
-    sex int(10) not null,
-    weight int(10) not null,
-    url varchar(255) not null,
-    
+    id varchar(100) not null,
+    pw varchar(100) not null,
+    phone_number varchar(100),
+    email varchar(100),
     PRIMARY KEY(idx)
 );
+INSERT INTO user(id,pw,phone_number,email) VALUES('test','test','01012345678','test@test.com');
+
 INSERT INTO shelter(id,pw,name) VALUES('test','test','테스트보호소');

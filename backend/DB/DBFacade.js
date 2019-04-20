@@ -53,3 +53,8 @@ exports.writeComment = function(_data,_callback){
   var b = require('./bbs/bbs');
   b.writeComment(_data,_callback);
 }
+
+exports.searchShelterCategory = function(_data,_callback){
+    var shelter = require('./android/shelter');
+    shelter.getShelterByCategory(_data,_callback);
+}

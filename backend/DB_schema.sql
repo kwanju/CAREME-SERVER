@@ -24,6 +24,34 @@ CREATE TABLE user(
     email varchar(100),
     PRIMARY KEY(idx)
 );
+
+CREATE TABLE animal(
+    idx int(10) not null AUTO_INCREMENT,
+    species_code int(10) COMMENT '견종 코드 ( 견종코드로 나타내는 것이 좋을 것 같음)',
+    estimated_birth_age int(10) COMMENT '추정 태어난 연도',
+    name varchar(100),
+    sex char(1) COMMENT 'M:남 / W:여',
+    weight int(10),
+    url_picture varchar(400) COMMENT '사진 url',
+    register_data date COMMENT '보호소에 등록된 날짜',
+    discovered_spot varchar(400) COMMENT '발견된 장소',
+    state int(3) COMMENT '견종 상태 - 0:안락사 / 1:보호소 보호중 / .... (점차 추가해야함)',
+    shelter_idx int(10) not null COMMENT '보호중인 보호소 id',
+    discover_idx int(10) COMMENT '발견했어요 id - null:발견했어요로 보호소에 가져오지 않았을 때 - 발견했어요 만들었을 때 FOREIGNKEY설정필요',
+    PRIMARY KEY(idx),
+    FOREIGN KEY(shelter_idx) REFERENCES shelter(idx)
+);
+
 INSERT INTO user(id,pw,phone_number,email) VALUES('test','test','01012345678','test@test.com');
 
 INSERT INTO shelter(id,pw,name) VALUES('test','test','테스트보호소');
+
+--test
+INSERT INTO animal(species_code,name,url_picture,shelter_idx) VALUES(1,'뽀삐',"picture",1);
+INSERT INTO animal(species_code,name,url_picture,shelter_idx) VALUES(3,'삐삐',"picture",1);
+INSERT INTO animal(species_code,name,url_picture,shelter_idx) VALUES(2,'뿌삐',"picture",1);
+INSERT INTO animal(species_code,name,url_picture,shelter_idx) VALUES(1,'아나',"picture",1);
+INSERT INTO animal(species_code,name,url_picture,shelter_idx) VALUES(3,'아마',"picture",1);
+INSERT INTO animal(species_code,name,url_picture,shelter_idx) VALUES(4,'가나',"picture",1);
+INSERT INTO animal(species_code,name,url_picture,shelter_idx) VALUES(5,'라마',"picture",1);
+INSERT INTO animal(species_code,name,url_picture,shelter_idx) VALUES(2,'파카',"picture",1);

@@ -4,7 +4,7 @@ var router = express.Router();
 var mainRouter = require('./main/main');
 var animalRouter = require('./animal/animal');
 var volunteerRouter = require('./volunteer/volunteer');
-var volunteerRouter = require('./mshelter/mshelter');
+var mshelterRouter = require('./mshelter/mshelter');
 
 
 router.use('/main',mainRouter);

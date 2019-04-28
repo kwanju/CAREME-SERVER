@@ -1,25 +1,43 @@
-<div class="container-fluid">
-    <ul class="nav flex-column">
-        <li class="nav-item">
-            <a class="nav-link active" href="/main">main</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="#">보호소 정보 관리</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/views/erp/animal">유기동물 정보 관리</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">봉사자 및 예약 관리</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">게시판 관리</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">채팅</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-    </ul>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Bootstrap Sidebar</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <p>Dummy Heading</p>
+            <li class="active">
+                <a href="/erp/main/main">main</a>
+            </li>
+            <li>
+                <a href="/erp/animal/animal">유기동물 정보 관리</a>
+            </li>
+            <li>
+                <a href="/erp/volunteer/volunteer">봉사자 및 예약 관리</a>
+            </li>
+            <li>
+                <a href="/erp/mshelter/mshelter">보호소 정보 관리</a>
+            </li>
+            <li>
+                <a href="#">게시판 관리</a>
+            </li>
+            <li>
+                <a href="#">채팅</a>
+            </li>
+            <li>
+                <a href="/erp/notifytest/notifytest">알림 테스트</a>
+            </li>
+        </ul>
+    </nav>
 </div>

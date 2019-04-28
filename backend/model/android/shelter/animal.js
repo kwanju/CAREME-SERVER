@@ -8,3 +8,12 @@ exports.getAnimalSummary = function(_data,_callback){
         _callback(res);
     })    
 }
+
+exports.getAnimalInfo = function(_data,_callback){
+    dbFacade.getAnimalInfo(_data,function(_result){
+        var res = {};
+        res.result = 1;
+        res.animalInfo = _result[0];
+        _callback(res);
+    });
+};

@@ -17,4 +17,14 @@ exports.getAnimalSummary = function(_data,_callback){
     poolAdapter.execute(sql+where,[_data.shelter_idx,_data.state],function(_results){
         _callback(_results);
     });
-}
+};
+
+// 보호동물 정보 가져오는 부분
+exports.getAnimalInfo = function(_data,_callback){
+    var sql = "SELECT * FROM animal ";
+    var where = "WHERE idx=?";
+
+    poolAdapter.execute(sql+where,[_data.animal_idx],function(_result){
+        _callback(_result);
+    });
+};

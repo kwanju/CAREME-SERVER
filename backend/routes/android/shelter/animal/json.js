@@ -13,5 +13,12 @@ router.post('/getAnimalSummary',function(_req,_res){
     });
 });;
 
+router.post('/getAnimalInfo',function(_req,_res){
+    var animalModel = require('../../../../model/android/shelter/animal');
+    animalModel.getAnimalInfo(_req.body,function(_result){
+        _res.send(_result);
+    })
+});
+
 
 module.exports = router;

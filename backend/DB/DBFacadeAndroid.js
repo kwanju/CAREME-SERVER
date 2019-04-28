@@ -7,3 +7,8 @@ exports.getAnimalSummary = function(_data,_callback){
     var shelter = require('./android/shelter');
     shelter.getAnimalSummary(_data,_callback);
 }
+
+exports.getAnimalInfo = function(_data,_callback){
+    var shelter = require('./android/shelter');
+    shelter.getAnimalInfo(_data,_callback);
+}

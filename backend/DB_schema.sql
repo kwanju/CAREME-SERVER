@@ -43,6 +43,16 @@ CREATE TABLE animal(
     FOREIGN KEY(shelter_idx,state) REFERENCES shelter(idx)
 );
 
+CREATE TABLE schedule(
+    idx int(10) not null AUTO_INCREMENT,
+    date date COMMENT '스케쥴 날짜',
+    user_idx int(10) not null COMMENT '사용자 id',
+    animal_idx int(10) not null COMMENT 'animal id',
+    PRIMARY KEY(idx),
+    FOREIGN KEY(user_idx) REFERENCES user(idx),
+    FOREIGN KEY(animal_idx) REFERENCES animal(idx)
+);
+
 INSERT INTO user(id,pw,phone_number,email) VALUES('test','test','01012345678','test@test.com');
 
 INSERT INTO shelter(id,pw,name) VALUES('test','test','테스트보호소');
@@ -58,3 +68,6 @@ INSERT INTO animal(species_code,name,url_picture,shelter_idx,state) VALUES(5,'�
 INSERT INTO animal(species_code,name,shelter_idx,state) VALUES(2,'파카',1,1);
 INSERT INTO animal(species_code,name,shelter_idx,state) VALUES(2,'나나나',1,1);
 INSERT INTO animal(species_code,name,shelter_idx,state) VALUES(2,'가가가가가가',1,1);
+
+INSERT INTO schedule(date,user_idx,animal_idx) VALUES ('2019-4-29',1,60);
+INSERT INTO schedule(date,user_idx,animal_idx) VALUES ('2019-4-30',1,60);

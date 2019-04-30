@@ -12,3 +12,8 @@ exports.getAnimalInfo = function(_data,_callback){
     var shelter = require('./android/shelter');
     shelter.getAnimalInfo(_data,_callback);
 }
+
+exports.getAnimalSchedule = function(_data,_callback){
+    var shelter = require('./android/shelter');
+    shelter.getAnimalSchedule(_data,_callback);
+}

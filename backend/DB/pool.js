@@ -14,7 +14,8 @@ Pool.prototype.init = function(){
     host : config.host,
     user : config.user,
     password : config.password,
-    database : config.database
+    database : config.database,
+    timezone:config.timezone
   });
 }
 

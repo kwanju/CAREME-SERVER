@@ -17,3 +17,12 @@ exports.getAnimalInfo = function(_data,_callback){
         _callback(res);
     });
 };
+
+exports.getAnimalSchedule = function(_data,_callback){
+    dbFacade.getAnimalSchedule(_data,function(_result){
+        var res = {};
+        res.result = 1;
+        res.schedule = _result;
+        _callback(res);
+    });
+}

@@ -20,9 +20,11 @@ CREATE TABLE user(
     idx int(10) not null AUTO_INCREMENT,
     id varchar(100) not null,
     pw varchar(100) not null,
+    nickname varchar(100) not null,
     phone_number varchar(100),
     email varchar(100),
-    PRIMARY KEY(idx)
+    PRIMARY KEY(idx),
+    UNIQUE(id)
 );
 
 CREATE TABLE animal(

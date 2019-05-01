@@ -50,3 +50,11 @@ exports.getVolunteerShelter = function (_data, _callback) {
         _callback(_results);
     });
 }
+
+exports.getShelter = function (_data, _callback) {
+    var sql = "SELECT * FROM shelter ";
+    var where = "WHERE idx=?";
+    poolAdapter.execute(sql + where, [_data.idx], function (_results) {
+        _callback(_results);
+    });
+}

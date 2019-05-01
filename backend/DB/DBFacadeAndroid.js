@@ -32,3 +32,8 @@ exports.getVolunteerShelter = function (_data, _callback) {
     var shelter = require('./android/shelter');
     shelter.getVolunteerShelter(_data, _callback);
 }
+
+exports.getShelter = function (_data, _callback) {
+    var shelter = require('./android/shelter');
+    shelter.getShelter(_data, _callback);
+}

@@ -54,6 +54,8 @@ CREATE TABLE schedule(
     date date COMMENT '스케쥴 날짜',
     user_idx int(10) not null COMMENT '사용자 id',
     animal_idx int(10) not null COMMENT 'animal id',
+    permit int(1) default 0 COMMENT '1: 허가 / 0: 아직 결정안됨. / -1: 거절',
+    apply_datetime datetime COMMENT '사용자가 요청한 날짜시간',
     PRIMARY KEY(idx),
     FOREIGN KEY(user_idx) REFERENCES user(idx),
     FOREIGN KEY(animal_idx) REFERENCES animal(idx)

@@ -9,13 +9,13 @@ exports.getAnimalSummary = function (_data, _callback) {
 }
 
 exports.getAnimalInfo = function (_data, _callback) {
-    var shelter = require('./android/shelter');
-    shelter.getAnimalInfo(_data, _callback);
+    var animal = require('./android/animal');
+    animal.getAnimalInfo(_data, _callback);
 }
 
 exports.getAnimalSchedule = function (_data, _callback) {
-    var shelter = require('./android/shelter');
-    shelter.getAnimalSchedule(_data, _callback);
+    var animal = require('./android/animal');
+    animal.getAnimalSchedule(_data, _callback);
 }
 
 exports.checkDupID = function (_data, _callback) {

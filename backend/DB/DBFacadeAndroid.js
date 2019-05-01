@@ -37,3 +37,8 @@ exports.getShelter = function (_data, _callback) {
     var shelter = require('./android/shelter');
     shelter.getShelter(_data, _callback);
 }
+
+exports.registerSchedule = function (_data, _callback) {
+    var animal = require('./android/animal');
+    animal.registerSchedule(_data, _callback);
+}

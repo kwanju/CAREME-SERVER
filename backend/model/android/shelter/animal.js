@@ -35,3 +35,9 @@ exports.getVolunteerShelter = function (_data, _callback) {
         _callback(res);
     })
 }
+
+exports.registerSchedule = function (_data, _callback) {
+    dbFacade.registerSchedule(_data, function (_results) {
+        _callback();
+    });
+}

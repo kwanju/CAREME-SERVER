@@ -13,6 +13,10 @@ CREATE TABLE shelter(
     phone_number varchar(100),
     start_time time,
     end_time time ,
+    description varchar(1000) COMMENT '보호소 설명 기입',
+    volunteer_description varchar(1000) COMMENT '자원봉사에 대한 설명 기입란.',
+    volunteer_start_time time COMMENT '자원봉사 가능 시작시간',
+    volunteer_end_time time COMMENT '자원봉사 가능 종료시간',
     PRIMARY KEY(idx)
 );
 
@@ -38,11 +42,11 @@ CREATE TABLE animal(
     register_data date COMMENT '보호소에 등록된 날짜',
     discovered_spot varchar(400) COMMENT '발견된 장소',
     state int(3) COMMENT '견종 상태 - 0:안락사 / 1:보호소 보호중 / .... (점차 추가해야함)',
-    shelter_idx,state int(10) not null COMMENT '보호중인 보호소 id',
+    shelter_idx int(10) not null COMMENT '보호중인 보호소 id',
     discover_idx int(10) COMMENT '발견했어요 id - null:발견했어요로 보호소에 가져오지 않았을 때 - 발견했어요 만들었을 때 FOREIGNKEY설정필요',
     description varchar(1000) COMMENT '유기동물 설명',
     PRIMARY KEY(idx),
-    FOREIGN KEY(shelter_idx,state) REFERENCES shelter(idx)
+    FOREIGN KEY(shelter_idx) REFERENCES shelter(idx)
 );
 
 CREATE TABLE schedule(

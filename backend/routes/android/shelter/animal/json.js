@@ -27,5 +27,12 @@ router.post('/getAnimalSchedule',function(_req,_res){
     })
 });
 
+router.post('/getVolunteerShelter',function(_req,_res){
+    var animal = require('../../../../model/android/shelter/animal');
+    animal.getVolunteerShelter(_req.body,function(_result){
+        _res.send(_result);
+    });
+});
+
 
 module.exports = router;

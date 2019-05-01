@@ -23,7 +23,12 @@ exports.checkDupID = function (_data, _callback) {
     user.checkDupID(_data, _callback);
 };
 
-exports.registration = function(_data,_callback){
+exports.registration = function (_data, _callback) {
     var user = require('./android/user');
-    user.registration(_data,_callback);
+    user.registration(_data, _callback);
+}
+
+exports.getVolunteerShelter = function (_data, _callback) {
+    var shelter = require('./android/shelter');
+    shelter.getVolunteerShelter(_data, _callback);
 }

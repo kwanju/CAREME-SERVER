@@ -10,4 +10,11 @@ router.post('/login',function(_req,_res){
     });
 });
 
+router.post('/registration',function(_req,_res){
+    var registration = require('../../../model/android/user/registration');
+    registration.registration(_req.body,function(_result){
+        _res.send(_result);
+    })
+});
+
 module.exports = router;

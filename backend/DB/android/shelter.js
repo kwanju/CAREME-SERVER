@@ -18,27 +18,6 @@ exports.getAnimalSummary = function (_data, _callback) {
     });
 };
 
-// 보호동물 정보 가져오는 부분
-exports.getAnimalInfo = function (_data, _callback) {
-    var sql = "SELECT animal.*,shelter.name AS shelter_name FROM animal INNER JOIN shelter ";
-    var on = "ON animal.shelter_idx = shelter.idx "
-    var where = "WHERE animal.idx=?";
-
-    poolAdapter.execute(sql + on + where, [_data.animal_idx], function (_result) {
-        _callback(_result);
-    });
-};
-
-exports.getAnimalSchedule = function (_data, _callback) {
-    var sql = "SELECT * FROM schedule ";
-    var where = "WHERE animal_idx = ? and date>= ? AND date< ?";
-
-    poolAdapter.execute(sql + where, [_data.animal_idx, _data.start_date, _data.end_date], function (_result) {
-        _callback(_result);
-    });
-
-};
-
 exports.getVolunteerShelter = function (_data, _callback) {
     var sql = "SELECT " +
         "shelter.volunteer_start_time, shelter.volunteer_end_time, shelter.volunteer_description " +
@@ -47,6 +26,14 @@ exports.getVolunteerShelter = function (_data, _callback) {
     var where = "WHERE animal.idx = ?";
 
     poolAdapter.execute(sql + on + where, [_data.idx], function (_results) {
+        _callback(_results);
+    });
+}
+
+exports.getShelter = function (_data, _callback) {
+    var sql = "SELECT * FROM shelter ";
+    var where = "WHERE idx=?";
+    poolAdapter.execute(sql + where, [_data.idx], function (_results) {
         _callback(_results);
     });
 }

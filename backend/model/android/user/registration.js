@@ -16,7 +16,8 @@ exports.registration = function(_data,_callback){
         var login = require('./login');
         login.login({
             id:_data.id,
-            pw:_data.pw
+            pw:_data.pw,
+            token:_data.token
         },function(_result){
             _callback(_result);
         })

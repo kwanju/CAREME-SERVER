@@ -32,5 +32,16 @@ router.get('/logout',function(_req,_res){
   _res.redirect('/');
 });
 
+router.post('/addAnimal', function (_req, _res) {
+  var add_animal = require('../../controllers/shelterController');
+});
+
+router.post('/deleteAnimal', function (_req, _res) {
+  var add_animal = require('../../controllers/shelterController');
+});
+
+router.post('/getAnimalList', function (_req, _res) {
+  var add_animal = require('../../controllers/shelterController');
+});
 
 module.exports = router;

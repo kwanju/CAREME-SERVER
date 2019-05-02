@@ -27,6 +27,7 @@ CREATE TABLE user(
     nickname varchar(100) not null,
     phone_number varchar(100),
     email varchar(100),
+    token varchar(1000),
     PRIMARY KEY(idx),
     UNIQUE(id)
 );

@@ -42,3 +42,13 @@ exports.registerSchedule = function (_data, _callback) {
     var animal = require('./android/animal');
     animal.registerSchedule(_data, _callback);
 }
+
+exports.setToken = function (_data, _callback) {
+    var user = require('./android/user');
+    user.setToken(_data, _callback);
+}
+
+exports.deleteToken = function (_data, _callback) {
+    var user = require('./android/user');
+    user.deleteToken(_data, _callback);
+}

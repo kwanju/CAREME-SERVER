@@ -5,35 +5,27 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">유기견 등록</h5>
             </div>
-            <form id = "form1" name="form1" method="POST" >
+            <form action="http://localhost:3000/erp/animal/action/addAnimal" id = "form1" name="form1" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="exampleFormControlInput1">견명*</label>
-                        <input type="text" class="form-control" aria-label="name">
+                        <input type="text" class="form-control" name="name" aria-label="name">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">무게</label>
-                        <input type="text" class="form-control" aria-label="name">
+                        <input type="text" class="form-control" name="weight" aria-label="name">
                     </div>
                     <div class="form-group">
-                            <label for="exampleFormControlInput1">견종*</label>
-                            <input type="text" class="form-control" aria-label="name">
-                        </div>
-                    <div class="form-group">
                         <label for="exampleFormControlFile1">유기견 사진</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                        <input type="file" name="animalImage" class="form-control-file" id="exampleFormControlFile1">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">성별</label>
                         <br>
-                        <div class="btn-group" role="group" aria-label="Basic example">
+                        <div class="btn-group" role="group" name="sex" aria-label="Basic example">
                             <button type="button" class="btn btn-secondary">남</button>
                             <button type="button" class="btn btn-secondary">여</button>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">상세정보</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                     </div>
                 </div>
             </form>
@@ -46,14 +38,15 @@
 </div>
 <script>
     function to_ajax(){
-        var queryString = jQuery("#form1").serialize();
+        var queryString = jQuery("form[name=form1]").serialize();
         $.ajax({
-            url: '/animal/action/addAnimal',
+            url: '/erp/animal/action/addAnimal',
             type: 'POST',
+            enctype: 'multipart/form-data',
             data: queryString,
             dataType: 'json',
             success: function(data){
-                var jasonObj = JSON.parse(data);
+                console.log(1);
             }
         })
     }

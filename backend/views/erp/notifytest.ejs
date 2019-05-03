@@ -1,33 +1,58 @@
 <div>
-    <button onclick="calculate()">calculate</button>
+    <button onclick="runCheckNewSchedule()">calculate</button>
+    <p id="newSchedule">test</p>
 </div>
 
 <script type="text/javascript">
+    var n = 0;
     window.onload = function () {
         if (window.Notification) {
             Notification.requestPermission();
         }
     }
+    function checkNewSchedule() {
+        var NEW_SCHEDULE_API_URL = 'http://localhost:3000/erp/notifytest/json/checkReadState';
 
-    function calculate() {
-        setTimeout(function () {
-            notify();
+        $.ajax({
+            url: NEW_SCHEDULE_API_URL,
+            data: null,
+            type:"post",
+            dataType:"json",
+            success:function(result) {
+                //console.log(result.schedule.length);
+                if (result.schedule.length > 0) {
+                    n = result.schedule.length;
+                    document.getElementById('newSchedule').innerHTML = n + "개의 알림이 있습니다";
+                }
+                else
+                    document.getElementById('newSchedule').innerHTML = "알림이 없습니다";
+            },
+            error: function(){
+                console.log("에러");
+            }
+        });
+    }
+    function showNewSchedule() {
+        var NEW_SCHEDULE_API_URL = 'http://localhost:3000/erp/notifytest/json/checkReadState';
+
+        $.ajax({
+            url: NEW_SCHEDULE_API_URL,
+            data: null,
+            type:"post",
+            dataType:"json",
+            success:function(result){
+                console.log(result);
+            },
+            error: function(){
+                console.log("에러");
+            }
+        });
+    }
+    function runCheckNewSchedule() {
+        checkNewSchedule();
+        setInterval(function () {
+            checkNewSchedule();
         }, 5000);
     }
 
-    function notify() {
-        if (Notification.permission !== 'granted') {
-            alert('notification is disabled');
-        }
-        else {
-            var notification = new Notification('Notification title', {
-                icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
-                body: 'Notification text',
-            });
-
-            notification.onclick = function () {
-                window.open('http://google.com');
-            };
-        }
-    }
 </script>

@@ -20,5 +20,9 @@ exports.deleteAnimal = function (_data, _callback) {
 }
 
 exports.getAnimalList = function (_data, _callback) {
-  animal.getAnimalList(_data, _callback);
+    animal.getAnimalList(_data, _callback);
+}
+
+exports.checkReadState = function(_data,_callback){
+    dbfacade.checkReadState(_data,_callback);
 }

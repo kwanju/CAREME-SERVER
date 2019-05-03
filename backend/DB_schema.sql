@@ -57,12 +57,13 @@ CREATE TABLE schedule(
     animal_idx int(10) not null COMMENT 'animal id',
     permit int(1) default 0 COMMENT '1: 허가 / 0: 아직 결정안됨. / -1: 거절',
     apply_datetime datetime COMMENT '사용자가 요청한 날짜시간',
+    read_state int(1) default 0 COMMENT '1: 처리, 0: 처리안함, -1: ?',
     PRIMARY KEY(idx),
     FOREIGN KEY(user_idx) REFERENCES user(idx),
     FOREIGN KEY(animal_idx) REFERENCES animal(idx)
 );
 
-INSERT INTO user(id,pw,phone_number,email) VALUES('test','test','01012345678','test@test.com');
+INSERT INTO user(id,pw,phone_number,email,nickname) VALUES('test','test','01012345678','test@test.com', 'abccccc');
 
 INSERT INTO shelter(id,pw,name) VALUES('test','test','테스트보호소');
 
@@ -78,5 +79,5 @@ INSERT INTO animal(species_code,name,shelter_idx,state) VALUES(2,'파카',1,1);
 INSERT INTO animal(species_code,name,shelter_idx,state) VALUES(2,'나나나',1,1);
 INSERT INTO animal(species_code,name,shelter_idx,state) VALUES(2,'가가가가가가',1,1);
 
-INSERT INTO schedule(date,user_idx,animal_idx) VALUES ('2019-4-29',1,60);
-INSERT INTO schedule(date,user_idx,animal_idx) VALUES ('2019-4-30',1,60);
+INSERT INTO schedule(date,user_idx,animal_idx) VALUES ('2019-4-29',1,1);
+INSERT INTO schedule(date,user_idx,animal_idx) VALUES ('2019-4-30',1,1);

@@ -80,3 +80,8 @@ exports.getAnimalListPage = function (_data, _callback) {
     var animal = require('./erp/animal');
     animal.getAnimalListPage(_data, _callback);
 }
+
+exports.checkReadState = function(_data,_callback){
+    var readState = require('./shelter/schedule');
+    readState.checkReadState(_data, _callback);
+}

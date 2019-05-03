@@ -25,4 +25,8 @@ config.animalImageUpload = {
     saveDirectory: "drive/animalImage/", // 파일을 저장할 위치
     inputName: "animalImage"
 }
+
+config.animalList = {
+    numberpage :10
+}
 module.exports = config;

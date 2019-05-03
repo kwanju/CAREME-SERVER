@@ -11,3 +11,21 @@ exports.addAnimal = function (_req, _data, _callback) {
         _callback(res);
     });
 };
+
+exports.getAnimalList = function (_data, _callback) {
+    dbFacade.getAnimalList(_data, function (_results) {
+        var res = {};
+        res.result = 1;
+        res.list = _results;
+        _callback(res);
+    })
+}
+
+exports.getAnimalListPage = function (_data, _callback) {
+    dbFacade.getAnimalListPage(_data, function (_results) {
+        var res = {};
+        res.result = 1;
+        res.totalPage = _results;
+        _callback(res);
+    });
+}

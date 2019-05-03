@@ -67,13 +67,13 @@ INSERT INTO user(id,pw,phone_number,email) VALUES('test','test','01012345678','t
 INSERT INTO shelter(id,pw,name) VALUES('test','test','테스트보호소');
 
 --test
-INSERT INTO animal(species_code,name,url_picture,shelter_idx,state) VALUES(1,'뽀삐',"http://192.168.43.244:3000/drive/animalImage/1.jpg",1,1);
-INSERT INTO animal(species_code,name,url_picture,shelter_idx,state) VALUES(3,'삐삐',"http://192.168.43.244:3000/drive/animalImage/2.jpg",1,1);
-INSERT INTO animal(species_code,name,url_picture,shelter_idx,state) VALUES(2,'뿌삐',"http://192.168.43.244:3000/drive/animalImage/3.jpg",1,1);
-INSERT INTO animal(species_code,name,url_picture,shelter_idx,state) VALUES(1,'아나',"http://192.168.43.244:3000/drive/animalImage/4.jpg",1,1);
-INSERT INTO animal(species_code,name,url_picture,shelter_idx,state) VALUES(3,'아마',"http://192.168.43.244:3000/drive/animalImage/5.jpg",1,1);
-INSERT INTO animal(species_code,name,url_picture,shelter_idx,state) VALUES(4,'가나',"http://192.168.43.244:3000/drive/animalImage/6.jpg",1,1);
-INSERT INTO animal(species_code,name,url_picture,shelter_idx,state) VALUES(5,'라마',"http://192.168.43.244:3000/drive/animalImage/7.jpg",1,1);
+INSERT INTO animal(species_code,name,url_picture,shelter_idx,state) VALUES(1,'뽀삐',"drive/animalImage/1.jpg",1,1);
+INSERT INTO animal(species_code,name,url_picture,shelter_idx,state) VALUES(3,'삐삐',"drive/animalImage/2.jpg",1,1);
+INSERT INTO animal(species_code,name,url_picture,shelter_idx,state) VALUES(2,'뿌삐',"drive/animalImage/3.jpg",1,1);
+INSERT INTO animal(species_code,name,url_picture,shelter_idx,state) VALUES(1,'아나',"drive/animalImage/4.jpg",1,1);
+INSERT INTO animal(species_code,name,url_picture,shelter_idx,state) VALUES(3,'아마',"drive/animalImage/5.jpg",1,1);
+INSERT INTO animal(species_code,name,url_picture,shelter_idx,state) VALUES(4,'가나',"drive/animalImage/6.jpg",1,1);
+INSERT INTO animal(species_code,name,url_picture,shelter_idx,state) VALUES(5,'라마',"drive/animalImage/7.jpg",1,1);
 INSERT INTO animal(species_code,name,shelter_idx,state) VALUES(2,'파카',1,1);
 INSERT INTO animal(species_code,name,shelter_idx,state) VALUES(2,'나나나',1,1);
 INSERT INTO animal(species_code,name,shelter_idx,state) VALUES(2,'가가가가가가',1,1);

@@ -1,0 +1,62 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <div class="container row">
+        <div class="col-sm-2">
+            hello
+        </div>
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-12">
+                    <span class="btn btn-primary" id="cloud_upload"><label for="cloud_upload_file"
+                            style="margin-bottom:0px;">업로드</label>
+                        <input type="file" id="cloud_upload_file" hidden>
+                    </span>
+                    <form action="http://localhost:3000/erp/animal/action/addAnimal" method="POST"
+                        enctype="multipart/form-data">
+                        <input type="file" name='animalImage'>
+                        <input type="text" name='name'>
+                        <input type="submit">
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <div class="row file">
+                <span class="">
+                    <img src="/images/file.png" alt="">
+                </span>
+                <div class="">
+                    <P>FILENAME</P>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            he;;p
+        </div>
+    </div>
+
+    <script>
+        $('#cloud_upload_file').on('change', function () {
+            var formData = new FormData();
+            formData.append('hold', this.files[0]);
+
+            $.ajax({
+                type: 'POST',
+                url: '/cloud/action/uploadFile',
+                enctype: 'multipart/form-data',
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function (result) {
+                    console.log("성공");
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>

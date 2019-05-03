@@ -62,16 +62,16 @@ exports.searchShelterCategory = function (_data, _callback) {
 
 //유기견 리스트, 등록, 삭제
 exports.addAnimal = function (_data, _callback) {
-  var animal = require('./shelter/animal');
-  animal.writeBoard(_data, _callback);
+  var animal = require('./erp/animal');
+  animal.addAnimal(_data, _callback);
 }
 
 exports.deleteAnimal = function (_data, _callback) {
-  var animal = require('./shelter/animal');
-  animal.deleteAnimal(_data, _callback);
+    var animal = require('./erp/animal');
+    animal.deleteAnimal(_data, _callback);
 }
 
 exports.getAnimalList = function (_data, _callback) {
-  var animal = require('./shelter/animal');
-  animal.getAnimalList(_data, _callback);
+    var animal = require('./erp/animal');
+    animal.getAnimalList(_data, _callback);
 }

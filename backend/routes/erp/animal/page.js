@@ -6,4 +6,8 @@ router.get("/animal", function(_req,_res){
 
 });
 
+router.get('/imagetest',function(_req,_res){
+    _res.render('erp/imageTest',{});
+});
+
 module.exports = router;

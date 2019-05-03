@@ -52,3 +52,8 @@ exports.deleteToken = function (_data, _callback) {
     var user = require('./android/user');
     user.deleteToken(_data, _callback);
 }
+
+exports.getUserSchedule = function (_data, _callback) {
+    var schedule = require('./android/schedule');
+    schedule.getUserSchedule(_data, _callback);
+}

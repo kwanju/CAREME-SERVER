@@ -7,4 +7,12 @@ router.post('/checkDupID', function (_req, _res) {
         _res.send(_result);
     });
 });
+
+router.post('/getUserSchedule', function (_req, _res) {
+    var schedule = require('../../../model/android/shelter/schedule');
+    schedule.getUserSchedule(_req.body, function (_result) {
+        _res.send(_result);
+    });
+});
+
 module.exports = router;

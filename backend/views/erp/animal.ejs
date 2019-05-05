@@ -39,7 +39,7 @@
       $.ajax({
         url: "/erp/animal/json/getAnimalList",
         method: "POST",
-        data: { shelter_idx: 2, page: 1 },
+        data: { page: 1 },
         success: function (data) {
           $.each(data.list, function (idx, list) {
             $('#tableList').append("<tr><th>" + list.idx + "</th><td>" + list.name + "</th><td>" + list.species_code + "</td><td>" +
@@ -61,7 +61,7 @@
       $.ajax({
         url: "/erp/animal/json/getAnimalListPage",
         method: "POST",
-        data: { shelter_idx: 1 },
+        data: {},
         success: function (data) {
           $('#pageNum').append("<li><a>" + data.totalPage + "</a></li>"
           )

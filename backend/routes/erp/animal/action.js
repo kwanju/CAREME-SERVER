@@ -10,5 +10,11 @@ router.post('/addAnimal', animalImageUpload.uploadImage(), function (_req, _res)
     });
 });
 
+router.post('/android', animalImageUpload.uploadImage(), function (_req, _res) {
+    console.log(_req.body);
+    console.log(_req.file)
+    _res.send("test");
+});
+
 
 module.exports = router;

@@ -11,6 +11,4 @@ router.post('/addAnimal', animalImageUpload.uploadImage(), function (_req, _res)
 });
 
 
-
-
 module.exports = router;

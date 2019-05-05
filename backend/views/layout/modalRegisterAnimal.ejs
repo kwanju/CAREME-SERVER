@@ -1,4 +1,3 @@
-<!-- Modal -->
 <div class="modal fade" id="animal_register" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -38,16 +37,19 @@
 </div>
 <script>
     function to_ajax(){
-        var queryString = jQuery("form[name=form1]").serialize();
-        $.ajax({
-            url: '/erp/animal/action/addAnimal',
-            type: 'POST',
-            enctype: 'multipart/form-data',
-            data: queryString,
-            dataType: 'json',
-            success: function(data){
-                console.log(data);
-            }
-        })
-    }
+       var form = $('#form1')[0];
+       var formData = new FormData(form);
+       $.ajax({
+           url: '/erp/animal/action/addAnimal',
+           type: 'POST',
+           enctype: 'multipart/form-data',
+           data: formData,
+           dataType: 'json',
+           processData: false,
+           contentType: false,
+           success: function(data){
+               console.log(data);
+           }
+       })
+   }
 </script>

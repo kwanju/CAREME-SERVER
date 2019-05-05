@@ -1,13 +1,75 @@
-<div class="list-group">
-    <a href="#" class="list-group-item list-group-item-action active">
-      유기견 리스트
-    </a>
-    <a href="#" class="list-group-item list-group-item-action">푸들</a>
-    <a href="#" class="list-group-item list-group-item-action">댕댕이</a>
-    <a href="#" class="list-group-item list-group-item-action">누렁이</a>
-    <a href="#" class="list-group-item list-group-item-action disabled">백구</a>
-  </div>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#animal_register">
-    유기견 등록
+<div>
+  header
+</div>
+<div class="ui segment" style="width:68%;margin:auto;">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">idx</th>
+        <th scope="col">name</th>
+        <th scope="col">species_code</th>
+        <th scope="col">register_data</th>
+        <th scope="col">state</th>
+      </tr>
+    </thead>
+    <tbody id="tableList">
+    </tbody>
+  </table>
+</div>
+
+<hr/>
+
+<div>
+<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#animal_register">
+  유기견 등록
 </button>
-<% include ./../layout/modalRegisterAnimal.ejs %>
+<div>
+
+
+<div class="text-center">
+  <ul class="pagination" id="pageNum">
+  </ul>
+</div>
+
+
+<script>
+  $(document).ready(function () {
+    fetchAimalLIst();
+    function fetchAimalLIst() {
+      $.ajax({
+        url: "/erp/animal/json/getAnimalList",
+        method: "POST",
+        data: { shelter_idx: 2, page: 1 },
+        success: function (data) {
+          $.each(data.list, function (idx, list) {
+            $('#tableList').append("<tr><th>" + list.idx + "</th><td>" + list.name + "</th><td>" + list.species_code + "</td><td>" +
+              list.register_data + "</td><td>" + list.state + "</td><td>"
+            )
+          })
+        }
+      })
+    }
+
+  });
+
+</script>
+
+<script>
+  $(document).ready(function () {
+    fetchAnimalListPage();
+    function fetchAnimalListPage() {
+      $.ajax({
+        url: "/erp/animal/json/getAnimalListPage",
+        method: "POST",
+        data: { shelter_idx: 1 },
+        success: function (data) {
+          $('#pageNum').append("<li><a>" + data.totalPage + "</a></li>"
+          )
+        }
+      })
+    }
+  });
+
+</script>
+
+<% include ./../layout/modalRegisterAnimal.ejs %> 

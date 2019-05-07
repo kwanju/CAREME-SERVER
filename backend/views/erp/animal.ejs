@@ -1,61 +1,60 @@
 <div>
   header
 </div>
-<div class="ui segment" style="width:68%;margin:auto;">
+<div class="ui segment" style="width:72%;margin:auto; margin-right: 140px">
   <table class="table">
-    <thead class="thead-dark">
+    <thead class="thead-dark text-center">
       <tr>
         <th scope="col">idx</th>
         <th scope="col">name</th>
         <th scope="col">species_code</th>
         <th scope="col">register_data</th>
         <th scope="col">state</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody id="tableList">
     </tbody>
   </table>
+  <ul class="pagination pull-right" id="pageNum">
+  </ul>
 </div>
 
 <hr/>
 
-<div>
-<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#animal_register">
-  유기견 등록
-</button>
-<div>
 
 
-<div class="text-center">
-  <ul class="pagination" id="pageNum">
-  </ul>
+
+<div class="text-center" style="margin-top: 60px">
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#animal_register">
+    유기견 등록
+  </button>
 </div>
 
-
 <script>
-  $(document).ready(function () {
-    fetchAimalLIst();
-    function fetchAimalLIst() {
+    function fetchAnimalList(page) {
       $.ajax({
         url: "/erp/animal/json/getAnimalList",
         method: "POST",
-        data: { page: 1 },
+        data: { page: page },
         success: function (data) {
+          $('#tableList').html('');
           $.each(data.list, function (idx, list) {
             $('#tableList').append("<tr><th>" + list.idx + "</th><td>" + list.name + "</th><td>" + list.species_code + "</td><td>" +
-              list.register_data + "</td><td>" + list.state + "</td><td>"
+              list.register_data + "</td><td>" + list.state + "</td><td><button>삭제</button><button>수정</button></td>"
             )
           })
         }
       })
     }
-
+  $(document).ready(function () {
+    fetchAnimalList(1);
   });
-
 </script>
 
 <script>
   $(document).ready(function () {
+    var count;
     fetchAnimalListPage();
     function fetchAnimalListPage() {
       $.ajax({
@@ -63,13 +62,24 @@
         method: "POST",
         data: {},
         success: function (data) {
-          $('#pageNum').append("<li><a>" + data.totalPage + "</a></li>"
-          )
+          for (count = 1; count <= data.totalPage; count++) {
+            $('#pageNum').append("<li><a class='page-button'>" + count + "</a></li>"
+            )
+          }
         }
       })
     }
   });
+  $(document).on('click','.page-button',function(e){
+    console.log(this.innerHTML);
+    fetchAnimalList(this.innerHTML);
+  });
+  $('.page-button').on('click',function(){
+    console.log($(this).find('a'));
+    //var page = $(this).find('a')
+    //fetchAimalLIst(parseInt(page));
+  })
 
 </script>
 
-<% include ./../layout/modalRegisterAnimal.ejs %> 
+<% include ./../layout/modalRegisterAnimal.ejs %>

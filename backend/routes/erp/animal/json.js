@@ -1,16 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
-router.post('/getAnimalList', function (_req, _res) {
-    _req.body.shelter_idx = _req.session.user.idx;
+var insertIdxIntoBody = require('../../../utils/erp/insertIdxIntoBody');
+
+router.post('/getAnimalList',insertIdxIntoBody, function (_req, _res) {
     var animal = require('../../../model/erp/animal');
     animal.getAnimalList(_req.body, function (_result) {
         _res.send(_result);
     });
 });
 
-router.post('/getAnimalListPage', function (_req, _res) {
-    _req.body.shelter_idx = _req.session.user.idx;
+router.post('/getAnimalListPage',insertIdxIntoBody, function (_req, _res) {
     var animal = require('../../../model/erp/animal');
     animal.getAnimalListPage(_req.body, function (_result) {
         _res.send(_result);

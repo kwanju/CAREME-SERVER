@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
+var insertIdxIntoBody = require('../../../utils/erp/insertIdxIntoBody');
+
 var animalImageUpload = require('../../../model/erp/animalImageUpload');
 
-router.post('/addAnimal', animalImageUpload.uploadImage(), function (_req, _res) {
+router.post('/addAnimal',insertIdxIntoBody, animalImageUpload.uploadImage(), function (_req, _res) {
     var animal = require('../../../model/erp/animal');
     animal.addAnimal(_req, _req.body, function (_result) {
         _res.send(_result);

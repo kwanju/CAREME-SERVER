@@ -13,6 +13,5 @@ router.use('/animal', animalRouter);
 router.use('/volunteer', volunteerRouter);
 router.use('/mshelter', mshelterRouter);
 router.use('/notifytest', notifyRouter);
-router.use('/schedule',scheduleRouter);
 
 module.exports = router;

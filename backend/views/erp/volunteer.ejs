@@ -59,11 +59,11 @@
 <script>
     function getScheduleListPermitted() {
         $.ajax({
-            url: "/erp/schedule/json/getScheduleListPermitted",
+            url: "/erp/volunteer/json/getScheduleListPermitted",
             method: "POST",
-            data: { shelter_idx: 1 },
+            data: {},
             success: function (data) {
-                data = {
+                /*data = {
                     "result": 1,
                     "list": [
                         {
@@ -133,7 +133,7 @@
                             "userEmail": "test@test.com"
                         }
                     ]
-                }
+                }*/
                 console.log(data.list);
                 $('#permit').html('');
                 $.each(data.list, function (idx, list) {
@@ -151,11 +151,11 @@
 
     function getScheduleListWaiting() {
         $.ajax({
-            url: "/erp/schedule/json/getScheduleListWaiting",
+            url: "/erp/volunteer/json/getScheduleListWaiting",
             method: "POST",
-            data: { shelter_idx: 1 },
+            data: {},
             success: function (data) {
-                data = {
+              /*  data = {
                     "result": 1,
                     "list": [
                         {
@@ -171,7 +171,7 @@
                             "userEmail": "test@test.com"
                         }
                     ]
-                }
+                }*/
                 console.log(data.list);
                 $('#waiting').html('');
                 $.each(data.list, function (idx, list) {
@@ -192,7 +192,7 @@
 
     function permitSchedule(idx) {
         $.ajax({
-            url: "/erp/schedule/action/permitSchedule",
+            url: "/erp/volunteer/action/permitSchedule",
             method: "POST",
             data: {idx:idx},
             success: function (data) {
@@ -208,7 +208,7 @@
 
     function rejectSchedule(idx) {
         $.ajax({
-            url: "/erp/schedule/action/rejectSchedule",
+            url: "/erp/volunteer/action/rejectSchedule",
             method: "POST",
             data: {idx:idx},
             success: function (data) {

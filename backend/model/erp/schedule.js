@@ -1,7 +1,16 @@
 var dbFacade = require('../../DB/DBFacade');
 
-exports.getScheduleList = function (_data, _callback) {
-    dbFacade.getScheduleList(_data, function (_results) {
+exports.getScheduleListPermitted = function (_data, _callback) {
+    dbFacade.getScheduleListPermitted(_data, function (_results) {
+        var res = {};
+        res.result = 1;
+        res.list = _results;
+        _callback(res);
+    });
+};
+
+exports.getScheduleListWaiting = function (_data, _callback) {
+    dbFacade.getScheduleListWaiting(_data, function (_results) {
         var res = {};
         res.result = 1;
         res.list = _results;

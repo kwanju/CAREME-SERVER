@@ -1,5 +1,5 @@
  var n = 0;
- runCheckNewSchedule();
+ //runCheckNewSchedule();
  window.onload = function () {
      if (window.Notification) {
          Notification.requestPermission();

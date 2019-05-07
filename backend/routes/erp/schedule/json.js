@@ -3,9 +3,9 @@ var router = express.Router();
 
 var insertIdxIntoBody = require('../../../utils/erp/insertIdxIntoBody');
 
-router.post('/getScheduleListNotRead', function (_req, _res) {
+router.post('/getScheduleList', function (_req, _res) {
     var schedule = require('../../../model/erp/schedule');
-    schedule.getScheduleListNotRead(_req.body, function (_result) {
+    schedule.getScheduleList(_req.body, function (_result) {
         _res.send(_result);
     });
 });

@@ -86,9 +86,9 @@ exports.checkReadState = function (_data, _callback) {
     readState.checkReadState(_data, _callback);
 }
 
-exports.getScheduleListNotRead = function (_data, _callback) {
+exports.getScheduleList = function (_data, _callback) {
     var schedule = require('./erp/schedule');
-    schedule.getScheduleListNotRead(_data, _callback);
+    schedule.getScheduleList(_data, _callback);
 };
 
 exports.updateSheduleListNotRead = function (_data, _callback) {

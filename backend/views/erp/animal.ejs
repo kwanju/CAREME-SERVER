@@ -1,8 +1,8 @@
 <div>
   header
 </div>
-<div class="ui segment" style="width:72%;margin:auto; margin-right: 140px">
-  <table class="table">
+<div class="ui segment" style="width:72%;margin:auto; margin-right: 140px; padding-top:20px">
+  <table class="table table-bordered">
     <thead class="thead-dark text-center">
       <tr>
         <th scope="col">idx</th>
@@ -10,7 +10,7 @@
         <th scope="col">species_code</th>
         <th scope="col">register_data</th>
         <th scope="col">state</th>
-        <th scope="col"></th>
+        <th scope="col" style="width: 10%;"></th>
       </tr>
     </thead>
     <tbody id="tableList">
@@ -41,7 +41,9 @@
           $('#tableList').html('');
           $.each(data.list, function (idx, list) {
             $('#tableList').append("<tr><th>" + list.idx + "</th><td>" + list.name + "</th><td>" + list.species_code + "</td><td>" +
-              list.register_data + "</td><td>" + list.state + "</td><td><button>삭제</button><button>수정</button></td>"
+              list.register_data + "</td><td>" + list.state +
+                "</td><td><button class='btn btn-default btn' style='color:green;'><span class='glyphicon glyphicon-edit'></span></button>"+
+                "<button class='btn btn-default btn' style='color:red;'><span class='glyphicon glyphicon-trash'></span></button></td>"
             )
           })
         }

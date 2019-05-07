@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs">
+<ul class="nav nav-tabs" style="padding-top: 10px">
     <li class="active">
         <a data-toggle="tab" href="#waitList">봉사대기자</a>
     </li>
@@ -8,9 +8,9 @@
 </ul>
 
 <div class="tab-content">
-    <div class="ui segment tab-pane fade in active" id="waitList" style="width:72%;margin:auto; margin-right: 140px">
-        <table class="table">
-            <thead class="thead-dark text-center">
+    <div class="tab-pane fade in active" id="waitList" style="width:77%;margin:auto; margin-right: 100px; padding-top:30px">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
                 <tr>
                     <th scope="col">idx</th>
                     <th scope="col">date</th>
@@ -22,7 +22,7 @@
                     <th scope="col">userNickname</th>
                     <th scope="col">userPhoneNum</th>
                     <th scope="col">userEmail</th>
-                    <td scope="col"></td>
+                    <th scope="col" style="width: 10%;">permission</th>
                 </tr>
 
             </thead>
@@ -32,8 +32,8 @@
         <ul class="pagination pull-right" id="pageNum">
         </ul>
     </div>
-    <div class="ui segment tab-pane fade" id="permittedList" style="width:72%;margin:auto; margin-right: 140px">
-        <table class="table">
+    <div class="ui segment tab-pane fade" id="permittedList" style="width:77%;margin:auto; margin-right: 100px; padding-top:30px">
+        <table class="table table-bordered">
             <thead class="thead-dark text-center" >
                 <tr>
                     <th scope="col">idx</th>
@@ -45,7 +45,6 @@
                     <th scope="col">userNickname</th>
                     <th scope="col">userPhoneNum</th>
                     <th scope="col">userEmail</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody id="permit">
@@ -56,8 +55,6 @@
     </div>
 </div>
 
-
-<hr/>
 
 <script>
     function getScheduleListPermitted() {
@@ -181,7 +178,8 @@
                     $('#waiting').append("<tr><th>" + list.idx + "</th><td>" + list.date + "</th><td>" + list.apply_datetime + "</td><td>" +
                         list.read_state + "</td><td>" + list.animal_idx + "</td><td>" + list.animalName + "</td><td>" + list.species_code + "</td><td>" + list.userNickName +
                         "</td><td>" + list.userPhoneNumber + "</td><td>" + list.userEmail +
-                        "</td><td><button class='permit-button'>허가</button></td><td><button class='reject-button'>거부</button></td>"
+                        "</td><td><button class='permit-button btn btn-default btn' style='color:green;'><span class='glyphicon glyphicon-ok'></span></button>"+
+                        "<button class='reject-button btn btn-default btn' style='color:red;'><span class='glyphicon glyphicon-remove'></span></button></td>"
                     )
                 })
             }

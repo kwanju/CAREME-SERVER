@@ -11,6 +11,7 @@ var indexRouter = require('./routes/index');
 var shelterRouter = require('./routes/shelter/shelter');
 var erpRouter = require('./routes/erp/erp');
 var androidRouter = require('./routes/android/android');
+var mapRouter = require('./routes/map/mapTest');
 
 var app = express();
 
@@ -38,6 +39,7 @@ app.use('/', indexRouter);
 app.use('/user', shelterRouter);
 app.use('/erp',erpRouter);
 app.use('/android',androidRouter);
+app.use('/mapTest', mapRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

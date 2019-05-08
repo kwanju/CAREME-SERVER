@@ -63,7 +63,7 @@
             method: "POST",
             data: {},
             success: function (data) {
-                data = {
+               /* data = {
                     "result": 1,
                     "list": [
                         {
@@ -133,7 +133,7 @@
                             "userEmail": "test@test.com"
                         }
                     ]
-                }
+                }*/
                 console.log(data.list);
                 $('#permit').html('');
                 $.each(data.list, function (idx, list) {
@@ -155,7 +155,7 @@
             method: "POST",
             data: {},
             success: function (data) {
-                data = {
+              /*  data = {
                     "result": 1,
                     "list": [
                         {
@@ -171,7 +171,7 @@
                             "userEmail": "test@test.com"
                         }
                     ]
-                }
+                }*/
                 console.log(data.list);
                 $('#waiting').html('');
                 $.each(data.list, function (idx, list) {

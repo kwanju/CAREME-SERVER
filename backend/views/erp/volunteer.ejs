@@ -34,7 +34,7 @@
     </div>
     <div class="ui segment tab-pane fade" id="permittedList" style="width:77%;margin:auto; margin-right: 100px; padding-top:30px">
         <table class="table table-bordered">
-            <thead class="thead-dark text-center" >
+            <thead class="thead-dark text-center">
                 <tr>
                     <th scope="col">idx</th>
                     <th scope="col">date</th>
@@ -63,7 +63,7 @@
             method: "POST",
             data: {},
             success: function (data) {
-                /*data = {
+                data = {
                     "result": 1,
                     "list": [
                         {
@@ -133,7 +133,7 @@
                             "userEmail": "test@test.com"
                         }
                     ]
-                }*/
+                }
                 console.log(data.list);
                 $('#permit').html('');
                 $.each(data.list, function (idx, list) {
@@ -155,7 +155,7 @@
             method: "POST",
             data: {},
             success: function (data) {
-              /*  data = {
+                data = {
                     "result": 1,
                     "list": [
                         {
@@ -171,14 +171,14 @@
                             "userEmail": "test@test.com"
                         }
                     ]
-                }*/
+                }
                 console.log(data.list);
                 $('#waiting').html('');
                 $.each(data.list, function (idx, list) {
                     $('#waiting').append("<tr><th>" + list.idx + "</th><td>" + list.date + "</th><td>" + list.apply_datetime + "</td><td>" +
                         list.read_state + "</td><td>" + list.animal_idx + "</td><td>" + list.animalName + "</td><td>" + list.species_code + "</td><td>" + list.userNickName +
                         "</td><td>" + list.userPhoneNumber + "</td><td>" + list.userEmail +
-                        "</td><td><button class='permit-button btn btn-default btn' style='color:green;'><span class='glyphicon glyphicon-ok'></span></button>"+
+                        "</td><td><button class='permit-button btn btn-default btn' style='color:green;'><span class='glyphicon glyphicon-ok'></span></button>" +
                         "<button class='reject-button btn btn-default btn' style='color:red;'><span class='glyphicon glyphicon-remove'></span></button></td>"
                     )
                 })
@@ -194,9 +194,10 @@
         $.ajax({
             url: "/erp/volunteer/action/permitSchedule",
             method: "POST",
-            data: {idx:idx},
+            data: { idx: idx },
             success: function (data) {
                 alert("승인되었습니다.");
+                window.location.href="/erp/volunteer/volunteer";
             }
         })
     }
@@ -210,9 +211,10 @@
         $.ajax({
             url: "/erp/volunteer/action/rejectSchedule",
             method: "POST",
-            data: {idx:idx},
+            data: { idx: idx },
             success: function (data) {
                 alert("거절되었습니다.");
+                window.location.href="/erp/volunteer/volunteer";
             }
         })
     }

@@ -63,7 +63,7 @@
             method: "POST",
             data: {},
             success: function (data) {
-                data = {
+               /* data = {
                     "result": 1,
                     "list": [
                         {
@@ -133,7 +133,8 @@
                             "userEmail": "test@test.com"
                         }
                     ]
-                }
+                }*/
+                console.log(data.list);
                 $('#permit').html('');
                 $.each(data.list, function (idx, list) {
                     $('#permit').append("<tr><th>" + list.idx + "</th><td>" + list.date + "</th><td>" + list.apply_datetime + "</td><td>" +
@@ -154,7 +155,7 @@
             method: "POST",
             data: {},
             success: function (data) {
-                data = {
+              /*  data = {
                     "result": 1,
                     "list": [
                         {
@@ -170,7 +171,8 @@
                             "userEmail": "test@test.com"
                         }
                     ]
-                }
+                }*/
+                console.log(data.list);
                 $('#waiting').html('');
                 $.each(data.list, function (idx, list) {
                     $('#waiting').append("<tr><th>" + list.idx + "</th><td>" + list.date + "</th><td>" + list.apply_datetime + "</td><td>" +

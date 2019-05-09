@@ -1,0 +1,49 @@
+<div class="modal fade" id="animal_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" style="height: auto; height: 100%;" role="document">
+        <div class="modal-content" style="height:auto;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">유기견 수정</h5>
+            </div>
+            <form id="form2" name="form2">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">견명*</label>
+                        <input type="text" class="form-control" id="animalName" name="name" aria-label="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">견종</label>
+                        <input type="text" class="form-control" id="animalCode" name="species_code" aria-label="species_code">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">무게</label>
+                        <input type="text" class="form-control" id="animalWeight" name="weight" aria-label="weight">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">상태</label>
+                        <input type="text" class="form-control" id="animalState" name="state" aria-label="state">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">유기견 사진</label>
+                        <input type="file" name="animalImage" class="form-control-file" id="exampleFormControlFile1">
+                    </div>
+                    <div class="form-group">
+                        <fieldset>
+                            <label for="exampleFormControlSelect1">성별</label>
+                            <br>
+                            <input type="radio" name="sex" id="male" value="m" /> 남
+                            <input type="radio" name="sex" id="female" value="w" /> 여
+                        </fieldset>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Comment:</label>
+                        <textarea class="form-control" name="description" rows="4"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">완료</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

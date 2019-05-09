@@ -134,7 +134,6 @@
                         }
                     ]
                 }
-                console.log(data.list);
                 $('#permit').html('');
                 $.each(data.list, function (idx, list) {
                     $('#permit').append("<tr><th>" + list.idx + "</th><td>" + list.date + "</th><td>" + list.apply_datetime + "</td><td>" +
@@ -172,7 +171,6 @@
                         }
                     ]
                 }
-                console.log(data.list);
                 $('#waiting').html('');
                 $.each(data.list, function (idx, list) {
                     $('#waiting').append("<tr><th>" + list.idx + "</th><td>" + list.date + "</th><td>" + list.apply_datetime + "</td><td>" +

@@ -81,7 +81,7 @@ exports.getAnimalListPage = function (_data, _callback) {
     animal.getAnimalListPage(_data, _callback);
 }
 
-exports.checkReadState = function(_data,_callback){
+exports.checkReadState = function (_data, _callback) {
     var readState = require('./shelter/schedule');
     readState.checkReadState(_data, _callback);
 }
@@ -89,4 +89,29 @@ exports.checkReadState = function(_data,_callback){
 exports.getShelterAddress = function (_data, _callback) {
     var addr = require('./map/map');
     addr.getShelterAddress(_data, _callback);
+}
+
+exports.getScheduleListPermitted = function (_data, _callback) {
+    var schedule = require('./erp/schedule');
+    schedule.getScheduleListPermitted(_data, _callback);
+};
+
+exports.getScheduleListWaiting = function (_data, _callback) {
+    var schedule = require('./erp/schedule');
+    schedule.getScheduleListWaiting(_data, _callback);
+};
+
+exports.updateSheduleListNotRead = function (_data, _callback) {
+    var schedule = require('./erp/schedule');
+    schedule.updateScheduleListNotRead(_data, _callback);
+}
+
+exports.permitSchedule = function (_data, _callback) {
+    var schedule = require('./erp/schedule');
+    schedule.permitSchedule(_data, _callback);
+}
+
+exports.rejectSchedule = function (_data, _callback) {
+    var schedule = require('./erp/schedule');
+    schedule.rejectSchedule(_data, _callback)
 }

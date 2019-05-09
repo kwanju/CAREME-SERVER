@@ -9,7 +9,8 @@ config.db = {
     user: "root",       // Please input MYSQL ID
     password: "root",   // Please input MySQl password
     database: 'ZANGDOL',
-    timezone: 'utc'
+    timezone: 'utc',
+    multipleStatements: true
 };
 config.server = {
     port: 3000
@@ -27,6 +28,6 @@ config.animalImageUpload = {
 }
 
 config.animalList = {
-    numberpage :10
+    numberpage: 10
 }
 module.exports = config;

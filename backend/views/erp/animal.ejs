@@ -1,8 +1,8 @@
 <div>
   header
 </div>
-<div class="ui segment" style="width:72%;margin:auto; margin-right: 140px">
-  <table class="table">
+<div class="ui segment" style="width:72%;margin:auto; margin-right: 140px; padding-top:20px">
+  <table class="table table-bordered">
     <thead class="thead-dark text-center">
       <tr>
         <th scope="col">idx</th>
@@ -10,7 +10,7 @@
         <th scope="col">species_code</th>
         <th scope="col">register_data</th>
         <th scope="col">state</th>
-        <th scope="col"></th>
+        <th scope="col" style="width: 10%;"></th>
       </tr>
     </thead>
     <tbody id="tableList">
@@ -25,31 +25,72 @@
 
 
 
-<div class="text-center" style="margin-top: 60px">
+<div class="text-center" style="margin-top: 40px; margin-left: 350px">
   <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#animal_register">
     유기견 등록
   </button>
 </div>
 
 <script>
-    function fetchAnimalList(page) {
-      $.ajax({
-        url: "/erp/animal/json/getAnimalList",
-        method: "POST",
-        data: { page: page },
-        success: function (data) {
-          $('#tableList').html('');
-          $.each(data.list, function (idx, list) {
-            $('#tableList').append("<tr><th>" + list.idx + "</th><td>" + list.name + "</th><td>" + list.species_code + "</td><td>" +
-              list.register_data + "</td><td>" + list.state + "</td><td><button>삭제</button><button>수정</button></td>"
-            )
-          })
-        }
-      })
-    }
+  function fetchAnimalList(page) {
+    $.ajax({
+      url: "/erp/animal/json/getAnimalList",
+      method: "POST",
+      data: { page: page },
+      success: function (data) {
+        $('#tableList').html('');
+        $.each(data.list, function (idx, list) {
+          $('#tableList').append("<tr><th>" + list.idx + "</th><td>" + list.name + "</th><td>" + list.species_code + "</td><td>" +
+            list.register_data + "</td><td>" + list.state +
+            "</td><td><button class='btn btn-default btn edit-animal' style='color:green;' onclick='getAnimalInfo()'>" +
+            "<span class='glyphicon glyphicon-edit'></span></button>" +
+            "<button class='btn btn-default btn' style='color:red;'><span class='glyphicon glyphicon-trash'></span></button></td>"
+          )
+        })
+      }
+    })
+  }
   $(document).ready(function () {
     fetchAnimalList(1);
   });
+
+  function getAnimalInfo(idx) {
+    //     $.ajax({
+    //         url: "/erp/animal/json/getAnimalList",
+    //         method: "POST",
+    //         data: { animal_idx: idx },
+    //         success: function (data) {
+    //           console.log(data)
+    //           $("#animal_edit").modal("toggle")
+    //         }
+    //     })
+    // }
+    var data = {
+      result: 1,
+      animal: {
+        idx: idx, name: "멍멍", species_code: 1,register_data: "2012-05-09", state: 1, sex: "w", weight: 15, url_picture: "이미지"
+      }
+    };
+
+    var test = function (data) {
+      console.log(data.animal.sex);
+      $("#animalName").val(data.animal.name);
+      $("#animalCode").val(data.animal.species_code);
+      $("#animalState").val(data.animal.state);
+      $("#animalWeight").val(data.animal.weight);
+      $('input[name=sex]:checked').val();
+      $("#animal_edit").modal("show");
+    };
+
+    test(data);
+  }
+
+  $(document).on('click', '.edit-animal', function (e) {
+    var idx = $(this).closest('tr').find('th').html();
+    getAnimalInfo(idx);
+  });
+
+
 </script>
 
 <script>
@@ -70,11 +111,11 @@
       })
     }
   });
-  $(document).on('click','.page-button',function(e){
+  $(document).on('click', '.page-button', function (e) {
     console.log(this.innerHTML);
     fetchAnimalList(this.innerHTML);
   });
-  $('.page-button').on('click',function(){
+  $('.page-button').on('click', function () {
     console.log($(this).find('a'));
     //var page = $(this).find('a')
     //fetchAimalLIst(parseInt(page));
@@ -83,3 +124,4 @@
 </script>
 
 <% include ./../layout/modalRegisterAnimal.ejs %>
+  <% include ./../layout/modalEditAnimal.ejs %>

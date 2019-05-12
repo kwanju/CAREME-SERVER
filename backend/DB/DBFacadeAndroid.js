@@ -57,3 +57,8 @@ exports.getUserSchedule = function (_data, _callback) {
     var schedule = require('./android/schedule');
     schedule.getUserSchedule(_data, _callback);
 }
+
+exports.registerDiscover = function (_data, _callback) {
+    var discover = require('./android/discover');
+    discover.registerDiscover(_data, _callback);
+}

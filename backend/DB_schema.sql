@@ -68,7 +68,7 @@ CREATE TABLE discover(
     idx int(10) not null AUTO_INCREMENT,
     discover_datetime datetime COMMENT '유기동물을 발견한 날짜 및 시간',
     discovered_spot varchar(1000) COMMENT '유기동물을 발견한 장소',
-    description varchar(1000) COMMENT '발견한 유기동물 특징'
+    description varchar(1000) COMMENT '발견한 유기동물 특징',
     species_code int(10) COMMENT '견종 코드',
     animal_sex char(1) COMMENT '발견된 유기동물 성별',
     url_picture varchar(1000) COMMENT '발견된 유기동물 사진',

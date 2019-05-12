@@ -86,6 +86,11 @@ exports.checkReadState = function (_data, _callback) {
     readState.checkReadState(_data, _callback);
 }
 
+exports.getShelterAddress = function (_data, _callback) {
+    var addr = require('./map/map');
+    addr.getShelterAddress(_data, _callback);
+}
+
 exports.getScheduleListPermitted = function (_data, _callback) {
     var schedule = require('./erp/schedule');
     schedule.getScheduleListPermitted(_data, _callback);

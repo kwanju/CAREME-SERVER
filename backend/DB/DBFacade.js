@@ -115,3 +115,13 @@ exports.rejectSchedule = function (_data, _callback) {
     var schedule = require('./erp/schedule');
     schedule.rejectSchedule(_data, _callback)
 }
+
+exports.getAnimal = function (_data, _callback) {
+    var animal = require('./erp/animal');
+    animal.getAnimal(_data, _callback);
+}
+
+exports.updateAnimal = function (_data,_idx, _callback) {
+    var animal = require('./erp/animal');
+    animal.updateAnimal(_data,_idx, _callback);
+}

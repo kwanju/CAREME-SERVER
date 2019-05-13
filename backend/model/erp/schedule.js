@@ -18,14 +18,19 @@ exports.getScheduleListWaiting = function (_data, _callback) {
         var idxs = []
 
         for (var i = 0; i < _results.length; i++) //Idx 뽑아내기
-            idxs.push(_results[i].idx);
-        _callback(res);
+            if (_results[i].read_state == 0)
+                idxs.push(_results[i].idx);
+
         //읽은 목록 읽은 표시.
 
-        /*        dbFacade.updateSheduleListNotRead(idxs, function () {
+        if (idxs.length != 0) {
+            dbFacade.updateSheduleListNotRead(idxs, function () {
+                _callback(res);
+            });
+        } else {
             _callback(res);
-        });
-        */
+        }
+
     });
 };
 

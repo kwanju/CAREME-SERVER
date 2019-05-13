@@ -81,7 +81,7 @@ exports.getAnimalListPage = function (_data, _callback) {
     animal.getAnimalListPage(_data, _callback);
 }
 
-exports.checkReadState = function (_data, _callback) {
+exports.checkScheduleReadState = function (_data, _callback) {
     var readState = require('./shelter/schedule');
     readState.checkScheduleReadState(_data, _callback);
 }

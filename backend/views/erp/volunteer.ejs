@@ -173,7 +173,15 @@
                 }*/
                 $('#waiting').html('');
                 $.each(data.list, function (idx, list) {
-                    $('#waiting').append("<tr><th>" + list.idx + "</th><td>" + list.date + "</th><td>" + list.apply_datetime + "</td><td>" +
+
+                    var tr="";
+                    if(list.read_state==0)
+                        tr="<tr class='new'>"
+                    else
+                        tr="<tr>"
+                        
+                    
+                    $('#waiting').append(tr+"<th>" + list.idx + "</th><td>" + list.date + "</th><td>" + list.apply_datetime + "</td><td>" +
                         list.read_state + "</td><td>" + list.animal_idx + "</td><td>" + list.animalName + "</td><td>" + list.species_code + "</td><td>" + list.userNickName +
                         "</td><td>" + list.userPhoneNumber + "</td><td>" + list.userEmail +
                         "</td><td><button class='permit-button btn btn-default btn' style='color:green;'><span class='glyphicon glyphicon-ok'></span></button>" +
@@ -221,4 +229,5 @@
         var idx = $(this).closest('tr').find('th').html();
         rejectSchedule(idx);
     });
+    cssLoader('/stylesheets/volunteer.css')
 </script>

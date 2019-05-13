@@ -3,7 +3,6 @@ var pool = require('./pool').getPool();
 var poolAdapter = {};
 
 poolAdapter.execute = function(_query,_data,_callback){
-  
   pool.getConnection(function(_err,_conn){
     if(_err)
       throw _err;
@@ -15,6 +14,7 @@ poolAdapter.execute = function(_query,_data,_callback){
           throw _err;
         }
         _data(_results);
+        _conn.release();
       });
     else if(_data != undefined) // if # of params is 3
       _conn.query(_query,_data,function(_err,_results){
@@ -23,6 +23,7 @@ poolAdapter.execute = function(_query,_data,_callback){
           throw _err;
         }
         _callback(_results);
+        _conn.release();
       });
   });
 }

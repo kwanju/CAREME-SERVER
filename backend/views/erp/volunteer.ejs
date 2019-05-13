@@ -229,5 +229,6 @@
         var idx = $(this).closest('tr').find('th').html();
         rejectSchedule(idx);
     });
-    cssLoader('/stylesheets/volunteer.css')
+    cssLoader('/stylesheets/volunteer.css');
+    setScheduleBadge(0) // 스케쥴 배찌 제거
 </script>

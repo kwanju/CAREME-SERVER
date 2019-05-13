@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-router.post('/checkScheduleReadState',function(_req,_res){
+router.post('/checkReadState',function(_req,_res){
     if(_req.session.user.idx) {
         _req.body.idx = _req.session.user.idx;
     }

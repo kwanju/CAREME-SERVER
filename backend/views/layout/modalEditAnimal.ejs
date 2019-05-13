@@ -6,6 +6,11 @@
             </div>
             <form id="form2" name="form2">
                 <div class="modal-body">
+                    <label for="exampleFormControlInput1">유기견 사진</label>
+                    <div class="form-group">
+                        <img src="" id="animalImg" width="250" height="200" />
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">견명*</label>
                         <input type="text" class="form-control" id="animalName" name="name" aria-label="name">
@@ -23,10 +28,6 @@
                         <input type="text" class="form-control" id="animalState" name="state" aria-label="state">
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlFile1">유기견 사진</label>
-                        <input type="file" name="animalImage" class="form-control-file" id="exampleFormControlFile1">
-                    </div>
-                    <div class="form-group">
                         <fieldset>
                             <label for="exampleFormControlSelect1">성별</label>
                             <br>
@@ -39,7 +40,7 @@
                         <textarea class="form-control" name="description" rows="4"></textarea>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">완료</button>
+                        <button type="button" class="btn btn-primary" onclick="completeUpdate()">완료</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                     </div>
                 </div>
@@ -47,3 +48,23 @@
         </div>
     </div>
 </div>
+
+<script>
+    function completeUpdate() {
+        var form = $('#form2')[0];
+        var formData = new FormData(form);
+        $.ajax({
+            url: '/erp/animal/action/updateAnimal',
+            type: 'POST',
+            enctype: 'multipart/form-data',
+            data: { formData },
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log(data);
+
+            }
+        })
+    }
+</script>

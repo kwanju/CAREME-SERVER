@@ -63,78 +63,77 @@
             method: "POST",
             data: {},
             success: function (data) {
-               /* data = {
-                    "result": 1,
-                    "list": [
-                        {
-                            "idx": 1,
-                            "date": "2019-04-29T00:00:00.000Z",
-                            "apply_datetime": null,
-                            "animal_idx": 60,
-                            "animalName": "삐삐",
-                            "species_code": 3,
-                            "userNickName": "admin",
-                            "userPhoneNumber": "01012345678",
-                            "userEmail": "test@test.com"
-                        },
-                        {
-                            "idx": 3,
-                            "date": "2019-04-01T00:00:00.000Z",
-                            "apply_datetime": null,
-                            "animal_idx": 60,
-                            "animalName": "삐삐",
-                            "species_code": 3,
-                            "userNickName": "admin",
-                            "userPhoneNumber": "01012345678",
-                            "userEmail": "test@test.com"
-                        },
-                        {
-                            "idx": 4,
-                            "date": "2019-05-16T00:00:00.000Z",
-                            "apply_datetime": null,
-                            "animal_idx": 60,
-                            "animalName": "삐삐",
-                            "species_code": 3,
-                            "userNickName": "admin",
-                            "userPhoneNumber": "01012345678",
-                            "userEmail": "test@test.com"
-                        },
-                        {
-                            "idx": 5,
-                            "date": "2019-05-18T00:00:00.000Z",
-                            "apply_datetime": null,
-                            "animal_idx": 60,
-                            "animalName": "삐삐",
-                            "species_code": 3,
-                            "userNickName": "admin",
-                            "userPhoneNumber": "01012345678",
-                            "userEmail": "test@test.com"
-                        },
-                        {
-                            "idx": 6,
-                            "date": "2019-05-04T00:00:00.000Z",
-                            "apply_datetime": null,
-                            "animal_idx": 60,
-                            "animalName": "삐삐",
-                            "species_code": 3,
-                            "userNickName": "admin",
-                            "userPhoneNumber": "01012345678",
-                            "userEmail": "test@test.com"
-                        },
-                        {
-                            "idx": 7,
-                            "date": "2019-05-06T00:00:00.000Z",
-                            "apply_datetime": null,
-                            "animal_idx": 60,
-                            "animalName": "삐삐",
-                            "species_code": 3,
-                            "userNickName": "admin",
-                            "userPhoneNumber": "01012345678",
-                            "userEmail": "test@test.com"
-                        }
-                    ]
-                }*/
-                console.log(data.list);
+                /* data = {
+                     "result": 1,
+                     "list": [
+                         {
+                             "idx": 1,
+                             "date": "2019-04-29T00:00:00.000Z",
+                             "apply_datetime": null,
+                             "animal_idx": 60,
+                             "animalName": "삐삐",
+                             "species_code": 3,
+                             "userNickName": "admin",
+                             "userPhoneNumber": "01012345678",
+                             "userEmail": "test@test.com"
+                         },
+                         {
+                             "idx": 3,
+                             "date": "2019-04-01T00:00:00.000Z",
+                             "apply_datetime": null,
+                             "animal_idx": 60,
+                             "animalName": "삐삐",
+                             "species_code": 3,
+                             "userNickName": "admin",
+                             "userPhoneNumber": "01012345678",
+                             "userEmail": "test@test.com"
+                         },
+                         {
+                             "idx": 4,
+                             "date": "2019-05-16T00:00:00.000Z",
+                             "apply_datetime": null,
+                             "animal_idx": 60,
+                             "animalName": "삐삐",
+                             "species_code": 3,
+                             "userNickName": "admin",
+                             "userPhoneNumber": "01012345678",
+                             "userEmail": "test@test.com"
+                         },
+                         {
+                             "idx": 5,
+                             "date": "2019-05-18T00:00:00.000Z",
+                             "apply_datetime": null,
+                             "animal_idx": 60,
+                             "animalName": "삐삐",
+                             "species_code": 3,
+                             "userNickName": "admin",
+                             "userPhoneNumber": "01012345678",
+                             "userEmail": "test@test.com"
+                         },
+                         {
+                             "idx": 6,
+                             "date": "2019-05-04T00:00:00.000Z",
+                             "apply_datetime": null,
+                             "animal_idx": 60,
+                             "animalName": "삐삐",
+                             "species_code": 3,
+                             "userNickName": "admin",
+                             "userPhoneNumber": "01012345678",
+                             "userEmail": "test@test.com"
+                         },
+                         {
+                             "idx": 7,
+                             "date": "2019-05-06T00:00:00.000Z",
+                             "apply_datetime": null,
+                             "animal_idx": 60,
+                             "animalName": "삐삐",
+                             "species_code": 3,
+                             "userNickName": "admin",
+                             "userPhoneNumber": "01012345678",
+                             "userEmail": "test@test.com"
+                         }
+                     ]
+                 }*/
                 $('#permit').html('');
                 $.each(data.list, function (idx, list) {
                     $('#permit').append("<tr><th>" + list.idx + "</th><td>" + list.date + "</th><td>" + list.apply_datetime + "</td><td>" +
@@ -155,35 +154,34 @@
             method: "POST",
             data: {},
             success: function (data) {
-              /*  data = {
-                    "result": 1,
-                    "list": [
-                        {
-                            "idx": 2,
-                            "date": "2019-04-30T00:00:00.000Z",
-                            "apply_datetime": null,
-                            "read_state": 0,
-                            "animal_idx": 60,
-                            "animalName": "삐삐",
-                            "species_code": 3,
-                            "userNickName": "admin",
-                            "userPhoneNumber": "01012345678",
-                            "userEmail": "test@test.com"
-                        }
-                    ]
-                }*/
-                console.log(data.list);
+                /*  data = {
+                      "result": 1,
+                      "list": [
+                          {
+                              "idx": 2,
+                              "date": "2019-04-30T00:00:00.000Z",
+                              "apply_datetime": null,
+                              "read_state": 0,
+                              "animal_idx": 60,
+                              "animalName": "삐삐",
+                              "species_code": 3,
+                              "userNickName": "admin",
+                              "userPhoneNumber": "01012345678",
+                              "userEmail": "test@test.com"
+                          }
+                      ]
+                  }*/
                 $('#waiting').html('');
                 $.each(data.list, function (idx, list) {
 
-                    var tr="";
-                    if(list.read_state==0)
-                        tr="<tr class='new'>"
+                    var tr = "";
+                    if (list.read_state == 0)
+                        tr = "<tr class='new'>"
                     else
-                        tr="<tr>"
-                        
-                    
-                    $('#waiting').append(tr+"<th>" + list.idx + "</th><td>" + list.date + "</th><td>" + list.apply_datetime + "</td><td>" +
+                        tr = "<tr>"
+
+
+                    $('#waiting').append(tr + "<th>" + list.idx + "</th><td>" + list.date + "</th><td>" + list.apply_datetime + "</td><td>" +
                         list.read_state + "</td><td>" + list.animal_idx + "</td><td>" + list.animalName + "</td><td>" + list.species_code + "</td><td>" + list.userNickName +
                         "</td><td>" + list.userPhoneNumber + "</td><td>" + list.userEmail +
                         "</td><td><button class='permit-button btn btn-default btn' style='color:green;'><span class='glyphicon glyphicon-ok'></span></button>" +
@@ -205,7 +203,7 @@
             data: { idx: idx },
             success: function (data) {
                 alert("승인되었습니다.");
-                window.location.href="/erp/volunteer/volunteer";
+                window.location.href = "/erp/volunteer/volunteer";
             }
         })
     }
@@ -222,7 +220,7 @@
             data: { idx: idx },
             success: function (data) {
                 alert("거절되었습니다.");
-                window.location.href="/erp/volunteer/volunteer";
+                window.location.href = "/erp/volunteer/volunteer";
             }
         })
     }

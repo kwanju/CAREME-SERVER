@@ -6,7 +6,7 @@
      }
  }
  function checkNewSchedule() {
-     var NEW_SCHEDULE_API_URL = 'http://localhost:3000/erp/notifytest/json/checkReadState';
+     var NEW_SCHEDULE_API_URL = 'http://localhost:3000/erp/notifytest/json/checkScheduleReadState';
 
      $.ajax({
          url: NEW_SCHEDULE_API_URL,
@@ -28,7 +28,7 @@
      });
  }
  function showNewSchedule() {
-     var NEW_SCHEDULE_API_URL = 'http://localhost:3000/erp/notifytest/json/checkReadState';
+     var NEW_SCHEDULE_API_URL = 'http://localhost:3000/erp/notifytest/json/checkScheduleReadState';
 
      $.ajax({
          url: NEW_SCHEDULE_API_URL,

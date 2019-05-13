@@ -83,11 +83,11 @@ exports.getAnimalListPage = function (_data, _callback) {
 
 exports.checkReadState = function (_data, _callback) {
     var readState = require('./shelter/schedule');
-    readState.checkReadState(_data, _callback);
+    readState.checkScheduleReadState(_data, _callback);
 }
 
 exports.getShelterAddress = function (_data, _callback) {
-    var addr = require('./map/map');
+    var addr = require('./discover/map');
     addr.getShelterAddress(_data, _callback);
 }
 
@@ -123,5 +123,15 @@ exports.getAnimal = function (_data, _callback) {
 
 exports.updateAnimal = function (_data,_idx, _callback) {
     var animal = require('./erp/animal');
-    animal.updateAnimal(_data,_idx, _callback);
+    animal.updateAnimal(_data, _idx, _callback);
+}
+
+exports.createDiscoverRequest = function (_discover_data, _shelter_data, _callback) {
+    var create = require('./discover/discover');
+    create.createDiscoverRequest(_discover_data, _shelter_data, _callback);
+}
+
+exports.checkDiscoverRequestReadState = function (_data, _callback) {
+    var check = require('./discover/discover');
+    check.checkDiscoverRequestReadState(_data, _callback);
 }

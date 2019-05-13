@@ -53,43 +53,31 @@
   $(document).ready(function () {
     fetchAnimalList(1);
   });
+</script>
+
+<script>
 
   function getAnimalInfo(idx) {
-    //     $.ajax({
-    //         url: "/erp/animal/json/getAnimalList",
-    //         method: "POST",
-    //         data: { animal_idx: idx },
-    //         success: function (data) {
-    //           console.log(data)
-    //           $("#animal_edit").modal("toggle")
-    //         }
-    //     })
-    // }
-    var data = {
-      result: 1,
-      animal: {
-        idx: idx, name: "멍멍", species_code: 1, register_data: "2012-05-09", state: 1, sex: "w", weight: 15, url_picture: "https://images.mypetlife.co.kr/wp-content/uploads/2018/07/27094143/pexels-photo-1220755.jpeg"
+    $.ajax({
+      url: "/erp/animal/json/getAnimal",
+      method: "POST",
+      data: { animal_idx: idx },
+      success: function (data) {
+        $("#animalName").val(data.animal.name);
+        $("#animalCode").val(data.animal.species_code);
+        $("#animalState").val(data.animal.state);
+        $("#animalWeight").val(data.animal.weight);
+        $("#animalImg").attr('src', "/" + data.animal.url_picture);
+
+        if (data.animal.sex = 'w') {
+          $('#female').prop("checked", true)
+        }
+        else {
+          $('#male').prop("checked", true)
+        }
+        $("#animal_edit").modal("show")
       }
-    };
-
-    var test = function (data) {
-      $("#animalName").val(data.animal.name);
-      $("#animalCode").val(data.animal.species_code);
-      $("#animalState").val(data.animal.state);
-      $("#animalWeight").val(data.animal.weight);
-      $("#animalImg").attr('src', data.animal.url_picture );
-
-      if (data.animal.sex = 'w') {
-        $('#female').prop("checked", true)
-      }
-      else {
-        $('#male').prop("checked", true)
-      }
-
-      $("#animal_edit").modal("show");
-    };
-
-    test(data);
+    })
   }
 
   $(document).on('click', '.edit-animal', function (e) {
@@ -97,27 +85,28 @@
     getAnimalInfo(idx);
   });
 
-
 </script>
 
 <script>
+  function fetchAnimalListPage() {
+    $.ajax({
+      url: "/erp/animal/json/getAnimalListPage",
+      method: "POST",
+      data: {},
+      success: function (data) {
+        for (count = 1; count <= data.totalPage; count++) {
+          $('#pageNum').append("<li><a class='page-button'>" + count + "</a></li>"
+          )
+        }
+      }
+    })
+  }
+
   $(document).ready(function () {
     var count;
     fetchAnimalListPage();
-    function fetchAnimalListPage() {
-      $.ajax({
-        url: "/erp/animal/json/getAnimalListPage",
-        method: "POST",
-        data: {},
-        success: function (data) {
-          for (count = 1; count <= data.totalPage; count++) {
-            $('#pageNum').append("<li><a class='page-button'>" + count + "</a></li>"
-            )
-          }
-        }
-      })
-    }
   });
+
   $(document).on('click', '.page-button', function (e) {
     fetchAnimalList(this.innerHTML);
   });
@@ -125,4 +114,4 @@
 </script>
 
 <% include ./../layout/modalRegisterAnimal.ejs %>
-<% include ./../layout/modalEditAnimal.ejs %>
+  <% include ./../layout/modalEditAnimal.ejs %>

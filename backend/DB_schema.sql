@@ -80,6 +80,17 @@ CREATE TABLE discover(
     FOREIGN KEY(matching_shelter_idx) REFERENCES shelter(idx)
 );
 
+CREATE TABLE discover_request(
+    idx int(10) not null AUTO_INCREMENT,
+    shelter_idx int(10) not null COMMENT '신청간 보호소 idx',
+    discover_idx int(10) not null COMMENT '찾았어요 idx',
+    read_state int(1) default 0 COMMENT '처리여부; 1:처리완료, 0:처리안함',
+    register_datetime datetime COMMENT '요청을 보낸 시간날짜',
+    PRIMARY KEY(idx),
+    FOREIGN KEY(discover_idx) REFERENCES discover(idx),
+    FOREIGN KEY(shelter_idx) REFERENCES shelter(idx),
+);
+
 INSERT INTO shelter(id,pw,name) VALUES('test','test','테스트보호소');
 
 --test

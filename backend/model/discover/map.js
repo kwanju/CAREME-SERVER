@@ -10,11 +10,9 @@ var getShelterAddress = function (_data, _callback) {
     });
 }
 
-var bubbleSort = function (resultAry, resultAryLength, shelterAryObj) { // 3, 012
+var bubbleSort = function (resultAry, resultAryLength, shelterAryObj) { //
     if(resultAryLength-1 === 0){
         resultAry[0] = shelterAryObj;
-        //console.log("count: "+count);
-        //console.log("bubble test: "+JSON.stringify(resultAry[count]));
     }else {
         var tmp;
         for (var i = resultAryLength-1; i > -1; i--) {
@@ -59,11 +57,7 @@ exports.getSortedShelter = function (_body,callback) {
             };
         }
         for (var j = 0; j < _result.shelter.length; j++) {
-            request({
-                uri: encodeURI('https://dapi.kakao.com/v2/local/search/address.json?query=' + shelterAry[count].position),
-                method: "GET",
-                headers: {'Authorization': 'KakaoAK 7a116decd0d85fb13328c9f516f7baaa'}, //카카오 key
-            }, function (error, response, body) {
+            getLocation(shelterAry[count].position, function (error, response, body) {
                 if (error) {
                     console.log(error);
                 }
@@ -86,5 +80,17 @@ exports.getSortedShelter = function (_body,callback) {
             });
         }
     });
-}
+};
+
+var getLocation = function(position,_callback){
+    request({
+        uri: encodeURI('https://dapi.kakao.com/v2/local/search/address.json?query=' + position),
+        method: "GET",
+        headers: {'Authorization': 'KakaoAK 7a116decd0d85fb13328c9f516f7baaa'}, //카카오 key
+    }, function (error, response, body) {
+        _callback(error,response,body)
+    });
+};
+
+exports.getLocation = getLocation;
 

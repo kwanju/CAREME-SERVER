@@ -5,17 +5,18 @@ var insertIdxIntoBody = require('../../../utils/erp/insertIdxIntoBody');
 
 var animalImageUpload = require('../../../model/erp/animalImageUpload');
 
-router.post('/addAnimal', animalImageUpload.uploadImage(),insertIdxIntoBody, function (_req, _res) {
+router.post('/addAnimal', animalImageUpload.uploadImage(), insertIdxIntoBody, function (_req, _res) {
     var animal = require('../../../model/erp/animal');
     animal.addAnimal(_req, _req.body, function (_result) {
         _res.send(_result);
     });
 });
 
-router.post('/android', animalImageUpload.uploadImage(), function (_req, _res) {
-    console.log(_req.body);
-    console.log(_req.file)
-    _res.send("test");
+router.post('/updateAnimal', animalImageUpload.uploadImage(), function (_req, _res) {
+    var animal = require('../../../model/erp/animal');
+    animal.updateAnimal(_req,_req.body, function (_result) {
+        _res.send(_result);
+    });
 });
 
 

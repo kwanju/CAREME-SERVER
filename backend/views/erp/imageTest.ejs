@@ -16,10 +16,11 @@
                             style="margin-bottom:0px;">업로드</label>
                         <input type="file" id="cloud_upload_file" hidden>
                     </span>
-                    <form action="http://localhost:3000/erp/animal/action/addAnimal" method="POST"
+                    <form action="http://localhost:3000/erp/animal/action/updateAnimal" method="POST"
                         enctype="multipart/form-data">
                         <input type="file" name='animalImage'>
-                        <input type="text" name='name'>
+                        <input type="text" name='name' placeholder="name">
+                        <input type="text" name='animal_idx' placeholder="animal_idx">
                         <input type="submit">
                     </form>
                 </div>

@@ -68,17 +68,24 @@
     var data = {
       result: 1,
       animal: {
-        idx: idx, name: "멍멍", species_code: 1,register_data: "2012-05-09", state: 1, sex: "w", weight: 15, url_picture: "이미지"
+        idx: idx, name: "멍멍", species_code: 1, register_data: "2012-05-09", state: 1, sex: "w", weight: 15, url_picture: "https://images.mypetlife.co.kr/wp-content/uploads/2018/07/27094143/pexels-photo-1220755.jpeg"
       }
     };
 
     var test = function (data) {
-      console.log(data.animal.sex);
       $("#animalName").val(data.animal.name);
       $("#animalCode").val(data.animal.species_code);
       $("#animalState").val(data.animal.state);
       $("#animalWeight").val(data.animal.weight);
-      $('input[name=sex]:checked').val();
+      $("#animalImg").attr('src', data.animal.url_picture );
+
+      if (data.animal.sex = 'w') {
+        $('#female').prop("checked", true)
+      }
+      else {
+        $('#male').prop("checked", true)
+      }
+
       $("#animal_edit").modal("show");
     };
 
@@ -112,16 +119,10 @@
     }
   });
   $(document).on('click', '.page-button', function (e) {
-    console.log(this.innerHTML);
     fetchAnimalList(this.innerHTML);
   });
-  $('.page-button').on('click', function () {
-    console.log($(this).find('a'));
-    //var page = $(this).find('a')
-    //fetchAimalLIst(parseInt(page));
-  })
 
 </script>
 
 <% include ./../layout/modalRegisterAnimal.ejs %>
-  <% include ./../layout/modalEditAnimal.ejs %>
+<% include ./../layout/modalEditAnimal.ejs %>

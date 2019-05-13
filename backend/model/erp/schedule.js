@@ -41,16 +41,7 @@ exports.permitSchedule = function (_data, _callback) {
         _callback(res);
 
         //푸시 메시지 보내기
-        dbFacade.getPushInfoAboutSchedule(_data, function (_results) {
-            var token = _results[0].token;
-
-            var body = _results[0].animalName + "(" + _results[0].shelterName + ") " + _results[0].date + " 허가되었습니다.";
-
-            var fcm = require('../../utils/android/fcm');
-            fcm.send(token, body);
-            console.log(token);
-            console.log(body);
-        });
+        sendPush(_data, 1)
     })
 }
 
@@ -59,6 +50,32 @@ exports.rejectSchedule = function (_data, _callback) {
         var res = {};
         res.result = 1;
         _callback(res);
+
+        //푸시 메시지 보내기
+        sendPush(_data, -1)
     })
 }
 
+var sendPush = function (_data, _permit) {
+    var permit = _permit == 1 ? "허가" : "거부";
+    dbFacade.getPushInfoAboutSchedule(_data, function (_results) {
+        var token = _results[0].token;
+        var date = formatDate(_results[0].date)
+        var body = _results[0].animalName + "(" + _results[0].shelterName + ") " + date + " " + permit + " 되었습니다.";
+
+        var fcm = require('../../utils/android/fcm');
+        fcm.send(token, body);
+    });
+}
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}

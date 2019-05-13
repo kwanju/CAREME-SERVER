@@ -53,3 +53,13 @@ exports.rejectSchedule = function (_data, _callback) {
         _callback();
     });
 }
+
+exports.getPushInfoAboutSchedule = function (_data, _callback) {
+    var select = "SELECT u.token, a.name AS animalName, slt.name AS shelterName, s.date "
+        + "FROM schedule AS s INNER JOIN user AS u INNER JOIN animal AS a INNER JOIN shelter AS slt "
+    var on = "ON s.user_idx=u.idx AND a.idx = s.animal_idx AND a.shelter_idx = slt.idx ";
+    var where = "WHERE s.idx=?";
+    poolAdapter.execute(select + on + where, [_data.idx], function (_results) {
+        _callback(_results);
+    });
+}

@@ -39,6 +39,18 @@ exports.permitSchedule = function (_data, _callback) {
         var res = {};
         res.result = 1;
         _callback(res);
+
+        //푸시 메시지 보내기
+        dbFacade.getPushInfoAboutSchedule(_data, function (_results) {
+            var token = _results[0].token;
+
+            var body = _results[0].animalName + "(" + _results[0].shelterName + ") " + _results[0].date + " 허가되었습니다.";
+
+            var fcm = require('../../utils/android/fcm');
+            fcm.send(token, body);
+            console.log(token);
+            console.log(body);
+        });
     })
 }
 

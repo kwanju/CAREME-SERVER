@@ -121,7 +121,7 @@ exports.getAnimal = function (_data, _callback) {
     animal.getAnimal(_data, _callback);
 }
 
-exports.updateAnimal = function (_data,_idx, _callback) {
+exports.updateAnimal = function (_data, _idx, _callback) {
     var animal = require('./erp/animal');
     animal.updateAnimal(_data, _idx, _callback);
 }
@@ -135,3 +135,8 @@ exports.checkDiscoverRequestReadState = function (_data, _callback) {
     var check = require('./discover/discover');
     check.checkDiscoverRequestReadState(_data, _callback);
 }
+
+exports.getPushInfoAboutSchedule = function (_data, _callback) {
+    var schedule = require('./erp/schedule');
+    schedule.getPushInfoAboutSchedule(_data, _callback);
+};

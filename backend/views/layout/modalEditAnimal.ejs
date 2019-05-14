@@ -4,12 +4,12 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">유기견 수정</h5>
             </div>
-            <form action="/erp/animal/action/updateAnimal" id="form2" name="form2" method="POST" enctype="multipart/form-data">
+            <form id="form2" name="form2" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <label for="exampleFormControlInput1">유기견 사진</label>
+                    <label for="animal_img">유기견 사진</label>
                     <div class="form-group">
                         <img src="" id="animalImg" width="250" height="200" />
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                        <input type="file" class="form-control-file" id="animal_img">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">견명*</label>
@@ -51,21 +51,36 @@
 
 
 <script>
+    $(function() {
+        $("#animal_img").on('change', function(){
+            readURL(this);
+        });
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#animalImg').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
     function updateAnimal(idx) {
-        console.log($("#animalImg").attr())
+        var form = $('#form2')[0];
+        var formData = new FormData(form);
+        formData.append('animal_idx', idx);
         $.ajax({
             url: "/erp/animal/action/updateAnimal",
             method: "POST",
             enctype: 'multipart/form-data',
+            data: formData,
             dataType: 'json',
             processData: false,
             contentType: false,
-            data: {
-                animal_idx : idx, name : $("#animalName").val(), species_code:$("#animalCode").val(),
-                state:$("#animalState").val(), weight:$("#animalWeight").val(),
-                description: $("#animalDesc").val(), url_picture: $("#animalImg").attr(),
-            },
             success: function (data) {
                 alert("정상적으로 수정되었습니다.");
                 window.location.href = "/erp/animal/animal";
@@ -74,7 +89,7 @@
     }
 
     $(document).on('click', '.update-animal', function (e) {
-        idx = selectedAnimal;
+        var idx = selectedAnimal;
         //console.log(idx);
         updateAnimal(idx);
     });

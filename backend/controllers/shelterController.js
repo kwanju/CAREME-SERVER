@@ -21,8 +21,8 @@ exports.registration = function (_data, _callback) {
                 var longitude = body.documents[0].x;
                 var latitude = body.documents[0].y;
                 dbfacade.registerLocation({
-                    longitude: longitude,
-                    latitude: latitude,
+                    longitude: longitude.substring(0,9),
+                    latitude: latitude.substring(0,8),
                     id: _data.id
                 }, function () {
                 });

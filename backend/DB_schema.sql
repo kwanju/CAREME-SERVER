@@ -91,9 +91,10 @@ CREATE TABLE discover_request(
     discover_idx int(10) not null COMMENT '찾았어요 idx',
     read_state int(1) default 0 COMMENT '처리여부; 1:처리완료, 0:처리안함',
     register_datetime datetime COMMENT '요청을 보낸 시간날짜',
+    permit int(1) default 0 COMMENT '1: 허가 / 0: 아직 결정안됨. / -1: 거절', 
     PRIMARY KEY(idx),
     FOREIGN KEY(discover_idx) REFERENCES discover(idx),
-    FOREIGN KEY(shelter_idx) REFERENCES shelter(idx),
+    FOREIGN KEY(shelter_idx) REFERENCES shelter(idx)
 );
 
 INSERT INTO shelter(id,pw,name, position, url_picture) VALUES('test','test','테스트보호소', '서울 종로구 경교장1길 7-1', 'drive/animalImage/1.jpg');

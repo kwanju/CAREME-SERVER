@@ -160,3 +160,23 @@ exports.getAllDiscoverRequestInDiscover = function (_data, _callback) {
     var discover = require('./discover/discover');
     discover.getAllDiscoverRequestInDiscover(_data, _callback);
 }
+
+exports.getDiscoverRequestWaiting = function (_data, _callback) {
+    var discover = require('./erp/discover');
+    discover.getDiscoverRequestWaiting(_data, _callback)
+};
+
+exports.getDiscoverRequestRecord = function (_data, _callback) {
+    var discover = require('./erp/discover');
+    discover.getDiscoverRequestRecord(_data, _callback)
+}
+
+exports.permitDiscoverRequest = function (_data, _callback) {
+    var discover = require('./erp/discover');
+    discover.permitDiscoverRequest(_data, _callback)
+}
+
+exports.rejectDiscoverRequest = function (_data, _callback) {
+    var discover = require('./erp/discover');
+    discover.rejectDiscoverRequest(_data, _callback)
+}

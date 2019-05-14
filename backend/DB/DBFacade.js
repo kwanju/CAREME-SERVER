@@ -145,3 +145,13 @@ exports.registerLocation = function (_data, _callback) {
     var registration = require('./shelter/registration');
     registration.registerLocation(_data, _callback)
 }
+
+exports.getShelter = function (_data, _callback) {
+    var shelter = require('./erp/shelter');
+    shelter.getShelter(_data, _callback);
+}
+
+exports.updateShelter = function (_data, _idx, _callback) {
+    var shelter = require('./erp/shelter');
+    shelter.updateShelter(_data, _idx, _callback);
+}

@@ -20,6 +20,7 @@ CREATE TABLE shelter(
     volunteer_end_time time COMMENT '자원봉사 가능 종료시간',
     longitude varchar(20) COMMENT '좌표 longitude',
     latitude varchar(20) COMMENT '좌표 latitude',
+    url_picture varchar(400) COMMENT '사진 url',
     UNIQUE(id)
     PRIMARY KEY(idx)
 );
@@ -95,7 +96,7 @@ CREATE TABLE discover_request(
     FOREIGN KEY(shelter_idx) REFERENCES shelter(idx),
 );
 
-INSERT INTO shelter(id,pw,name) VALUES('test','test','테스트보호소');
+INSERT INTO shelter(id,pw,name, position, url_picture) VALUES('test','test','테스트보호소', '서울 종로구 경교장1길 7-1', 'drive/animalImage/1.jpg');
 
 --test
 INSERT INTO animal(species_code,name,url_picture,shelter_idx,state) VALUES(1,'뽀삐',"drive/animalImage/1.jpg",1,1);

@@ -146,6 +146,16 @@ exports.registerLocation = function (_data, _callback) {
     registration.registerLocation(_data, _callback)
 }
 
+exports.getShelter = function (_data, _callback) {
+    var shelter = require('./erp/shelter');
+    shelter.getShelter(_data, _callback);
+}
+
+exports.updateShelter = function (_data, _idx, _callback) {
+    var shelter = require('./erp/shelter');
+    shelter.updateShelter(_data, _idx, _callback);
+}
+
 exports.getAllDiscoverRequestInDiscover = function (_data, _callback) {
     var discover = require('./discover/discover');
     discover.getAllDiscoverRequestInDiscover(_data, _callback);

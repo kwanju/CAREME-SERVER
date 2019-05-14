@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bb406fff-0e4f-4f3b-bfbf-c4e06bc50830" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/model/discover/matching.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DB/DBFacade.js" beforeDir="false" afterPath="$PROJECT_DIR$/DB/DBFacade.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DB/android/discover.js" beforeDir="false" afterPath="$PROJECT_DIR$/DB/android/discover.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DB/discover/discover.js" beforeDir="false" afterPath="$PROJECT_DIR$/DB/discover/discover.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DB/discover/map.js" beforeDir="false" afterPath="$PROJECT_DIR$/DB/discover/map.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DB_schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/DB_schema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/shelterController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/shelterController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/android/discover/discover.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/android/discover/discover.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/discover/map.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/discover/map.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/android/discover/action.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/android/discover/action.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/layout/modalEditShelter.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/layout/modalEditShelter.ejs" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -51,7 +43,7 @@
         <counts>
           <entry key="css" value="4" />
           <entry key="ejs" value="51" />
-          <entry key="js" value="251" />
+          <entry key="js" value="252" />
           <entry key="json" value="1" />
           <entry key="sql" value="12" />
         </counts>
@@ -61,23 +53,23 @@
           <entry key="CSS" value="4" />
           <entry key="EJS" value="51" />
           <entry key="JSON" value="1" />
-          <entry key="JavaScript" value="251" />
+          <entry key="JavaScript" value="252" />
           <entry key="SQL" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="4" />
-          <entry key="ejs" value="2645" />
-          <entry key="js" value="6457" />
+          <entry key="ejs" value="2672" />
+          <entry key="js" value="6458" />
           <entry key="sql" value="894" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="4" />
-          <entry key="EJS" value="2645" />
-          <entry key="JavaScript" value="6457" />
+          <entry key="EJS" value="2672" />
+          <entry key="JavaScript" value="6458" />
           <entry key="SQL" value="894" />
         </counts>
       </usages-collector>
@@ -85,20 +77,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/layout/modalEditShelter.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="12" column="35" lean-forward="true" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+            <state relative-caret-position="387">
+              <caret line="63" column="34" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DB/DBFacade.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="156" column="4" selection-start-line="156" selection-start-column="4" selection-end-line="156" selection-end-column="4" />
+            <state relative-caret-position="241">
+              <caret line="156" column="1" lean-forward="true" selection-start-line="156" selection-start-column="1" selection-end-line="156" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="644">
+              <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
             </state>
           </provider>
         </entry>
@@ -145,8 +146,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DB/erp/shelter.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="414">
+              <caret line="18" column="7" lean-forward="true" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -199,13 +200,13 @@
         <option value="$PROJECT_DIR$/routes/erp/animal/action.js" />
         <option value="$PROJECT_DIR$/routes/erp/mshelter/mshelter.js" />
         <option value="$PROJECT_DIR$/views/layout/modalEditAnimal.ejs" />
-        <option value="$PROJECT_DIR$/views/layout/modalEditShelter.ejs" />
         <option value="$PROJECT_DIR$/model/erp/shelter.js" />
         <option value="$PROJECT_DIR$/DB/erp/shelter.js" />
         <option value="$PROJECT_DIR$/views/erp/mshelter.ejs" />
         <option value="$PROJECT_DIR$/routes/erp/mshelter/json.js" />
         <option value="$PROJECT_DIR$/routes/erp/mshelter/action.js" />
         <option value="$PROJECT_DIR$/DB/DBFacade.js" />
+        <option value="$PROJECT_DIR$/views/layout/modalEditShelter.ejs" />
       </list>
     </option>
   </component>
@@ -441,12 +442,12 @@
       <updated>1556777577612</updated>
       <workItem from="1556777578887" duration="15274000" />
       <workItem from="1556888376125" duration="4044000" />
-      <workItem from="1556895174549" duration="56088000" />
+      <workItem from="1556895174549" duration="56516000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75406000" />
+    <option name="totallyTimeSpent" value="75834000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -463,11 +464,11 @@
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="npm" order="1" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.25679544" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.25679544" />
       <window_info id="Structure" order="3" side_tool="true" weight="0.25" />
       <window_info id="Project Explorer" order="4" />
       <window_info id="Job Explorer" order="5" />
-      <window_info anchor="bottom" id="Terminal" order="0" visible="true" weight="0.32923833" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="0" visible="true" weight="0.32923833" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="2" show_stripe_button="false" />
       <window_info anchor="bottom" id="Docker" order="3" show_stripe_button="false" />
@@ -507,9 +508,6 @@
           <caret line="10" selection-start-line="10" selection-end-line="10" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config.js">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -742,6 +740,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/DB/erp/shelter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="18" column="7" lean-forward="true" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/erp/mshelter.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
@@ -752,17 +757,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="644">
+          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/model/erp/shelter.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
           <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/erp/mshelter/action.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
         </state>
       </provider>
     </entry>
@@ -773,24 +778,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DB/erp/shelter.js">
+    <entry file="file://$PROJECT_DIR$/routes/erp/mshelter/action.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/layout/modalEditShelter.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="12" column="35" lean-forward="true" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+        <state relative-caret-position="345">
+          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DB/DBFacade.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="156" column="4" selection-start-line="156" selection-start-column="4" selection-end-line="156" selection-end-column="4" />
+        <state relative-caret-position="241">
+          <caret line="156" column="1" lean-forward="true" selection-start-line="156" selection-start-column="1" selection-end-line="156" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/layout/modalEditShelter.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="63" column="34" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
         </state>
       </provider>
     </entry>

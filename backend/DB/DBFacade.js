@@ -86,9 +86,9 @@ exports.checkScheduleReadState = function (_data, _callback) {
     readState.checkScheduleReadState(_data, _callback);
 }
 
-exports.getShelterAddress = function (_data, _callback) {
+exports.getAllShelterLocation = function (_callback) {
     var addr = require('./discover/map');
-    addr.getShelterAddress(_data, _callback);
+    addr.getAllShelterLocation(_callback);
 }
 
 exports.getScheduleListPermitted = function (_data, _callback) {
@@ -126,9 +126,9 @@ exports.updateAnimal = function (_data, _idx, _callback) {
     animal.updateAnimal(_data, _idx, _callback);
 }
 
-exports.createDiscoverRequest = function (_discover_data, _shelter_data, _callback) {
+exports.createDiscoverRequest = function (_data, _callback) {
     var create = require('./discover/discover');
-    create.createDiscoverRequest(_discover_data, _shelter_data, _callback);
+    create.createDiscoverRequest(_data, _callback);
 }
 
 exports.checkDiscoverRequestReadState = function (_data, _callback) {
@@ -144,4 +144,9 @@ exports.getPushInfoAboutSchedule = function (_data, _callback) {
 exports.registerLocation = function (_data, _callback) {
     var registration = require('./shelter/registration');
     registration.registerLocation(_data, _callback)
+}
+
+exports.getAllDiscoverRequestInDiscover = function (_data, _callback) {
+    var discover = require('./discover/discover');
+    discover.getAllDiscoverRequestInDiscover(_data, _callback);
 }

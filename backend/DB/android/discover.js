@@ -11,6 +11,6 @@ exports.registerDiscover = function (_data, _callback) {
         [_data.discover_datetime, _data.discover_spot, _data.description, _data.species_code, _data.animal_sex,
         _data.url_picture, registerDate, _data.user_idx],
         function (_results) {
-            _callback();
+            _callback(_results.insertId);
         });
 };

@@ -1,1 +1,119 @@
-shelter page
+<div>
+    header
+</div>
+<div class="ui segment" style="width:72%; margin:auto; margin-right: 140px; padding-top:20px">
+            <form id="form-shelter" name="form-shelter">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">보호소 이름</label>
+                        <input type="text" class="form-control" id="shelterName" name="name" aria-label="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">주소</label>
+                        <input type="text" class="form-control" id="shelterAddress" name="position" aria-label="address">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">전화번호</label>
+                        <input type="text" class="form-control" id="shelterPhoneNumber" name="phone_number" aria-label="number">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">시작 시간</label>
+                        <input type="text" class="form-control" id="shelterStartTime" name="start_time" aria-label="startTime">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">종료 시간</label>
+                        <input type="text" class="form-control" id="shelterEndTime" name="end_time" aria-label="endTime">
+                    </div>
+                    <label for="shelter_img">보호소 사진</label>
+                    <div class="form-group">
+                        <img src="" id="shelterImage" width="250" height="200" />
+                        <input type="file" name="animalImage" class="form-control-file" id="shelter_img">
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">보호소 설명</label>
+                        <textarea class="form-control" id="shelterDescription" name="description" rows="4"></textarea>
+                    </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">봉사자 설명</label>
+                    <input type="text" class="form-control" id="volunteer_description" name="volunteer_description" aria-label="volunteer_description">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">봉사 시작시간</label>
+                    <input type="text" class="form-control" id="volunteer_start_time" name="volunteer_start_time" aria-label="volunteer_start_time">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">봉사 시작시간</label>
+                    <input type="text" class="form-control" id="volunteer_end_time" name="volunteer_end_time" aria-label="volunteer_end_time">
+                </div>
+                <button type="button" class="btn btn-primary" onclick="completeUpdate()">완료</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+
+            </form>
+</div>
+<hr/>
+
+<script>
+    $(document).ready(function () {
+        getShelterInfo();
+    });
+
+    function getShelterInfo() {
+        $.ajax({
+            url: "/erp/mshelter/json/getShelter",
+            method: "POST",
+            data: null,
+            success: function (data) {
+                //console.log(data);
+                $("#shelterName").val(data.shelter.name);
+                $("#shelterAddress").val(data.shelter.position);
+                $("#shelterPhoneNumber").val(data.shelter.phone_number);
+                $("#shelterStartTime").val(data.shelter.start_time);
+                $("#shelterEndTime").val(data.shelter.end_time);
+                $("#shelterDescription").val(data.shelter.description);
+                $("#volunteer_description").val(data.shelter.volunteer_description);
+                $("#volunteer_start_time").val(data.shelter.volunteer_start_time);
+                $("#volunteer_end_time").val(data.shelter.volunteer_end_time);
+                $("#shelterImage").attr('src', "/" + data.shelter.url_picture);
+                //$("#shelter_edit").modal("show");
+            }
+        })
+    }
+    $(document).on('click', '.edit-shelter', function (e) {
+        getShelterInfo();
+    });
+    $(function() {
+        $("#shelter_img").on('change', function(){
+            readURL(this);
+        });
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#shelterImage').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    function completeUpdate() {
+        var form = $('#form-shelter')[0];
+        var formData = new FormData(form);
+        //console.log("form: "+JSON.parse(JSON.stringify(form)));
+        //console.log("formData: "+ JSON.parse(JSON.stringify(formData)));
+        $.ajax({
+            url: '/erp/mshelter/action/updateShelter',
+            type: 'POST',
+            enctype: 'multipart/form-data',
+            data: formData ,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log("success data: "+data);
+                location.reload();
+            }
+        })
+    }
+</script>

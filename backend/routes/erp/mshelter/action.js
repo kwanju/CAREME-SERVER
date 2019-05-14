@@ -1,35 +1,18 @@
 var express = require('express');
 var router = express.Router();
 
-router.post('/login', function (_req, _res) {
+var animalImageUpload = require('../../../model/erp/animalImageUpload');
 
-  var loginConroller = require('../../controllers/loginController');
-
-  loginConroller.login(_req.body.id, _req.body.pw, function (_result) {
-    if (_result == null)
-      _res.send("<script>alert('아이디 혹은 패스워드가 잘못되었습니다');history.back();</script>");
-    else {
-
-      _req.session.user = _result[0];
-
-      if (_req.body.from)
-        _res.redirect(_req.body.from);
-      else
-        _res.redirect("/");
+router.post('/updateShelter', animalImageUpload.uploadImage(), function (_req, _res) {
+    var shelter = require('../../../model/erp/shelter');
+    //console.log("req.body: "+JSON.stringify(_req.body));
+    //_req.body.idx = 1; //for test
+    if(_req.session.user.idx) {
+        _req.body.idx = _req.session.user.idx;
     }
-  });
-});
-
-router.post('/registration', function (_req, _res) {
-  var uc = require('../../controllers/shelterController');
-  uc.registration(_req.body, function () {
-    _res.redirect('/');
-  });
-});
-
-router.get('/logout',function(_req,_res){
-  _req.session.destroy();
-  _res.redirect('/');
+    shelter.updateShelter(_req, _req.body, function (_result) {
+        _res.send(_result);
+    });
 });
 
 

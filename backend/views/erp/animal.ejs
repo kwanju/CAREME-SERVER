@@ -57,17 +57,21 @@
 
 <script>
 
+  var selectedAnimal;
+
   function getAnimalInfo(idx) {
     $.ajax({
       url: "/erp/animal/json/getAnimal",
       method: "POST",
       data: { animal_idx: idx },
       success: function (data) {
+        selectedAnimal = data.animal.idx;
         $("#animalName").val(data.animal.name);
         $("#animalCode").val(data.animal.species_code);
         $("#animalState").val(data.animal.state);
         $("#animalWeight").val(data.animal.weight);
         $("#animalImg").attr('src', "/" + data.animal.url_picture);
+        $("#animalDesc").val(data.animal.description);
 
         if (data.animal.sex = 'w') {
           $('#female').prop("checked", true)

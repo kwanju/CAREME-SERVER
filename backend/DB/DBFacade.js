@@ -140,3 +140,8 @@ exports.getPushInfoAboutSchedule = function (_data, _callback) {
     var schedule = require('./erp/schedule');
     schedule.getPushInfoAboutSchedule(_data, _callback);
 };
+
+exports.registerLocation = function (_data, _callback) {
+    var registration = require('./shelter/registration');
+    registration.registerLocation(_data, _callback)
+}

@@ -9,7 +9,8 @@ CREATE TABLE shelter(
     id varchar(100) not null,
     pw varchar(100) not null,
     name varchar(255) not null,
-    position varchar(255),
+    position varchar(255) COMMENT '보호소 주소 앞에 값',
+    position2 varchar(255) COMMENT '보호소 주소 뒤에 값',
     phone_number varchar(100),
     start_time time,
     end_time time ,
@@ -17,6 +18,9 @@ CREATE TABLE shelter(
     volunteer_description varchar(1000) COMMENT '자원봉사에 대한 설명 기입란.',
     volunteer_start_time time COMMENT '자원봉사 가능 시작시간',
     volunteer_end_time time COMMENT '자원봉사 가능 종료시간',
+    longitude varchar(20) COMMENT '좌표 longitude',
+    latitude varchar(20) COMMENT '좌표 latitude',
+    UNIQUE(id)
     PRIMARY KEY(idx)
 );
 

@@ -55,7 +55,7 @@
         $.ajax({
             url: "/erp/discover/json/getDiscoverRequestWaiting",
             method: "POST",
-            data: { shelter_idx: 29 },
+            data: { },
             success: function (data) {
                 $('#discover_request_waiting').html('');
                 $.each(data.list, function (idx, list) {
@@ -77,7 +77,7 @@
         $.ajax({
             url: "/erp/discover/json/getDiscoverRequestRecord",
             method: "POST",
-            data: { shelter_idx: 29 },
+            data: { },
             success: function (data) {
                 $('#discover_request_record').html('');
                 $.each(data.list, function (idx, list) {

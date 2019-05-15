@@ -42,8 +42,8 @@
         $.each(data.list, function (idx, list) {
           $('#tableList').append("<tr><th>" + list.idx + "</th><td>" + list.name + "</th><td>" + list.species_code + "</td><td>" +
             list.register_data + "</td><td>" + list.state +
-            "</td><td><button class='btn btn-default btn edit-animal' style='color:green;' onclick='getAnimalInfo()'>" +
-            "<span class='glyphicon glyphicon-edit'></span></button>" +
+            "</td><td><button class='btn btn-primary edit-animal' onclick='getAnimalInfo()'>" +
+            "</button>" +
             "<button class='btn btn-default btn' style='color:red;'><span class='glyphicon glyphicon-trash'></span></button></td>"
           )
         })

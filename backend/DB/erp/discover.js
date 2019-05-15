@@ -12,6 +12,15 @@ exports.getDiscoverRequestWaiting = function (_data, _callback) {
     });
 };
 
+exports.updatDiscoverRequestNotRead = function (_data, _callback) {
+    var sql = "UPDATE discover_request SET read_state=1 ";
+    var where = "WHERE idx IN (?)";
+
+    poolAdapter.execute(sql + where, [_data], function (_results) {
+        _callback();
+    });
+}
+
 exports.getDiscoverRequestRecord = function (_data, _callback) {
     var select = "SELECT dr.idx, d.register_datetime AS requestDateTime, d.species_code, d.discover_datetime, d.discovered_spot, dr.permit ";
     var join = "FROM discover_request AS dr INNER JOIN discover AS d ";
@@ -40,3 +49,11 @@ exports.rejectDiscoverRequest = function (_data, _callback) {
         _callback();
     });
 };
+
+exports.checkDiscoverRequestReadState = function (_data, _callback) {
+    var sql = "SELECT * FROM discover_request ";
+    var where = "WHERE shelter_idx = ? AND read_state = 0"
+    poolAdapter.execute(sql + where, [_data.idx], function (_results) {
+        _callback(_results);
+    });
+}

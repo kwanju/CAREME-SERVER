@@ -82,8 +82,8 @@ exports.getAnimalListPage = function (_data, _callback) {
 }
 
 exports.checkScheduleReadState = function (_data, _callback) {
-    var readState = require('./shelter/schedule');
-    readState.checkScheduleReadState(_data, _callback);
+    var schedule = require('./erp/schedule');
+    schedule.checkScheduleReadState(_data, _callback);
 }
 
 exports.getAllShelterLocation = function (_callback) {
@@ -166,6 +166,11 @@ exports.getDiscoverRequestWaiting = function (_data, _callback) {
     discover.getDiscoverRequestWaiting(_data, _callback)
 };
 
+exports.updatDiscoverRequestNotRead = function (_data, _callback) {
+    var discover = require('./erp/discover')
+    discover.updatDiscoverRequestNotRead(_data, _callback);
+}
+
 exports.getDiscoverRequestRecord = function (_data, _callback) {
     var discover = require('./erp/discover');
     discover.getDiscoverRequestRecord(_data, _callback)
@@ -179,4 +184,9 @@ exports.permitDiscoverRequest = function (_data, _callback) {
 exports.rejectDiscoverRequest = function (_data, _callback) {
     var discover = require('./erp/discover');
     discover.rejectDiscoverRequest(_data, _callback)
+}
+
+exports.checkDiscoverRequestReadState = function (_data, _callback) {
+    var discover = require('./erp/discover')
+    discover.checkDiscoverRequestReadState(_data, _callback)
 }

@@ -20,6 +20,12 @@ function checkNewSchedule() {
                 setScheduleBadge(n);
             } else
                 setScheduleBadge(0);
+                
+            if(result.discoverRequest.length>0)
+                setDiscoverRequestBadge(result.discoverRequest.length)
+            else    
+                setDiscoverRequestBadge(0)
+
         },
         error: function () {
             console.log("에러(로그인하세요)");
@@ -49,6 +55,24 @@ function setScheduleBadge(_number) {
             badge.addClass('careme-badge');
         badge.html(_number);
     }
+}
+
+function setDiscoverRequestBadge(_number) {
+
+    var badge = $('#side_menu_discover_request_badge')
+    if (badge.length == 0)
+        return;
+
+    if (_number == 0) {
+        if (badge.hasClass('careme-badge'))
+            badge.removeClass('careme-badge')
+        badge.html("");
+    } else {
+        if (!badge.hasClass('careme-badge'))
+            badge.addClass('careme-badge');
+        badge.html(_number);
+    }
+}
 
     /*
         if($('#sidemenu_icon_volunteer').length==0)
@@ -79,7 +103,5 @@ function setScheduleBadge(_number) {
         }
     
     */
-
-}
 
 

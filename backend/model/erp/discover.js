@@ -5,7 +5,19 @@ exports.getDiscoverRequestWaiting = function (_data, _callback) {
         var res = {}
         res.result = 1;
         res.list = _results;
-        _callback(res);
+
+
+        var idxs = []
+
+        for (var i = 0; i < _results.length; i++) //Idx 뽑아내기
+            if (_results[i].read_state == 0)
+                idxs.push(_results[i].idx);
+        if (idxs.length != 0)
+            dbFacade.updatDiscoverRequestNotRead(idxs, function () {
+                _callback(res);
+            })
+        else
+            _callback(res);
     });
 };
 

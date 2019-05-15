@@ -63,3 +63,12 @@ exports.getPushInfoAboutSchedule = function (_data, _callback) {
         _callback(_results);
     });
 }
+
+exports.checkScheduleReadState = function (_data, _callback) {
+    var sql = "SELECT * FROM schedule AS s INNER JOIN animal AS a ";
+    var on = "ON s.animal_idx=a.idx ";
+    var where = "WHERE s.read_state=0 AND a.shelter_idx=?";
+    poolAdapter.execute(sql+on+where, [_data.idx], function (_results) {
+        _callback(_results);
+    });
+}

@@ -1,15 +1,14 @@
-<ul class="nav nav-tabs" style="padding-top: 10px">
-    <li class="active">
-        <a data-toggle="tab" href="#discover_request_waitList">발견했어요 요청 대기</a>
+<ul class="nav nav-tabs">
+    <li class="active nav-item">
+        <a class="nav-link" data-toggle="tab" href="#discover_request_waitList">발견했어요 요청 대기</a>
     </li>
-    <li>
-        <a data-toggle="tab" href="#discover_request_permittedList">발견했어요 요청 기록</a>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#discover_request_permittedList">발견했어요 요청 기록</a>
     </li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade in active" id="discover_request_waitList"
-        style="width:77%;margin:auto; margin-right: 100px; padding-top:30px">
+    <div class="tab-pane fade in active" id="discover_request_waitList" style="margin-top:20px">
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>
@@ -27,8 +26,7 @@
             </tbody>
         </table>
     </div>
-    <div class="ui segment tab-pane fade" id="discover_request_permittedList"
-        style="width:77%;margin:auto; margin-right: 100px; padding-top:30px">
+    <div class="ui segment tab-pane fade" id="discover_request_permittedList" style="margin-top:20px">
         <table class="table table-bordered">
             <thead class="thead-dark text-center">
                 <tr>
@@ -71,8 +69,8 @@
                         list.discover_datetime + "</td><td>" +
                         list.requestDateTime + "</td><td>" + list.species_code +
                         "</td><td>" +
-                        "<button class='permit-button btn btn-default btn' style='color:green;'><span class='glyphicon glyphicon-ok'></span></button>" +
-                        "<button class='reject-button btn btn-default btn' style='color:red;'><span class='glyphicon glyphicon-remove'></span></button></td>"
+                        "<button class='permit-button btn btn-default btn' style='color:green;'><i class='fas fa-chevron-down' style='font-size:24px'></i></button>" +
+                        "<button class='reject-button btn btn-default btn' style='color:red;'><i class='fas fa-ban' style='font-size:24px'></i></button></td>"
                     );
                 })
             }

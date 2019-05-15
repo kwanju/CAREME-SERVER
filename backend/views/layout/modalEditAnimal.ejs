@@ -4,12 +4,12 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">유기견 수정</h5>
             </div>
-            <form id="form2" name="form2">
+            <form id="form2" name="form2" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <label for="exampleFormControlInput1">유기견 사진</label>
+                    <label for="animal_img">유기견 사진</label>
                     <div class="form-group">
                         <img src="" id="animalImg" width="250" height="200" />
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                        <input type="file" class="form-control-file" id="animal_img" name="animalImage">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">견명*</label>
@@ -37,10 +37,10 @@
                     </div>
                     <div class="form-group">
                         <label for="comment">Comment:</label>
-                        <textarea class="form-control" name="description" rows="4"></textarea>
+                        <textarea class="form-control" id="animalDesc" name="description" rows="4"></textarea>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="completeUpdate()">완료</button>
+                        <button type="button" class="btn btn-primary update-animal">완료</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                     </div>
                 </div>
@@ -49,22 +49,48 @@
     </div>
 </div>
 
+
 <script>
-    function completeUpdate() {
+    $(function() {
+        $("#animal_img").on('change', function(){
+            readURL(this);
+        });
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#animalImg').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function updateAnimal(idx) {
         var form = $('#form2')[0];
         var formData = new FormData(form);
+        formData.append('animal_idx', idx);
         $.ajax({
-            url: '/erp/animal/action/updateAnimal',
-            type: 'POST',
+            url: "/erp/animal/action/updateAnimal",
+            method: "POST",
             enctype: 'multipart/form-data',
-            data: { formData },
+            data: formData,
             dataType: 'json',
             processData: false,
             contentType: false,
             success: function (data) {
-                console.log(data);
-
+                alert("정상적으로 수정되었습니다.");
+                window.location.href = "/erp/animal/animal";
             }
         })
     }
+
+    $(document).on('click', '.update-animal', function (e) {
+        var idx = selectedAnimal;
+        updateAnimal(idx);
+    });
+
 </script>

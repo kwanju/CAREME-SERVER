@@ -47,32 +47,13 @@
 <hr />
 
 <script>
-    // function getShelterPage() {
-    //     $.ajax({
-    //         url: "http://localhost:3000/erp/mshelter/json/getShelter",
-    //         method: "POST",
-    //         data: null,
-    //         success: function (data) {
-    //             //console.log(data);
-    //             $('#tableList').html('');
-    //             $('#tableList').append("<tr><th>" + data.shelter.name + "</th><td>" + data.shelter.position + "</th><td>"
-    //                 + data.shelter.phone_number + "</td><td>" +
-    //                 data.shelter.start_time + "</td><td>" + data.shelter.end_time + "</td><td>" + data.shelter.description +
-    //                 "</td><td><button class='btn btn-default btn edit-shelter' style='color:green;' onclick='getShelterInfo()'>" +
-    //                 "<span class='glyphicon glyphicon-edit'></span></button>" +
-    //                 "<button class='btn btn-default btn' style='color:red;'><span class='glyphicon glyphicon-trash'></span></button></td>"
-    //             );
-    //             //console.log(data.shelter.url_picture);
-    //         }
-    //     })
-    // }
     $(document).ready(function () {
         getShelterInfo();
     });
 
     function getShelterInfo() {
         $.ajax({
-            url: "http://localhost:3000/erp/mshelter/json/getShelter",
+            url: "/erp/mshelter/json/getShelter",
             method: "POST",
             data: null,
             success: function (data) {
@@ -83,6 +64,9 @@
                 $("#shelterStartTime").val(data.shelter.start_time);
                 $("#shelterEndTime").val(data.shelter.end_time);
                 $("#shelterDescription").val(data.shelter.description);
+                $("#volunteer_description").val(data.shelter.volunteer_description);
+                $("#volunteer_start_time").val(data.shelter.volunteer_start_time);
+                $("#volunteer_end_time").val(data.shelter.volunteer_end_time);
                 $("#shelterImage").attr('src', "/" + data.shelter.url_picture);
                 //$("#shelter_edit").modal("show");
             }
@@ -91,6 +75,40 @@
     $(document).on('click', '.edit-shelter', function (e) {
         getShelterInfo();
     });
-</script>
+    $(function() {
+        $("#shelter_img").on('change', function(){
+            readURL(this);
+        });
+    });
 
-<% include ./../layout/modalEditShelter.ejs %>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#shelterImage').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    function completeUpdate() {
+        var form = $('#form-shelter')[0];
+        var formData = new FormData(form);
+        //console.log("form: "+JSON.parse(JSON.stringify(form)));
+        //console.log("formData: "+ JSON.parse(JSON.stringify(formData)));
+        $.ajax({
+            url: '/erp/mshelter/action/updateShelter',
+            type: 'POST',
+            enctype: 'multipart/form-data',
+            data: formData ,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log("success data: "+data);
+                location.reload();
+            }
+        })
+    }
+</script>

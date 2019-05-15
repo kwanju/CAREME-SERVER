@@ -10,12 +10,13 @@
         <div class="form-group">
             <label for="exampleFormControlInput1">주소</label>
             <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <button class="btn btn-outline-secondary" type="button">Button</button>
+                <input id="shelterAddress" type="text" name="position" class="form-control"
+                    aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-dark" onclick="getPosition();">주소 찾기</button>
                 </div>
-                <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
             </div>
-            <input type="text" class="form-control" id="shelterAddress" name="position" aria-label="address">
+            <input type="text" class="form-control" id="shelterAddress2" name="position2" aria-label="address">
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput1">전화번호</label>
@@ -38,6 +39,21 @@
             <label for="comment">보호소 설명:</label>
             <textarea class="form-control" id="shelterDescription" name="description" rows="4"></textarea>
         </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">봉사자 설명</label>
+            <input type="text" class="form-control" id="volunteer_description" name="volunteer_description"
+                aria-label="volunteer_description">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">봉사 시작시간</label>
+            <input type="text" class="form-control" id="volunteer_start_time" name="volunteer_start_time"
+                aria-label="volunteer_start_time">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">봉사 시작시간</label>
+            <input type="text" class="form-control" id="volunteer_end_time" name="volunteer_end_time"
+                aria-label="volunteer_end_time">
+        </div>
 
         <button type="button" class="btn btn-primary" onclick="completeUpdate()">완료</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
@@ -45,7 +61,20 @@
     </form>
 </div>
 <hr />
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
+<script>
+    /*
+        도로명 주소 입력받는 함수.(daum api)
+    */
+    function getPosition() {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                document.getElementById("shelterAddress").value = data.roadAddress; // 도로명 주소 입력.
+            }
+        }).open();
+    }
+</script>
 <script>
     $(document).ready(function () {
         getShelterInfo();
@@ -60,6 +89,7 @@
                 //console.log(data);
                 $("#shelterName").val(data.shelter.name);
                 $("#shelterAddress").val(data.shelter.position);
+                $("#shelterAddress2").val(data.shelter.position2)
                 $("#shelterPhoneNumber").val(data.shelter.phone_number);
                 $("#shelterStartTime").val(data.shelter.start_time);
                 $("#shelterEndTime").val(data.shelter.end_time);
@@ -75,8 +105,8 @@
     $(document).on('click', '.edit-shelter', function (e) {
         getShelterInfo();
     });
-    $(function() {
-        $("#shelter_img").on('change', function(){
+    $(function () {
+        $("#shelter_img").on('change', function () {
             readURL(this);
         });
     });
@@ -101,12 +131,12 @@
             url: '/erp/mshelter/action/updateShelter',
             type: 'POST',
             enctype: 'multipart/form-data',
-            data: formData ,
+            data: formData,
             dataType: 'json',
             processData: false,
             contentType: false,
             success: function (data) {
-                console.log("success data: "+data);
+                console.log("success data: " + data);
                 location.reload();
             }
         })

@@ -6,3 +6,6 @@ package-lock.json
 
 # test
 test.jsg
+
+# 유기동물 이미지 무시
+drive/animalImage

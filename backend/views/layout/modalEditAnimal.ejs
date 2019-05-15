@@ -9,7 +9,7 @@
                     <label for="animal_img">유기견 사진</label>
                     <div class="form-group">
                         <img src="" id="animalImg" width="250" height="200" />
-                        <input type="file" class="form-control-file" id="animal_img">
+                        <input type="file" class="form-control-file" id="animal_img" name="animalImage">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">견명*</label>
@@ -90,7 +90,6 @@
 
     $(document).on('click', '.update-animal', function (e) {
         var idx = selectedAnimal;
-        //console.log(idx);
         updateAnimal(idx);
     });
 

@@ -2,43 +2,49 @@
     header
 </div>
 <div class="ui segment" style="width:72%; margin:auto; margin-right: 140px; padding-top:20px">
-            <form id="form-shelter" name="form-shelter">
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">보호소 이름</label>
-                        <input type="text" class="form-control" id="shelterName" name="name" aria-label="name">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">주소</label>
-                        <input type="text" class="form-control" id="shelterAddress" name="position" aria-label="address">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">전화번호</label>
-                        <input type="text" class="form-control" id="shelterPhoneNumber" name="phone_number" aria-label="number">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">시작 시간</label>
-                        <input type="text" class="form-control" id="shelterStartTime" name="start_time" aria-label="startTime">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">종료 시간</label>
-                        <input type="text" class="form-control" id="shelterEndTime" name="end_time" aria-label="endTime">
-                    </div>
-                    <label for="exampleFormControlInput1">보호소 사진</label>
-                    <div class="form-group">
-                        <img src="" id="shelterImage" width="250" height="200" />
-                        <input type="file" name="animalImage" class="form-control-file" id="exampleFormControlFile1">
-                    </div>
-                    <div class="form-group">
-                        <label for="comment">보호소 설명:</label>
-                        <textarea class="form-control" id="shelterDescription" name="description" rows="4"></textarea>
-                    </div>
+    <form id="form-shelter" name="form-shelter">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">보호소 이름</label>
+            <input type="text" class="form-control" id="shelterName" name="name" aria-label="name">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">주소</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-secondary" type="button">Button</button>
+                </div>
+                <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+            </div>
+            <input type="text" class="form-control" id="shelterAddress" name="position" aria-label="address">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">전화번호</label>
+            <input type="text" class="form-control" id="shelterPhoneNumber" name="phone_number" aria-label="number">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">시작 시간</label>
+            <input type="text" class="form-control" id="shelterStartTime" name="start_time" aria-label="startTime">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">종료 시간</label>
+            <input type="text" class="form-control" id="shelterEndTime" name="end_time" aria-label="endTime">
+        </div>
+        <label for="exampleFormControlInput1">보호소 사진</label>
+        <div class="form-group">
+            <img src="" id="shelterImage" width="250" height="200" />
+            <input type="file" name="animalImage" class="form-control-file" id="exampleFormControlFile1">
+        </div>
+        <div class="form-group">
+            <label for="comment">보호소 설명:</label>
+            <textarea class="form-control" id="shelterDescription" name="description" rows="4"></textarea>
+        </div>
 
-                        <button type="button" class="btn btn-primary" onclick="completeUpdate()">완료</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary" onclick="completeUpdate()">완료</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 
-            </form>
+    </form>
 </div>
-<hr/>
+<hr />
 
 <script>
     // function getShelterPage() {

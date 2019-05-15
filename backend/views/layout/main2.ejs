@@ -1,20 +1,26 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <% include ./commonHead.ejs %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <% include ./commonHead.ejs %>
 
 
 </head>
 
 <body>
-  <% include ./sideMenu.ejs %>
-  <%- include(body) %>
-  <% include ./footer.ejs %>
+    <div id="wrapper">
 
+        <% include ./sideMenu.ejs %>
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <%- include(body) %>
+            </div>
+        </div>
+        <% include ./footer.ejs %>
+    </div>
 
 
 </body>

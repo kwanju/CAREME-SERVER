@@ -41,6 +41,17 @@ exports.permitDiscoverRequest = function (_data, _callback) {
     });
 };
 
+exports.updateDiscoverShelter = function (_data, _callback) {
+    var update = "UPDATE discover AS d INNER JOIN discover_request AS dr ";
+    var on = "ON d.idx = dr.discover_idx ";
+    var set = "SET d.matching_shelter_idx = dr.shelter_idx ";
+    var where = "WHERE dr.idx=?";
+
+    poolAdapter.execute(update + on + set + where, [_data.idx], function () {
+        _callback();
+    });
+};
+
 exports.rejectDiscoverRequest = function (_data, _callback) {
     var update = "UPDATE discover_request SET permit=-1 ";
     var where = "WHERE idx=?";
@@ -49,6 +60,18 @@ exports.rejectDiscoverRequest = function (_data, _callback) {
         _callback();
     });
 };
+
+exports.getDiscoverFromDiscoverRequest = function (_data, _callback) {
+    var select = "SELECT d.idx, d.longitude, d.latitude ";
+    var from = "FROM discover AS d INNER JOIN discover_request AS dr ";
+    var on = "ON d.idx = dr.discover_idx ";
+    var where = "WHERE dr.idx = ?";
+
+    poolAdapter.execute(select + from + on + where, [_data.idx], function (_results) {
+        _callback(_results);
+    });
+
+}
 
 exports.checkDiscoverRequestReadState = function (_data, _callback) {
     var sql = "SELECT * FROM discover_request ";

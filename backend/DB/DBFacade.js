@@ -181,9 +181,19 @@ exports.permitDiscoverRequest = function (_data, _callback) {
     discover.permitDiscoverRequest(_data, _callback)
 }
 
+exports.updateDiscoverShelter = function (_data, _callback) {
+    var discover = require('./erp/discover');
+    discover.updateDiscoverShelter(_data, _callback)
+}
+
 exports.rejectDiscoverRequest = function (_data, _callback) {
     var discover = require('./erp/discover');
     discover.rejectDiscoverRequest(_data, _callback)
+}
+
+exports.getDiscoverFromDiscoverRequest = function (_data, _callback) {
+    var discover = require('./erp/discover');
+    discover.getDiscoverFromDiscoverRequest(_data, _callback)
 }
 
 exports.checkDiscoverRequestReadState = function (_data, _callback) {

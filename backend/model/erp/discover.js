@@ -34,14 +34,34 @@ exports.permitDiscoverRequest = function (_data, _callback) {
     dbFacade.permitDiscoverRequest(_data, function (_results) {
         var res = {};
         res.result = 1;
-        _callback(res);
+        dbFacade.updateDiscoverShelter(_data, function () {
+            _callback(res);
+        });
     });
 }
 
-exports.rejectDiscoverRequest = function (_data, _callback) {
+exports.rejectDiscoverRequest = function (_data, _callback, _testCallback) {
+    var matching = require('../discover/matching');
+
     dbFacade.rejectDiscoverRequest(_data, function (_results) {
         var res = {};
         res.result = 1;
         _callback(res);
+
+        // Discover 데이터 가져옴.
+        dbFacade.getDiscoverFromDiscoverRequest(_data, function (_results) {
+            //다시 매칭
+            matching.matching(
+                {
+                    discover_idx: _results[0].idx,
+                    longitude: _results[0].longitude,
+                    latitude: _results[0].latitude
+                },
+                function (_results) {
+                    if (typeof _testCallback == "function")
+                        _testCallback(_results);
+                }
+            )
+        });
     });
 }

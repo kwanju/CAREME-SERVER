@@ -21,7 +21,7 @@ CREATE TABLE shelter(
     longitude varchar(20) COMMENT '좌표 longitude',
     latitude varchar(20) COMMENT '좌표 latitude',
     url_picture varchar(400) COMMENT '사진 url',
-    UNIQUE(id)
+    UNIQUE(id),
     PRIMARY KEY(idx)
 );
 
@@ -68,7 +68,6 @@ CREATE TABLE schedule(
     FOREIGN KEY(animal_idx) REFERENCES animal(idx)
 );
 
-INSERT INTO user(id,pw,phone_number,email,nickname) VALUES('test','test','01012345678','test@test.com', 'abccccc');
 CREATE TABLE discover(
     idx int(10) not null AUTO_INCREMENT,
     discover_datetime datetime COMMENT '유기동물을 발견한 날짜 및 시간',
@@ -80,6 +79,8 @@ CREATE TABLE discover(
     register_datetime datetime COMMENT '발견했어요에 등록한 시간',
     user_idx int(10) not null COMMENT '등록한 유저 idx',
     matching_shelter_idx int(10) COMMENT '매칭된 shelter idx',
+    longitude varchar(20) COMMENT '좌표 longitude',
+    latitude varchar(20) COMMENT '좌표 latitude', 
     PRIMARY KEY(idx),
     FOREIGN KEY(user_idx) REFERENCES user(idx),
     FOREIGN KEY(matching_shelter_idx) REFERENCES shelter(idx)
@@ -98,6 +99,7 @@ CREATE TABLE discover_request(
 );
 
 INSERT INTO shelter(id,pw,name, position, url_picture) VALUES('test','test','테스트보호소', '서울 종로구 경교장1길 7-1', 'drive/animalImage/1.jpg');
+INSERT INTO user(id,pw,phone_number,email,nickname) VALUES('test','test','01012345678','test@test.com', 'abccccc');
 
 --test
 INSERT INTO animal(species_code,name,url_picture,shelter_idx,state) VALUES(1,'뽀삐',"drive/animalImage/1.jpg",1,1);

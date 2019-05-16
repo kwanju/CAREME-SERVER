@@ -16,11 +16,12 @@ exports.registerDiscover = function (_data, _callback) {
 };
 
 exports.getDiscoverRecord = function (_data, _callback) {
-    var select = "SELECT * "
-    var from = "FROM discover "
-    var where = "WHERE user_idx =?"
+    var select = "SELECT d.*, s.name AS shelterName "
+    var from = "FROM discover AS d LEFT JOIN shelter AS s "
+    var on = "ON d.matching_shelter_idx = s.idx "
+    var where = "WHERE d.user_idx =?"
 
-    poolAdaper.execute(select + from + where, [_data.user_idx], function (_results) {
+    poolAdaper.execute(select + from + on + where, [_data.user_idx], function (_results) {
         _callback(_results);
     });
 

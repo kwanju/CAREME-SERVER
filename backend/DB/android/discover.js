@@ -14,3 +14,14 @@ exports.registerDiscover = function (_data, _callback) {
             _callback(_results.insertId);
         });
 };
+
+exports.getDiscoverRecord = function (_data, _callback) {
+    var select = "SELECT * "
+    var from = "FROM discover "
+    var where = "WHERE user_idx =?"
+
+    poolAdaper.execute(select + from + where, [_data.user_idx], function (_results) {
+        _callback(_results);
+    });
+
+}

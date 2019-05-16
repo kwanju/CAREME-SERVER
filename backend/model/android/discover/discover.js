@@ -1,3 +1,5 @@
+// test :  .\unittest\android\discover\discover.spec.js
+
 var dbFacade = require('../../../DB/DBFacadeAndroid');
 
 exports.registerDiscover = function (_req, _data, _callback) {
@@ -21,3 +23,12 @@ exports.registerDiscover = function (_req, _data, _callback) {
         );
     });
 };
+
+exports.getDiscoverRecord = function (_data, _callback) {
+    dbFacade.getDiscoverRecord(_data, function (_results) {
+        var res = {};
+        res.result = 1;
+        res.list = _results;
+        _callback(res);
+    });
+}

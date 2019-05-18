@@ -200,3 +200,8 @@ exports.checkDiscoverRequestReadState = function (_data, _callback) {
     var discover = require('./erp/discover')
     discover.checkDiscoverRequestReadState(_data, _callback)
 }
+
+exports.getAppPushInfoWhenPermitDiscoverRequest = function (_data, _callback) {
+    var discover = require('./erp/discover');
+    discover.getAppPushInfoWhenPermitDiscoverRequest(_data, _callback);
+}

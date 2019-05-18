@@ -80,3 +80,14 @@ exports.checkDiscoverRequestReadState = function (_data, _callback) {
         _callback(_results);
     });
 }
+
+exports.getAppPushInfoWhenPermitDiscoverRequest = function (_data, _callback) {
+    var select = "SELECT u.token ";
+    var join = "FROM user AS u INNER JOIN discover AS d ";
+    var on = "ON u.idx = d.user_idx ";
+    var where = "WHERE d.idx = ?"
+
+    poolAdapter.execute(select + join + on + where, [_data.idx], function (_results) {
+        _callback(_results[0].token);
+    });
+}

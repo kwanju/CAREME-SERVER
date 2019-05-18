@@ -1,6 +1,6 @@
 const assert = require('assert');
 
-describe("permitDiscoverRequest Test", function () {
+describe.only("permitDiscoverRequest Test", function () {
     var discover = require('../../../model/erp/discover');
     it("result is 1", function (done) {
         discover.permitDiscoverRequest(
@@ -12,7 +12,7 @@ describe("permitDiscoverRequest Test", function () {
     });
 });
 
-describe.only("rejectDiscoverRequest Test", function () {
+describe("rejectDiscoverRequest Test", function () {
     var discover = require('../../../model/erp/discover');
     it("insert discover_request table Test", function (done) {
         discover.rejectDiscoverRequest(

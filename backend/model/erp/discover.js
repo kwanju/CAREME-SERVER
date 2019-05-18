@@ -31,11 +31,15 @@ exports.getDiscoverRequestRecord = function (_data, _callback) {
 }
 
 exports.permitDiscoverRequest = function (_data, _callback) {
+    var fcm = require('../../utils/android/fcm');
     dbFacade.permitDiscoverRequest(_data, function (_results) {
         var res = {};
         res.result = 1;
         dbFacade.updateDiscoverShelter(_data, function () {
             _callback(res);
+            dbFacade.getAppPushInfoWhenPermitDiscoverRequest(_data, function (_token) {
+                fcm.send(_token, "등록하신 발견했어요에 대한 보호소 매칭이 완료되었습니다.");
+            });
         });
     });
 }

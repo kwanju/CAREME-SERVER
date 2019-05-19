@@ -83,9 +83,9 @@ exports.checkDiscoverRequestReadState = function (_data, _callback) {
 
 exports.getAppPushInfoWhenPermitDiscoverRequest = function (_data, _callback) {
     var select = "SELECT u.token ";
-    var join = "FROM user AS u INNER JOIN discover AS d ";
-    var on = "ON u.idx = d.user_idx ";
-    var where = "WHERE d.idx = ?"
+    var join = "FROM user AS u INNER JOIN discover AS d INNER JOIN discover_request AS dr ";
+    var on = "ON u.idx = d.user_idx AND d.idx = dr.discover_idx ";
+    var where = "WHERE dr.idx = ?"
 
     poolAdapter.execute(select + join + on + where, [_data.idx], function (_results) {
         _callback(_results[0].token);

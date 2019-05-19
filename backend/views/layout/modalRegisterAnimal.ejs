@@ -22,9 +22,10 @@
                         <label for="exampleFormControlInput1">상태</label>
                         <input type="text" class="form-control" name="state" aria-label="state">
                     </div>
+                    <label for="registerAnimalImg">유기견 사진</label>
                     <div class="form-group">
-                        <label for="exampleFormControlFile1">유기견 사진</label>
-                        <input type="file" name="animalImage" class="form-control-file" id="exampleFormControlFile1">
+                        <img src="" alt="Image" id="regAnimalImg" width="250" height="200" />
+                        <input type="file" name="animalImage" class="form-control-file" id="registerAnimalImg">
                     </div>
                     <div class="form-group">
                         <fieldset>
@@ -48,6 +49,26 @@
     </div>
 </div>
 <script>
+
+    $(function () {
+        $("#registerAnimalImg").on('change', function () {
+            readURL(this);
+        });
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $("#regAnimalImg").attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+<script>
+
     function to_ajax() {
         var form = $('#form1')[0];
         var formData = new FormData(form);

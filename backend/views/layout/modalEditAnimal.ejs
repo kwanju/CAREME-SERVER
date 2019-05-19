@@ -51,23 +51,48 @@
 
 
 <script>
-    $(function() {
-        $("#animal_img").on('change', function(){
-            readURL(this);
-        });
+    var sel_file;
+
+    $(document).ready(function () {
+        $("#animal_img").on('change', handleImage);
     });
 
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+    function handleImage(e) {
+        var files = e.target.files;
+        var filesArr = Array.prototype.slice.call(files);
 
-            reader.onload = function (e) {
+        filesArr.forEach(function (f) {
+            if (!f.type.match("image.*")) {
+                alert("이미지 확장자만 가능합니다");
+                return
+            }
+            sel_file = f;
+
+            var reader = new FileReader();
+            reader.onload = function(e){
                 $('#animalImg').attr('src', e.target.result);
             }
-
-            reader.readAsDataURL(input.files[0]);
-        }
+            reader.readAsDataURL(f);
+        });
     }
+
+    // $(function() {
+    //     $("#animal_img").on('change', function(){
+    //         readURL(this);
+    //     });
+    // });
+
+    // function readURL(input) {
+    //     if (input.files && input.files[0]) {
+    //         var reader = new FileReader();
+
+    //         reader.onload = function (e) {
+    //             $('#animalImg').attr('src', e.target.result);
+    //         }
+
+    //         reader.readAsDataURL(input.files[0]);
+    //     }
+    // }
 
     function updateAnimal(idx) {
         var form = $('#form2')[0];

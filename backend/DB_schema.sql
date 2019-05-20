@@ -21,6 +21,7 @@ CREATE TABLE shelter(
     longitude varchar(20) COMMENT '좌표 longitude',
     latitude varchar(20) COMMENT '좌표 latitude',
     url_picture varchar(400) COMMENT '사진 url',
+    auth int(1) default 0 COMMENT '보호소가 인증이 되었는지 0:인증안됨 / 1: 인증됨'
     UNIQUE(id),
     PRIMARY KEY(idx)
 );

@@ -10,7 +10,7 @@ var mshelterRouter = require('./mshelter/mshelter');
 var notifyRouter = require('./notify/notify');
 var discoverRouter = require('./discover/discover');
 
-router.use(checkShelterAuth);
+//router.use(checkShelterAuth);
 router.use('/main', mainRouter);
 router.use('/adopt', adoptRouter);
 router.use('/animal', animalRouter);

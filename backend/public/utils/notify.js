@@ -46,15 +46,11 @@ function setScheduleBadge(_number) {
     if (badge.length == 0)
         return;
 
-    if (_number == 0) {
-        if (badge.hasClass('careme-badge'))
-            badge.removeClass('careme-badge')
+    if (_number == 0) 
         badge.html("");
-    } else {
-        if (!badge.hasClass('careme-badge'))
-            badge.addClass('careme-badge');
+     else 
         badge.html(_number);
-    }
+    
 }
 
 function setDiscoverRequestBadge(_number) {
@@ -63,15 +59,10 @@ function setDiscoverRequestBadge(_number) {
     if (badge.length == 0)
         return;
 
-    if (_number == 0) {
-        if (badge.hasClass('careme-badge'))
-            badge.removeClass('careme-badge')
+    if (_number == 0) 
         badge.html("");
-    } else {
-        if (!badge.hasClass('careme-badge'))
-            badge.addClass('careme-badge');
+     else 
         badge.html(_number);
-    }
 }
 
     /*

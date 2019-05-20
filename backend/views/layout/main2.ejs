@@ -4,25 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Free Bootstrap 4 Admin Theme | Pike Admin">
+    <meta name="author" content="Pike Web Development - https://www.pikephp.com">
     <title>Document</title>
-    <% include ./commonHead.ejs %>
+    <%- include(head) %>
+    
+    <% include ./commonERPHead.ejs %>
 
 
 </head>
 
-<body>
-    <div id="wrapper">
-
-        <% include ./sideMenu.ejs %>
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <%- include(body) %>
+<body class="adminbody widescreen">
+    <div id="main">
+        <div class="headerbar">
+            <% include ./newHeaderBar.ejs %>
+        </div>
+        <div class="left main-sidebar">
+            <% include ./newSideMenu.ejs %>
+        </div>
+        <div class="content-page">
+            <div class="content">
+                <div class="container-fluid">
+                    <%- include(body) %>
+                </div>
             </div>
         </div>
-        <% include ./footer.ejs %>
+        <footer class="footer">
+            <span class="text-right">
+                Copyright <a target="_blank" href="/">TEAM ZANGDOL</a>
+            </span>
+            <span class="float-right">
+                Powered by <a target="_blank" href="https://www.pikeadmin.com"><b>Pike Admin</b></a>
+            </span>
+        </footer>
     </div>
-
-
+    <%- include(javascript) %>
 </body>
 
 

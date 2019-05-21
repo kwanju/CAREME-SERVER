@@ -1,181 +1,141 @@
-
 <div class="row">
-  <div class="col-xl-12">
-    <div class="breadcrumb-holder">
-      <h1 class="main-title float-left">유기동물 정보 관리</h1>
-      <ol class="breadcrumb float-right">
-        <li class="breadcrumb-item">유기동물 정보 관리</li>
-      </ol>
-      <div class="clearfix"></div>
+    <div class="col-xl-12">
+        <div class="breadcrumb-holder">
+            <h1 class="main-title float-left">유기동물 정보 관리</h1>
+            <ol class="breadcrumb float-right">
+                <li class="breadcrumb-item">유기동물 정보 관리</li>
+            </ol>
+            <div class="clearfix"></div>
+        </div>
     </div>
-  </div>
 </div>
 <div class="row">
 
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-    <div class="card mb-3">
-      <div class="card-header">
-        <h3>
-          <i class="fa fa-table"></i> Basic data table</h3>
-        DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive
-        enhancement, and will add advanced interaction controls to any HTML table: pagination, instant search and multi-column
-        ordering.
-        <a target="_blank" href="https://datatables.net/">(more details)</a>
-      </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card mb-3">
+            <div class="table-responsive">
+                <table id="example1" class="table table-bordered table-hover display">
+                    <thead>
+                        <tr>
+                            <th scope="col">idx</th>
+                            <th scope="col">name</th>
+                            <th scope="col">species_code</th>
+                            <th scope="col">register_data</th>
+                            <th scope="col">state</th>
+                            <th scope="col" style="width: 10%;"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableList">
 
-      <div class="card-body">
-        <div class="table-responsive">
-          <table id="example1" class="table table-bordered table-hover display">
-            <thead>
-              <tr>
-                <th>idx</th>
-                <th>name</th>
-                <th>species_code</th>
-                <th>register_data</th>
-                <th>Start date</th>
-                <th>state</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
-                <td>2011/04/25</td>
-                <td>$320,800</td>
-              </tr>
-            </tbody>
-          </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-      </div>
+
+        <!-- end card-->
     </div>
-    <!-- end card-->
-  </div>
 </div>
 
-
-<div>
-  header
-</div>
-<div class="ui segment">
-  <table class="table table-bordered">
-    <thead class="thead-dark text-center">
-      <tr>
-        <th scope="col">idx</th>
-        <th scope="col">name</th>
-        <th scope="col">species_code</th>
-        <th scope="col">register_data</th>
-        <th scope="col">state</th>
-        <th scope="col" style="width: 10%;"></th>
-      </tr>
-    </thead>
-    <tbody id="tableList">
-    </tbody>
-  </table>
-</div>
-
-<hr/>
-
-<nav aria-label="...">
-  <ul class="pagination pagination justify-content-center" id="pageNum">
-  </ul>
-</nav>
 
 <div class="text-center">
-  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#animal_register">
-    유기견 등록
-  </button>
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#animal_register">
+        유기견 등록
+    </button>
 </div>
 
 <script>
-  function fetchAnimalList(page) {
-    $.ajax({
-      url: "/erp/animal/json/getAnimalList",
-      method: "POST",
-      data: { page: page },
-      success: function (data) {
-        $('#tableList').html('');
-        $.each(data.list, function (idx, list) {
-          $('#tableList').append("<tr><th>" + list.idx + "</th><td>" + list.name + "</th><td>" + list.species_code + "</td><td>" +
-            list.register_data + "</td><td>" + list.state +
-            "</td><td><button class='btn btn-default btn edit-animal' onclick='getAnimalInfo()'>" +
-            "<i class='fas fa-edit' style='font-size:20px; color:green;'></i></button>" +
-            "<button class='btn btn-default btn'><i class='fas fa-trash-alt' style='font-size:20px; color:red'></i></button></td>"
-          )
+    function fetchAnimalList() {
+        $.ajax({
+            url: "/erp/animal/json/getAnimalList",
+            method: "POST",
+            data: {},
+            success: function (data) {
+                $('#tableList').html('');
+                $.each(data.list, function (idx, list) {
+                    $('#tableList').append("<tr><th>" + list.idx + "</th><td>" + list.name + "</th><td>" + list.species_code + "</td><td>" +
+                        list.register_data + "</td><td>" + list.state +
+                        "</td><td><button class='btn btn-default btn edit-animal' onclick='getAnimalInfo()'>" +
+                        "<i class='fas fa-edit' style='font-size:20px; color:green;'></i></button>" +
+                        "<button class='btn btn-default btn'><i class='fas fa-trash-alt' style='font-size:20px; color:red'></i></button></td>"
+                    )
+                });
+                setTimeout(function () {
+                    console.log(10);
+                    $('#example1').DataTable();
+                }, 100)
+
+            }
         })
-      }
-    })
-  }
-  $(document).ready(function () {
-    fetchAnimalList(1);
-  });
+    }
+    $(document).ready(function () {
+        fetchAnimalList();
+    });
 </script>
 
 <script>
 
-  var selectedAnimal;
+    var selectedAnimal;
 
-  function getAnimalInfo(idx) {
-    $.ajax({
-      url: "/erp/animal/json/getAnimal",
-      method: "POST",
-      data: { animal_idx: idx },
-      success: function (data) {
-        selectedAnimal = data.animal.idx;
-        $("#animalName").val(data.animal.name);
-        $("#animalCode").val(data.animal.species_code);
-        $("#animalState").val(data.animal.state);
-        $("#animalWeight").val(data.animal.weight);
-        $("#animalImg").attr('src', "/" + data.animal.url_picture);
-        $("#animalDesc").val(data.animal.description);
+    function getAnimalInfo(idx) {
+        $.ajax({
+            url: "/erp/animal/json/getAnimal",
+            method: "POST",
+            data: { animal_idx: idx },
+            success: function (data) {
+                selectedAnimal = data.animal.idx;
+                $("#animalName").val(data.animal.name);
+                $("#animalCode").val(data.animal.species_code);
+                $("#animalState").val(data.animal.state);
+                $("#animalWeight").val(data.animal.weight);
+                $("#animalImg").attr('src', "/" + data.animal.url_picture);
+                $("#animalDesc").val(data.animal.description);
 
 
-        if (data.animal.sex = 'w') {
-          $('#female').prop("checked", true)
+                if (data.animal.sex = 'w') {
+                    $('#female').prop("checked", true)
 
-        }
-        else {
-          $('#male').prop("checked", true)
-        }
-        $("#animal_edit").modal("show")
-      }
-    })
-  }
+                }
+                else {
+                    $('#male').prop("checked", true)
+                }
+                $("#animal_edit").modal("show")
+            }
+        })
+    }
 
-  $(document).on('click', '.edit-animal', function (e) {
-    var idx = $(this).closest('tr').find('th').html();
-    getAnimalInfo(idx);
-  });
+    $(document).on('click', '.edit-animal', function (e) {
+        var idx = $(this).closest('tr').find('th').html();
+        getAnimalInfo(idx);
+    });
 
 </script>
 
 <script>
-  function fetchAnimalListPage() {
-    $.ajax({
-      url: "/erp/animal/json/getAnimalListPage",
-      method: "POST",
-      data: {},
-      success: function (data) {
-        for (count = 1; count <= data.totalPage; count++) {
-          $('#pageNum').append("<li class='page-item'><a class='page-button page-link'>" + count + "</a></li>"
-          )
-        }
-      }
-    })
-  }
+    function fetchAnimalListPage() {
+        $.ajax({
+            url: "/erp/animal/json/getAnimalListPage",
+            method: "POST",
+            data: {},
+            success: function (data) {
+                for (count = 1; count <= data.totalPage; count++) {
+                    $('#pageNum').append("<li class='page-item'><a class='page-button page-link'>" + count + "</a></li>"
+                    )
+                }
+            }
+        })
+    }
 
-  $(document).ready(function () {
-    var count;
-    fetchAnimalListPage();
-  });
+    $(document).ready(function () {
+        var count;
+        fetchAnimalListPage();
+    });
 
-  $(document).on('click', '.page-button', function (e) {
-    fetchAnimalList(this.innerHTML);
-  });
+    $(document).on('click', '.page-button', function (e) {
+        fetchAnimalList(this.innerHTML);
+    });
 
 </script>
 
 <% include ./../layout/modalRegisterAnimal.ejs %>
-  <% include ./../layout/modalEditAnimal.ejs %>
+<% include ./../layout/modalEditAnimal.ejs %>

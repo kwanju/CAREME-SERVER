@@ -3,11 +3,9 @@ const NUMPERPAGE = require('../../config').animalList.numberpage; // # of animal
 var poolAdapter = require('../poolAdapter'); // get poolAdapter
 
 exports.getAnimalList = function (_data, _callback) {
-    var offset = (_data.page - 1) * NUMPERPAGE;
-
     var query = "SELECT animal.idx, animal.name, animal.species_code, animal.register_data, animal.state FROM animal";
     var withWhere = ' WHERE animal.shelter_idx=? '
-    var withBack = " ORDER BY animal.idx DESC LIMIT " + NUMPERPAGE + " OFFSET " + offset;
+    var withBack = " ORDER BY animal.idx DESC";
 
     poolAdapter.execute(query + withWhere + withBack, [_data.shelter_idx], function (_results) {
         _callback(_results);

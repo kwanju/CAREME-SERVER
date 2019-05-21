@@ -21,7 +21,7 @@ CREATE TABLE shelter(
     longitude varchar(20) COMMENT '좌표 longitude',
     latitude varchar(20) COMMENT '좌표 latitude',
     url_picture varchar(400) COMMENT '사진 url',
-    auth int(1) default 0 COMMENT '보호소가 인증이 되었는지 0:인증안됨 / 1: 인증됨'
+    auth int(1) default 0 COMMENT '보호소가 인증이 되었는지 0:인증안됨 / 1: 인증됨',
     UNIQUE(id),
     PRIMARY KEY(idx)
 );
@@ -97,6 +97,22 @@ CREATE TABLE discover_request(
     PRIMARY KEY(idx),
     FOREIGN KEY(discover_idx) REFERENCES discover(idx),
     FOREIGN KEY(shelter_idx) REFERENCES shelter(idx)
+);
+
+CREATE TABLE find(
+    idx int(10) not null AUTO_INCREMENT,
+    user_idx int(10) not null COMMENT '등록한 유저 idx',
+    lost_datetime datetime COMMENT '유기동물을 잃어버린 날짜 및 시간',
+    lost_spot varchar(1000) COMMENT '유기동물을 잃어버린 장소',
+    description varchar(1000) COMMENT '잃어버린 유기동물 특징',
+    species_code int(10) COMMENT '잃어버린 견종 코드',
+    animal_sex char(1) COMMENT '잃어버린 유기동물 성별',
+    url_picture varchar(1000) COMMENT '잃어버린 유기동물 사진',
+    register_datetime datetime COMMENT '찾아요에 등록한 시간', 
+    longitude varchar(20) COMMENT '잃어버린 위치 좌표 longitude',
+    latitude varchar(20) COMMENT '잃어버린 위치 좌표 latitude',
+    PRIMARY KEY(idx),
+    FOREIGN KEY(user_idx) REFERENCES user(idx)  
 );
 
 INSERT INTO shelter(id,pw,name, position, url_picture) VALUES('test','test','테스트보호소', '서울 종로구 경교장1길 7-1', 'drive/animalImage/1.jpg');

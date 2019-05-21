@@ -67,3 +67,8 @@ exports.getDiscoverRecord = function (_data, _callback) {
     var discover = require('./android/discover');
     discover.getDiscoverRecord(_data, _callback);
 }
+
+exports.registerFind = function (_data, _callback) {
+    var find = require('./android/find');
+    find.registerFind(_data, _callback);
+}

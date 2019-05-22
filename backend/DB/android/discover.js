@@ -26,3 +26,11 @@ exports.getDiscoverRecord = function (_data, _callback) {
     });
 
 }
+
+exports.getDiscoverInBulletinBoard = function (_data, _callback) {
+    var select = "SELECT idx,species_code, animal_sex, url_picture,discovered_spot, discover_datetime FROM discover ORDER BY discover_datetime DESC";
+
+    poolAdaper.execute(select, function (_results) {
+        _callback(_results);
+    });
+}

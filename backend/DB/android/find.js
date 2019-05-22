@@ -16,3 +16,11 @@ exports.registerFind = function (_data, _callback) {
     });
 
 }
+
+exports.getFindInBulletinBoard = function (_data, _callback) {
+    var select = "SELECT idx, species_code, animal_sex, url_picture,lost_spot, lost_datetime FROM find ORDER BY lost_datetime DESC";
+
+    poolAdapter.execute(select, function (_results) {
+        _callback(_results);
+    });
+}

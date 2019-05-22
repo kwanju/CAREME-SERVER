@@ -22,7 +22,7 @@
                             <th scope="col">species_code</th>
                             <th scope="col">register_data</th>
                             <th scope="col">state</th>
-                            <th scope="col" style="width: 10%;"></th>
+                            <th scope="col" style="width: 8%;"></th>
                         </tr>
                     </thead>
                     <tbody id="tableList">
@@ -56,8 +56,8 @@
                     $('#tableList').append("<tr><th>" + list.idx + "</th><td>" + list.name + "</th><td>" + list.species_code + "</td><td>" +
                         list.register_data + "</td><td>" + list.state +
                         "</td><td><button class='btn btn-default btn edit-animal' onclick='getAnimalInfo()'>" +
-                        "<i class='fas fa-edit' style='font-size:20px; color:green;'></i></button>" +
-                        "<button class='btn btn-default btn'><i class='fas fa-trash-alt' style='font-size:20px; color:red'></i></button></td>"
+                        "<i class='fa fa-edit' style='font-size:24px; color:green'></i></button>" +
+                        "<button class='btn btn-default btn'><i class='fa fa-trash' style='font-size:24px; color:red'></i></button></td>"
                     )
                 });
                 setTimeout(function () {

@@ -9,51 +9,57 @@
         </div>
     </div>
 </div>
-<ul class="nav nav-tabs">
-    <li class="active nav-item">
-        <a class="nav-link" data-toggle="tab" href="#discover_request_waitList">발견했어요 요청 대기</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#discover_request_permittedList">발견했어요 요청 기록</a>
-    </li>
-</ul>
+<div class="row">
+    <ul class="nav nav-tabs">
+        <li class="active nav-item">
+            <a class="nav-link" data-toggle="tab" href="#discover_request_waitList">발견했어요 요청 대기</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#discover_request_permittedList">발견했어요 요청 기록</a>
+        </li>
+    </ul>
+</div>
 
-<div class="tab-content">
-    <div class="tab-pane fade in active" id="discover_request_waitList" style="margin-top:20px">
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">idx</th>
-                    <th scope="col">발견장소</th>
-                    <th scope="col">발견시간</th>
-                    <th scope="col">요청시간</th>
-                    <th scope="col">유기동물 종</th>
-                    <th scope="col" style="width: 10%;">승인여부</th>
-                </tr>
-
-            </thead>
-            <tbody id="discover_request_waiting">
-
-            </tbody>
-        </table>
-    </div>
-    <div class="ui segment tab-pane fade" id="discover_request_permittedList" style="margin-top:20px">
-        <table class="table table-bordered">
-            <thead class="thead-dark text-center">
-                <tr>
-                    <th scope="col">idx</th>
-                    <th scope="col">발견장소</th>
-                    <th scope="col">발견시간</th>
-                    <th scope="col">요청시간</th>
-                    <th scope="col">유기동물 종</th>
-                    <th scope="col" style="width: 10%;">승인여부</th>
-                </tr>
-            </thead>
-            <tbody id="discover_request_record">
-            </tbody>
-        </table>
-        <ul class="pagination pull-right" id="pageNum">
-        </ul>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card mb-3">
+            <div class="table-responsive">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="discover_request_waitList" style="margin-top:20px">
+                        <table id="requestWaitTable" class="table table-bordered table-hover display">
+                            <thead>
+                                <tr>
+                                    <th scope="col">idx</th>
+                                    <th scope="col">발견장소</th>
+                                    <th scope="col">발견시간</th>
+                                    <th scope="col">요청시간</th>
+                                    <th scope="col">유기동물 종</th>
+                                    <th scope="col" style="width: 10%;">승인여부</th>
+                                </tr>
+                            </thead>
+                            <tbody id="discover_request_waiting">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="discover_request_permittedList" style="margin-top:20px">
+                        <table id="requestRecordTabe" class="table table-bordered table-hover display">
+                            <thead>
+                                <tr>
+                                    <th scope="col">idx</th>
+                                    <th scope="col">발견장소</th>
+                                    <th scope="col">발견시간</th>
+                                    <th scope="col">요청시간</th>
+                                    <th scope="col">유기동물 종</th>
+                                    <th scope="col" style="width: 10%;">승인여부</th>
+                                </tr>
+                            </thead>
+                            <tbody id="discover_request_record">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -83,6 +89,10 @@
                         "<button class='reject-button btn btn-default btn' style='color:red;'><i class='fas fa-ban' style='font-size:24px'></i></button></td>"
                     );
                 })
+                setTimeout(function () {
+                    console.log(10);
+                    $('#requestWaitTable').DataTable();
+                }, 100)
             }
         })
     }
@@ -103,6 +113,10 @@
                         "</td><td>" + (list.permit == "1" ? "허가" : "거부") + "</td>"
                     );
                 })
+                setTimeout(function () {
+                    console.log(10);
+                    $('#requestRecordTabe').DataTable();
+                }, 100)
             }
         })
     }

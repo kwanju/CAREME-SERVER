@@ -9,60 +9,66 @@
         </div>
     </div>
 </div>
-<ul class="nav nav-tabs">
-    <li class="active nav-item">
-        <a class="nav-link" data-toggle="tab" href="#waitList">봉사대기자</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#permittedList">승인된 봉사자</a>
-    </li>
-</ul>
+<div class="row">
+    <ul class="nav nav-tabs">
+        <li class="active nav-item">
+            <a class="nav-link" data-toggle="tab" href="#waitList">봉사대기자</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#permittedList">승인된 봉사자</a>
+        </li>
+    </ul>
+</div>
 
-<div class="tab-content">
-    <div class="tab-pane fade in active" id="waitList" style="margin-top:20px">
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">idx</th>
-                    <th scope="col">date</th>
-                    <th scope="col">apply_datetime</th>
-                    <th scope="col">read_state</th>
-                    <th scope="col">animal_idx</th>
-                    <th scope="col">animalName</th>
-                    <th scope="col">species_code</th>
-                    <th scope="col">userNickname</th>
-                    <th scope="col">userPhoneNum</th>
-                    <th scope="col">userEmail</th>
-                    <th scope="col" style="width: 10%;">permission</th>
-                </tr>
+<div class="row" style="margin-top:20px;">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card mb-3">
+            <div class="table-responsive">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="waitList" style="margin-top:20px">
+                        <table id="waitTable" class="table table-bordered table-hover display">
+                            <thead>
+                                <tr>
+                                    <th scope="col">idx</th>
+                                    <th scope="col">date</th>
+                                    <th scope="col">apply_datetime</th>
+                                    <th scope="col">read_state</th>
+                                    <th scope="col">animal_idx</th>
+                                    <th scope="col">animalName</th>
+                                    <th scope="col">species_code</th>
+                                    <th scope="col">userNickname</th>
+                                    <th scope="col">userPhoneNum</th>
+                                    <th scope="col">userEmail</th>
+                                    <th scope="col" style="width: 8%;">permission</th>
+                                </tr>
 
-            </thead>
-            <tbody id="waiting">
-            </tbody>
-        </table>
-        <ul class="pagination pull-right" id="pageNum">
-        </ul>
-    </div>
-    <div class="ui segment tab-pane fade" id="permittedList" style="margin-top:20px">
-        <table class="table table-bordered">
-            <thead class="thead-dark text-center">
-                <tr>
-                    <th scope="col">idx</th>
-                    <th scope="col">date</th>
-                    <th scope="col">apply_datetime</th>
-                    <th scope="col">animal_idx</th>
-                    <th scope="col">animalName</th>
-                    <th scope="col">species_code</th>
-                    <th scope="col">userNickname</th>
-                    <th scope="col">userPhoneNum</th>
-                    <th scope="col">userEmail</th>
-                </tr>
-            </thead>
-            <tbody id="permit">
-            </tbody>
-        </table>
-        <ul class="pagination pull-right" id="pageNum">
-        </ul>
+                            </thead>
+                            <tbody id="waiting">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="permittedList" style="margin-top:20px">
+                        <table id="permitTable" class="table table-bordered table-hover display">
+                            <thead>
+                                <tr>
+                                    <th scope="col">idx</th>
+                                    <th scope="col">date</th>
+                                    <th scope="col">apply_datetime</th>
+                                    <th scope="col">animal_idx</th>
+                                    <th scope="col">animalName</th>
+                                    <th scope="col">species_code</th>
+                                    <th scope="col">userNickname</th>
+                                    <th scope="col">userPhoneNum</th>
+                                    <th scope="col">userEmail</th>
+                                </tr>
+                            </thead>
+                            <tbody id="permit">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -74,22 +80,11 @@
             method: "POST",
             data: {},
             success: function (data) {
-                /*data = {
+                data = {
                     "result": 1,
                     "list": [
                         {
                             "idx": 1,
-                            "date": "2019-04-29T00:00:00.000Z",
-                            "apply_datetime": null,
-                            "animal_idx": 60,
-                            "animalName": "삐삐",
-                            "species_code": 3,
-                            "userNickName": "admin",
-                            "userPhoneNumber": "01012345678",
-                            "userEmail": "test@test.com"
-                        },
-                        {
-                            "idx": 3,
                             "date": "2019-04-01T00:00:00.000Z",
                             "apply_datetime": null,
                             "animal_idx": 60,
@@ -100,7 +95,7 @@
                             "userEmail": "test@test.com"
                         },
                         {
-                            "idx": 4,
+                            "idx": 2,
                             "date": "2019-05-16T00:00:00.000Z",
                             "apply_datetime": null,
                             "animal_idx": 60,
@@ -110,41 +105,8 @@
                             "userPhoneNumber": "01012345678",
                             "userEmail": "test@test.com"
                         },
-                        {
-                            "idx": 5,
-                            "date": "2019-05-18T00:00:00.000Z",
-                            "apply_datetime": null,
-                            "animal_idx": 60,
-                            "animalName": "삐삐",
-                            "species_code": 3,
-                            "userNickName": "admin",
-                            "userPhoneNumber": "01012345678",
-                            "userEmail": "test@test.com"
-                        },
-                        {
-                            "idx": 6,
-                            "date": "2019-05-04T00:00:00.000Z",
-                            "apply_datetime": null,
-                            "animal_idx": 60,
-                            "animalName": "삐삐",
-                            "species_code": 3,
-                            "userNickName": "admin",
-                            "userPhoneNumber": "01012345678",
-                            "userEmail": "test@test.com"
-                        },
-                        {
-                            "idx": 7,
-                            "date": "2019-05-06T00:00:00.000Z",
-                            "apply_datetime": null,
-                            "animal_idx": 60,
-                            "animalName": "삐삐",
-                            "species_code": 3,
-                            "userNickName": "admin",
-                            "userPhoneNumber": "01012345678",
-                            "userEmail": "test@test.com"
-                        }
                     ]
-                }*/
+                }
                 $('#permit').html('');
                 $.each(data.list, function (idx, list) {
                     $('#permit').append("<tr><th>" + list.idx + "</th><td>" + list.date + "</th><td>" + list.apply_datetime + "</td><td>" +
@@ -152,6 +114,10 @@
                         "</td><td>" + list.userPhoneNumber + "</td><td>" + list.userEmail + "</td>"
                     )
                 })
+                setTimeout(function () {
+                    console.log(10);
+                    $('#permitTable').DataTable();
+                }, 100)
             }
         })
     }
@@ -165,7 +131,7 @@
             method: "POST",
             data: {},
             success: function (data) {
-                /*data = {
+                data = {
                     "result": 1,
                     "list": [
                         {
@@ -181,7 +147,7 @@
                             "userEmail": "test@test.com"
                         }
                     ]
-                }*/
+                }
                 $('#waiting').html('');
                 $.each(data.list, function (idx, list) {
 
@@ -195,10 +161,14 @@
                     $('#waiting').append(tr + "<th>" + list.idx + "</th><td>" + list.date + "</th><td>" + list.apply_datetime + "</td><td>" +
                         list.read_state + "</td><td>" + list.animal_idx + "</td><td>" + list.animalName + "</td><td>" + list.species_code + "</td><td>" + list.userNickName +
                         "</td><td>" + list.userPhoneNumber + "</td><td>" + list.userEmail +
-                        "</td><td><button class='permit-button btn btn-default btn' style='color:green;'><i class='fas fa-chevron-down' style='font-size:24px'></i></button>" +
-                        "<button class='reject-button btn btn-default btn' style='color:red;'><i class='fas fa-ban' style='font-size:24px'></i></button></td>"
+                        "</td><td><button class='permit-button btn btn-default btn' style='color:green;'><i class='fa fa-check' style='font-size:24px'></i></button>" +
+                        "<button class='reject-button btn btn-default btn' style='color:red;'><i class='fa fa-remove' style='font-size:24px'></i></button></td>"
                     )
                 })
+                setTimeout(function () {
+                    console.log(10);
+                    $('#waitTable').DataTable();
+                }, 100)
             }
         })
     }

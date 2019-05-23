@@ -31,4 +31,15 @@ exports.getDiscoverRecord = function (_data, _callback) {
         res.list = _results;
         _callback(res);
     });
-}
+};
+
+exports.getDiscover = function (_data, _callback, _testcallback) {
+    dbFacade.getDiscover(_data, function (_results) {
+        if (typeof _testcallback == 'function')
+            _testcallback(_results);
+        var res = {};
+        res.result = 1;
+        res.discover = _results[0];
+        _callback(res);
+    });
+};

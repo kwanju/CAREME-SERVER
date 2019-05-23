@@ -34,3 +34,12 @@ exports.getDiscoverInBulletinBoard = function (_data, _callback) {
         _callback(_results);
     });
 }
+
+exports.getDiscover = function (_data, _callback) {
+    var select = "SELECT * FROM discover ";
+    var where = "WHERE idx=?";
+
+    poolAdaper.execute(select + where, [_data.idx], function (_results) {
+        _callback(_results);
+    });
+}

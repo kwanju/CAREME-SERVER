@@ -15,4 +15,11 @@ router.post('/getDiscoverRequestRecord', insertIdxIntoBody, function (_req, _res
         _res.send(_result);
     });
 });
+
+router.post('/getDiscoverInfo', function (_req, _res) {
+    var discover = require('../../../model/erp/discover');
+    discover.getDiscoverInfo(_req.body, function (_result) {
+        _res.send(_result);
+    });
+});
 module.exports = router;

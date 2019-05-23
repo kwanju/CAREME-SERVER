@@ -9,6 +9,7 @@ var volunteerRouter = require('./volunteer/volunteer');
 var mshelterRouter = require('./mshelter/mshelter');
 var notifyRouter = require('./notify/notify');
 var discoverRouter = require('./discover/discover');
+var searchRouter = require('./search/search');
 
 //router.use(checkShelterAuth);
 router.use('/main', mainRouter);
@@ -18,5 +19,6 @@ router.use('/volunteer', volunteerRouter);
 router.use('/mshelter', mshelterRouter);
 router.use('/notify', notifyRouter);
 router.use('/discover', discoverRouter);
+router.use('/search', searchRouter);
 
 module.exports = router;

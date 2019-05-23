@@ -63,6 +63,7 @@
     </div>
 </div>
 
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7a116decd0d85fb13328c9f516f7baaa"></script>
 <script>
     getDiscoverRequestWaiting();
     getDiscoverRequestRecord();
@@ -86,7 +87,8 @@
                         list.requestDateTime + "</td><td>" + list.species_code +
                         "</td><td>" +
                         "<button class='permit-button btn btn-default btn' style='color:green;'><i class='fa fa-check' style='font-size:24px'></i></button>" +
-                        "<button class='reject-button btn btn-default btn' style='color:red;'><i class='fa fa-remove' style='font-size:24px'></i></button></td>"
+                        "<button class='reject-button btn btn-default btn' style='color:red;'><i class='fa fa-remove' style='font-size:24px'></i></button></td>"+
+                        "<button class='info-button'>정보</button></td>",
                     );
                 })
                 setTimeout(function () {
@@ -152,4 +154,47 @@
         var idx = $(this).closest('tr').find('th').html();
         rejectDiscoverRequest(idx);
     });
+    $(document).on('click', '.info-button', function (e) {
+        var idx = $(this).closest('tr').find('th').html();
+        getDiscoverInfo(idx);
+    });
+
+    function getDiscoverInfo(idx) {
+        $.ajax({
+            url: "/erp/discover/json/getDiscoverInfo",
+            method: "POST",
+            data: {idx : idx},
+            success: function (data) {
+                console.log(data);
+                $('#discover_time').html(data.discover.discover_datetime);
+                $('#discover_spot').html(data.discover.discovered_spot);
+                $('#discover_request_time').html(data.discover.register_datetime);
+                $('#discover_spieces').html(data.discover.species_code);
+                $('#discover_descript').html(data.discover.description);
+                $('#discover_image').append(
+                    '<img src="" id="discoverImg" width="200" height="160"/>' + "</td>"
+                );
+                $("#discoverImg").attr('src', "/" + data.discover.url_picture);
+                /*
+                if (data.discover.animal_sex = 'w') {
+                    $('#female').prop("checked", true)
+                }
+                else {
+                    $('#male').prop("checked", true)
+                }
+                */
+                //console.log(parseFloat(data.discover.latitude));
+                var container = document.getElementById('discover_map'); //지도를 담을 영역의 DOM 레퍼런스
+                var options = { //지도를 생성할 때 필요한 기본 옵션
+                    center: new daum.maps.LatLng(33.4507, 126.5706),
+                    //center: new daum.maps.LatLng(parseFloat(data.discover.latitude), parseFloat(data.discover.longitude)), //지도의 중심좌표.
+                    level: 3 //지도의 레벨(확대, 축소 정도)
+                };
+
+                var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
+                $("#discoverInfo").modal("show")
+            }
+        })
+    }
 </script>
+<% include ./../layout/modalDiscoverInfo.ejs %>

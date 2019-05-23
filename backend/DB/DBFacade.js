@@ -205,3 +205,18 @@ exports.getAppPushInfoWhenPermitDiscoverRequest = function (_data, _callback) {
     var discover = require('./erp/discover');
     discover.getAppPushInfoWhenPermitDiscoverRequest(_data, _callback);
 }
+
+exports.searchAnimalByName = function (_data, _callback) {
+    var shelter = require('./erp/search');
+    shelter.searchAnimalByName(_data, _callback);
+}
+
+exports.searchShelterByName = function (_data, _callback) {
+    var shelter = require('./erp/search');
+    shelter.searchShelterByName(_data, _callback);
+}
+
+exports.getDiscoverInfo = function (_data, _callback) {
+    var discover = require('./erp/discover');
+    discover.getDiscoverInfo(_data, _callback);
+}

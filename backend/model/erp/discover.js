@@ -69,3 +69,12 @@ exports.rejectDiscoverRequest = function (_data, _callback, _testCallback) {
         });
     });
 }
+
+exports.getDiscoverInfo = function (_data, _callback) {
+    dbFacade.getDiscoverInfo(_data, function (_result) {
+        var res = {};
+        res.result = 1;
+        res.discover = _result[0];
+        _callback(res);
+    });
+}

@@ -1,7 +1,13 @@
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 
-function mailer(email) {
+exports.mailer = function (email, _callback) {
+    mailer(email, function (result) {
+        _callback();
+    })
+}
+
+var mailer = function(email, _callback) {
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -30,6 +36,7 @@ function mailer(email) {
         }
         else {
             console.log('Email sent: ' + info.response);
+            _callback();
         }
     });
 }

@@ -115,6 +115,32 @@ CREATE TABLE find(
     FOREIGN KEY(user_idx) REFERENCES user(idx)  
 );
 
+CREATE TABLE adopt(
+    idx int(10) not null AUTO_INCREMENT,
+    animal_idx int(10) not null COMMENT '신청할 동물 idx',
+    shelter_idx int(10) not null COMMENT '신청할 보호소 idx',
+    user_idx int(10) not null COMMENT '신청자 idx',
+    datetime datetime not null COMMENT '신청 등록 날짜',
+    --여기부터 입양신청서 정보--
+    user_name varchar(20) not null COMMENT '신청자 실명',
+    address varchar(100) COMMENT '신청자 주소',
+    phone_number int(10) COMMENT '신청자 전화번호',
+    second_phone_number int(10) COMMENT '주변인 전화번호',
+    user_email varchar(20) COMMENT '신청자 메일',
+    user_birth int(10) COMMENT '신청자 생년월일',
+    user_job varchar(20) COMMENT '신청자 직업',
+    q1 varchar(100) not null COMMENT '질문들',
+    q2 varchar(100) not null COMMENT '',
+    q3 varchar(100) not null COMMENT '',
+    q4 varchar(100) not null COMMENT '',
+    q5 varchar(100) not null COMMENT '',
+    q6 varchar(100) not null COMMENT '',
+    q7 varchar(100) not null COMMENT '',
+    q8 varchar(100) not null COMMENT '',
+    q9 varchar(100) not null COMMENT '',
+    q10 varchar(100) not null COMMENT '',
+)
+
 INSERT INTO shelter(id,pw,name, position, url_picture) VALUES('test','test','테스트보호소', '서울 종로구 경교장1길 7-1', 'drive/animalImage/1.jpg');
 INSERT INTO user(id,pw,phone_number,email,nickname) VALUES('test','test','01012345678','test@test.com', 'abccccc');
 

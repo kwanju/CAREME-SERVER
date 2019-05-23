@@ -9,6 +9,7 @@ var csession = require('./utils/clientSession');
 
 var indexRouter = require('./routes/index');
 var shelterRouter = require('./routes/shelter/shelter');
+var adoptRegisterRouter = require('./routes/adoptRegister/adoptRegister');
 var erpRouter = require('./routes/erp/erp');
 var androidRouter = require('./routes/android/android');
 var mapRouter = require('./routes/map/mapTest');
@@ -37,6 +38,7 @@ app.use(csession); // user side session
 
 app.use('/', indexRouter);
 app.use('/user', shelterRouter);
+app.use('/adoptRegister', adoptRegisterRouter);
 app.use('/erp',erpRouter);
 app.use('/android',androidRouter);
 app.use('/mapTest', mapRouter);

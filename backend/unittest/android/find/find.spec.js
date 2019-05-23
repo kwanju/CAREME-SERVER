@@ -5,7 +5,8 @@ describe.only("registerFind Test", function () {
     it("insert result not undefined", function (done) {
         find.registerFind({},
             {
-                user_idx: 1
+                user_idx: 1,
+                lost_datetime: "2019-5-28"
             }
             , function () { }, function (_insertId) {
                 console.log("Idx : " + _insertId);
@@ -16,7 +17,8 @@ describe.only("registerFind Test", function () {
     it("result is 1", function (done) {
         find.registerFind({},
             {
-                user_idx: 1
+                user_idx: 1,
+                lost_datetime: "2019-5-29"
             }
             , function (_res) {
                 assert.equal(_res.result, 1);

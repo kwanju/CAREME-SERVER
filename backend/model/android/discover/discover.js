@@ -10,6 +10,7 @@ exports.registerDiscover = function (_req, _data, _callback) {
     dbFacade.registerDiscover(_data, function (_idx) {
         var res = {};
         res.result = 1;
+        res.idx=_idx;
         _callback(res);
 
         matching.matching(

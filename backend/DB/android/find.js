@@ -24,3 +24,12 @@ exports.getFindInBulletinBoard = function (_data, _callback) {
         _callback(_results);
     });
 }
+
+exports.getFind = function (_data, _callback) {
+    var select = "SELECT * FROM find ";
+    var where = "WHERE idx=?";
+
+    poolAdapter.execute(select + where, [_data.idx], function (_results) {
+        _callback(_results);
+    });
+}

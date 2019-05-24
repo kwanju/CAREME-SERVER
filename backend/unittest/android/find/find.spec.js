@@ -35,6 +35,7 @@ describe.only("getFind Test", function () {
                 idx: 20,
             }
             , function () { }, function (_result) {
+                console.log(_result);
                 assert(_result)
                 done();
             });

@@ -26,10 +26,11 @@ exports.getFindInBulletinBoard = function (_data, _callback) {
 }
 
 exports.getFind = function (_data, _callback) {
-    var select = "SELECT * FROM find ";
-    var where = "WHERE idx=?";
+    var select = "SELECT f.*, u.nickname, u.phone_number FROM find AS f INNER JOIN user AS u ";
+    var on = "ON f.user_idx = u.idx "
+    var where = "WHERE f.idx=?";
 
-    poolAdapter.execute(select + where, [_data.idx], function (_results) {
+    poolAdapter.execute(select + on + where, [_data.idx], function (_results) {
         _callback(_results);
     });
 }

@@ -115,6 +115,8 @@
                     </div>
     */
     function searchDiscoveredSpot(_caller, _latitude, _longitude) {
+        var latitude = _latitude == "" || _latitude == undefined ? 37.56631 : parseFloat(_latitude)
+        var longitude = _longitude == "" || _longitude == undefined ? 126.97875 : parseFloat(_longitude)
         mCaller = _caller
         var geocoder = new daum.maps.services.Geocoder();// 주소-좌표변환 객체
 
@@ -132,9 +134,7 @@
         setTimeout(function () {
             var mapContainer = document.getElementById('discovered_spot_map'), // 지도를 표시할 div 
                 mapOption = {
-                    center: new daum.maps.LatLng(
-                        _latitude != undefined ? parseFloat(_latitude) : 37.56631,
-                        _longitude != undefined ? parseFloat(_longitude) : 126.97875), // 지도의 중심좌표
+                    center: new daum.maps.LatLng(latitude, longitude), // 지도의 중심좌표
                     level: 5 // 지도의 확대 레벨
                 };
 
@@ -164,6 +164,7 @@
 
                         // 마커를 클릭한 위치에 표시합니다 
                         marker.setPosition(mouseEvent.latLng);
+                        console.log(mouseEvent.latLng);
                         marker.setMap(map);
 
                         // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
@@ -186,6 +187,10 @@
                 // 클릭한 위도, 경도 정보를 가져옵니다 
 
             });
+
+            daum.maps.event.trigger(map, 'click', {
+                latLng: map.getCenter()
+            })
         }, 500)
 
 

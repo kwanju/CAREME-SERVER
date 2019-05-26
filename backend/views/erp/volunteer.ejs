@@ -90,7 +90,7 @@
             method: "POST",
             data: {},
             success: function (data) {
-                data = {
+                /*data = {
                     "result": 1,
                     "list": [
                         {
@@ -116,10 +116,10 @@
                             "userEmail": "test@test.com"
                         },
                     ]
-                }
+                }*/
                 $('#permit').html('');
                 $.each(data.list, function (idx, list) {
-                    $('#permit').append("<tr><th>" + list.idx + "</th><td>" + list.date + "</th><td>" + list.apply_datetime + "</td><td>" +
+                    $('#permit').append("<tr><th>" + list.idx + "</th><td>" + formatDate(list.date, DATE) + "</th><td>" + formatDate(list.apply_datetime, DATETIME) + "</td><td>" +
                         list.animal_idx + "</td><td>" + list.animalName + "</td><td>" + list.species_code + "</td><td>" + list.userNickName +
                         "</td><td>" + list.userPhoneNumber + "</td><td>" + list.userEmail + "</td>"
                     )
@@ -153,7 +153,7 @@
             method: "POST",
             data: {},
             success: function (data) {
-                data = {
+                /*data = {
                     "result": 1,
                     "list": [
                         {
@@ -169,7 +169,7 @@
                             "userEmail": "test@test.com"
                         }
                     ]
-                }
+                }*/
                 $('#waiting').html('');
                 $.each(data.list, function (idx, list) {
 
@@ -180,7 +180,7 @@
                         tr = "<tr>"
 
 
-                    $('#waiting').append(tr + "<th>" + list.idx + "</th><td>" + list.date + "</th><td>" + list.apply_datetime + "</td><td>" +
+                    $('#waiting').append(tr + "<th>" + list.idx + "</th><td>" + formatDate(list.date, DATE) + "</th><td>" + formatDate(list.apply_datetime, DATETIME) + "</td><td>" +
                         list.read_state + "</td><td>" + list.animal_idx + "</td><td>" + list.animalName + "</td><td>" + list.species_code + "</td><td>" + list.userNickName +
                         "</td><td>" + list.userPhoneNumber + "</td><td>" + list.userEmail +
                         "</td><td><button class='permit-button btn btn-default btn' style='color:green;'><i class='fa fa-check' style='font-size:24px'></i></button>" +

@@ -67,7 +67,7 @@
                 $('#tableList').html('');
                 $.each(data.list, function (idx, list) {
                     $('#tableList').append("<tr><th>" + list.idx + "</th><td>" + list.name + "</th><td>" + list.species_code + "</td><td>" +
-                        list.register_data + "</td><td>" + list.state +
+                        formatDate(list.register_data, DATE) + "</td><td>" + list.state +
                         "</td><td><button class='btn btn-default btn edit-animal'>" +
                         "<i class='fa fa-edit' style='font-size:24px; color:green'></i></button>" +
                         "<button class='btn btn-default btn'><i class='fa fa-trash' style='font-size:24px; color:red'></i></button></td>"

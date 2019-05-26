@@ -9,23 +9,33 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <ul class="nav nav-tabs">
-        <li class="active nav-item">
-            <a class="nav-link" data-toggle="tab" href="#waitList">봉사대기자</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#permittedList">승인된 봉사자</a>
-        </li>
-    </ul>
-</div>
+
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-wait-tab" data-toggle="tab" href="#waitList" role="tab" aria-controls="nav-wait"
+            aria-selected="true">봉사대기자</a>
+        <a class="nav-item nav-link" id="nav-permit-tab" data-toggle="tab" href="#permittedList" role="tab" aria-controls="nav-permit"
+            aria-selected="false">승인된 봉사자</a>
+    </div>
+</nav>
 
 <div class="row" style="margin-top:20px;">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-        <div class="card mb-3">
+        <div class="card mb-3 p-3">
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6"></div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">검색</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" id="volunteer_search">
+                    </div>
+                </div>
+            </div>
             <div class="table-responsive">
                 <div class="tab-content">
-                    <div class="tab-pane fade in active" id="waitList" style="margin-top:20px">
+                    <div class="tab-pane fade show active" id="waitList" style="margin-top:20px">
                         <table id="waitTable" class="table table-bordered table-hover display">
                             <thead>
                                 <tr>
@@ -114,13 +124,25 @@
                         "</td><td>" + list.userPhoneNumber + "</td><td>" + list.userEmail + "</td>"
                     )
                 })
-                setTimeout(function () {
-                    console.log(10);
-                    $('#permitTable').DataTable();
-                }, 100)
+                var dataTable = $('#permitTable').DataTable(
+                    {
+                        "searching": true,
+                        "language": {
+                            "lengthMenu": "_MENU_개씩 보기",
+                            "zeroRecords": "Nothing found - sorry",
+                            "info": " _PAGES_ 페이지 중 _PAGE_ 페이지",
+                            "infoEmpty": "No records available",
+                            "infoFiltered": "(filtered from _MAX_ total records)"
+                        }
+                    }
+                );
+                $('#volunteer_search').on('keyup', function () {
+                    dataTable.search(this.value).draw();
+                });
             }
         })
     }
+
     $(document).ready(function () {
         getScheduleListPermitted();
     });
@@ -165,10 +187,22 @@
                         "<button class='reject-button btn btn-default btn' style='color:red;'><i class='fa fa-remove' style='font-size:24px'></i></button></td>"
                     )
                 })
-                setTimeout(function () {
-                    console.log(10);
-                    $('#waitTable').DataTable();
-                }, 100)
+                var dataTable = $('#waitTable').DataTable(
+                    {
+                        "searching": true,
+                        "language": {
+                            "lengthMenu": "_MENU_개씩 보기",
+                            "zeroRecords": "Nothing found - sorry",
+                            "info": " _PAGES_ 페이지 중 _PAGE_ 페이지",
+                            "infoEmpty": "No records available",
+                            "infoFiltered": "(filtered from _MAX_ total records)"
+                        }
+                    }
+                );
+
+                $('#volunteer_search').on('keyup', function () {
+                    dataTable.search(this.value).draw();
+                });
             }
         })
     }

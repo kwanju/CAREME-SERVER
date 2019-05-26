@@ -1,0 +1,44 @@
+<div class="modal fade" id="modalSearchAniaml" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">유기견을 선택해 주세요</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="" id="searchAnimal" name="searchAnimal" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputID">유기견명</label>
+                        <input type="text" class="form-control" id="exampleInputID" name="Animal_id" aria-describedby="emailHelp" placeholder="유기견명을 입력하세요">
+                    </div>
+                    <input type="text" name="from" style="display:none;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                    <button type="submit" class="btn btn-primary add_id" onclick="regsiter()">완료</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function register() {
+        var form = $('#searchAnimal')[0];
+        var formData = new FormData(form);
+        $.ajax({
+            url: '',
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                alert("정상적으로 등록이 되었습니다.");
+                window.location.href = "/adoptRegister/adoptRegister";
+            }
+        })
+    }
+</script>

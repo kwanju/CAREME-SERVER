@@ -1,7 +1,21 @@
 <script src="/utils/notify.js"></script>
 
 <% if(csession!=0){ %>
-<script>
-    runCheckNewSchedule();
-</script>
-<% }%>
+    <script>
+    //runCheckNewSchedule();
+    </script>
+    <% }%>
+
+        <script>
+            var date_case1;
+
+            function getDate1(d, type) {
+                var split_case1 = d.split('T', 1);
+                for (var i in split_case1) {
+                    date_case1 = split_case1[i] 
+                    console.log(date_case1)
+                }
+                return date_case1;
+            }
+            getDate1(d);
+        </script>

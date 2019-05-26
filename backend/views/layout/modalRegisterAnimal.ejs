@@ -1,11 +1,13 @@
-<div class="modal fade" id="animal_register" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" style="height: auto;" role="document">
-        <div class="modal-content" style="height:auto;">
+<div class="modal fade" id="animal_register" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true" style="overflow-y: initial !important">
+    <div class="modal-dialog modal-dialog-centered modal-lg" style="overflow-y: initial !important;" role="document">
+        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">유기견 등록</h5>
             </div>
-            <form action="/erp/animal/action/addAnimal" id="form1" name="form1" method="POST" enctype="multipart/form-data">
-                <div class="modal-body">
+            <form action="/erp/animal/action/addAnimal" id="form1" name="form1" method="POST"
+                enctype="multipart/form-data">
+                <div class="modal-body" style="overflow-y: auto; height:500px;">
                     <div class="form-group">
                         <label for="exampleFormControlInput1">견명*</label>
                         <input type="text" class="form-control" name="name" aria-label="name">
@@ -26,6 +28,21 @@
                     <div class="form-group">
                         <img src="" alt="Image" id="regAnimalImg" width="250" height="200" />
                         <input type="file" name="animalImage" class="form-control-file" id="registerAnimalImg">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">유기견 발견장소</label>
+                        <div class="input-group mb-3">
+                            <input id="register_animal_discovered_spot" type="text" name="discovered_spot"
+                                class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2"
+                                readonly>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-dark"
+                                    onclick="searchDiscoveredSpot('register_animal_')">위치
+                                    찾기</button>
+                            </div>
+                        </div>
+                        <input id="register_animal_latitude" type="text" name="latitude" style="display: none;">
+                        <input id="register_animal_longitude" type="text" name="longitude" style="display: none;">
                     </div>
                     <div class="form-group">
                         <fieldset>

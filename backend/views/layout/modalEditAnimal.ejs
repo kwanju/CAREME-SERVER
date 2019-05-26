@@ -1,11 +1,12 @@
-<div class="modal fade" id="animal_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" style="height: auto;" role="document">
-        <div class="modal-content" style="height:auto;">
+<div class="modal fade" id="animal_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true" style="overflow-y: initial !important">
+    <div class="modal-dialog modal-dialog-centered modal-lg" style="overflow-y: initial !important;" role="document">
+        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">유기견 수정</h5>
             </div>
             <form id="form2" name="form2" method="POST" enctype="multipart/form-data">
-                <div class="modal-body">
+                <div class="modal-body" style="overflow-y: auto; height:500px;">
                     <label for="animal_img">유기견 사진</label>
                     <div class="form-group">
                         <img src="" id="animalImg" width="250" height="200" />
@@ -17,7 +18,8 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">견종</label>
-                        <input type="text" class="form-control" id="animalCode" name="species_code" aria-label="species_code">
+                        <input type="text" class="form-control" id="animalCode" name="species_code"
+                            aria-label="species_code">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">무게</label>
@@ -26,6 +28,21 @@
                     <div class="form-group">
                         <label for="exampleFormControlInput1">상태</label>
                         <input type="text" class="form-control" id="animalState" name="state" aria-label="state">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">유기견 발견장소</label>
+                        <div class="input-group mb-3">
+                            <input id="edit_animal_discovered_spot" type="text" name="discovered_spot"
+                                class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2"
+                                readonly>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-dark"
+                                    onclick="searchDiscoveredSpot('edit_animal_')">위치
+                                    찾기</button>
+                            </div>
+                        </div>
+                        <input id="edit_animal_latitude" type="text" name="latitude" style="display: none;">
+                        <input id="edit_animal_longitude" type="text" name="longitude" style="display: none;">
                     </div>
                     <div class="form-group">
                         <fieldset>
@@ -69,7 +86,7 @@
             sel_file = f;
 
             var reader = new FileReader();
-            reader.onload = function(e){
+            reader.onload = function (e) {
                 $('#animalImg').attr('src', e.target.result);
             }
             reader.readAsDataURL(f);

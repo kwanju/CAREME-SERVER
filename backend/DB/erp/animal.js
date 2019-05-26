@@ -28,14 +28,14 @@ exports.addAnimal = function (_data, _callback) {
     var query = "INSERT INTO " +
         "animal(" +
         "species_code, estimated_birth_age, name, sex, weight, url_picture, register_data, " +
-        "discovered_spot, state, shelter_idx, description) "
-        + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        "discovered_spot, state, shelter_idx, description, discovered_spot_latitude, discovered_spot_longitude) "
+        + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
     var date = require('../../utils/date')();
 
     poolAdapter.execute(query, [
         _data.species_code, _data.estimated_birth_age, _data.name, _data.sex, _data.weight, _data.url_picture, date,
-        _data.discovered_spot, _data.state, _data.shelter_idx, _data.description
+        _data.discovered_spot, _data.state, _data.shelter_idx, _data.description, _data.discovered_spot_latitude, _data.discovered_spot_longitude
     ],
         function (_results) {
             _callback();
@@ -58,11 +58,11 @@ exports.getAnimal = function (_data, _callback) {
     });
 }
 
-exports.updateAnimal = function (_data,_idx, _callback) {
+exports.updateAnimal = function (_data, _idx, _callback) {
     var sql = "UPDATE animal SET ? ";
     var where = "WHERE idx=?"
 
-    poolAdapter.execute(sql + where, [_data,_idx], function (_results) {
+    poolAdapter.execute(sql + where, [_data, _idx], function (_results) {
         _callback();
     });
 

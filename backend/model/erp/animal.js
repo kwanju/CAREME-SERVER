@@ -1,10 +1,13 @@
 var dbFacade = require('../../DB/DBFacade');
-exports.addAnimal = function (_req, _data, _callback) {
+exports.addAnimal = function (_req, _data, _callback,_testCallback) {
 
     if (_req.file) // 이미지 파일이 있을 때만 url_picture 설정
         _req.body.url_picture = _req.file.destination + _req.file.filename;
 
-    dbFacade.addAnimal(_data, function () {
+    dbFacade.addAnimal(_data, function (_idx) {
+        if( typeof _testCallback == 'function')
+            _testCallback(_idx)
+            
         var res = { result: 1 };
         _callback(res);
     });

@@ -36,13 +36,14 @@
                                 class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2"
                                 readonly>
                             <div class="input-group-append">
-                                <button type="button" class="btn btn-dark"
-                                    onclick="searchDiscoveredSpot('edit_animal_')">위치
+                                <button type="button" class="btn btn-dark" id="edit_animal_search_address">위치
                                     찾기</button>
                             </div>
                         </div>
-                        <input id="edit_animal_latitude" type="text" name="latitude" style="display: none;">
-                        <input id="edit_animal_longitude" type="text" name="longitude" style="display: none;">
+                        <input id="edit_animal_latitude" type="text" name="discovered_spot_latitude"
+                            style="display: none;">
+                        <input id="edit_animal_longitude" type="text" name="discovered_spot_longitude"
+                            style="display: none;">
                     </div>
                     <div class="form-group">
                         <fieldset>
@@ -72,6 +73,10 @@
 
     $(document).ready(function () {
         $("#animal_img").on('change', handleImage);
+    });
+    $(document).on('click', '#edit_animal_search_address', function () {
+        searchDiscoveredSpot('edit_animal_', document.form2.discovered_spot_latitude.value,
+            document.form2.discovered_spot_longitude.value)
     });
 
     function handleImage(e) {

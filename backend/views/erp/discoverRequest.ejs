@@ -34,6 +34,7 @@
                                     <th scope="col">발견시간</th>
                                     <th scope="col">요청시간</th>
                                     <th scope="col">유기동물 종</th>
+                                    <th scope="col">상세정보</th>
                                     <th scope="col" style="width: 10%;">승인여부</th>
                                 </tr>
                             </thead>
@@ -50,6 +51,7 @@
                                     <th scope="col">발견시간</th>
                                     <th scope="col">요청시간</th>
                                     <th scope="col">유기동물 종</th>
+                                    <th scope="col">상세정보</th>
                                     <th scope="col" style="width: 10%;">승인여부</th>
                                 </tr>
                             </thead>
@@ -63,6 +65,7 @@
     </div>
 </div>
 
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7a116decd0d85fb13328c9f516f7baaa"></script>
 <script>
     getDiscoverRequestWaiting();
     getDiscoverRequestRecord();
@@ -84,13 +87,12 @@
                         list.discovered_spot + "</th><td>" +
                         list.discover_datetime + "</td><td>" +
                         list.requestDateTime + "</td><td>" + list.species_code +
-                        "</td><td>" +
+                        "</td><td><button class='btn btn-info info-button'>상세정보보기</button></td><td>" +
                         "<button class='permit-button btn btn-default btn' style='color:green;'><i class='fa fa-check' style='font-size:24px'></i></button>" +
                         "<button class='reject-button btn btn-default btn' style='color:red;'><i class='fa fa-remove' style='font-size:24px'></i></button></td>"
                     );
                 })
                 setTimeout(function () {
-                    console.log(10);
                     $('#requestWaitTable').DataTable();
                 }, 100)
             }
@@ -109,12 +111,13 @@
                         "<tr><th>" + list.idx + "</th><td>" +
                         list.discovered_spot + "</th><td>" +
                         list.discover_datetime + "</td><td>" +
-                        list.requestDateTime + "</td><td>" + list.species_code +
+                        list.requestDateTime + "</td>" +
+                        "<td><button class='btn btn-info info-button'>상세정보보기</button></td>" +
+                        "<td>" + list.species_code +
                         "</td><td>" + (list.permit == "1" ? "허가" : "거부") + "</td>"
                     );
                 })
                 setTimeout(function () {
-                    console.log(10);
                     $('#requestRecordTabe').DataTable();
                 }, 100)
             }
@@ -152,4 +155,52 @@
         var idx = $(this).closest('tr').find('th').html();
         rejectDiscoverRequest(idx);
     });
+    $(document).on('click', '.info-button', function (e) {
+        var idx = $(this).closest('tr').find('th').html();
+        getDiscoverInfo(idx);
+    });
+
+    function getDiscoverInfo(idx) {
+        $.ajax({
+            url: "/erp/discover/json/getDiscoverInfo",
+            method: "POST",
+            data: { idx: idx },
+            success: function (data) {
+
+                console.log(data);
+                $('#discover_time').html(data.discover.discover_datetime);
+                $('#discover_spot').html(data.discover.discovered_spot);
+                $('#discover_request_time').html(data.discover.register_datetime);
+                $('#discover_spieces').html(data.discover.species_code);
+                $('#discover_descript').html(data.discover.description);
+                $('#discover_image').html("");
+                $('#discover_image').append(
+                    '<img src="" id="discoverImg" width="200" height="160"/>' + "</td>"
+                );
+                $("#discoverImg").attr('src', "/" + data.discover.url_picture);
+                $("#discoverInfo").modal("show")
+
+                setTimeout(function () {
+                    var container = document.getElementById('discover_map'); //지도를 담을 영역의 DOM 레퍼런스
+                    var options = { //지도를 생성할 때 필요한 기본 옵션
+                        //center: new daum.maps.LatLng(33.4507, 126.5706),
+                        center: new daum.maps.LatLng(parseFloat(data.discover.latitude), parseFloat(data.discover.longitude)), //지도의 중심좌표.
+                        level: 6 //지도의 레벨(확대, 축소 정도)
+                    };
+                    var markerPosition = new daum.maps.LatLng(parseFloat(data.discover.latitude), parseFloat(data.discover.longitude));
+
+                    // 마커를 생성합니다
+                    var marker = new daum.maps.Marker({
+                        position: markerPosition
+                    });
+
+                    var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴*/
+                    marker.setMap(map);
+                }, 500)
+
+
+            }
+        })
+    }
 </script>
+<% include ./../layout/modalDiscoverInfo.ejs %>

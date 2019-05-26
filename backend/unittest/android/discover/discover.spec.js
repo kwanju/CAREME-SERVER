@@ -1,6 +1,31 @@
 const assert = require('assert');
 
-describe.only("GetDiscoverRecord Test", function () {
+describe.only("getDiscover Test", function () {
+    var discover = require('../../../model/android/discover/discover');
+    var data = {
+        idx: "25"
+    };
+    it("Get data from db", function (done) {
+        discover.getDiscover(
+            data, function () { },
+            function (_test) {
+                console.log(_test);
+                assert(_test);
+                done();
+            }
+        );
+
+    });
+
+    it("Result is 1", function (done) {
+        discover.getDiscover(data, function (_result) {
+            assert.equal(_result.result, 1);
+            done();
+        });
+    });
+});
+
+describe("GetDiscoverRecord Test", function () {
     var discover = require('../../../model/android/discover/discover');
     it("result is 1", function (done) {
         discover.getDiscoverRecord(

@@ -7,8 +7,20 @@ exports.registerFind = function (_req, _data, _callback, _testcallback) {
     dbFacade.registerFind(_data, function (_insertId) {
         var res = {}
         res.result = 1
+        res.idx = _insertId;
         _callback(res);
         if (typeof _testcallback == 'function')
             _testcallback(_insertId);
+    });
+}
+
+exports.getFind = function (_data, _callback, _testcallback) {
+    dbFacade.getFind(_data, function (_results) {
+        if (typeof _testcallback == 'function')
+            _testcallback(_results);
+        var res = {};
+        res.result = 1;
+        res.find = _results[0];
+        _callback(res);
     });
 }

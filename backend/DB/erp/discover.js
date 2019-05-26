@@ -91,3 +91,12 @@ exports.getAppPushInfoWhenPermitDiscoverRequest = function (_data, _callback) {
         _callback(_results[0].token);
     });
 }
+
+exports.getDiscoverInfo = function (_data, _callback) {
+    var select = "SELECT d.* FROM discover AS d INNER JOIN discover_request AS dr ";
+    var on = "ON d.idx = dr.discover_idx ";
+    var where = "WHERE dr.idx = ?";
+    poolAdapter.execute(select +on+ where, [_data.idx], function (_results) {
+        _callback(_results);
+    });
+}

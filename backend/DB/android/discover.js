@@ -34,3 +34,13 @@ exports.getDiscoverInBulletinBoard = function (_data, _callback) {
         _callback(_results);
     });
 }
+
+exports.getDiscover = function (_data, _callback) {
+    var select = "SELECT d.*,u.nickname, u.phone_number FROM discover AS d INNER JOIN user AS u ";
+    var on = "ON d.user_idx = u.idx "
+    var where = "WHERE d.idx=?";
+
+    poolAdaper.execute(select + on + where, [_data.idx], function (_results) {
+        _callback(_results);
+    });
+}

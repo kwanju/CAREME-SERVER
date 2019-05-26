@@ -82,3 +82,13 @@ exports.getFindInBulletinBoard = function (_data, _callback) {
     var find = require('./android/find');
     find.getFindInBulletinBoard(_data, _callback);
 }
+
+exports.getDiscover = function (_data, _callback) {
+    var discover = require('./android/discover');
+    discover.getDiscover(_data, _callback);
+}
+
+exports.getFind = function (_data, _callback) {
+    var find = require('./android/find');
+    find.getFind(_data, _callback);
+}

@@ -4,6 +4,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">유기견 수정</h5>
+                <button class="btn btn-default btn" data-toggle="modal" data-target="#animalSchedule">
+                    <i class='fa fa-calendar' style='font-size:24px; color:blue'></i>
+                </button>
             </div>
             <form id="form2" name="form2" method="POST" enctype="multipart/form-data">
                 <div class="modal-body" style="overflow-y: auto; height:500px;">
@@ -141,3 +144,5 @@
     });
 
 </script>
+
+<% include ./../modal/animalScheduleModal.ejs %>

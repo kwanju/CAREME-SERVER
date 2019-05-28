@@ -16,6 +16,8 @@
             aria-selected="true">봉사대기자</a>
         <a class="nav-item nav-link" id="nav-permit-tab" data-toggle="tab" href="#permittedList" role="tab" aria-controls="nav-permit"
             aria-selected="false">승인된 봉사자</a>
+        <a class="nav-item nav-link" id="nav-calendar-tab" data-toggle="tab" href="#volunteerCalendar" role="tab" aria-controls="nav-calendar"
+            aria-selected="false">일정관리</a>
     </div>
 </nav>
 
@@ -76,11 +78,21 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="tab-pane fade" id="volunteerCalendar" style="margin-top:20px">
+                        <div id='external-events'>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="card-box tilebox-one noradius">
+                            <div id="calendar"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 
 <script>

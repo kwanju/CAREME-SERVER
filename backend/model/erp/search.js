@@ -12,7 +12,7 @@ exports.searchShelterByName = function (_data, _callback) {
     dbFacade.searchShelterByName(_data, function (_results) {
         var res = {};
         res.result = 1;
-        res.shelter = _results[0];
+        res.shelter = _results;
         _callback(res);
     });
 }

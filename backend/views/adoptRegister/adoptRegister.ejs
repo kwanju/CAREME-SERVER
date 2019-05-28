@@ -49,20 +49,20 @@
             <label for="exampleFormControlInput1">전화번호</label>
             <input type="text" class="form-control" id="adopterPhoneNumber" name="phone_number" aria-label="number">
         </div>
-        <label for="exampleFormControlInput1">희망하는 유기견을 선택하여 주세요</label>
-        <div class="input-group mb-3">
-            <input disabled type="text" class="form-control" id="animalName" name="name" aria-label="name">
-            <div class="input-group-append">
-                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalSearchAniaml">
-                    <i class="fa fa-search" style="font-size:20px"></i>
-                </button>
-            </div>
-        </div>
         <label for="exampleFormControlInput1">입양할 보호소를 선택하여 주세요</label>
         <div class="input-group mb-3">
             <input disabled type="text" class="form-control" id="shelterName" name="name" aria-label="name">
             <div class="input-group-append">
                 <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalSearchShelter">
+                    <i class="fa fa-search" style="font-size:20px"></i>
+                </button>
+            </div>
+        </div>
+        <label for="exampleFormControlInput1">희망하는 유기견을 선택하여 주세요</label>
+        <div class="input-group mb-3">
+            <input disabled type="text" class="form-control" id="animalName" name="name" aria-label="name">
+            <div class="input-group-append">
+                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalSearchAniaml">
                     <i class="fa fa-search" style="font-size:20px"></i>
                 </button>
             </div>
@@ -300,13 +300,34 @@
             </div>
         </div>
         </br>
-        <button type="button" class="btn btn-primary" onclick="sumit()">신청하기</button>
+        <button type="button" class="btn btn-primary" onclick="submit_adopt()">신청하기</button>
     </form>
 </div>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <script>
+    function submit_adopt() {
+        localStorage.clear();
+        form_ajax();
+    }
+    function form_ajax() {
+        var form = $('#form-adoptRegister')[0];
+        var formData = new FormData(form);
+        $.ajax({
+            url: '',
+            type: 'POST',
+            enctype: 'multipart/form-data',
+            data: formData,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                alert("정상적으로 등록이 되었습니다.");
+                window.location.href = "/";
+            }
+        })
+    }
     /*
         도로명 주소 입력받는 함수.(daum api)
     */

@@ -16,6 +16,8 @@
             aria-selected="true">봉사대기자</a>
         <a class="nav-item nav-link" id="nav-permit-tab" data-toggle="tab" href="#permittedList" role="tab" aria-controls="nav-permit"
             aria-selected="false">승인된 봉사자</a>
+        <a class="nav-item nav-link" id="nav-calendar-tab" data-toggle="tab" href="#volunteerCalendar" role="tab" aria-controls="nav-calendar"
+            aria-selected="false">일정관리</a>
     </div>
 </nav>
 
@@ -29,7 +31,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">검색</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" id="volunteer_search">
+                        <input type="text" class="form-control" placeholder="search..." aria-label="Username" aria-describedby="basic-addon1" id="volunteer_search">
                     </div>
                 </div>
             </div>
@@ -39,17 +41,17 @@
                         <table id="waitTable" class="table table-bordered table-hover display">
                             <thead>
                                 <tr>
-                                    <th scope="col">idx</th>
-                                    <th scope="col">date</th>
-                                    <th scope="col">apply_datetime</th>
-                                    <th scope="col">read_state</th>
+                                    <th scope="col">번호</th>
+                                    <th scope="col">봉사일정</th>
+                                    <th scope="col">신청일정</th>
+                                    <th scope="col">확인여부</th>
                                     <th scope="col">animal_idx</th>
-                                    <th scope="col">animalName</th>
-                                    <th scope="col">species_code</th>
-                                    <th scope="col">userNickname</th>
-                                    <th scope="col">userPhoneNum</th>
-                                    <th scope="col">userEmail</th>
-                                    <th scope="col" style="width: 8%;">permission</th>
+                                    <th scope="col">유기견명</th>
+                                    <th scope="col">견종</th>
+                                    <th scope="col">닉네임</th>
+                                    <th scope="col">폰번호</th>
+                                    <th scope="col">이메일</th>
+                                    <th scope="col" style="width: 8%;">승인여부</th>
                                 </tr>
 
                             </thead>
@@ -61,26 +63,36 @@
                         <table id="permitTable" class="table table-bordered table-hover display">
                             <thead>
                                 <tr>
-                                    <th scope="col">idx</th>
-                                    <th scope="col">date</th>
-                                    <th scope="col">apply_datetime</th>
+                                    <th scope="col">번호</th>
+                                    <th scope="col">봉사날짜</th>
+                                    <th scope="col">신청날짜</th>
                                     <th scope="col">animal_idx</th>
-                                    <th scope="col">animalName</th>
-                                    <th scope="col">species_code</th>
-                                    <th scope="col">userNickname</th>
-                                    <th scope="col">userPhoneNum</th>
-                                    <th scope="col">userEmail</th>
+                                    <th scope="col">유기견명</th>
+                                    <th scope="col">견종</th>
+                                    <th scope="col">닉네임</th>
+                                    <th scope="col">폰번호</th>
+                                    <th scope="col">이메일</th>
                                 </tr>
                             </thead>
                             <tbody id="permit">
                             </tbody>
                         </table>
                     </div>
+                    <div class="tab-pane fade" id="volunteerCalendar" style="margin-top:20px">
+                        <div id='external-events'>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="card-box tilebox-one noradius">
+                            <div id="calendar"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 
 <script>

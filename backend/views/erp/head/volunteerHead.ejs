@@ -1,6 +1,5 @@
 <!-- Favicon -->
 <link rel="shortcut icon" href="/assets/images/favicon.ico">
-
 <!-- Bootstrap CSS -->
 <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 
@@ -10,16 +9,6 @@
 <!-- Custom CSS -->
 <link href="/assets/css/style.css" rel="stylesheet" type="text/css" />
 
-<!-- Modernizr -->
-<script src="/assets/js/modernizr.min.js"></script>
-
-<!-- jQuery -->
-<script src="/assets/js/jquery.min.js"></script>
-
-<!-- Moment -->
-<script src="/assets/js/moment.min.js"></script>
-
-<!-- BEGIN CSS for this page -->
 <link href="/assets/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" />
 <style>
     #external-events .fc-event {
@@ -87,6 +76,29 @@
         border-color: #eff1f3;
     }
 </style>
+
+
+
+<!-- BEGIN CSS for this page -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" />
+<style>
+    td.details-control {
+        background: url('/assets/plugins/datatables/img/details_open.png') no-repeat center center;
+        cursor: pointer;
+    }
+
+    tr.shown td.details-control {
+        background: url('/assets/plugins/datatables/img/details_close.png') no-repeat center center;
+    }
+</style>
+
+<link rel="stylesheet" type="text/css" href="/stylesheets/dataTable.css" />
+
+
+
+<script src="/assets/js/modernizr.min.js"></script>
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/moment.min.js"></script>
 
 <script src="/assets/js/popper.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>

@@ -25,29 +25,29 @@
     <form id="form-adoptRegister" name="form-adoptRegister">
         <label for="exampleFormControlInput1">아이디</label>
         <div class="input-group mb-3">
-            <input disabled type="text" class="form-control" id="adopterName" name="name" aria-label="name">
+            <input disabled type="text" class="form-control" id="adoptId" name="adoptId" aria-label="adoptId">
             <div class="input-group-append">
                 <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAdoptLogin">로그인</button>
             </div>
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput1">성명</label>
-            <input type="text" class="form-control" id="adopterName" name="name" aria-label="name">
+            <input type="text" class="form-control" id="adoptName" name="adoptName" aria-label="adoptName">
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput1">주소</label>
             <div class="input-group mb-3">
-                <input id="adopterAddress" type="text" name="position" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2"
+                <input id="adoptAddress" type="text" name="position" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2"
                     readonly>
                 <div class="input-group-append">
                     <button type="button" class="btn btn-dark" onclick="getPosition();">주소 찾기</button>
                 </div>
             </div>
-            <input type="text" class="form-control" id="adopterAddress2" name="position2" aria-label="address">
+            <input type="text" class="form-control" id="adoptAddress2" name="position2" aria-label="address">
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput1">전화번호</label>
-            <input type="text" class="form-control" id="adopterPhoneNumber" name="phone_number" aria-label="number">
+            <input type="text" class="form-control" id="adoptPhoneNumber" name="adoptPhoneNumber" aria-label="number">
         </div>
         <label for="exampleFormControlInput1">입양할 보호소를 선택하여 주세요</label>
         <div class="input-group mb-3">
@@ -68,8 +68,8 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">신청인과의 관계</label>
-            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+            <label class="my-1 mr-2" for="adoptRelation">신청인과의 관계</label>
+            <select class="custom-select my-1 mr-sm-2" id="adoptRelation">
                 <option selected>Choose...</option>
                 <option value="1">부모님</option>
                 <option value="2">배우자</option>
@@ -80,8 +80,8 @@
             </select>
         </div>
         <div class="form-group">
-            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">신청인의 주거형태</label>
-            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+            <label class="my-1 mr-2" for="adoptHouse">신청인의 주거형태</label>
+            <select class="custom-select my-1 mr-sm-2" id="adoptHouse">
                 <option selected>Choose...</option>
                 <option value="1">아파트</option>
                 <option value="2">전원주택</option>
@@ -90,8 +90,8 @@
             </select>
         </div>
         <div class="form-group">
-            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">유기견이 지낼곳은?</label>
-            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+            <label class="my-1 mr-2" for="adoptAnimlaPlace">유기견이 지낼곳은?</label>
+            <select class="custom-select my-1 mr-sm-2" id="adoptAnimlaPlace">
                 <option selected>Choose...</option>
                 <option value="1">회사</option>
                 <option value="2">집안</option>
@@ -102,37 +102,37 @@
             <fieldset>
                 <label for="exampleFormControlSelect1">전원주택일 경우 뒷마당 또는 앞마당에 담이 설치되있습니까?</label>
                 <br>
-                <input type="radio" name="background" value="y" /> 네
-                <input type="radio" name="background" value="n" /> 아니오
+                <input type="radio" name="adoptBack" id="adoptBack" value="y" /> 네
+                <input type="radio" name="adoptBack" id="adoptBack" value="n" /> 아니오
             </fieldset>
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput1">이메일</label>
-            <input type="text" class="form-control" id="adopterEmail" name="email" aria-label="email">
+            <input type="text" class="form-control" id="adoptEmail" name="email" aria-label="email">
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput1">신분증 번호</label>
-            <input type="text" class="form-control" id="idNumber" name="idNumber" aria-label="idNumber">
+            <input type="text" class="form-control" id="adoptIdNumber" name="adoptIdNumber" aria-label="adoptIdNumber">
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput1">직업</label>
-            <input type="text" class="form-control" id="adopterJob" name="adopterJob" aria-label="adopterJob">
+            <input type="text" class="form-control" id="adoptJob" name="adoptJob" aria-label="adoptJob">
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput1">소셜미디어 아이디</label>
-            <input type="text" class="form-control" id="socialId" name="socialId" aria-label="socialId">
+            <input type="text" class="form-control" id="adoptSocialId" name="adoptSocialId" aria-label="adoptSocialId">
         </div>
         <div class="form-group">
             <label for="comment">주거의 형태가 아파트또는 원룸일 경우 유기견은 소변과 대변을 어디서 보는지요?</label>
-            <textarea class="form-control" id="placeType" name="placeType" rows="4"></textarea>
+            <textarea class="form-control" id="adoptPlaceType" name="adoptPlaceType" rows="4"></textarea>
         </div>
         <div class="form-group">
             <label for="comment">가족소개</label>
-            <textarea class="form-control" id="family" name="family" rows="4"></textarea>
+            <textarea class="form-control" id="adoptFamily" name="adoptFamily" rows="4"></textarea>
         </div>
         <div class="form-group">
-            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">유기견을 책임지실 분</label>
-            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+            <label class="my-1 mr-2" for="adoptResponsible">유기견을 책임지실 분</label>
+            <select class="custom-select my-1 mr-sm-2" id="adoptResponsible">
                 <option selected>Choose...</option>
                 <option value="1">본인</option>
                 <option value="2">배우자</option>
@@ -144,52 +144,36 @@
         </div>
         <div class="form-group">
             <label for="comment">본인에게 강아지는 어떤 의미인가요?</label>
-            <textarea class="form-control" id="meanDog" name="meanDog" rows="4"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="comment">입양을 희망하는 강아지의 이름을 입력해주십시오.</label>
-            <textarea class="form-control" id="hopeDog" name="hopeDog" rows="4"></textarea>
-        </div>
-        <div class="form-group">
-            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">입양을 원하는 반려동물 보호소 이름</label>
-            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-                <option selected>Choose...</option>
-                <option value="1">종로 보호소</option>
-                <option value="2">해피 보호소</option>
-                <option value="3">댕댕 보호소</option>
-                <option value="4">딸기 보호소</option>
-                <option value="5">헬로 보호소</option>
-                <option value="6">24시 보호소</option>
-            </select>
+            <textarea class="form-control" id="adoptMeanDog" name="adoptMeanDog" rows="4"></textarea>
         </div>
         <div class="form-group">
             <fieldset>
                 <label for="exampleFormControlSelect1">여분의 주의가 필요한 학대 또는 방임의 일부 형태를 경험을한 유기견을 입양할 의향이 있습니까?
                 </label>
                 <br>
-                <input type="radio" name="background" value="y" /> 네
-                <input type="radio" name="background" value="n" /> 아니오
+                <input type="radio" name="adoptPurpose1" id="adoptPurpose1" value="y" /> 네
+                <input type="radio" name="adoptPurpose1" id="adoptPurpose1" value="n" /> 아니오
             </fieldset>
         </div>
         <div class="form-group">
             <fieldset>
                 <label for="exampleFormControlSelect1">특별한 치료가 필요한 유기견을 입양할 의향이 있습니까? </label>
                 <br>
-                <input type="radio" name="background" value="y" /> 네
-                <input type="radio" name="background" value="n" /> 아니오
+                <input type="radio" name="adoptPurpose2" id="adoptPurpose2" value="y" /> 네
+                <input type="radio" name="adoptPurpose2" id="adoptPurpose2" value="n" /> 아니오
             </fieldset>
         </div>
         <div class="form-group">
             <fieldset>
                 <label for="exampleFormControlSelect1">과거에 키운 애완동물이 있습니까? </label>
                 <br>
-                <input type="radio" name="background" value="y" /> 네
-                <input type="radio" name="background" value="n" /> 아니오
+                <input type="radio" name="adoptExperience" value="y" /> 네
+                <input type="radio" name="adoptExperience" value="n" /> 아니오
             </fieldset>
         </div>
         <div class="form-group">
-            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">현재 반려동물을 키우고 계십니까? </label>
-            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+            <label class="my-1 mr-2" for="adoptWithAnimal">현재 반려동물을 키우고 계십니까? </label>
+            <select class="custom-select my-1 mr-sm-2" id="adoptWithAnimal">
                 <option selected>Choose...</option>
                 <option value="1">강아지</option>
                 <option value="2">고양이</option>
@@ -201,15 +185,15 @@
         </div>
         <div class="form-group">
             <label for="comment">애완동물을 키운 종류와 수는? </label>
-            <textarea class="form-control" id="numberDog" name="numberDog" rows="4"></textarea>
+            <textarea class="form-control" id="adoptNumberDog" name="adoptNumberDog" rows="4"></textarea>
         </div>
         <div class="form-group">
             <label for="comment">과거에 키운 애완동물을 다른 식구 및 친구에게 보내셨는지요? </label>
-            <textarea class="form-control" id="sendDog" name="sendDog" rows="4"></textarea>
+            <textarea class="form-control" id="adoptSendDog" name="adoptSendDog" rows="4"></textarea>
         </div>
         <div class="form-group">
             <label for="comment">입양동물이 짖음, 배변실수, 분리불안, 어지럽히기, 기존강아지와의 트러블을 일으킬 수 있습니다. 이점에 대해서 어떻게 생각하시나요? * </label>
-            <textarea class="form-control" id="benefitDog" name="benefitDog" rows="4"></textarea>
+            <textarea class="form-control" id="adoptBenefitDog" name="adoptBenefitDog" rows="4"></textarea>
         </div>
         <div class="form-group">
             <fieldset>
@@ -217,25 +201,25 @@
 
                 </label>
                 <br>
-                <input type="radio" name="carePay" value="y" /> 네
-                <input type="radio" name="carePay" value="n" /> 아니오
+                <input type="radio" name="adoptCarePay" id="adoptCarePay" value="y" /> 네
+                <input type="radio" name="adoptCarePay" id="adoptCarePay" value="n" /> 아니오
             </fieldset>
         </div>
         <div class="form-group">
             <label for="comment">입양동물이 동물병원을 방문 할 주기와 방문목적을 작성해주세요. </label>
-            <textarea class="form-control" id="purpose" name="purpose" rows="4"></textarea>
+            <textarea class="form-control" id="adoptVisitPurpose" name="adoptVisitPurpose" rows="4"></textarea>
         </div>
         <div class="form-group">
             <label for="comment">입양동물에 필요한 치료 및 검진 예상금액은? </label>
-            <textarea class="form-control" id="feeDog" name="feefitDog" rows="4"></textarea>
+            <textarea class="form-control" id="adoptPreditFee" name="adoptPreditFee" rows="4"></textarea>
         </div>
         <div class="form-group">
             <label for="comment">입양동물과 하루를 어떻게 보내실 예정입니까? </label>
-            <textarea class="form-control" id="lifeDog" name="lifeDog" rows="4"></textarea>
+            <textarea class="form-control" id="adoptLifeDog" name="adoptLifeDog" rows="4"></textarea>
         </div>
         <div class="form-group">
             <label for="comment">여행/특별한 일정으로 집을 비우게 될 시 반려동물은 어떻게 지내게됩니까?</label>
-            <textarea class="form-control" id="emptyDog" name="emptyDog" rows="4"></textarea>
+            <textarea class="form-control" id="adoptEmptyDog" name="adoptEmptyDog" rows="4"></textarea>
         </div>
         <div class="card">
             <div class="card-header">
@@ -258,7 +242,7 @@
                     <br> 동물을 학대할경우: 개정동물보호법 제8조 - 징역 1년이하 또는 천만원 이하의 벌금형에 처한다.
                 </p>
                 <div>
-                    <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                    <input type="checkbox" class="form-check-input" id="adoptConfirm1">
                     <label class="form-check-label" for="dropdownCheck">
                         동의합니다.
                     </label>
@@ -269,20 +253,20 @@
         <div class="form-group row">
             <label for="example-datetime-local-input" class="col-1 col-form-label">신청 날짜:</label>
             <div>
-                <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+                <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="adoptApplyDate">
             </div>
         </div>
         <br>
         <div class="form-group">
             <label for="exampleFormControlInput1">전자 서명 행위 (E-Sign Act of 2000)</label>
-            <input type="text" class="form-control" id="sign" name="sign" aria-label="sign">
+            <input type="text" class="form-control" id="adoptSign" name="adoptSign" aria-label="adoptSign">
         </div>
         </br>
         <div class="form-group">
             <b>* 본인은 본인의 서명이며 모든 정보가 정확하고 사실임을 증명합니다.</b>
             </p>
             <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                <input type="checkbox" class="form-check-input" id="adoptConfirm2">
                 <label class="form-check-label" for="dropdownCheck">
                     동의합니다.
                 </label>
@@ -293,7 +277,7 @@
             </b>
             </p>
             <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                <input type="checkbox" class="form-check-input" id="adoptConfirm3">
                 <label class="form-check-label" for="dropdownCheck">
                     동의합니다.
                 </label>

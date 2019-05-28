@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">유기견을 선택해 주세요</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="clear_result()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -11,13 +11,21 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="exampleInputID">유기견명</label>
-                        <input type="text" class="form-control" id="exampleInputID" name="Animal_id" aria-describedby="emailHelp" placeholder="유기견명을 입력하세요">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="animal_name_input" name="animal_id" placeholder="유기견명을 입력해주세요" aria-label="검색할 유기견 이름" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="findButton" onclick="getAdoptAnimalList()">찾기</button>
+                            </div>
+                        </div>
                     </div>
+                    <table class="table table-striped table-bordered" id="table-body2">
+
+                    </table>
                     <input type="text" name="from" style="display:none;">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                    <button type="submit" class="btn btn-primary add_id" onclick="regsiter()">완료</button>
+                    <button type="submit" class="btn btn-primary add_id" onclick="register_animal()" data-dismiss="modal">완료</button>
                 </div>
             </form>
         </div>
@@ -25,20 +33,64 @@
 </div>
 
 <script>
-    function register() {
-        var form = $('#searchAnimal')[0];
-        var formData = new FormData(form);
+    cssLoader('/stylesheets/searchShelterModal.css')
+    $('#animal_name_input').keydown(function (e) {
+        if (e.keyCode == 13) {
+            getAdoptAnimalList();
+            return false;
+        }
+    })
+    function getAdoptAnimalList() {
+        var idx = localStorage.getItem('shelter_idx');
+        var inputText = document.getElementById('animal_name_input').value;
         $.ajax({
-            url: '',
+            url: '/erp/search/json/searchAnimal',
             type: 'POST',
-            data: formData,
-            dataType: 'json',
-            processData: false,
-            contentType: false,
+            data: {
+                type: 'name', //이름으로 검색
+                idx: idx, //검색할 shelter idx
+                text: inputText
+            },
             success: function (data) {
-                alert("정상적으로 등록이 되었습니다.");
-                window.location.href = "/adoptRegister/adoptRegister";
+                console.log(data);
+                $('#table-body2').html('');
+                $.each(data.animal, function (idx, animal) {
+                    var text = '<tr class="searchAnimal-list">'+
+                        '<th><span class="animal_idx" style="display: none;">'+animal.idx+'</span>'+animal.name+'</th></tr>';
+                    $('#table-body2').append(text);
+                })
             }
         })
     }
+
+    function register_animal() {
+        //selected가 없으면 선택하시오 alert
+        var selected= $('.searchAnimal-selected')[0];
+        if(selected === undefined) {
+            alert("검색 안했음");
+            return;
+        }
+        //shelterName에 값 추가
+        var name = selected.innerText;
+        $('#animalName').val(name);
+        //modal 초기화
+        clear_result();
+    }
+    function clear_result(){
+        setTimeout(1000);
+        $('#table-body2').html("");
+    }
+    $(document).on('click','.searchAnimal-list',function(){
+        //console.log(this);
+        var selected= $('.searchAnimal-selected')[0];
+
+        if(selected !== undefined) {
+            $(selected).removeClass('searchAnimal-selected');
+        }
+        if(!$(this).hasClass('searchAnimal-selected')) {
+            $(this).addClass('searchAnimal-selected');
+            var tmp = $(this).find('span')[0].innerHTML;
+            localStorage.setItem('animal_idx', tmp); //local storage 에 animal idx 저장
+        }
+    });
 </script>

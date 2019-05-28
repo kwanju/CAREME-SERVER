@@ -44,3 +44,18 @@ exports.getDiscover = function (_data, _callback) {
         _callback(_results);
     });
 }
+
+exports.getDiscoverListByFindAnimal = function (_data, _callback) {
+    var select = "SELECT idx, discover_datetime AS datetime, discovered_spot AS spot, species_code, animal_sex AS sex, url_picture FROM discover ";
+    var whereLatitude = "WHERE latitude > ? AND latitude < ? AND "
+    var whereLongitude = "longitude > ? AND longitude < ? AND "
+    var whereDate = "discover_datetime > ? AND discover_datetime < ? AND "
+    var whereSC = "species_code = ? AND "
+    var whereSex = "animal_sex = ? ORDER BY discover_datetime DESC"
+
+    poolAdaper.execute(select + whereLatitude + whereLongitude + whereDate + whereSC + whereSex,
+        [_data.start_latitude, _data.end_latitude, _data.start_longitude, _data.end_longitude,
+        _data.start_date, _data.end_date, _data.species_code, _data.sex], function (_results) {
+            _callback(_results);
+        });
+}

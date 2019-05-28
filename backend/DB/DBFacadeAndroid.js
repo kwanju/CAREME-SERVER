@@ -92,3 +92,13 @@ exports.getFind = function (_data, _callback) {
     var find = require('./android/find');
     find.getFind(_data, _callback);
 }
+
+exports.getAnimalListByFindAnimal = function (_data, _callback) {
+    var shelter = require('./android/shelter');
+    shelter.getAnimalListByFindAnimal(_data, _callback)
+}
+
+exports.getDiscoverListByFindAnimal = function (_data, _callback) {
+    var discover = require('./android/discover');
+    discover.getDiscoverListByFindAnimal(_data, _callback)
+}

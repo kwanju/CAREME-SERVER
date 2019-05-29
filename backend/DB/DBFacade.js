@@ -225,3 +225,8 @@ exports.getVolunteerInCalendar = function (_data, _callback) {
     var schedule = require('./erp/schedule');
     schedule.getVolunteerInCalendar(_data, _callback);
 }
+
+exports.addAdopt = function (_data, _callback) {
+    var adopt = require('./erp/adopt');
+    adopt.addAdopt(_data, _callback);
+}

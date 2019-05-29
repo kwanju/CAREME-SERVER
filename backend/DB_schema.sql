@@ -120,7 +120,6 @@ CREATE TABLE find(
 CREATE TABLE adopt(
     idx int(10) not null AUTO_INCREMENT,
     animal_idx int(10) not null COMMENT '신청할 동물 idx',
-    shelter_idx int(10) not null COMMENT '신청할 보호소 idx',
     user_idx int(10) not null COMMENT '신청자 idx',
     datetime datetime not null COMMENT '신청 등록 날짜',
     --여기부터 입양신청서 정보--
@@ -143,7 +142,6 @@ CREATE TABLE adopt(
     q10 varchar(100) not null COMMENT '',
     PRIMARY KEY(idx),
     FOREIGN KEY(animal_idx) REFERENCES animal(idx),
-    FOREIGN KEY(shelter_idx) REFERENCES shelter(idx),
 )
 
 INSERT INTO shelter(id,pw,name, position, url_picture) VALUES('test','test','테스트보호소', '서울 종로구 경교장1길 7-1', 'drive/animalImage/1.jpg');

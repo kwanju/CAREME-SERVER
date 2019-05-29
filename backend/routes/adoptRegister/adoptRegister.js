@@ -7,9 +7,9 @@ var action = require('./action');
 
 
 
-//router.use("/JSON",JSONuser);
+router.use("/json",JSONuser);
 router.use(page);
-//router.use("/action",action);
+router.use("/action",action);
 
 
 module.exports = router;

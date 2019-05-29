@@ -297,16 +297,12 @@
         //localStorage.clear();
     }
     function form_ajax() {
-        var form = $('#form-adoptRegister')[0];
-        var formData = new FormData(form);
+        var formData = $('#form-adoptRegister').serialize();
+        console.log(formData);
         $.ajax({
             url: '/adoptRegister/action/addAdopt',
-            type: 'POST',
-            enctype: 'multipart/form-data',
+            method: 'POST',
             data: formData,
-            dataType: 'json',
-            processData: false,
-            contentType: false,
             success: function (data) {
                 alert("정상적으로 등록이 되었습니다.");
                 window.location.href = "/";

@@ -102,3 +102,8 @@ exports.getDiscoverListByFindAnimal = function (_data, _callback) {
     var discover = require('./android/discover');
     discover.getDiscoverListByFindAnimal(_data, _callback)
 }
+
+exports.matchingFind = function (_data, _callback) {
+    var find = require('./android/find');
+    find.matchingFind(_data, _callback);
+}

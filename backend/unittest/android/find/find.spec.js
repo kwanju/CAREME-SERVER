@@ -6,7 +6,11 @@ describe("registerFind Test", function () {
         find.registerFind({},
             {
                 user_idx: 1,
-                lost_datetime: "2019-5-28"
+                lost_datetime: "2019-5-29",
+                latitude: "37.56711",
+                longitude: "126.98247",
+                animal_sex: "w",
+                species_code: '1'
             }
             , function () { }, function (_insertId) {
                 console.log("Idx : " + _insertId);
@@ -27,7 +31,7 @@ describe("registerFind Test", function () {
     })
 });
 
-describe.only("getFind Test", function () {
+describe("getFind Test", function () {
     var find = require('../../../model/android/find/find');
     it("result from db is not undefined", function (done) {
         find.getFind(
@@ -50,4 +54,23 @@ describe.only("getFind Test", function () {
                 done();
             }, function () { });
     })
+});
+
+describe.only("matchingFind Test", function () {
+    var find = require('../../../model/android/find/find');
+    it("매칭된 Find DB 가져오기", function (done) {
+        find.matchingFind(
+            {
+                date: new Date(2019, 4, 12),
+                latitude: "37.56611",
+                longitude: "126.98247",
+                species_code: "1",
+                sex: "w"
+            }
+            , function () { }, function (_result) {
+                console.log(_result);
+                assert(_result)
+                done();
+            });
+    });
 });

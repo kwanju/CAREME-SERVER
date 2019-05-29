@@ -6,11 +6,12 @@ exports.registerDiscover = function (_req, _data, _callback) {
     if (_req.file) // 이미지 파일이 있을 때만 url_picture 설정
         _req.body.url_picture = _req.file.destination + _req.file.filename;
 
+    var find = require('../find/find');
     var matching = require('../../discover/matching');
     dbFacade.registerDiscover(_data, function (_idx) {
         var res = {};
         res.result = 1;
-        res.idx=_idx;
+        res.idx = _idx;
         _callback(res);
 
         matching.matching(
@@ -22,6 +23,14 @@ exports.registerDiscover = function (_req, _data, _callback) {
 
             }
         );
+
+        find.matchingFind({
+            date: new Date(_data.discover_datetime),
+            latitude: _data.latitude,
+            longitude: _data.longitude,
+            species_code: _data.species_code,
+            sex: _data.animal_sex
+        }, function () { })
     });
 };
 

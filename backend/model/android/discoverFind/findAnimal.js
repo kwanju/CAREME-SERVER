@@ -3,7 +3,7 @@ var dbFacade = require('../../../DB/DBFacadeAndroid');
 
 exports.findAnimal = function (_data, _callback, _testcallback) {
 
-    var latlong = calculateLatLong(_data.latitude, _data.longitude, _data.distance)
+    var latlong = require('../../../utils/erp/calculate').calculateLatLong(_data.latitude, _data.longitude, _data.distance)
 
     var data = {
         start_latitude: latlong.lat[0],
@@ -63,22 +63,5 @@ var sortAnimalDiscoverByDiscoveredDateTime = function (_list, _discovers, _anima
             _list.push(animal);
             f++
         }
-    }
-}
-
-
-function calculateLatLong(_lat, _long, _distance) {
-    var lat = [0, 0];
-    var long = [0, 0]
-
-    lat[0] = String(parseFloat(_lat) - _distance / 111).substring(0, 8)
-    lat[1] = String(parseFloat(_lat) + _distance / 111).substring(0, 8)
-
-    long[0] = String(parseFloat(_long) - _distance / 91.17).substring(0, 9)
-    long[1] = String(parseFloat(_long) + _distance / 91.17).substring(0, 9)
-
-    return {
-        lat: lat,
-        long: long
     }
 }

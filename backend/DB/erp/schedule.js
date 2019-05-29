@@ -68,7 +68,18 @@ exports.checkScheduleReadState = function (_data, _callback) {
     var sql = "SELECT * FROM schedule AS s INNER JOIN animal AS a ";
     var on = "ON s.animal_idx=a.idx ";
     var where = "WHERE s.read_state=0 AND a.shelter_idx=?";
-    poolAdapter.execute(sql+on+where, [_data.idx], function (_results) {
+    poolAdapter.execute(sql + on + where, [_data.idx], function (_results) {
+        _callback(_results);
+    });
+}
+
+exports.getVolunteerInCalendar = function (_data, _callback) {
+    var select = "SELECT sch.idx, a.name AS animalName, a.species_code, u.nickname, sch.date "
+    var from = "FROM schedule AS sch INNER JOIN animal AS a INNER JOIN user AS u INNER JOIN shelter AS she ";
+    var on = "ON sch.animal_idx = a.idx AND sch.user_idx = u.idx AND a.shelter_idx =she.idx "
+    var where = "WHERE she.idx = ? AND sch.permit=1";
+
+    poolAdapter.execute(select + from + on + where, [_data.shelter_idx], function (_results) {
         _callback(_results);
     });
 }

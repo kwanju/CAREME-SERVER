@@ -56,6 +56,17 @@ exports.rejectSchedule = function (_data, _callback) {
     })
 }
 
+exports.getVolunteerInCalendar = function (_data, _callback, _testcallback) {
+    dbFacade.getVolunteerInCalendar(_data, function (_results) {
+        if (typeof _testcallback == 'function')
+            _testcallback(_results);
+        var res = {}
+        res.result = 1;
+        res.list = _results;
+        _callback(res);
+    });
+}
+
 var sendPush = function (_data, _permit) {
     var permit = _permit == 1 ? "허가" : "거부";
     dbFacade.getPushInfoAboutSchedule(_data, function (_results) {

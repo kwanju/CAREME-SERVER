@@ -220,3 +220,8 @@ exports.getDiscoverInfo = function (_data, _callback) {
     var discover = require('./erp/discover');
     discover.getDiscoverInfo(_data, _callback);
 }
+
+exports.getVolunteerInCalendar = function (_data, _callback) {
+    var schedule = require('./erp/schedule');
+    schedule.getVolunteerInCalendar(_data, _callback);
+}

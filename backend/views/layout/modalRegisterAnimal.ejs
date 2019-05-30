@@ -1,12 +1,11 @@
-<div class="modal fade" id="animal_register" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true" style="overflow-y: initial !important">
+<div class="modal fade" id="animal_register" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"
+    style="overflow-y: initial !important">
     <div class="modal-dialog modal-dialog-centered modal-lg" style="overflow-y: initial !important;" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">유기견 등록</h5>
             </div>
-            <form action="/erp/animal/action/addAnimal" id="form1" name="form1" method="POST"
-                enctype="multipart/form-data">
+            <form action="/erp/animal/action/addAnimal" id="form1" name="form1" method="POST" enctype="multipart/form-data">
                 <div class="modal-body" style="overflow-y: auto; height:500px;">
                     <div class="form-group">
                         <label for="exampleFormControlInput1">견명*</label>
@@ -14,7 +13,14 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">견종</label>
-                        <input type="text" class="form-control" name="species_code" aria-label="species_code">
+                        <div class="input-group mb-3">
+                            <input disabled type="text" class="form-control" id="animalSpecies" name="species_code" aria-label="species_code">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalSearchSpecies">
+                                    <i class="fa fa-search" style="font-size:20px"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">무게</label>
@@ -22,7 +28,14 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">상태</label>
-                        <input type="text" class="form-control" name="state" aria-label="state">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="state" aria-label="state">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalSearchState">
+                                    <i class="fa fa-search" style="font-size:20px"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <label for="registerAnimalImg">유기견 사진</label>
                     <div class="form-group">
@@ -32,13 +45,11 @@
                     <div class="form-group">
                         <label for="exampleFormControlInput1">유기견 발견장소</label>
                         <div class="input-group mb-3">
-                            <input id="register_animal_discovered_spot" type="text" name="discovered_spot"
-                                class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2"
-                                readonly>
+                            <input id="register_animal_discovered_spot" type="text" name="discovered_spot" class="form-control" aria-label="Recipient's username"
+                                aria-describedby="basic-addon2" readonly>
                             <div class="input-group-append">
-                                <button type="button" class="btn btn-dark"
-                                    onclick="searchDiscoveredSpot('register_animal_')">위치
-                                    찾기</button>
+                                <button type="button" class="btn btn-dark" onclick="searchDiscoveredSpot('register_animal_')">위치 찾기
+                                </button>
                             </div>
                         </div>
                         <input id="register_animal_latitude" type="text" name="discovered_spot_latitude" style="display: none;">
@@ -104,3 +115,6 @@
         })
     }
 </script>
+
+<% include ./../modal/searchSpeciesModal.ejs %>
+<% include ./../modal/searchStateModal.ejs %>

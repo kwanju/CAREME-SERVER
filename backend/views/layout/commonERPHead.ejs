@@ -11,6 +11,8 @@
     const DATETIME = "FORMAT DATA : DATETIME"
 
     var formatDate = function (_date, _type) {
+        if (_date==null)
+            return "없음";
         var date = _date.split('T')[0];
         var time = _date.split('T')[1].substring(0, 5);
 

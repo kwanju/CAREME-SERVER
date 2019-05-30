@@ -27,3 +27,40 @@ exports.addAdopt = function (_data, _callback) {
             _callback();
         });
 }
+
+exports.getAdoptList = function (_data, _callback) {
+    var select = "SELECT ad.* ";
+    var join = "FROM adopt AS ad INNER JOIN animal AS an ";
+    var on = "ON ad.animal_idx = an.idx "; //입양신청서의 animal_idx와 animal의 idx가 같은 것만
+    var where = "WHERE an.shelter_idx = ? AND ad.permit=0"; // 결정 안된 입양신청만
+
+    poolAdapter.execute(select + join + on + where, [_data.idx], function (_results) { //_data.idx = shelter idx
+        _callback(_results);
+    });
+};
+
+exports.getAdopt = function (_data, _callback) { // adopt idx를 받아서 adopt info 출력
+    var select = "SELECT ad.* FROM adopt AS ad ";
+    var where = "WHERE ad.idx = ?";
+    poolAdapter.execute(select + on + where, [_data.idx], function (_results) { //_data.idx = adopt idx
+        _callback(_results);
+    });
+}
+
+exports.permitAdopt = function (_data, _callback) {
+    var update = "UPDATE adopt SET permit=1 ";
+    var where = "WHERE idx=?";
+
+    poolAdapter.execute(update + where, [_data.idx], function (_results) { //adopt idx
+        _callback();
+    });
+};
+
+exports.rejectAdopt = function (_data, _callback) {
+    var update = "UPDATE adopt SET permit=-1 ";
+    var where = "WHERE idx=?";
+
+    poolAdapter.execute(update + where, [_data.idx], function (_results) { //adopt idx
+        _callback();
+    });
+};

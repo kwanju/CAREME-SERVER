@@ -37,20 +37,16 @@
             <div class="table-responsive">
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="adopt_applyList" style="margin-top:20px">
-                        <table class="table table-bordered table-hover display">
+                        <table class="table table-bordered table-hover display" id="adopt_waitTable">
                             <thead>
                                 <tr>
-                                    <th scope="col">번호</th>
+                                    <th scope="col">신청번호</th>
+                                    <th scope="col">유기견 이름</th>
                                     <th scope="col">입양신청날짜</th>
-                                    <th scope="col">입양지원자이름</th>
-                                    <th scope="col">성별</th>
-                                    <th scope="col">핸드폰번호</th>
+                                    <th scope="col">입양신청자 이름</th>
+                                    <th scope="col">핸드폰 번호</th>
                                     <th scope="col">이메일</th>
-                                    <th scope="col">read_state</th>
-                                    <th scope="col">animal_idx</th>
-                                    <th scope="col">animalName</th>
-                                    <th scope="col">species_code</th>
-                                    <th scope="col" style="width: 10%;">permission</th>
+                                    <th scope="col" style="width: 10%;">허가/거부</th>
                                 </tr>
                             </thead>
                             <tbody id="adopt_waiting">
@@ -61,15 +57,13 @@
                         <table class="table table-bordered table-hover display">
                             <thead>
                                 <tr>
-                                    <th scope="col">번호</th>
+                                    <th scope="col">신청번호</th>
                                     <th scope="col">허가날짜</th>
-                                    <th scope="col">픽업날짜</th>
+                                    <th scope="col">유기견 이름</th>
+                                    <th scope="col">입양신청날짜</th>
                                     <th scope="col">입양자 이름</th>
-                                    <th scope="col">폰번호</th>
+                                    <th scope="col">핸드폰 번호</th>
                                     <th scope="col">이메일</th>
-                                    <th scope="col">animal_idx</th>
-                                    <th scope="col">유기견명</th>
-                                    <th scope="col">견종</th>
                                 </tr>
                             </thead>
                             <tbody id="adopt_permit">
@@ -81,3 +75,71 @@
         </div>
     </div>
 </div>
+
+<script>
+    function getAdoptList() {
+        $.ajax({
+            url: "/erp/adopt/json/getAdoptList",
+            method: "POST",
+            data: {},
+            success: function (data) {
+                $('#adopt_waiting').html('');
+                $.each(data.adopt, function (idx, adopt) {
+                    $('#adopt_waiting').append(
+                        /*
+                        "<tr><th>" + adopt.idx + "</th><td>" + formatDate(adopt.date, DATE) + "</th><td>" + formatDate(adopt.apply_datetime, DATETIME) + "</td><td>" +
+                        adopt.read_state + "</td><td>" + adopt.animal_idx + "</td><td>" + adopt.animalName + "</td><td>" + adopt.species_code + "</td><td>" + adopt.userNickName +
+                        "</td><td>" + adopt.userPhoneNumber + "</td><td>" + adopt.userEmail +
+                        "</td><td><button class='permit-button btn btn-default btn' style='color:green;'><i class='fa fa-check' style='font-size:24px'></i></button>" +
+                        "<button class='reject-button btn btn-default btn' style='color:red;'><i class='fa fa-remove' style='font-size:24px'></i></button></td>"
+                        */
+                    )
+                });
+            }
+        });
+    }
+    $(document).ready(function () {
+        getAdoptList();
+    });
+
+    function getPermitAdoptList() {
+        //table 표시
+    }
+    $(document).ready(function () {
+        getPermitAdoptList();
+    });
+
+    function permitAdopt(idx) {
+        $.ajax({
+            url: "/erp/adopt/action/permitAdopt",
+            method: "POST",
+            data: { idx: idx },
+            success: function (data) {
+                alert("승인 되었습니다.");
+            }
+        })
+    }
+    $(document).on('click', '.permit-button', function (e) {
+        //var idx = $(this).closest('tr').find('th').html();
+        permitAdopt(idx);
+    });
+
+    function rejectAdopt(idx) {
+        $.ajax({
+            url: "/erp/adopt/action/rejectAdopt",
+            method: "POST",
+            data: { idx: idx },
+            success: function (data) {
+                alert("거절 되었습니다.");
+            }
+        })
+    }
+    $(document).on('click', '.permit-button', function (e) {
+        //var idx = $(this).closest('tr').find('th').html();
+        rejectAdopt(idx);
+    });
+
+    function popAdoptInfo() {
+        //새창 띄워주기
+    }
+</script>

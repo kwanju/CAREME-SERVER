@@ -85,7 +85,8 @@
             $(this).addClass('searchShelter-selected');
             var tmp = $(this).find('span')[0].innerHTML;
             //console.log(tmp);
-            localStorage.setItem('shelter_idx', tmp); //local storage 에 shelter idx 저장 -> 이걸로 animal search
+            //localStorage.setItem('shelter_idx', tmp); //local storage 에 shelter idx 저장 -> 이걸로 animal search
+            $('#shelterIdx').val(tmp);
             //local storage ->
         }
     });

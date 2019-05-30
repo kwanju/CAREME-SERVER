@@ -58,6 +58,9 @@
                 </button>
             </div>
         </div>
+        <div class="form-group">
+            <input id="shelterIdx" name="shelterIdx" type="text" style="display:none;">
+        </div>
         <label for="exampleFormControlInput1">희망하는 유기견을 선택하여 주세요</label>
         <div class="input-group mb-3">
             <input disabled type="text" class="form-control" id="animalName" name="name" aria-label="name">
@@ -68,8 +71,11 @@
             </div>
         </div>
         <div class="form-group">
+            <input id="animalIdx" name="animalIdx" type="text" style="display:none;">
+        </div>
+        <div class="form-group">
             <label class="my-1 mr-2" for="adoptRelation">신청인과의 관계</label>
-            <select class="custom-select my-1 mr-sm-2" id="adoptRelation">
+            <select class="custom-select my-1 mr-sm-2" id="adoptRelation" name="adoptRelation">
                 <option selected>Choose...</option>
                 <option value="1">부모님</option>
                 <option value="2">배우자</option>
@@ -81,7 +87,7 @@
         </div>
         <div class="form-group">
             <label class="my-1 mr-2" for="adoptHouse">신청인의 주거형태</label>
-            <select class="custom-select my-1 mr-sm-2" id="adoptHouse">
+            <select class="custom-select my-1 mr-sm-2" id="adoptHouse" name="adoptHouse">
                 <option selected>Choose...</option>
                 <option value="1">아파트</option>
                 <option value="2">전원주택</option>
@@ -91,7 +97,7 @@
         </div>
         <div class="form-group">
             <label class="my-1 mr-2" for="adoptAnimlaPlace">유기견이 지낼곳은?</label>
-            <select class="custom-select my-1 mr-sm-2" id="adoptAnimlaPlace">
+            <select class="custom-select my-1 mr-sm-2" id="adoptAnimalPlace" name="adoptAnimalPlace">
                 <option selected>Choose...</option>
                 <option value="1">회사</option>
                 <option value="2">집안</option>
@@ -102,13 +108,13 @@
             <fieldset>
                 <label for="exampleFormControlSelect1">전원주택일 경우 뒷마당 또는 앞마당에 담이 설치되있습니까?</label>
                 <br>
-                <input type="radio" name="adoptBack" id="adoptBack" value="y" /> 네
-                <input type="radio" name="adoptBack" id="adoptBack" value="n" /> 아니오
+                <input type="radio" name="adoptBack" value="y" /> 네
+                <input type="radio" name="adoptBack" value="n" /> 아니오
             </fieldset>
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput1">이메일</label>
-            <input type="text" class="form-control" id="adoptEmail" name="email" aria-label="email">
+            <input type="text" class="form-control" id="adoptEmail" name="adoptEmail" aria-label="email">
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput1">신분증 번호</label>
@@ -132,7 +138,7 @@
         </div>
         <div class="form-group">
             <label class="my-1 mr-2" for="adoptResponsible">유기견을 책임지실 분</label>
-            <select class="custom-select my-1 mr-sm-2" id="adoptResponsible">
+            <select class="custom-select my-1 mr-sm-2" id="adoptResponsible" name="adoptResponsible">
                 <option selected>Choose...</option>
                 <option value="1">본인</option>
                 <option value="2">배우자</option>
@@ -151,16 +157,16 @@
                 <label for="exampleFormControlSelect1">여분의 주의가 필요한 학대 또는 방임의 일부 형태를 경험을한 유기견을 입양할 의향이 있습니까?
                 </label>
                 <br>
-                <input type="radio" name="adoptPurpose1" id="adoptPurpose1" value="y" /> 네
-                <input type="radio" name="adoptPurpose1" id="adoptPurpose1" value="n" /> 아니오
+                <input type="radio" name="adoptPurpose1" value="y" /> 네
+                <input type="radio" name="adoptPurpose1" value="n" /> 아니오
             </fieldset>
         </div>
         <div class="form-group">
             <fieldset>
                 <label for="exampleFormControlSelect1">특별한 치료가 필요한 유기견을 입양할 의향이 있습니까? </label>
                 <br>
-                <input type="radio" name="adoptPurpose2" id="adoptPurpose2" value="y" /> 네
-                <input type="radio" name="adoptPurpose2" id="adoptPurpose2" value="n" /> 아니오
+                <input type="radio" name="adoptPurpose2" value="y" /> 네
+                <input type="radio" name="adoptPurpose2" value="n" /> 아니오
             </fieldset>
         </div>
         <div class="form-group">
@@ -173,7 +179,7 @@
         </div>
         <div class="form-group">
             <label class="my-1 mr-2" for="adoptWithAnimal">현재 반려동물을 키우고 계십니까? </label>
-            <select class="custom-select my-1 mr-sm-2" id="adoptWithAnimal">
+            <select class="custom-select my-1 mr-sm-2" id="adoptWithAnimal" name="adoptWithAnimal">
                 <option selected>Choose...</option>
                 <option value="1">강아지</option>
                 <option value="2">고양이</option>
@@ -201,8 +207,8 @@
 
                 </label>
                 <br>
-                <input type="radio" name="adoptCarePay" id="adoptCarePay" value="y" /> 네
-                <input type="radio" name="adoptCarePay" id="adoptCarePay" value="n" /> 아니오
+                <input type="radio" name="adoptCarePay" value="y" /> 네
+                <input type="radio" name="adoptCarePay" value="n" /> 아니오
             </fieldset>
         </div>
         <div class="form-group">
@@ -298,7 +304,7 @@
     }
     function form_ajax() {
         var formData = $('#form-adoptRegister').serialize();
-        console.log(formData);
+
         $.ajax({
             url: '/adoptRegister/action/addAdopt',
             method: 'POST',
@@ -315,7 +321,8 @@
     function getPosition() {
         new daum.Postcode({
             oncomplete: function (data) {
-                document.getElementById("adopterAddress").value = data.roadAddress; // 도로명 주소 입력.
+                // 도로명 주소 입력.
+                $('#adoptAddress').val(data.roadAddress);
             }
         }).open();
     }

@@ -41,7 +41,9 @@
         }
     })
     function getAdoptAnimalList() {
-        var idx = localStorage.getItem('shelter_idx');
+        //var idx = localStorage.getItem('shelter_idx');
+        var idx = document.getElementById('shelterIdx').value;
+        idx = parseInt(idx);
         var inputText = document.getElementById('animal_name_input').value;
         $.ajax({
             url: '/erp/search/json/searchAnimal',
@@ -90,7 +92,8 @@
         if(!$(this).hasClass('searchAnimal-selected')) {
             $(this).addClass('searchAnimal-selected');
             var tmp = $(this).find('span')[0].innerHTML;
-            localStorage.setItem('animal_idx', tmp); //local storage 에 animal idx 저장
+            //localStorage.setItem('animal_idx', tmp); //local storage 에 animal idx 저장
+            $('#animalIdx').val(tmp);
         }
     });
 </script>

@@ -315,7 +315,7 @@
     function getPosition() {
         new daum.Postcode({
             oncomplete: function (data) {
-                document.getElementById("adopterAddress").value = data.roadAddress; // 도로명 주소 입력.
+                document.getElementById("adoptAddress").value = data.roadAddress; // 도로명 주소 입력.
             }
         }).open();
     }

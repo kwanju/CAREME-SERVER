@@ -32,46 +32,51 @@
 		/* initialize the calendar
         -----------------------------------------------------------------*/
         setTimeout(function () {
-            console.log(1);
+            $.ajax({
+                url: '/erp/volunteer/json/getVolunteerInCalendar',
+                method: 'POST',
+                data: {},
+                success: function (data) {
+                    var events = []
+                    $.each(data.list,function(idx, list){
+                        events.push({
+                            title: list.animalName + " / "+ list.nickname,
+                            start: formatDate(list.date, DATE)
+                        })
+                    })
+                    var date = new Date();
+                    var d = date.getDate();
+                    m = date.getMonth();
+                    y = date.getFullYear();
 
-            var date = new Date();
-            var d = date.getDate();
-            m = date.getMonth();
-            y = date.getFullYear();
+                    $('#calendar').fullCalendar({
+                        header: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'month,agendaWeek,agendaDay'
+                        },
+                        selectable: true,
+                        selectHelper: true,
+                        select: function (start, end) {
+                            var title = prompt('Event Title:');
+                            var eventData;
+                            if (title) {
+                                eventData = {
+                                    title: title,
+                                    start: start,
+                                    end: end
+                                };
+                                $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+                            }
+                            $('#calendar').fullCalendar('unselect');
+                        },
+                        editable: true,
+                        eventLimit: true, // allow "more" link when too many events
+                        events: events,
+                        droppable: true, // this allows things to be dropped onto the calendar
+                    })
 
-            $('#calendar').fullCalendar({
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
-                },
-                selectable: true,
-                selectHelper: true,
-                select: function (start, end) {
-                    var title = prompt('Event Title:');
-                    var eventData;
-                    if (title) {
-                        eventData = {
-                            title: title,
-                            start: start,
-                            end: end
-                        };
-                        $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-                    }
-                    $('#calendar').fullCalendar('unselect');
-                },
-                editable: true,
-                eventLimit: true, // allow "more" link when too many events
-                events: [
-                    {
-                        title: '김영철',
-                        start: new Date(y, m, 27),
-                        end: new Date(y, m, 28),
-                        className: 'bg-danger',
-                    }
-
-                ],
-                droppable: true, // this allows things to be dropped onto the calendar
+                }
             })
         }, 3000)
     });

@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bb406fff-0e4f-4f3b-bfbf-c4e06bc50830" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DB/erp/adopt.js" beforeDir="false" afterPath="$PROJECT_DIR$/DB/erp/adopt.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DB_schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/DB_schema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/adoptRegister/action.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/adoptRegister/action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/adoptRegister/adoptRegister.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/adoptRegister/adoptRegister.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/modal/searchAnimalModal.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/modal/searchAnimalModal.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/modal/searchShelterModal.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/modal/searchShelterModal.ejs" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -49,7 +43,7 @@
           <entry key="css" value="9" />
           <entry key="ejs" value="119" />
           <entry key="jpg" value="1" />
-          <entry key="js" value="381" />
+          <entry key="js" value="383" />
           <entry key="json" value="4" />
           <entry key="sql" value="21" />
         </counts>
@@ -60,7 +54,7 @@
           <entry key="EJS" value="119" />
           <entry key="Image" value="1" />
           <entry key="JSON" value="4" />
-          <entry key="JavaScript" value="381" />
+          <entry key="JavaScript" value="383" />
           <entry key="SQL" value="21" />
         </counts>
       </usages-collector>
@@ -68,9 +62,9 @@
         <counts>
           <entry key="css" value="727" />
           <entry key="ejs" value="7217" />
-          <entry key="js" value="9850" />
+          <entry key="js" value="9852" />
           <entry key="json" value="8" />
-          <entry key="sql" value="1843" />
+          <entry key="sql" value="1852" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -78,18 +72,18 @@
           <entry key="CSS" value="727" />
           <entry key="EJS" value="7217" />
           <entry key="JSON" value="8" />
-          <entry key="JavaScript" value="9850" />
-          <entry key="SQL" value="1843" />
+          <entry key="JavaScript" value="9852" />
+          <entry key="SQL" value="1852" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/adoptRegister/adoptRegister.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
+            <state relative-caret-position="7498">
               <caret line="326" column="18" lean-forward="true" selection-start-line="326" selection-start-column="18" selection-end-line="326" selection-end-column="18" />
               <folding>
                 <element signature="e#3092#3114#0#HTML" expanded="true" />
@@ -99,6 +93,20 @@
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/adoptRegister/page.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="138">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/erp/adopt/page.js">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -149,11 +157,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DB_schema.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="839">
-              <caret line="155" column="2" lean-forward="true" selection-start-line="155" selection-start-column="2" selection-end-line="155" selection-end-column="2" />
+            <state relative-caret-position="331">
+              <caret line="153" column="21" lean-forward="true" selection-start-line="153" selection-start-column="21" selection-end-line="153" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -176,7 +184,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/public/javascripts/bootstrap.min.js" />
         <option value="$PROJECT_DIR$/public/javascripts/popper.min.js" />
         <option value="$PROJECT_DIR$/public/stylesheets/bootstrap.min.css" />
         <option value="$PROJECT_DIR$/model/discover/map.js" />
@@ -225,8 +232,9 @@
         <option value="$PROJECT_DIR$/views/modal/searchAnimalModal.ejs" />
         <option value="$PROJECT_DIR$/routes/adoptRegister/action.js" />
         <option value="$PROJECT_DIR$/DB/erp/adopt.js" />
-        <option value="$PROJECT_DIR$/DB_schema.sql" />
         <option value="$PROJECT_DIR$/views/adoptRegister/adoptRegister.ejs" />
+        <option value="$PROJECT_DIR$/routes/adoptRegister/page.js" />
+        <option value="$PROJECT_DIR$/DB_schema.sql" />
       </list>
     </option>
   </component>
@@ -505,12 +513,12 @@
       <workItem from="1556777578887" duration="15274000" />
       <workItem from="1556888376125" duration="4044000" />
       <workItem from="1556895174549" duration="106350000" />
-      <workItem from="1559017688674" duration="22426000" />
+      <workItem from="1559017688674" duration="23549000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="148094000" />
+    <option name="totallyTimeSpent" value="149217000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -527,11 +535,11 @@
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="npm" order="1" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.26037195" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.26037195" />
       <window_info id="Structure" order="3" side_tool="true" weight="0.25" />
       <window_info id="Project Explorer" order="4" />
       <window_info id="Job Explorer" order="5" />
-      <window_info anchor="bottom" id="Terminal" order="0" sideWeight="0.49928468" visible="true" weight="0.32923833" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="0" sideWeight="0.49928468" visible="true" weight="0.32923833" />
       <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.5007153" side_tool="true" weight="0.32923833" />
       <window_info anchor="bottom" id="Version Control" order="2" show_stripe_button="false" />
       <window_info anchor="bottom" id="Docker" order="3" show_stripe_button="false" />
@@ -777,20 +785,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/erp/adopt/page.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/erp/adopt/adopt.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
           <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/adoptRegister/page.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -895,13 +893,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DB_schema.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="839">
-          <caret line="155" column="2" lean-forward="true" selection-start-line="155" selection-start-column="2" selection-end-line="155" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/modal/searchAnimalModal.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="416">
@@ -912,9 +903,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/erp/adopt/page.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/adoptRegister/page.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/adoptRegister/adoptRegister.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
+        <state relative-caret-position="7498">
           <caret line="326" column="18" lean-forward="true" selection-start-line="326" selection-start-column="18" selection-end-line="326" selection-end-column="18" />
           <folding>
             <element signature="e#3092#3114#0#HTML" expanded="true" />
@@ -922,6 +923,13 @@
             <element signature="e#3602#3624#0#HTML" expanded="true" />
             <element signature="e#4007#4028#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DB_schema.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="153" column="21" lean-forward="true" selection-start-line="153" selection-start-column="21" selection-end-line="153" selection-end-column="21" />
         </state>
       </provider>
     </entry>

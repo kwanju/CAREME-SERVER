@@ -1,4 +1,11 @@
 .navbar_logo {
-  width:100px;
+  width:150px;
   height: auto;
+}
+.navbar_list{
+  padding-right: 15px;
+}
+.navbar_careme{
+  background-color: white;
+  color: #000;
 }

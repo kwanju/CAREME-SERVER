@@ -36,11 +36,15 @@ exports.getDiscoverInBulletinBoard = function (_data, _callback) {
 }
 
 exports.getDiscover = function (_data, _callback) {
-    var select = "SELECT d.*,u.nickname, u.phone_number , she.name AS shelterName FROM discover AS d INNER JOIN user AS u LEFT JOIN shelter AS she ";
-    var on = "ON d.user_idx = u.idx AND she.idx = d.matching_shelter_idx "
-    var where = "WHERE d.idx=?";
+    var select = "SELECT t1.*,she.name AS shelterName FROM ";
+    var table1 = "(SELECT d.*,u.nickname, u.phone_number FROM discover AS d INNER JOIN user AS u "
+    var table1On = "ON d.user_idx = u.idx "
+    var talbe1Where = "WHERE d.idx=?) AS t1 "
+    var shelterLeftJoin = "LEFT JOIN shelter AS she ";
+    var shelterOn = "On t1.matching_shelter_idx = she.idx ";
 
-    poolAdaper.execute(select + on + where, [_data.idx], function (_results) {
+
+    poolAdaper.execute(select + table1 + table1On + talbe1Where + shelterLeftJoin + shelterOn, [_data.idx], function (_results) {
         _callback(_results);
     });
 }

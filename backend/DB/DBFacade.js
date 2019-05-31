@@ -234,6 +234,7 @@ exports.addAdopt = function (_data, _callback) {
 exports.userLogin = function (_data, _callback) {
     var adopt = require('./erp/adopt');
     adopt.userLogin(_data, _callback);
+};
     
 exports.getAdoptList = function (_data, _callback) {
     var adopt = require('./erp/adopt');

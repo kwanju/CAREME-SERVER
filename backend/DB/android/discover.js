@@ -36,8 +36,8 @@ exports.getDiscoverInBulletinBoard = function (_data, _callback) {
 }
 
 exports.getDiscover = function (_data, _callback) {
-    var select = "SELECT d.*,u.nickname, u.phone_number FROM discover AS d INNER JOIN user AS u ";
-    var on = "ON d.user_idx = u.idx "
+    var select = "SELECT d.*,u.nickname, u.phone_number , she.name AS shelterName FROM discover AS d INNER JOIN user AS u LEFT JOIN shelter AS she ";
+    var on = "ON d.user_idx = u.idx AND she.idx = d.matching_shelter_idx "
     var where = "WHERE d.idx=?";
 
     poolAdaper.execute(select + on + where, [_data.idx], function (_results) {

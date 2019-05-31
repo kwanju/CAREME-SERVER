@@ -33,7 +33,7 @@ exports.setToken = function (_data, _callback) {
     var sql = "UPDATE user SET token = ? ";
     var where = "WHERE idx=?";
 
-    poolAdapter.execute(sql + where, [_data.token,_data.idx ], function (_results) {
+    poolAdapter.execute(sql + where, [_data.token, _data.idx], function (_results) {
         _callback();
     });
 }
@@ -44,5 +44,16 @@ exports.deleteToken = function (_data, _callback) {
 
     poolAdapter.execute(sql + where, [_data.idx], function (_results) {
         _callback();
+    });
+}
+
+exports.getFavoriteInfoList = function (_data, _callback) {
+    var select = "SELECT a.name, a.species_code, she.name AS shelterName "
+    var from = "FROM animal AS a INNER JOIN shelter AS she "
+    var on = "ON a.shelter_idx = she.idx "
+    var where = "WHERE a.idx IN (?)"
+
+    poolAdapter.execute(select + from + on + where, [_data.animal_idx], function (_results) {
+        _callback(_results);
     });
 }

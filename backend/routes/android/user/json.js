@@ -15,4 +15,12 @@ router.post('/getUserSchedule', function (_req, _res) {
     });
 });
 
+router.post('/getFavoriteInfoList', function (_req, _res) {
+    console.log(_req.body);
+    var favorite = require('../../../model/android/user/favorite');
+    favorite.getFavoriteInfoList(_req.body, function (_result) {
+        _res.send(_result)
+    });
+});
+
 module.exports = router;

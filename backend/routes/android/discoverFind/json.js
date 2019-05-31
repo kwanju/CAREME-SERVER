@@ -16,4 +16,11 @@ router.post('/findAnimal', function (_req, _res) {
     });
 });
 
+router.post('/getDiscoverFindRecord', function (_req, _res) {
+    var discoverFind = require('../../../model/android/discoverFind/discoverFind');
+    discoverFind.getDiscoverFindRecord(_req.body, function (_result) {
+        _res.send(_result);
+    });
+});
+
 module.exports = router;

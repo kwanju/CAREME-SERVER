@@ -107,3 +107,8 @@ exports.matchingFind = function (_data, _callback) {
     var find = require('./android/find');
     find.matchingFind(_data, _callback);
 }
+
+exports.getFindRecord = function (_data, _callback) {
+    var find = require('./android/find');
+    find.getFindRecord(_data, _callback);
+}

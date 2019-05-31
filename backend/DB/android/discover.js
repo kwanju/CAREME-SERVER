@@ -19,7 +19,7 @@ exports.getDiscoverRecord = function (_data, _callback) {
     var select = "SELECT d.*, s.name AS shelterName "
     var from = "FROM discover AS d LEFT JOIN shelter AS s "
     var on = "ON d.matching_shelter_idx = s.idx "
-    var where = "WHERE d.user_idx =?"
+    var where = "WHERE d.user_idx =? ORDER BY discover_datetime DESC"
 
     poolAdaper.execute(select + from + on + where, [_data.user_idx], function (_results) {
         _callback(_results);

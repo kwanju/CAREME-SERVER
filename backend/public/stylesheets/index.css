@@ -13,12 +13,12 @@ header.masthead {
 
 header.masthead .overlay {
     position: absolute;
-    background-color: #212529;
+    background-color: white;
     height: 100%;
     width: 100%;
     top: 0;
     left: 0;
-    opacity: 0.3;
+    opacity: 0;
 }
 
 header.masthead h1 {

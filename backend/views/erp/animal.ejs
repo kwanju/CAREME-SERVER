@@ -135,6 +135,8 @@
 <script>
 
     var selectedAnimal;
+    var selectedSpecies;
+    var selectedState;
 
     function getAnimalInfo(idx) {
         $.ajax({
@@ -143,9 +145,11 @@
             data: { animal_idx: idx },
             success: function (data) {
                 selectedAnimal = data.animal.idx;
+                selectedSpecies = data.animal.species_code;
+                selectedState = data.animal.state
                 $("#animalName").val(data.animal.name);
-                $("#animalCode").val(data.animal.species_code);
-                $("#animalState").val(data.animal.state);
+                $("#animalCode").val(animalList[data.animal.species_code]);
+                $("#animalState").val(stateList[data.animal.state]);
                 $("#animalWeight").val(data.animal.weight);
                 $("#animalImg").attr('src', "/" + data.animal.url_picture);
                 $("#animalDesc").val(data.animal.description);

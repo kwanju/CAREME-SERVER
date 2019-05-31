@@ -96,13 +96,28 @@
 
 
 <script>
+    var animalList;
+
+    $(document).ready(function () {
+        $.ajax({
+            url: '/data/species_code.json',
+            type: 'GET',
+            data: {},
+            success: function (data) {
+                animalList = data
+                getScheduleListPermitted();
+                getScheduleListWaiting();
+            }
+        })
+    });
+
     function getScheduleListPermitted() {
         $.ajax({
             url: "/erp/volunteer/json/getScheduleListPermitted",
             method: "POST",
             data: {},
             success: function (data) {
-                /*data = {
+                data = {
                     "result": 1,
                     "list": [
                         {
@@ -128,11 +143,11 @@
                             "userEmail": "test@test.com"
                         },
                     ]
-                }*/
+                }
                 $('#permit').html('');
                 $.each(data.list, function (idx, list) {
                     $('#permit').append("<tr><th>" + list.idx + "</th><td>" + formatDate(list.date, DATE) + "</th><td>" + formatDate(list.apply_datetime, DATETIME) + "</td><td>" +
-                        list.animal_idx + "</td><td>" + list.animalName + "</td><td>" + list.species_code + "</td><td>" + list.userNickName +
+                        list.animal_idx + "</td><td>" + list.animalName + "</td><td>" + animalList[list.species_code] + "</td><td>" + list.userNickName +
                         "</td><td>" + list.userPhoneNumber + "</td><td>" + list.userEmail + "</td>"
                     )
                 })
@@ -155,9 +170,6 @@
         })
     }
 
-    $(document).ready(function () {
-        getScheduleListPermitted();
-    });
 
     function getScheduleListWaiting() {
         $.ajax({
@@ -165,7 +177,7 @@
             method: "POST",
             data: {},
             success: function (data) {
-                /*data = {
+                data = {
                     "result": 1,
                     "list": [
                         {
@@ -181,7 +193,7 @@
                             "userEmail": "test@test.com"
                         }
                     ]
-                }*/
+                }
                 $('#waiting').html('');
                 $.each(data.list, function (idx, list) {
 
@@ -193,7 +205,7 @@
 
 
                     $('#waiting').append(tr + "<th>" + list.idx + "</th><td>" + formatDate(list.date, DATE) + "</th><td>" + formatDate(list.apply_datetime, DATETIME) + "</td><td>" +
-                        list.read_state + "</td><td>" + list.animal_idx + "</td><td>" + list.animalName + "</td><td>" + list.species_code + "</td><td>" + list.userNickName +
+                        list.read_state + "</td><td>" + list.animal_idx + "</td><td>" + list.animalName + "</td><td>" + animalList[list.species_code] + "</td><td>" + list.userNickName +
                         "</td><td>" + list.userPhoneNumber + "</td><td>" + list.userEmail +
                         "</td><td><button class='permit-button btn btn-default btn' style='color:green;'><i class='fa fa-check' style='font-size:24px'></i></button>" +
                         "<button class='reject-button btn btn-default btn' style='color:red;'><i class='fa fa-remove' style='font-size:24px'></i></button></td>"
@@ -218,10 +230,6 @@
             }
         })
     }
-    $(document).ready(function () {
-        getScheduleListWaiting();
-    });
-
 
     function permitSchedule(idx) {
         $.ajax({

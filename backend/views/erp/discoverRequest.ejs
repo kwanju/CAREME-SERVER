@@ -77,8 +77,23 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7a116decd0d85fb13328c9f516f7baaa"></script>
 <script>
-    getDiscoverRequestWaiting();
-    getDiscoverRequestRecord();
+
+    var animalList;
+
+    $(document).ready(function () {
+        $.ajax({
+            url: '/data/species_code.json',
+            type: 'GET',
+            data: {},
+            success: function (data) {
+                animalList = data
+                getDiscoverRequestWaiting();
+                getDiscoverRequestRecord();
+            }
+        })
+    });
+
+
     function getDiscoverRequestWaiting() {
         $.ajax({
             url: "/erp/discover/json/getDiscoverRequestWaiting",
@@ -96,7 +111,7 @@
                         tr + "<th>" + list.idx + "</th><td>" +
                         list.discovered_spot + "</th><td>" +
                         formatDate(list.discover_datetime, DATETIME) + "</td><td>" +
-                        formatDate(list.requestDateTime, DATETIME) + "</td><td>" + list.species_code +
+                        formatDate(list.requestDateTime, DATETIME) + "</td><td>" + animalList[list.species_code] +
                         "</td><td><button class='btn btn-info info-button'>상세정보보기</button></td><td>" +
                         "<button class='permit-button btn btn-default btn' style='color:green;'><i class='fa fa-check' style='font-size:24px'></i></button>" +
                         "<button class='reject-button btn btn-default btn' style='color:red;'><i class='fa fa-remove' style='font-size:24px'></i></button></td>"
@@ -134,10 +149,9 @@
                         "<tr><th>" + list.idx + "</th><td>" +
                         list.discovered_spot + "</th><td>" +
                         formatDate(list.discover_datetime, DATETIME) + "</td><td>" +
-                        formatDate(list.requestDateTime, DATETIME) + "</td>" +
+                        formatDate(list.requestDateTime, DATETIME) + "</td><td>" + animalList[list.species_code] + "</td>" +
                         "<td><button class='btn btn-info info-button'>상세정보보기</button></td>" +
-                        "<td>" + list.species_code +
-                        "</td><td>" + (list.permit == "1" ? "허가" : "거부") + "</td>"
+                        "<td>" + (list.permit == "1" ? "허가" : "거부") + "</td>"
                     );
                 })
                 setTimeout(function () {
@@ -191,10 +205,10 @@
             success: function (data) {
 
                 console.log(data);
-                $('#discover_time').html(formatDate(data.discover.discover_datetime,DATETIME));
+                $('#discover_time').html(formatDate(data.discover.discover_datetime, DATETIME));
                 $('#discover_spot').html(data.discover.discovered_spot);
-                $('#discover_request_time').html(formatDate(data.discover.register_datetime,DATETIME));
-                $('#discover_spieces').html(data.discover.species_code);
+                $('#discover_request_time').html(formatDate(data.discover.register_datetime, DATETIME));
+                $('#discover_spieces').html(animalList[data.discover.species_code]);
                 $('#discover_descript').html(data.discover.description);
                 $('#discover_image').html("");
                 $('#discover_image').append(

@@ -19,7 +19,7 @@ exports.getDiscoverRecord = function (_data, _callback) {
     var select = "SELECT d.*, s.name AS shelterName "
     var from = "FROM discover AS d LEFT JOIN shelter AS s "
     var on = "ON d.matching_shelter_idx = s.idx "
-    var where = "WHERE d.user_idx =?"
+    var where = "WHERE d.user_idx =? ORDER BY discover_datetime DESC"
 
     poolAdaper.execute(select + from + on + where, [_data.user_idx], function (_results) {
         _callback(_results);
@@ -36,8 +36,8 @@ exports.getDiscoverInBulletinBoard = function (_data, _callback) {
 }
 
 exports.getDiscover = function (_data, _callback) {
-    var select = "SELECT d.*,u.nickname, u.phone_number FROM discover AS d INNER JOIN user AS u ";
-    var on = "ON d.user_idx = u.idx "
+    var select = "SELECT d.*,u.nickname, u.phone_number , she.name AS shelterName FROM discover AS d INNER JOIN user AS u LEFT JOIN shelter AS she ";
+    var on = "ON d.user_idx = u.idx AND she.idx = d.matching_shelter_idx "
     var where = "WHERE d.idx=?";
 
     poolAdaper.execute(select + on + where, [_data.idx], function (_results) {

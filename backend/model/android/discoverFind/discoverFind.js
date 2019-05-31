@@ -16,6 +16,21 @@ exports.getDiscoverFind = function (_data, _callback, _testcallback) {
     });
 }
 
+exports.getDiscoverFindRecord = function (_data, _callback, _testcallback) {
+    var res = {};
+    res.list = [];
+    res.result = 1;
+    dbFacade.getDiscoverRecord(_data, function (_discover) {
+        dbFacade.getFindRecord(_data, function (_find) {
+            if (typeof _testcallback == "function")
+                _testcallback(_discover, _find);
+
+            sortDiscoverFindByDate(res.list, _discover, _find);
+            _callback(res);
+        });
+    });
+}
+
 
 var sortDiscoverFindByDate = function (_list, _discovers, _finds) {
     var length = _discovers.length + _finds.length;

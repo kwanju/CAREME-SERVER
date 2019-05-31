@@ -1,15 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-router.post('/checkDupId',function(_req,_res){
-  var uc = require('../../controllers/shelterController');
-
-  uc.checkDupId(_req.body.id,function(_result){
-    if(_result)//id 중복
-      _res.send("false")
-    else
-      _res.send("true");
-  });
+router.post('/userLogin', function (_req, _res) {
+    var adopt = require('../../model/erp/adopt');
+    adopt.userLogin(_req.body, function (_result) {
+        _res.send(_result);
+    });
 });
 
 module.exports = router;

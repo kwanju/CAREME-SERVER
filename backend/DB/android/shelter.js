@@ -2,7 +2,7 @@ var poolAdapter = require('../poolAdapter'); // 데이터베이스 풀 어뎁터
 
 // Shelter를 지역 카테고리로 디비에 검색하는 부분.
 exports.getShelterByCategory = function (_data, _callback) {
-    var sql = "SELECT idx,name,position,phone_number FROM shelter ";
+    var sql = "SELECT idx,name,position,phone_number,url_picture FROM shelter ";
     var where = "WHERE position LIKE '%" + _data.big + "%' AND position LIKE '%" + _data.small + "%'";
     poolAdapter.execute(sql + where, function (_results) {
         _callback(_results);

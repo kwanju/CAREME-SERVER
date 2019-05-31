@@ -230,3 +230,28 @@ exports.addAdopt = function (_data, _callback) {
     var adopt = require('./erp/adopt');
     adopt.addAdopt(_data, _callback);
 }
+
+exports.userLogin = function (_data, _callback) {
+    var adopt = require('./erp/adopt');
+    adopt.userLogin(_data, _callback);
+};
+    
+exports.getAdoptList = function (_data, _callback) {
+    var adopt = require('./erp/adopt');
+    adopt.getAdoptList(_data, _callback);
+}
+
+exports.getAdopt = function (_data, _callback) {
+    var adopt = require('./erp/adopt');
+    adopt.getAdopt(_data, _callback);
+}
+
+exports.permitAdopt = function (_data, _callback) {
+    var adopt = require('./erp/adopt');
+    adopt.permitAdopt(_data, _callback);
+}
+
+exports.rejectAdopt = function (_data, _callback) {
+    var adopt = require('./erp/adopt');
+    adopt.rejectAdopt(_data, _callback);
+}

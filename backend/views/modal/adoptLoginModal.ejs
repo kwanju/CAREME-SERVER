@@ -1,48 +1,59 @@
-<div class="modal fade" id="modalAdoptLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">로그인</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form action="" id="adoptLogin" name="adoptLogin" method="POST">
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="exampleInputID">ID</label>
-            <input type="text" class="form-control" id="exampleInputID" name="id" aria-describedby="emailHelp" placeholder="ID를 입력하세요">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">PW</label>
-            <input type="password" class="form-control" name="pw" id="exampleInputPassword1" placeholder="Password">
-          </div>
-          <input type="text" name="from" style="display:none;">
+<div class="modal fade" id="modalAdoptLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">로그인</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="" id="adoptLogin" name="adoptLogin" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputID">ID</label>
+                        <input type="text" class="form-control adopt-login-modal-enterabled" id="exampleInputID" name="id"
+                            aria-describedby="emailHelp" placeholder="ID를 입력하세요">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">PW</label>
+                        <input type="password" class="form-control adopt-login-modal-enterabled" name="pw" id="exampleInputPassword1"
+                            placeholder="Password">
+                    </div>
+                    <input type="text" name="from" style="display:none;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-primary add_id"
+                        onclick="userLogin(); return false;">로그인</button>
+                </div>
+            </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-          <button type="submit" class="btn btn-primary add_id" onclick="regsiter()">로그인</button>
-        </div>
-      </form>
     </div>
-  </div>
 </div>
 
 <script>
-  function register() {
-    var form = $('#adoptLogin')[0];
-    var formData = new FormData(form);
-    $.ajax({
-      url: '',
-      type: 'POST',
-      data: formData,
-      dataType: 'json',
-      processData: false,
-      contentType: false,
-      success: function (data) {
-        alert("정상적으로 등록이 되었습니다.");
-        window.location.href = "/adoptRegister/adoptRegister";
-      }
+    $('.adopt-login-modal-enterabled').keydown(function (e) {
+        if (e.keyCode == 13) {
+            userLogin();
+            return false;
+        }
     })
-  }
+    function userLogin() {
+        var formData = $('#adoptLogin').serialize();
+        $.ajax({
+            url: '/adoptRegister/json/userLogin',
+            method: 'POST',
+            data: formData,
+            success: function (data) {
+                if (data.result == 1) {
+                    $('#adoptId').val(data.user.id);
+                    $('#adopt_user_idx').val(data.user.idx);
+                    $('#adopt_btn_user_login')[0].disabled = true
+                    $('#modalAdoptLogin').modal('hide');
+                } else
+                    alert("아이디와 비밀번호를 확인해주세요.")
+            }
+        })
+    }
 </script>

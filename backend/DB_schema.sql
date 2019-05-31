@@ -127,6 +127,7 @@ CREATE TABLE adopt(
     address2 varchar(100) COMMENT '신청자 주소2',
     phone_number varchar(20) COMMENT '신청자 전화번호',
     user_email varchar(20) COMMENT '신청자 메일',
+    permit int(1) default 0 COMMENT '1: 허가 / 0: 아직 결정안됨. / -1: 거절',
     q1 varchar(100) COMMENT '신청인과의 관계',
     q2 varchar(100) COMMENT '신청인의 주거 형태',
     q3 varchar(100) COMMENT '유기견이 지낼 곳',

@@ -9,6 +9,13 @@ router.post('/getAdoptList', insertIdxIntoBody, function (_req, _res) { //body =
     });
 });
 
+router.post('/getPermitAdoptList', insertIdxIntoBody, function (_req, _res) { //body = shelter idx
+    var adopt = require('../../../model/erp/adopt');
+    adopt.getPermitAdoptList(_req.body, function (_result) {
+        _res.send(_result);
+    });
+});
+
 router.post('/getAdopt', function (_req, _res) { // body = adopt idx
     var adopt = require('../../../model/erp/adopt');
     adopt.getAdopt(_req.body, function (_result) {

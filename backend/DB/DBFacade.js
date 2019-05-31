@@ -255,3 +255,8 @@ exports.rejectAdopt = function (_data, _callback) {
     var adopt = require('./erp/adopt');
     adopt.rejectAdopt(_data, _callback);
 }
+
+exports.getPermitAdoptList = function (_data, _callback) {
+    var adopt = require('./erp/adopt');
+    adopt.getPermitAdoptList(_data, _callback);
+}

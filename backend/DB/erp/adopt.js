@@ -37,12 +37,23 @@ exports.userLogin = function (_data, _callback) {
 };
 
 exports.getAdoptList = function (_data, _callback) {
-    var select = "SELECT ad.* ";
+    var select = "SELECT ad.*, an.name ";
     var join = "FROM adopt AS ad INNER JOIN animal AS an ";
     var on = "ON ad.animal_idx = an.idx "; //입양신청서의 animal_idx와 animal의 idx가 같은 것만
     var where = "WHERE an.shelter_idx = ? AND ad.permit=0"; // 결정 안된 입양신청만
 
-    poolAdapter.execute(select + join + on + where, [_data.idx], function (_results) { //_data.idx = shelter idx
+    poolAdapter.execute(select + join + on + where, [_data.shelter_idx], function (_results) { //_data.idx = shelter idx
+        _callback(_results);
+    });
+};
+
+exports.getPermitAdoptList = function (_data, _callback) {
+    var select = "SELECT ad.*, an.name ";
+    var join = "FROM adopt AS ad INNER JOIN animal AS an ";
+    var on = "ON ad.animal_idx = an.idx "; //입양신청서의 animal_idx와 animal의 idx가 같은 것만
+    var where = "WHERE an.shelter_idx = ? AND ad.permit=1"; // 결정 된 입양신청만
+
+    poolAdapter.execute(select + join + on + where, [_data.shelter_idx], function (_results) { //_data.idx = shelter idx
         _callback(_results);
     });
 };

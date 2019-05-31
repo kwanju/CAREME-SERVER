@@ -29,6 +29,15 @@ exports.getAdoptList = function (_data, _callback) {
     });
 };
 
+exports.getPermitAdoptList = function (_data, _callback) {
+    dbFacade.getPermitAdoptList(_data, function (_results) {
+        var res = {};
+        res.result = 1;
+        res.adopt = _results;
+        _callback(res);
+    });
+};
+
 exports.getAdopt = function (_data, _callback) {
     dbFacade.getAdopt(_data, function (_results) {
         var res = {};

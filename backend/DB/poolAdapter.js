@@ -13,6 +13,7 @@ poolAdapter.execute = function(_query,_data,_callback){
           console.log(this.sql);
           throw _err;
         }
+        //console.log(this.sql);
         _data(_results);
         _conn.release();
       });
@@ -22,6 +23,7 @@ poolAdapter.execute = function(_query,_data,_callback){
           console.log(this.sql);
           throw _err;
         }
+        //console.log(this.sql);
         _callback(_results);
         _conn.release();
       });

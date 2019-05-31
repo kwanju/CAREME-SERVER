@@ -14,7 +14,7 @@
                     <div class="form-group">
                         <label for="exampleFormControlInput1">견종</label>
                         <div class="input-group mb-3">
-                            <input disabled type="text" class="form-control" id="animalSpecies" name="species_code" aria-label="species_code">
+                            <input disabled type="text" class="form-control" id="animalSpecies" aria-label="species_code">
                             <div class="input-group-append">
                                 <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalSearchSpecies">
                                     <i class="fa fa-search" style="font-size:20px"></i>
@@ -23,19 +23,21 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <input id="species_code" name="species_code" type="text" style="display:none;">
+                    </div>
+                    <div class="form-group">
                         <label for="exampleFormControlInput1">무게</label>
                         <input type="text" class="form-control" name="weight" aria-label="weight">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">상태</label>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="state" aria-label="state">
-                            <div class="input-group-append">
-                                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalSearchState">
-                                    <i class="fa fa-search" style="font-size:20px"></i>
-                                </button>
-                            </div>
+                        <div class="form-group">
+                            <select class="form-control" id="choiceState">
+                            </select>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <input id="state" name="state" type="text" style="display:none;">
                     </div>
                     <label for="registerAnimalImg">유기견 사진</label>
                     <div class="form-group">
@@ -96,7 +98,6 @@
     }
 </script>
 <script>
-
     function to_ajax() {
         var form = $('#form1')[0];
         var formData = new FormData(form);
@@ -117,4 +118,3 @@
 </script>
 
 <% include ./../modal/searchSpeciesModal.ejs %>
-<% include ./../modal/searchStateModal.ejs %>

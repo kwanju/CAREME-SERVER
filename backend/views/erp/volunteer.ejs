@@ -117,33 +117,6 @@
             method: "POST",
             data: {},
             success: function (data) {
-                data = {
-                    "result": 1,
-                    "list": [
-                        {
-                            "idx": 1,
-                            "date": "2019-04-01T00:00:00.000Z",
-                            "apply_datetime": null,
-                            "animal_idx": 60,
-                            "animalName": "삐삐",
-                            "species_code": 3,
-                            "userNickName": "admin",
-                            "userPhoneNumber": "01012345678",
-                            "userEmail": "test@test.com"
-                        },
-                        {
-                            "idx": 2,
-                            "date": "2019-05-16T00:00:00.000Z",
-                            "apply_datetime": null,
-                            "animal_idx": 60,
-                            "animalName": "삐삐",
-                            "species_code": 3,
-                            "userNickName": "admin",
-                            "userPhoneNumber": "01012345678",
-                            "userEmail": "test@test.com"
-                        },
-                    ]
-                }
                 $('#permit').html('');
                 $.each(data.list, function (idx, list) {
                     $('#permit').append("<tr><th>" + list.idx + "</th><td>" + formatDate(list.date, DATE) + "</th><td>" + formatDate(list.apply_datetime, DATETIME) + "</td><td>" +
@@ -177,23 +150,6 @@
             method: "POST",
             data: {},
             success: function (data) {
-                data = {
-                    "result": 1,
-                    "list": [
-                        {
-                            "idx": 2,
-                            "date": "2019-04-30T00:00:00.000Z",
-                            "apply_datetime": null,
-                            "read_state": 0,
-                            "animal_idx": 60,
-                            "animalName": "삐삐",
-                            "species_code": 3,
-                            "userNickName": "admin",
-                            "userPhoneNumber": "01012345678",
-                            "userEmail": "test@test.com"
-                        }
-                    ]
-                }
                 $('#waiting').html('');
                 $.each(data.list, function (idx, list) {
 

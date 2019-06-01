@@ -48,7 +48,7 @@ exports.deleteToken = function (_data, _callback) {
 }
 
 exports.getFavoriteInfoList = function (_data, _callback) {
-    var select = "SELECT a.name, a.species_code, she.name AS shelterName "
+    var select = "SELECT a.name, a.species_code, she.name,a.idx,a.url_picture AS shelterName "
     var from = "FROM animal AS a INNER JOIN shelter AS she "
     var on = "ON a.shelter_idx = she.idx "
     var where = "WHERE a.idx IN (?)"

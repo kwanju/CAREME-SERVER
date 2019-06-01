@@ -117,3 +117,8 @@ exports.getFavoriteInfoList = function (_data, _callback) {
     var user = require('./android/user');
     user.getFavoriteInfoList(_data, _callback);
 }
+
+exports.getInfo = function (_data, _callback) {
+    var user = require('./android/user');
+    user.getInfo(_data, _callback);
+}

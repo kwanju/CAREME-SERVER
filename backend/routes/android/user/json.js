@@ -23,4 +23,11 @@ router.post('/getFavoriteInfoList', function (_req, _res) {
     });
 });
 
+router.post('/getInfo', function (_req, _res) {
+    var info = require('../../../model/android/user/info');
+    info.getInfo(_req.body, function (_result) {
+        _res.send(_result);
+    });
+});
+
 module.exports = router;

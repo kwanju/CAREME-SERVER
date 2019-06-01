@@ -57,3 +57,12 @@ exports.getFavoriteInfoList = function (_data, _callback) {
         _callback(_results);
     });
 }
+
+exports.getInfo = function (_data, _callback) {
+    var select = "SELECT nickname,phone_number,email FROM user "
+    var where = "WHERE idx = ?"
+
+    poolAdapter.execute(select + where, [_data.user_idx], function (_results) {
+        _callback(_results[0]);
+    });
+}

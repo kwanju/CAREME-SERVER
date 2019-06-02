@@ -84,25 +84,13 @@
             method: "POST",
             data: {},
             success: function (data) {
-                data = {
-                    "adopt": [
-                        {
-                            "idx": 1,
-                            "name": "김영철",
-                            "datetime": "2019-04-01T00:00:00.000Z",
-                            "user_name": "김씨",
-                            "phone_number": "0101231234",
-                            "user_email": "ahnppeng@naver.com"
-                        }
-                    ]
-                }
                 $('#adopt_waiting').html('');
                 $.each(data.adopt, function (idx, adopt) {
                     $('#adopt_waiting').append(
                         "<tr><th>" + adopt.idx + "</th><td>" + adopt.name + "</td><td>" + formatDate(adopt.datetime, DATE) + "</td><td>" +
                         adopt.user_name + "</td><td>" + adopt.phone_number + "</td><td>" + adopt.user_email +
                         "</td><td>" +
-                        "<a href='/adoptDetail/adoptDetail'><button class='btn btn-info info-button'>신청서 보기</button></a>" +
+                        "<a href=/adoptDetail/adoptDetail/?idx=" + adopt.idx + "><button class='btn btn-info info-button'>신청서 보기</button></a>" +
                         "</td><td>" +
                         "<button class='permit-button btn btn-default btn' style='color:green;'><i class='fa fa-check' style='font-size:24px'></i></button>" +
                         "<button class='reject-button btn btn-default btn' style='color:red;'><i class='fa fa-remove' style='font-size:24px'></i></button>" +
@@ -145,7 +133,7 @@
                     $('#adopt_permit').append(
                         "<tr><th>" + adopt.idx + "</th><td>" + adopt.name + "</td><td>" + formatDate(adopt.datetime, DATE) + "</td><td>" +
                         adopt.user_name + "</td><td>" + adopt.phone_number + "</td><td>" + adopt.user_email +
-                        "</td><td>" + "<button class='btn btn-info info-button'>신청서 보기</button>"
+                        "</td><td>" + "<a href=/adoptDetail/adoptDetail/?idx=" + adopt.idx + "><button class='btn btn-info info-button'>신청서 보기</button></a>"
                     )
                 });
 
@@ -178,6 +166,7 @@
             method: "POST",
             data: { idx: idx },
             success: function (data) {
+                window.location.href = "/erp/adopt/adopt";
                 alert("승인 되었습니다.");
             }
         })
@@ -197,38 +186,8 @@
             }
         })
     }
-    $(document).on('click', '.permit-button', function (e) {
+    $(document).on('click', '.reject-button', function (e) {
         var idx = $(this).closest('tr').find('th').html();
         rejectAdopt(idx);
-    });
-
-    function getAdoptInfo(idx) {
-        $.ajax({
-            url: "/erp/adopt/json/getAdopt",
-            method: "POST",
-            data: { idx: idx },
-            success: function (data) {
-                console.log(1);
-                console.log(data.adopt.idx);
-                // selectedAnimal = data.animal.idx;
-                // selectedSpecies = data.animal.species_code;
-                // selectedState = data.animal.state
-                // $("#animalName").val(data.animal.name);
-                // $("#animalCode").val(animalList[data.animal.species_code]);
-                // $("#animalState").val(stateList[data.animal.state]);
-                // $("#animalWeight").val(data.animal.weight);
-                // $("#animalImg").attr('src', "/" + data.animal.url_picture);
-                // $("#animalDesc").val(data.animal.description);
-                // $('#edit_animal_discovered_spot').val(data.animal.discovered_spot)
-                // $('#edit_animal_latitude').val(data.animal.discovered_spot_latitude)
-                // $('#edit_animal_longitude').val(data.animal.discovered_spot_longitude)
-            }
-        })
-    }
-
-    $(document).on('click', '.info-button', function (e) {
-        var idx = $(this).closest('tr').find('th').html();
-        //console.log(idx);
-        getAdoptInfo(idx);
     });
 </script>

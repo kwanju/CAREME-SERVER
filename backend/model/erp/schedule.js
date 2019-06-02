@@ -67,6 +67,33 @@ exports.getVolunteerInCalendar = function (_data, _callback, _testcallback) {
     });
 }
 
+exports.getVolunteerToday = function (_data, _callback) {
+    dbFacade.getVolunteerToday(_data, function (_results) {
+        var res = {};
+        res.result = 1;
+        res.volunteer = _results[0];
+        _callback(res);
+    })
+}
+
+exports.getVolunteerName = function (_data, _callback) {
+    dbFacade.getVolunteerName(_data, function (_results) {
+        var res = {};
+        res.result = 1;
+        res.volunteer = _results;
+        _callback(res);
+    })
+}
+
+exports.getAlarmNumb = function (_data, _callback) {
+    dbFacade.getAlarmNumb(_data, function (_results) {
+        var res = {};
+        res.result = 1;
+        res.count = _results;
+        _callback(res);
+    })
+}
+
 var sendPush = function (_data, _permit) {
     var permit = _permit == 1 ? "허가" : "거부";
     dbFacade.getPushInfoAboutSchedule(_data, function (_results) {

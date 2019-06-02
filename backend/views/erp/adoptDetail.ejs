@@ -200,7 +200,7 @@
             </div>
             <br>
             <div class="form-group row">
-                <label for="example-datetime-local-input" class="col-1 col-form-label">신청 날짜:</label>
+                <label for="example-datetime-local-input" class="col-1 col-form-label">신청날짜:</label>
                 <div>
                     <input disabled class="form-control" type="text" id="adoptApplyDate">
                 </div>
@@ -272,7 +272,6 @@
             var url_string = window.location.href
             var url = new URL(url_string);
             var adopt_idx = url.searchParams.get("idx");
-            console.log(adopt_idx)
             $.ajax({
                 url: "/erp/adopt/json/getAdopt",
                 method: "POST",
@@ -283,8 +282,8 @@
                     $("#adoptAddress").val(data.adopt.address);
                     $("#adoptAddress2").val(data.adopt.address2);
                     $("#adoptPhoneNumber").val(data.adopt.phone_number);
-                    //$("#shelterName").val(data.adopt.user_name);
-                    //$("#animalName").val(data.adopt.user_name);
+                    $("#shelterName").val(data.adopt.shelterName);
+                    $("#animalName").val(data.adopt.animalName);
                     $("#adoptRelation").val(data.adopt.q1);
                     $("#adoptHouse").val(data.adopt.q2);
                     $("#adoptAnimalPlace").val(data.adopt.q3);

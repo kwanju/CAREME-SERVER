@@ -59,9 +59,11 @@ exports.getPermitAdoptList = function (_data, _callback) {
 };
 
 exports.getAdopt = function (_data, _callback) { // adopt idx를 받아서 adopt info 출력
-    var select = "SELECT ad.* FROM adopt AS ad ";
+    var select = "SELECT ad.*, an.name AS animalName, s.name AS shelterName ";
+    var from = "FROM adopt AS ad INNER JOIN animal AS an INNER JOIN shelter AS s "; //animal이름 shelter이름
+    var on = "ON ad.animal_idx = an.idx AND an.shelter_idx = s.idx ";
     var where = "WHERE ad.idx = ?";
-    poolAdapter.execute(select + where, [_data.idx], function (_results) { //_data.idx = adopt idx
+    poolAdapter.execute(select+from+on+where, [_data.idx], function (_results) { //_data.idx = adopt idx
         _callback(_results);
     });
 }

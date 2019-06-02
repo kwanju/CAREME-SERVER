@@ -226,6 +226,21 @@ exports.getVolunteerInCalendar = function (_data, _callback) {
     schedule.getVolunteerInCalendar(_data, _callback);
 }
 
+exports.getVolunteerToday = function (_data, _callback) {
+    var schedule = require('./erp/schedule');
+    schedule.getVolunteerToday(_data, _callback);
+}
+
+exports.getVolunteerName = function (_data, _callback) {
+    var schedule = require('./erp/schedule');
+    schedule.getVolunteerName(_data, _callback);
+}
+
+exports.getAlarmNumb = function (_data, _callback) {
+    var schedule = require('./erp/schedule');
+    schedule.getAlarmNumb(_data, _callback);
+}
+
 exports.addAdopt = function (_data, _callback) {
     var adopt = require('./erp/adopt');
     adopt.addAdopt(_data, _callback);

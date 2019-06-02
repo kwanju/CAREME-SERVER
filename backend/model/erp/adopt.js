@@ -42,7 +42,7 @@ exports.getAdopt = function (_data, _callback) {
     dbFacade.getAdopt(_data, function (_results) {
         var res = {};
         res.result = 1;
-        res.adopt = _results;
+        res.adopt = _results[0];
         _callback(res);
     });
 };

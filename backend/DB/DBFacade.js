@@ -235,7 +235,7 @@ exports.userLogin = function (_data, _callback) {
     var adopt = require('./erp/adopt');
     adopt.userLogin(_data, _callback);
 };
-    
+
 exports.getAdoptList = function (_data, _callback) {
     var adopt = require('./erp/adopt');
     adopt.getAdoptList(_data, _callback);
@@ -259,4 +259,9 @@ exports.rejectAdopt = function (_data, _callback) {
 exports.getPermitAdoptList = function (_data, _callback) {
     var adopt = require('./erp/adopt');
     adopt.getPermitAdoptList(_data, _callback);
+}
+
+exports.saveMessage = function (_data, _callback) {
+    var chat = require('./chat/chat');
+    chat.saveMessage(_data, _callback);
 }

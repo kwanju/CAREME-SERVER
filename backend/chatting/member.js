@@ -2,6 +2,8 @@ var shelterList = {};
 var userList = {}
 
 exports.participate = function (_socket) {
+
+    //소켓에 참여했을 때 주는 정보.
     _socket.on('participate', function (_message) {
         var message = JSON.parse(_message);
         if (message.type == "shelter") {
@@ -13,6 +15,8 @@ exports.participate = function (_socket) {
             console.log("USER" + message.idx + " participate")
         }
     });
+
+    //소켓이 종료 되었을 때
     _socket.on('disconnect', function () {
         var idx
         if (!(idx = findShelterIdx(_socket.id)))

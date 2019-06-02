@@ -83,3 +83,47 @@ exports.getVolunteerInCalendar = function (_data, _callback) {
         _callback(_results);
     });
 }
+
+exports.getVolunteerToday = function (_data, _callback) {
+    var date = require('../../utils/date')();
+    var select = "SELECT COUNT(*) AS count ";
+    var from = "FROM schedule INNER JOIN animal INNER JOIN shelter ";
+    var on = "ON schedule.animal_idx = animal.idx AND animal.shelter_idx = shelter.idx ";
+    var where = "WHERE date(date) = date('"+date+"') AND shelter.idx = ?";
+
+    poolAdapter.execute(select+from+on+where, [_data.shelter_idx],function (_result) {
+        _callback(_result);
+    })
+}
+
+exports.getVolunteerName = function (_data, _callback) {
+    var date = require('../../utils/date')();
+    var select = "SELECT user.nickname AS userName, animal.name AS animalName ";
+    var from = "FROM schedule INNER JOIN animal INNER JOIN shelter INNER JOIN user ";
+    var on = "ON schedule.animal_idx = animal.idx AND animal.shelter_idx = shelter.idx AND schedule.user_idx = user.idx ";
+    var where = "WHERE date(date) = date('"+date+"') AND shelter.idx = ?";
+
+    poolAdapter.execute(select+from+on+where, [_data.shelter_idx],function (_result) {
+        _callback(_result);
+    })
+}
+
+exports.getAlarmNumb = function (_data, _callback) {
+    var date = require('../../utils/date')();
+    var select = "SELECT COUNT(*) AS count " +
+        "FROM schedule INNER JOIN animal INNER JOIN shelter " +
+        "ON schedule.animal_idx = animal.idx AND animal.shelter_idx = shelter.idx " +
+        "WHERE date(date) = date('"+date+"') AND shelter.idx = ? " +
+        "UNION ALL ";
+    var select2 = "SELECT COUNT(*) AS count " + "FROM discover INNER JOIN shelter " +
+        "ON discover.matching_shelter_idx = shelter.idx " +
+        "WHERE date(register_datetime) = date('"+date+"') AND shelter.idx = ? " +
+        "UNION ALL ";
+    var select3 = "SELECT COUNT(*) AS count " + "FROM adopt INNER JOIN animal INNER JOIN shelter " +
+        "ON adopt.animal_idx = animal.idx AND animal.shelter_idx = shelter.idx " +
+        "WHERE date(datetime) = date('"+date+"') AND shelter.idx = ?";
+
+    poolAdapter.execute(select+select2+select3, [_data.shelter_idx, _data.shelter_idx, _data.shelter_idx],function (_result) {
+        _callback(_result);
+    })
+}

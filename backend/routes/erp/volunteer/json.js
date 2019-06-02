@@ -24,4 +24,25 @@ router.post('/getVolunteerInCalendar', insertIdxIntoBody, function (_req, _res) 
     });
 });
 
+router.post('/getVolunteerToday', insertIdxIntoBody, function (_req, _res) {
+    var schedule = require('../../../model/erp/schedule');
+    schedule.getVolunteerToday(_req.body, function (_result) {
+        _res.send(_result);
+    });
+});
+
+router.post('/getVolunteerName', insertIdxIntoBody, function (_req, _res) {
+    var schedule = require('../../../model/erp/schedule');
+    schedule.getVolunteerName(_req.body, function (_result) {
+        _res.send(_result);
+    });
+});
+
+router.post('/getAlarmNumb', insertIdxIntoBody, function (_req, _res) {
+    var schedule = require('../../../model/erp/schedule');
+    schedule.getAlarmNumb(_req.body, function (_result) {
+        _res.send(_result);
+    });
+});
+
 module.exports = router;

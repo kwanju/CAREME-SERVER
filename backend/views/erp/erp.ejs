@@ -10,59 +10,95 @@
     </div>
 </div>
 <div class="row">
-    <div class="container" style="width: 32%; height: 150px;">
-        <div class="row h-50">
-            <div class="col" style="background: orange">
-                유기견 현황
-            </div>
-        </div>
-        <div class="row border h-50">
-            <div class="col border-right">
-                1 of 3
-            </div>
-            <div class="col border-right">
-                2 of 3
-            </div>
-            <div class="col border-right">
-                3 of 3
-            </div>
-        </div>
-    </div>
-    <div class="container" style="width: 32%; height: 150px;">
-        <div class="row h-50">
-            <div class="col" style="background: lightskyblue">
+    <div class="container-volunteer col-xs-12 col-md-6 col-lg-6 col-xl-3" style="width: 32%; height: 144px;">
+        <div class="row h-25">
+            <div class="col" style="background: lightskyblue" id="volunteer_count">
                 봉사자 현황
             </div>
         </div>
+        <div class="row border-left border-right h-25">
+            <!--
+            <div class="col border-right">
+                봉사신청
+            </div>
+            -->
+            <div class="col border-right">
+                누가 했냐
+            </div>
+            <div class="col">
+                어떤 강아지
+            </div>
+        </div>
         <div class="row border h-50">
-            <div class="col border-right">
-                1 of 3
+            <!--
+            <div class="col border-right" id="volunteer_count">
+                오늘의 봉사신청 수
             </div>
-            <div class="col border-right">
-                2 of 3
+            -->
+            <div class="col border-right" id="volunteer_user">
+                누가 봉사신청 했냐
             </div>
-            <div class="col border-right">
-                3 of 3
+            <div class="col" id="volunteer_animal">
+                어떤 강아지가 봉사당하냐
             </div>
         </div>
     </div>
-    <div class="container" style="width: 32%; height: 150px;">
-        <div class="row h-50">
-            <div class="col" style="background: lightgreen">
-                입양신청자 현황
-            </div>
-        </div>
-        <div class="row border h-50">
-            <div class="col border-right">
-                1 of 3
-            </div>
-            <div class="col border-right">
-                2 of 3
-            </div>
-            <div class="col border-right">
-                3 of 3
-            </div>
-        </div>
 
+    <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+        <div class="card-box noradius noborder bg-danger">
+            <i class="fa fa-bell-o float-right text-white"></i>
+            <h6 class="text-white text-uppercase m-b-20">오늘 들어온 신청</h6>
+            <h1 class="m-b-20 text-white counter" id="alarmNumb"></h1>
+            <span class="text-white" id="alarmNumbSub"></span>
+        </div>
     </div>
 </div>
+<script>
+    function getVolunteerCount() {
+        $.ajax({
+            url: "/erp/volunteer/json/getVolunteerToday",
+            method: "POST",
+            data: {},
+            success: function (data) {
+                $('#volunteer_count').html('봉사자 현황 : '+data.volunteer.count);
+            }
+        })
+    }
+    function getVolunteerName() {
+        $.ajax({
+            url: "/erp/volunteer/json/getVolunteerName",
+            method: "POST",
+            data: {},
+            success: function (data) {
+                $('#volunteer_animal').html('');
+                $('#volunteer_user').html('');
+                $.each(data.volunteer, function (idx, volunteer) {
+                    $('#volunteer_animal').append(
+                        "<li>" + volunteer.animalName + "</li>"
+                    )
+                    $('#volunteer_user').append(
+                        "<li>" + volunteer.userName + "</li>"
+                    )
+                })
+            }
+        })
+    }
+    $(document).ready(function () {
+        getVolunteerCount();
+        getVolunteerName();
+        getAlarmNumb()
+    })
+    function getAlarmNumb() {
+        var total=0;
+        $.ajax({
+            url: "/erp/volunteer/json/getAlarmNumb",
+            method: "POST",
+            data: {},
+            success: function (data) {
+                total = data.count[0].count + data.count[1].count + data.count[2].count;
+                $('#alarmNumb').html(total);
+                $('#alarmNumbSub').html('봉사: '+data.count[0].count+' 발견: '+data.count[1].count +' 입양: '+data.count[2].count);
+            }
+        })
+    }
+</script>

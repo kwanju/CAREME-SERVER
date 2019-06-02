@@ -84,6 +84,18 @@
             method: "POST",
             data: {},
             success: function (data) {
+                data = {
+                    "adopt": [
+                        {
+                            "idx": 1,
+                            "name": "김영철",
+                            "datetime": "2019-04-01T00:00:00.000Z",
+                            "user_name": "김씨",
+                            "phone_number": "0101231234",
+                            "user_email": "ahnppeng@naver.com"
+                        }
+                    ]
+                }
                 $('#adopt_waiting').html('');
                 $.each(data.adopt, function (idx, adopt) {
                     $('#adopt_waiting').append(
@@ -191,6 +203,32 @@
     });
 
     function getAdoptInfo(idx) {
-        //새창 띄워주기
+        $.ajax({
+            url: "/erp/adopt/json/getAdopt",
+            method: "POST",
+            data: { idx: idx },
+            success: function (data) {
+                console.log(1);
+                console.log(data.adopt.idx);
+                // selectedAnimal = data.animal.idx;
+                // selectedSpecies = data.animal.species_code;
+                // selectedState = data.animal.state
+                // $("#animalName").val(data.animal.name);
+                // $("#animalCode").val(animalList[data.animal.species_code]);
+                // $("#animalState").val(stateList[data.animal.state]);
+                // $("#animalWeight").val(data.animal.weight);
+                // $("#animalImg").attr('src', "/" + data.animal.url_picture);
+                // $("#animalDesc").val(data.animal.description);
+                // $('#edit_animal_discovered_spot').val(data.animal.discovered_spot)
+                // $('#edit_animal_latitude').val(data.animal.discovered_spot_latitude)
+                // $('#edit_animal_longitude').val(data.animal.discovered_spot_longitude)
+            }
+        })
     }
+
+    $(document).on('click', '.info-button', function (e) {
+        var idx = $(this).closest('tr').find('th').html();
+        //console.log(idx);
+        getAdoptInfo(idx);
+    });
 </script>

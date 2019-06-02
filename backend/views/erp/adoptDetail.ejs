@@ -237,7 +237,6 @@
             <button type="button" class="btn btn-primary btn-bg" id="print">
                 인쇄하기
             </button>
-            <input type="button" value="뒤로가기" class="btn btn-primary btn-bg" onclick="goBack()">
         </div>
     </div>
 
@@ -246,9 +245,7 @@
             window.print();
         });
 
-        function goBack() {
-            window.history.back();
-        };
+
 
     </script>
     <script>
@@ -275,6 +272,7 @@
             var url_string = window.location.href
             var url = new URL(url_string);
             var adopt_idx = url.searchParams.get("idx");
+            console.log(adopt_idx)
             $.ajax({
                 url: "/erp/adopt/json/getAdopt",
                 method: "POST",

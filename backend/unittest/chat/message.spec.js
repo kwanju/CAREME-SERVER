@@ -6,8 +6,8 @@ describe.only("saveMessage Test", function () {
         message.saveMessage(
             {
                 type: "0",
-                sender: "1",
-                receiver: "1",
+                user_idx: "1",
+                shelter_idx: "1",
                 message: "message"
             }
             , function () { }, function (_idx) {

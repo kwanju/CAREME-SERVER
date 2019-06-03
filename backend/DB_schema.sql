@@ -157,14 +157,17 @@ CREATE TABLE adopt(
     FOREIGN KEY(animal_idx) REFERENCES animal(idx)
 );
 
-CREATE TABLE chat(
+CREATE TABLE chat_user_shelter(
     idx int(10) not null AUTO_INCREMENT,
-    type int(1) not null COMMENT '0 : 유저 -> 보호소 / 1 : 보호소 -> 유저',
-    sender varchar(20) not null COMMENT '보내는 사람(or 보호소) idx',
-    receiver varchar(20) not null COMMENT '받는 사람(or 보호소) idx',
+    type int(1) not null COMMENT '0 : 사용자 -> 보호소 / 1 : 보호소 -> 사용자',
+    shelter_idx int(10) not null COMMENT '보호소 idx',
+    user_idx int(10) not null COMMENT '사용자 idx',
     message varchar(200) COMMENT '메시지',
     send_time datetime COMMENT '보낸 시간',
-    PRIMARY KEY(idx)
+    read_state int(1) default 0 COMMENT '1: 처리, 0: 처리안함',
+    PRIMARY KEY(idx),
+    FOREIGN KEY(shelter_idx) REFERENCES shelter(idx),
+    FOREIGN KEY(user_idx) REFERENCES user(idx) 
 );
 
 INSERT INTO shelter(id,pw,name, position, url_picture) VALUES('test','test','테스트보호소', '서울 종로구 경교장1길 7-1', 'drive/animalImage/1.jpg');

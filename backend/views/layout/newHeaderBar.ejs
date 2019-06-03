@@ -47,34 +47,9 @@
             </div>
         </li>
 
-        <li class="list-inline-item dropdown notif">
-            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                <i class="fa fa-fw fa-envelope-o"></i>
-                <span class="notif-bullet"></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-arrow-success dropdown-lg">
-                <!-- item-->
-                <div class="dropdown-item noti-title">
-                    <h5>
-                        <small>
-                            <span class="label label-danger pull-xs-right">12</span>Contact Messages</small>
-                    </h5>
-                </div>
-
-                <!-- item-->
-                <a class="dropdown-item notify-item open-chat">
-                    <p class="notify-details ml-0">
-                        <b>Jokn Doe</b>
-                        <span>New message received</span>
-                        <small class="text-muted">2 minutes ago</small>
-                    </p>
-                </a>
-                <!-- All-->
-                <a href="#" class="dropdown-item notify-item notify-all">
-                    View All
-                </a>
-
-            </div>
+        <li class="list-inline-item  notif">
+            <i class="fa fa-fw fa-envelope-o nav-link arrow-none open-chat"></i>
+            <span class="notif-bullet"></span>
         </li>
 
         <li class="list-inline-item dropdown notif">
@@ -181,7 +156,7 @@
 <script>
     function openChat() {
         window.open("/erp/chat/chat",
-            "채팅창", "width=400, height=900, toolbar=no, menubar=no, scrollbars=no, resizable=yes")
+            "채팅창", "width=800, height=500, toolbar=no, menubar=no, scrollbars=no, resizable=yes")
     }
 
     $(document).on('click', '.open-chat', function (e) {

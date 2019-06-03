@@ -280,3 +280,13 @@ exports.saveMessage = function (_data, _callback) {
     var chat = require('./chat/chat');
     chat.saveMessage(_data, _callback);
 }
+
+exports.checkAdoptReadState = function (_data, _callback) {
+    var adopt = require('./erp/adopt');
+    adopt.checkAdoptReadState(_data, _callback);
+}
+
+exports.updateAdoptNotRead = function (_data, _callback) {
+    var adopt = require('./erp/adopt');
+    adopt.updateAdoptNotRead(_data, _callback);
+}

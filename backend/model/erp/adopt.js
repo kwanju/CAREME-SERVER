@@ -26,6 +26,16 @@ exports.getAdoptList = function (_data, _callback) {
         res.result = 1;
         res.adopt = _results;
         _callback(res);
+
+        var notReadList = []
+        for (var i = 0; i < _results.length; i++) {
+            var adopt = _results[i];
+            if (adopt.read_state == 0)
+                notReadList.push(adopt.idx)
+        }
+
+        if (notReadList.length != 0)
+            dbFacade.updateAdoptNotRead(notReadList, function () { });
     });
 };
 

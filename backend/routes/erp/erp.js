@@ -10,6 +10,7 @@ var mshelterRouter = require('./mshelter/mshelter');
 var notifyRouter = require('./notify/notify');
 var discoverRouter = require('./discover/discover');
 var searchRouter = require('./search/search');
+var chatRouter = require('./chat/chat');
 
 //router.use(checkShelterAuth);
 router.use('/main', mainRouter);
@@ -18,6 +19,7 @@ router.use('/animal', animalRouter);
 router.use('/volunteer', volunteerRouter);
 router.use('/mshelter', mshelterRouter);
 router.use('/notify', notifyRouter);
+router.use('/chat', chatRouter)
 router.use('/discover', discoverRouter);
 router.use('/search', searchRouter);
 

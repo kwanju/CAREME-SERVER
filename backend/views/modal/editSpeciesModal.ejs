@@ -1,0 +1,89 @@
+<div class="modal fade" id="modalEditSpecies" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">견종을 수정해 주세요</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="clear_result()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputID">견종명</label>
+                    <div class="input-group mb-3">
+                        <input type="text" id="species_edit" class="form-control" placeholder="견종명을 입력해주세요" aria-label="검색할 유기견 이름" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="findButton" onclick="editSpeciesList()">찾기</button>
+                        </div>
+                    </div>
+                </div>
+                <input type="text" id="speciesTmpStorage" style="display:none;">
+                <table class="table table-bordered" id="table-body4">
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="clear_result()">닫기</button>
+                <button type="submit" class="btn btn-primary add_id" onclick="register_edit_species()" data-dismiss="modal">완료</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#species_input').keydown(function (e) {
+        if (e.keyCode == 13) {
+            editSpeciesList();
+            return false;
+        }
+    })
+
+    function editSpeciesList() {
+        var inputText = document.getElementById("species_edit").value;
+        $('#table-body4').html('');
+        $.each(animalList, function (key, value) {
+            if (inputText.includes(value[0])) {
+                var text = '<tr class="editSpecies-list">' +
+                    '<th><span class="update_species_code" style="display: none;">' + key + '</span>' + value + '</th></tr>';
+                $('#table-body4').append(text);
+            }
+        })
+    }
+
+    function register_edit_species() {
+        //selected가 없으면 선택하시오 alert
+        var selected = $('.editSpecies-selected')[0];
+        if (selected === undefined) {
+            alert("검색 안했음");
+            return;
+        }
+        //shelterName에 값 추가
+        var editName = selected.innerText;
+        //console.log(editName)
+        var edit_code = $(selected).find('span').html();
+        $('#animalCode').val(editName);
+        $('#species_code').val(edit_code);
+        //modal 초기화
+        clear_result();
+    }
+    function clear_result() {
+        setTimeout(1000);
+        $('#table-body4').html("");
+    }
+    $(document).on('click', '.editSpecies-list', function () {
+        //console.log(this);
+        var selected = $('.editSpecies-selected')[0];
+        console.log(selected);
+
+        if (selected !== undefined) {
+            $(selected).removeClass('editSpecies-selected');
+        }
+        if (!$(this).hasClass('editSpecies-selected')) {
+            $(this).addClass('editSpecies-selected');
+            var tmp = $(this).find('span')[0].innerHTML;
+            //console.log(tmp);
+            localStorage.setItem('edit_species_code', tmp); //local storage 에 shelter idx 저장 -> 이걸로 animal search
+            //local storage ->
+        }
+    });
+</script>

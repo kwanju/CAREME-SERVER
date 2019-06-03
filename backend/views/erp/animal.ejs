@@ -83,14 +83,21 @@
 
     function fetchAnimalState(stateList) {
         var choice = $('#choiceState');
-        choice.append('<option selected="true" disabled>유기견 상태를 선택하세요</option>');
-        choice.prop('selectedIndex', 0);
+        var edit = $('#animalState');
+        choice.append('<option disabled>유기견 상태를 선택하세요</option>');
         $.each(stateList, function (key, entry) {
-            choice.append($('<span style="display: none;">'+ key+ '</span><option>'+ entry +'</option>'))
+            choice.append($('<span style="display: none;">' + key + '</span><option>' + entry + '</option>'))
+            edit.append($('<span class="selectDropdown" style="display: none;">' + key + '</span><option>' + entry + '</option>'))
+            var state = $(choice).find('span').html();
+            var edit_state = $(edit).find('span').html();
+
+            $('#state').val(state);
+            $('#update_state').val(edit);
+            console.log(state);
+
+
         })
 
-        var state = $(choice).find('span').html();
-        $('#state').val(state);
 
     }
 

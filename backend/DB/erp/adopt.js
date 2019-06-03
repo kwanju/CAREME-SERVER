@@ -63,7 +63,7 @@ exports.getAdopt = function (_data, _callback) { // adopt idx를 받아서 adopt
     var from = "FROM adopt AS ad INNER JOIN animal AS an INNER JOIN shelter AS s "; //animal이름 shelter이름
     var on = "ON ad.animal_idx = an.idx AND an.shelter_idx = s.idx ";
     var where = "WHERE ad.idx = ?";
-    poolAdapter.execute(select+from+on+where, [_data.idx], function (_results) { //_data.idx = adopt idx
+    poolAdapter.execute(select + from + on + where, [_data.idx], function (_results) { //_data.idx = adopt idx
         _callback(_results);
     });
 }
@@ -85,3 +85,23 @@ exports.rejectAdopt = function (_data, _callback) {
         _callback();
     });
 };
+
+exports.checkAdoptReadState = function (_data, _callback) {
+    var select = "SELECT ad.idx ";
+    var from = "FROM adopt AS ad INNER JOIN animal AS ani "
+    var on = "ON ad.animal_idx = ani.idx "
+    var where = "WHERE read_state = 0 AND ani.shelter_idx=?";
+
+    poolAdapter.execute(select + from + on + where, [_data.idx], function (_results) {
+        _callback(_results);
+    });
+}
+
+exports.updateAdoptNotRead = function (_data, _callback) {
+    var update = "UPDATE adopt SET read_state=1 ";
+    var where = "WHERE idx IN (?)"
+
+    poolAdapter.execute(update + where, [_data], function () {
+        _callback();
+    });
+}

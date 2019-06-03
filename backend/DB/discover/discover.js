@@ -12,9 +12,9 @@ exports.createDiscoverRequest = function (_data, _callback) {
 }//discover_request에 insert
 
 exports.checkDiscoverRequestReadState = function (_data, _callback) {
-    var sql = "SELECT * FROM discover_request AS d ";
-    var where = "WHERE d.read_state=0";
-    poolAdapter.execute(sql + where, function (_results) {
+    var sql = "SELECT d.idx FROM discover_request AS d ";
+    var where = "WHERE d.read_state=0 AND d.shelter_idx = ?";
+    poolAdapter.execute(sql + where, [_data.idx],function (_results) {
         _callback(_results);
     });
 }//read_state가 0인 discover_request 객체를 보낸다

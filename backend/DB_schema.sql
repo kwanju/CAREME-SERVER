@@ -126,7 +126,7 @@ CREATE TABLE adopt(
     address varchar(100) COMMENT '신청자 주소',
     address2 varchar(100) COMMENT '신청자 주소2',
     phone_number varchar(20) COMMENT '신청자 전화번호',
-    user_email varchar(20) COMMENT '신청자 메일',
+    user_email varchar(100) COMMENT '신청자 메일',
     permit int(1) default 0 COMMENT '1: 허가 / 0: 아직 결정안됨. / -1: 거절',
     q1 varchar(100) COMMENT '신청인과의 관계',
     q2 varchar(100) COMMENT '신청인의 주거 형태',
@@ -152,6 +152,7 @@ CREATE TABLE adopt(
     q22 varchar(100) COMMENT '입양동물과 하루를 어떻게 보내실 예정?',
     q23 varchar(100) COMMENT '여행/특별한 일정으로 집을 비우게 될 시 반려동물은 어떻게 지내게됩니까?',
     q24 varchar(100) COMMENT '전자서명 행위',
+    read_state int(1) default 0 COMMENT '1: 처리, 0: 처리안함',
     PRIMARY KEY(idx),
     FOREIGN KEY(animal_idx) REFERENCES animal(idx)
 );

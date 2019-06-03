@@ -25,6 +25,12 @@ function checkNewSchedule() {
                 setDiscoverRequestBadge(result.discoverRequest.length)
             else    
                 setDiscoverRequestBadge(0)
+            
+            if(result.adopt.length>0)
+                setAdoptBadge(result.adopt.length)
+            else    
+                setAdoptBadge(0)
+
 
         },
         error: function () {
@@ -56,6 +62,18 @@ function setScheduleBadge(_number) {
 function setDiscoverRequestBadge(_number) {
 
     var badge = $('#side_menu_discover_request_badge')
+    if (badge.length == 0)
+        return;
+
+    if (_number == 0) 
+        badge.html("");
+     else 
+        badge.html(_number);
+}
+
+function setAdoptBadge(_number){
+    
+    var badge = $('#side_menu_adopt_badge')
     if (badge.length == 0)
         return;
 

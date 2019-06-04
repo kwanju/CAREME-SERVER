@@ -290,3 +290,8 @@ exports.updateAdoptNotRead = function (_data, _callback) {
     var adopt = require('./erp/adopt');
     adopt.updateAdoptNotRead(_data, _callback);
 }
+
+exports.getScheduleDate = function (_data, _callback) {
+    var date = require('./erp/chart');
+    date.getScheduleDate(_data, _callback);
+}

@@ -53,6 +53,18 @@
         </div>
     </div>
 </div>
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fa fa-table"></i> 월별 봉사 신청
+        </div>
+
+        <div class="card-body">
+            <canvas id="barChart1"></canvas>
+        </div>
+        <div class="card-footer small text-muted">Updated now</div>
+    </div><!-- end card-->
+</div>
 <script>
     function getVolunteerCount() {
         $.ajax({
@@ -86,7 +98,8 @@
     $(document).ready(function () {
         getVolunteerCount();
         getVolunteerName();
-        getAlarmNumb()
+        getAlarmNumb();
+        getScheduleDate();
     })
     function getAlarmNumb() {
         var total=0;
@@ -98,6 +111,97 @@
                 total = data.count[0].count + data.count[1].count + data.count[2].count;
                 $('#alarmNumb').html(total);
                 $('#alarmNumbSub').html('봉사: '+data.count[0].count+' 발견: '+data.count[1].count +' 입양: '+data.count[2].count);
+            }
+        })
+    }
+</script>
+<script>
+    //barChart
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth()+1;
+    var months = {1:"Jan", 2:"Feb", 3:"Mar", 4:"Apr", 5:"May", 6:"Jun", 7:"Jul", 8:"Aug", 9:"Sep", 10:"Oct", 11:"Nov", 12:"Dec"};
+    var lable_data = [];
+    var chart_data = [];
+    function getScheduleDate() {
+        $.ajax({
+            url: "/erp/chart/json/getScheduleDate",
+            method: "POST",
+            data: {},
+            success: function (data) {
+                //console.log("data[0]: "+data.date[0].c);
+                var j = 0;
+                var tmp;
+                var comp_date;
+                for(var i=0 ; i<12; i++){
+                    tmp = String((month-i+12)%12);
+                    if(parseInt(tmp) === 0) tmp=String(12);
+                    if(tmp.length === 1){
+                        tmp = "0" + tmp;
+                    }
+                    comp_date = String(year)+'-'+tmp;
+                    if(data.date[j] === undefined || data.date[j].m !== comp_date ){
+                        lable_data.push(months[parseInt(tmp)]);
+                        chart_data.push(0);
+                    }else{
+                        lable_data.push(months[parseInt(tmp)]);
+                        chart_data.push(data.date[j].c);
+                        j++;
+                    }
+                }
+                lable_data.reverse();
+                chart_data.reverse();
+
+                var ctx1 = document.getElementById("barChart1").getContext('2d');
+                var barChart = new Chart(ctx1, {
+                    type: 'bar',
+                    data: {
+                        labels: lable_data,
+                        //["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+                        datasets: [{
+                            label: 'Amount received',
+                            data: chart_data, //[12, 19, 3, 5, 10, 5, 13, 17, 11, 8, 11, 9]
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        }
+                    }
+                });
             }
         })
     }

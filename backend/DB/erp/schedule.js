@@ -115,8 +115,8 @@ exports.getAlarmNumb = function (_data, _callback) {
         "ON schedule.animal_idx = animal.idx AND animal.shelter_idx = shelter.idx " +
         "WHERE date(date) = date('"+date+"') AND shelter.idx = ? " +
         "UNION ALL ";
-    var select2 = "SELECT COUNT(*) AS count " + "FROM discover INNER JOIN shelter " +
-        "ON discover.matching_shelter_idx = shelter.idx " +
+    var select2 = "SELECT COUNT(*) AS count " + "FROM discover_request INNER JOIN shelter " +
+        "ON discover_request.shelter_idx = shelter.idx " +
         "WHERE date(register_datetime) = date('"+date+"') AND shelter.idx = ? " +
         "UNION ALL ";
     var select3 = "SELECT COUNT(*) AS count " + "FROM adopt INNER JOIN animal INNER JOIN shelter " +

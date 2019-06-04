@@ -11,6 +11,7 @@ var notifyRouter = require('./notify/notify');
 var discoverRouter = require('./discover/discover');
 var searchRouter = require('./search/search');
 var chatRouter = require('./chat/chat');
+var chartRouter = require('./chart/chart');
 
 //router.use(checkShelterAuth);
 router.use('/main', mainRouter);
@@ -22,5 +23,6 @@ router.use('/notify', notifyRouter);
 router.use('/chat', chatRouter)
 router.use('/discover', discoverRouter);
 router.use('/search', searchRouter);
+router.use('/chart', chartRouter);
 
 module.exports = router;

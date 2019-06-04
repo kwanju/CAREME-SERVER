@@ -3,14 +3,13 @@
     var shelter_idx;
     var socket = io();
 
-    io.on('connection', function (_socket) {
-        _socket.on('message', function (_msg) {
-            var message = JSON.parse(_msg);
-            console.log(message);
-            newMessage(0, message.message);
-            // 여기서 없을 때 있을 때 구분해서 한다.
-        });
+    socket.on('message', function (_msg) {
+        var message = JSON.parse(_msg);
+        console.log(message);
+        newMessage(0, message.message);
+        // 여기서 없을 때 있을 때 구분해서 한다.
     });
+
 
     $.ajax({
         url: "/erp/chat/json/getShelterIdx",

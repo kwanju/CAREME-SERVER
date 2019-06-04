@@ -10,18 +10,13 @@
     </div>
 </div>
 <div class="row">
-    <div class="container-volunteer col-xs-12 col-md-6 col-lg-6 col-xl-3" style="width: 32%; height: 144px;">
+    <div class="container-volunteer col-xs-12 col-md-6 col-lg-6 col-xl-6" style="width: 32%; height: 144px;">
         <div class="row h-25">
             <div class="col" style="background: lightskyblue" id="volunteer_count">
-                봉사자 현황
+                봉사자 현황 : 0
             </div>
         </div>
         <div class="row border-left border-right h-25">
-            <!--
-            <div class="col border-right">
-                봉사신청
-            </div>
-            -->
             <div class="col border-right">
                 누가 했냐
             </div>
@@ -30,20 +25,13 @@
             </div>
         </div>
         <div class="row border h-50">
-            <!--
-            <div class="col border-right" id="volunteer_count">
-                오늘의 봉사신청 수
-            </div>
-            -->
             <div class="col border-right" id="volunteer_user">
-                누가 봉사신청 했냐
             </div>
             <div class="col" id="volunteer_animal">
-                어떤 강아지가 봉사당하냐
             </div>
         </div>
     </div>
-
+    <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3"></div>
     <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
         <div class="card-box noradius noborder bg-danger">
             <i class="fa fa-bell-o float-right text-white"></i>
@@ -53,6 +41,47 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> 월별 봉사 신청
+            </div>
+
+            <div class="card-body">
+                <canvas id="barChart1"></canvas>
+            </div>
+            <div class="card-footer small text-muted">Updated now</div>
+        </div><!-- end card-->
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> 월별 입양 신청
+            </div>
+
+            <div class="card-body">
+                <canvas id="barChart2"></canvas>
+            </div>
+            <div class="card-footer small text-muted">Updated now</div>
+        </div><!-- end card-->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> 월별 발견 신청
+            </div>
+
+            <div class="card-body">
+                <canvas id="barChart3"></canvas>
+            </div>
+            <div class="card-footer small text-muted">Updated now</div>
+        </div><!-- end card-->
+    </div>
+</div>
 <script>
     function getVolunteerCount() {
         $.ajax({
@@ -60,10 +89,11 @@
             method: "POST",
             data: {},
             success: function (data) {
-                $('#volunteer_count').html('봉사자 현황 : '+data.volunteer.count);
+                $('#volunteer_count').html('봉사자 현황 : ' + data.volunteer.count);
             }
         })
     }
+
     function getVolunteerName() {
         $.ajax({
             url: "/erp/volunteer/json/getVolunteerName",
@@ -83,13 +113,18 @@
             }
         })
     }
+
     $(document).ready(function () {
         getVolunteerCount();
         getVolunteerName();
-        getAlarmNumb()
+        getAlarmNumb();
+        getScheduleDate();
+        getAdoptDate();
+        getDiscoverDate();
     })
+
     function getAlarmNumb() {
-        var total=0;
+        var total = 0;
         $.ajax({
             url: "/erp/volunteer/json/getAlarmNumb",
             method: "POST",
@@ -97,8 +132,184 @@
             success: function (data) {
                 total = data.count[0].count + data.count[1].count + data.count[2].count;
                 $('#alarmNumb').html(total);
-                $('#alarmNumbSub').html('봉사: '+data.count[0].count+' 발견: '+data.count[1].count +' 입양: '+data.count[2].count);
+                $('#alarmNumbSub').html('봉사: ' + data.count[0].count + ' 발견: ' + data.count[1].count + ' 입양: ' + data.count[2].count);
             }
         })
+    }
+</script>
+<script>
+    //barChart
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var months = {
+        1: "Jan",
+        2: "Feb",
+        3: "Mar",
+        4: "Apr",
+        5: "May",
+        6: "Jun",
+        7: "Jul",
+        8: "Aug",
+        9: "Sep",
+        10: "Oct",
+        11: "Nov",
+        12: "Dec"
+    };
+    var lable_data = [[], [], []];
+    var chart_data = [[], [], []];
+    var backgroundColorSet = [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+    ];
+    var borderColorSet = [
+        'rgba(255,99,132,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+        'rgba(255,99,132,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+    ];
+
+    function getScheduleDate() {
+        $.ajax({
+            url: "/erp/chart/json/getScheduleDate",
+            method: "POST",
+            data: {},
+            success: function (data) {
+                lableNchartDataSet(data, 0);
+                var ctx1 = document.getElementById("barChart1").getContext('2d');
+                var barChart = new Chart(ctx1, {
+                    type: 'bar',
+                    data: {
+                        labels: lable_data[0],
+                        datasets: [{
+                            label: 'Amount received',
+                            data: chart_data[0],
+                            backgroundColor: backgroundColorSet,
+                            borderColor: borderColorSet,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+        })
+    }
+
+    function getAdoptDate() {
+        $.ajax({
+            url: "/erp/chart/json/getAdoptDate",
+            method: "POST",
+            data: {},
+            success: function (data) {
+                lableNchartDataSet(data, 1);
+                var ctx2 = document.getElementById("barChart2").getContext('2d');
+                var barChart = new Chart(ctx2, {
+                    type: 'bar',
+                    data: {
+                        labels: lable_data[1],
+                        datasets: [{
+                            label: 'Amount received',
+                            data: chart_data[1],
+                            backgroundColor: backgroundColorSet,
+                            borderColor: borderColorSet,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+        })
+    }
+
+    function getDiscoverDate() {
+        $.ajax({
+            url: "/erp/chart/json/getDiscoverDate",
+            method: "POST",
+            data: {},
+            success: function (data) {
+                lableNchartDataSet(data, 2);
+                var ctx3 = document.getElementById("barChart3").getContext('2d');
+                var barChart = new Chart(ctx3, {
+                    type: 'bar',
+                    data: {
+                        labels: lable_data[2],
+                        datasets: [{
+                            label: 'Amount received',
+                            data: chart_data[2],
+                            backgroundColor: backgroundColorSet,
+                            borderColor: borderColorSet,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+        })
+    }
+
+    function lableNchartDataSet(data, idx) {
+        var j = 0;
+        var tmp;
+        var comp_date;
+        for (var i = 0; i < 12; i++) {
+            tmp = String((month - i + 12) % 12);
+            if (parseInt(tmp) === 0) tmp = String(12);
+            if (tmp.length === 1) {
+                tmp = "0" + tmp;
+            }
+            comp_date = String(year) + '-' + tmp;
+            if (data.date[j] === undefined || data.date[j].m !== comp_date) {
+                lable_data[idx].push(months[parseInt(tmp)]);
+                chart_data[idx].push(0);
+            } else {
+                lable_data[idx].push(months[parseInt(tmp)]);
+                chart_data[idx].push(data.date[j].c);
+                j++;
+            }
+        }
+        lable_data[idx].reverse();
+        chart_data[idx].reverse();
     }
 </script>

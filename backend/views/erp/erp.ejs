@@ -42,45 +42,45 @@
     </div>
 </div>
 <div class="row">
-<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-    <div class="card mb-3">
-        <div class="card-header">
-            <i class="fa fa-table"></i> 월별 봉사 신청
-        </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> 월별 봉사 신청
+            </div>
 
-        <div class="card-body">
-            <canvas id="barChart1"></canvas>
-        </div>
-        <div class="card-footer small text-muted">Updated now</div>
-    </div><!-- end card-->
-</div>
-<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-    <div class="card mb-3">
-        <div class="card-header">
-            <i class="fa fa-table"></i> 월별 입양 신청
-        </div>
+            <div class="card-body">
+                <canvas id="barChart1"></canvas>
+            </div>
+            <div class="card-footer small text-muted">Updated now</div>
+        </div><!-- end card-->
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> 월별 입양 신청
+            </div>
 
-        <div class="card-body">
-            <canvas id="barChart2"></canvas>
-        </div>
-        <div class="card-footer small text-muted">Updated now</div>
-    </div><!-- end card-->
-</div>
+            <div class="card-body">
+                <canvas id="barChart2"></canvas>
+            </div>
+            <div class="card-footer small text-muted">Updated now</div>
+        </div><!-- end card-->
+    </div>
 </div>
 
 <div class="row">
-<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-    <div class="card mb-3">
-        <div class="card-header">
-            <i class="fa fa-table"></i> 월별 발견 신청
-        </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> 월별 발견 신청
+            </div>
 
-        <div class="card-body">
-            <canvas id="barChart3"></canvas>
-        </div>
-        <div class="card-footer small text-muted">Updated now</div>
-    </div><!-- end card-->
-</div>
+            <div class="card-body">
+                <canvas id="barChart3"></canvas>
+            </div>
+            <div class="card-footer small text-muted">Updated now</div>
+        </div><!-- end card-->
+    </div>
 </div>
 <script>
     function getVolunteerCount() {
@@ -89,10 +89,11 @@
             method: "POST",
             data: {},
             success: function (data) {
-                $('#volunteer_count').html('봉사자 현황 : '+data.volunteer.count);
+                $('#volunteer_count').html('봉사자 현황 : ' + data.volunteer.count);
             }
         })
     }
+
     function getVolunteerName() {
         $.ajax({
             url: "/erp/volunteer/json/getVolunteerName",
@@ -112,6 +113,7 @@
             }
         })
     }
+
     $(document).ready(function () {
         getVolunteerCount();
         getVolunteerName();
@@ -120,8 +122,9 @@
         getAdoptDate();
         getDiscoverDate();
     })
+
     function getAlarmNumb() {
-        var total=0;
+        var total = 0;
         $.ajax({
             url: "/erp/volunteer/json/getAlarmNumb",
             method: "POST",
@@ -129,7 +132,7 @@
             success: function (data) {
                 total = data.count[0].count + data.count[1].count + data.count[2].count;
                 $('#alarmNumb').html(total);
-                $('#alarmNumbSub').html('봉사: '+data.count[0].count+' 발견: '+data.count[1].count +' 입양: '+data.count[2].count);
+                $('#alarmNumbSub').html('봉사: ' + data.count[0].count + ' 발견: ' + data.count[1].count + ' 입양: ' + data.count[2].count);
             }
         })
     }
@@ -138,8 +141,21 @@
     //barChart
     var date = new Date();
     var year = date.getFullYear();
-    var month = date.getMonth()+1;
-    var months = {1:"Jan", 2:"Feb", 3:"Mar", 4:"Apr", 5:"May", 6:"Jun", 7:"Jul", 8:"Aug", 9:"Sep", 10:"Oct", 11:"Nov", 12:"Dec"};
+    var month = date.getMonth() + 1;
+    var months = {
+        1: "Jan",
+        2: "Feb",
+        3: "Mar",
+        4: "Apr",
+        5: "May",
+        6: "Jun",
+        7: "Jul",
+        8: "Aug",
+        9: "Sep",
+        10: "Oct",
+        11: "Nov",
+        12: "Dec"
+    };
     var lable_data = [[], [], []];
     var chart_data = [[], [], []];
     var backgroundColorSet = [
@@ -170,6 +186,7 @@
         'rgba(153, 102, 255, 1)',
         'rgba(255, 159, 64, 1)'
     ];
+
     function getScheduleDate() {
         $.ajax({
             url: "/erp/chart/json/getScheduleDate",
@@ -194,7 +211,7 @@
                         scales: {
                             yAxes: [{
                                 ticks: {
-                                    beginAtZero:true
+                                    beginAtZero: true
                                 }
                             }]
                         }
@@ -203,6 +220,7 @@
             }
         })
     }
+
     function getAdoptDate() {
         $.ajax({
             url: "/erp/chart/json/getAdoptDate",
@@ -227,7 +245,7 @@
                         scales: {
                             yAxes: [{
                                 ticks: {
-                                    beginAtZero:true
+                                    beginAtZero: true
                                 }
                             }]
                         }
@@ -236,6 +254,7 @@
             }
         })
     }
+
     function getDiscoverDate() {
         $.ajax({
             url: "/erp/chart/json/getDiscoverDate",
@@ -260,7 +279,7 @@
                         scales: {
                             yAxes: [{
                                 ticks: {
-                                    beginAtZero:true
+                                    beginAtZero: true
                                 }
                             }]
                         }
@@ -270,27 +289,27 @@
         })
     }
 
-function lableNchartDataSet(data, idx) {
-    var j = 0;
-    var tmp;
-    var comp_date;
-    for(var i=0 ; i<12; i++){
-        tmp = String((month-i+12)%12);
-        if(parseInt(tmp) === 0) tmp=String(12);
-        if(tmp.length === 1){
-            tmp = "0" + tmp;
+    function lableNchartDataSet(data, idx) {
+        var j = 0;
+        var tmp;
+        var comp_date;
+        for (var i = 0; i < 12; i++) {
+            tmp = String((month - i + 12) % 12);
+            if (parseInt(tmp) === 0) tmp = String(12);
+            if (tmp.length === 1) {
+                tmp = "0" + tmp;
+            }
+            comp_date = String(year) + '-' + tmp;
+            if (data.date[j] === undefined || data.date[j].m !== comp_date) {
+                lable_data[idx].push(months[parseInt(tmp)]);
+                chart_data[idx].push(0);
+            } else {
+                lable_data[idx].push(months[parseInt(tmp)]);
+                chart_data[idx].push(data.date[j].c);
+                j++;
+            }
         }
-        comp_date = String(year)+'-'+tmp;
-        if(data.date[j] === undefined || data.date[j].m !== comp_date ){
-            lable_data[idx].push(months[parseInt(tmp)]);
-            chart_data[idx].push(0);
-        }else{
-            lable_data[idx].push(months[parseInt(tmp)]);
-            chart_data[idx].push(data.date[j].c);
-            j++;
-        }
+        lable_data[idx].reverse();
+        chart_data[idx].reverse();
     }
-    lable_data[idx].reverse();
-    chart_data[idx].reverse();
-}
 </script>

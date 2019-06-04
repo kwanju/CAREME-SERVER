@@ -226,6 +226,11 @@ exports.getVolunteerInCalendar = function (_data, _callback) {
     schedule.getVolunteerInCalendar(_data, _callback);
 }
 
+exports.getAnimalInCalendar = function (_data, _callback) {
+    var schedule = require('./erp/schedule');
+    schedule.getAnimalInCalendar(_data, _callback);
+}
+
 exports.getVolunteerToday = function (_data, _callback) {
     var schedule = require('./erp/schedule');
     schedule.getVolunteerToday(_data, _callback);

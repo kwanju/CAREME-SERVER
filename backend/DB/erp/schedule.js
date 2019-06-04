@@ -84,6 +84,17 @@ exports.getVolunteerInCalendar = function (_data, _callback) {
     });
 }
 
+exports.getAnimalInCalendar = function (_data, _callback) {
+    var select = "SELECT sch.idx, a.name AS animalName, a.species_code, u.nickname, sch.date "
+    var from = "FROM schedule AS sch INNER JOIN animal AS a INNER JOIN user AS u INNER JOIN shelter AS she ";
+    var on = "ON sch.animal_idx = a.idx AND sch.user_idx = u.idx AND a.shelter_idx =she.idx "
+    var where = "WHERE she.idx = ? AND sch.permit=1 AND a.idx = ?";
+
+    poolAdapter.execute(select + from + on + where, [_data.shelter_idx, _data.animal_idx], function (_results) {
+        _callback(_results);
+    });
+}
+
 exports.getVolunteerToday = function (_data, _callback) {
     var date = require('../../utils/date')();
     var select = "SELECT COUNT(*) AS count ";

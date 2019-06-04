@@ -109,7 +109,7 @@ exports.getVolunteerToday = function (_data, _callback) {
 
 exports.getVolunteerName = function (_data, _callback) {
     var date = require('../../utils/date')();
-    var select = "SELECT user.nickname AS userName, animal.name AS animalName ";
+    var select = "SELECT user.nickname AS userName, animal.name AS animalName, animal.idx AS animalIdx ";
     var from = "FROM schedule INNER JOIN animal INNER JOIN shelter INNER JOIN user ";
     var on = "ON schedule.animal_idx = animal.idx AND animal.shelter_idx = shelter.idx AND schedule.user_idx = user.idx ";
     var where = "WHERE date(date) = date('"+date+"') AND shelter.idx = ?";

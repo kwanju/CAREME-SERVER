@@ -1,2 +1,82 @@
 <!-- App js -->
 <script src="/assets/js/pikeadmin.js"></script>
+
+<!-- BEGIN DataTable -->
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+<!-- BEGIN Calendar -->
+<script src="/assets/js/jquery-ui.min.js"></script>
+<script src="/assets/plugins/fullcalendar/fullcalendar.min.js"></script>
+<script>
+    $(document).ready(function () {
+        /* initialize the external events
+        -----------------------------------------------------------------*/
+        $('#external-events .fc-event').each(function () {
+
+            // store data so the calendar knows to render an event upon drop
+            $(this).data('event', {
+                title: $.trim($(this).text()), // use the element's text as the event title
+                stick: true // maintain when user navigates (see docs on the renderEvent method)
+            });
+
+            // make the event draggable using jQuery UI
+            $(this).draggable({
+                zIndex: 999,
+                revert: true,      // will cause the event to go back to its
+                revertDuration: 0  //  original position after the drag
+            });
+
+        });
+
+        /* initialize the calendar
+        -----------------------------------------------------------------*/
+        setTimeout(function () {
+            $.ajax({
+                url: '/erp/volunteer/json/getAnimalInCalendar',
+                method: 'POST',
+                data: {animal_idx : selectedAnimal},
+                success: function (data) {
+                    var events = []
+                    $.each(data.list,function(idx, list){
+                        events.push({
+                            title: list.animalName + " / "+ list.nickname,
+                            start: formatDate(list.date, DATE)
+                        })
+                    })
+                    var date = new Date();
+                    var d = date.getDate();
+                    m = date.getMonth();
+                    y = date.getFullYear();
+
+                    $('#calendar').fullCalendar({
+                        header: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'month,agendaWeek,agendaDay'
+                        },
+                        selectable: true,
+                        selectHelper: true,
+                        select: function (start, end) {
+                            var title = prompt('Event Title:');
+                            var eventData;
+                            if (title) {
+                                eventData = {
+                                    title: title,
+                                    start: start,
+                                    end: end
+                                };
+                                $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+                            }
+                            $('#calendar').fullCalendar('unselect');
+                        },
+                        editable: true,
+                        eventLimit: true, // allow "more" link when too many events
+                        events: events,
+                        droppable: true, // this allows things to be dropped onto the calendar
+                    })
+                }
+            })
+        }, 3000)
+    });
+</script>

@@ -19,6 +19,10 @@ exports.init = function (_server) {
     });
 }
 
+exports.send = function (_event, _socketId, _message) {
+    socket.io.to(_socketId).emit(_event, _message);
+}
+
 exports.getIo = function () {
     return socket.io
 }

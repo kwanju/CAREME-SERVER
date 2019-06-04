@@ -6,9 +6,9 @@ describe.only("saveMessage Test", function () {
         message.saveMessage(
             {
                 type: "0",
-                user_idx: "1",
+                user_idx: "7",
                 shelter_idx: "1",
-                message: "message"
+                message: "반갑습니다."
             }
             , function () { }, function (_idx) {
                 assert(_idx);

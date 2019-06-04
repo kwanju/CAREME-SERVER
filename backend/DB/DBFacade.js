@@ -295,3 +295,13 @@ exports.getScheduleDate = function (_data, _callback) {
     var date = require('./erp/chart');
     date.getScheduleDate(_data, _callback);
 }
+
+exports.getAdoptDate = function (_data, _callback) {
+    var date = require('./erp/chart');
+    date.getAdoptDate(_data, _callback);
+}
+
+exports.getDiscoverDate = function (_data, _callback) {
+    var date = require('./erp/chart');
+    date.getDiscoverDate(_data, _callback);
+}

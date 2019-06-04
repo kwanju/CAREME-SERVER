@@ -75,31 +75,12 @@
                         stateList = data
                         fetchAnimalList();
                         fetchAnimalState(stateList);
+                        fetchEditState(stateList);
                     }
                 })
             }
         })
     });
-
-    function fetchAnimalState(stateList) {
-        var choice = $('#choiceState');
-        var edit = $('#animalState');
-        choice.append('<option disabled>유기견 상태를 선택하세요</option>');
-        $.each(stateList, function (key, entry) {
-            choice.append($('<span style="display: none;">' + key + '</span><option>' + entry + '</option>'))
-            edit.append($('<span class="selectDropdown" style="display: none;">' + key + '</span><option>' + entry + '</option>'))
-            var state = $(choice).find('span').html();
-            var edit_state = $(edit).find('span').html();
-
-            $('#state').val(state);
-            $('#update_state').val(edit);
-            console.log(state);
-
-
-        })
-
-
-    }
 
     function fetchAnimalList() {
         $.ajax({
@@ -153,10 +134,12 @@
             success: function (data) {
                 selectedAnimal = data.animal.idx;
                 selectedSpecies = data.animal.species_code;
-                selectedState = data.animal.state
+                selectedState = data.animal.state;
                 $("#animalName").val(data.animal.name);
                 $("#animalCode").val(animalList[data.animal.species_code]);
-                $("#animalState").val(stateList[data.animal.state]);
+                $("#update_species_code").val(data.animal.species_code);
+                $("#animalState").val(data.animal.state);
+                $("#update_state").val(data.animal.state);
                 $("#animalWeight").val(data.animal.weight);
                 $("#animalImg").attr('src', "/" + data.animal.url_picture);
                 $("#animalDesc").val(data.animal.description);

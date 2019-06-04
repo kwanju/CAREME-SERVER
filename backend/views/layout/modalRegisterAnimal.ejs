@@ -32,7 +32,7 @@
                     <div class="form-group">
                         <label for="exampleFormControlInput1">상태</label>
                         <div class="form-group">
-                            <select class="form-control" id="choiceState">
+                            <select class="form-control choiceDropdown" id="choiceState">
                             </select>
                         </div>
                     </div>
@@ -115,6 +115,31 @@
             }
         })
     }
+
+    function fetchAnimalState(stateList) {
+        var choice = $('#choiceState');
+        choice.append('<option selected="false" disabled>유기견 상태를 선택하세요</option>');
+        $.each(stateList, function (key, entry) {
+            choice.append($('<option value = ' + key + '>' + entry + '</option>'))
+        })
+
+    }
+
+    var selectedKey;
+    var selectedText;
+
+    $(document).on('change', '.choiceDropdown', function (e) {
+        var selectedSpecies = document.getElementById("choiceState");
+        selectedKey = selectedSpecies.options[selectedSpecies.selectedIndex].value;
+        selectedText = selectedSpecies.options[selectedSpecies.selectedIndex].text;
+
+        $('#state').val(selectedKey);
+
+    })
 </script>
+
+
+
+
 
 <% include ./../modal/searchSpeciesModal.ejs %>

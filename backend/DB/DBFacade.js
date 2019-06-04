@@ -226,6 +226,11 @@ exports.getVolunteerInCalendar = function (_data, _callback) {
     schedule.getVolunteerInCalendar(_data, _callback);
 }
 
+exports.getAnimalInCalendar = function (_data, _callback) {
+    var schedule = require('./erp/schedule');
+    schedule.getAnimalInCalendar(_data, _callback);
+}
+
 exports.getVolunteerToday = function (_data, _callback) {
     var schedule = require('./erp/schedule');
     schedule.getVolunteerToday(_data, _callback);
@@ -289,4 +294,34 @@ exports.checkAdoptReadState = function (_data, _callback) {
 exports.updateAdoptNotRead = function (_data, _callback) {
     var adopt = require('./erp/adopt');
     adopt.updateAdoptNotRead(_data, _callback);
+}
+
+exports.getNewChatList = function (_data, _callback) {
+    var chat = require('./erp/chat');
+    chat.getNewChatList(_data, _callback);
+}
+
+exports.getChatList = function (_data, _callback) {
+    var chat = require('./erp/chat');
+    chat.getChatList(_data, _callback);
+}
+
+exports.getChat = function (_data, _callback) {
+    var chat = require('./erp/chat');
+    chat.getChat(_data, _callback);
+}
+
+exports.getScheduleDate = function (_data, _callback) {
+    var date = require('./erp/chart');
+    date.getScheduleDate(_data, _callback);
+}
+
+exports.getAdoptDate = function (_data, _callback) {
+    var date = require('./erp/chart');
+    date.getAdoptDate(_data, _callback);
+}
+
+exports.getDiscoverDate = function (_data, _callback) {
+    var date = require('./erp/chart');
+    date.getDiscoverDate(_data, _callback);
 }

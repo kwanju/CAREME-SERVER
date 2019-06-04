@@ -1,6 +1,19 @@
 var shelterList = {};
 var userList = {}
 
+
+exports.getMember = function (_type, user_idx, shelter_idx) {
+    if (_type == "1") { // 보호소에서 보냈으면
+        if (userList[user_idx] == undefined)
+            return null
+        return userList[user_idx]
+    } else {
+        if (shelterList[shelter_idx] == undefined)
+            return null
+        return shelterList[shelter_idx]
+    }
+}
+
 exports.participate = function (_socket) {
 
     //소켓에 참여했을 때 주는 정보.

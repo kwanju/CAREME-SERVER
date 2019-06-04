@@ -67,6 +67,16 @@ exports.getVolunteerInCalendar = function (_data, _callback, _testcallback) {
     });
 }
 
+exports.getAnimalInCalendar = function (_data, _callback, _testcallback) {
+    dbFacade.getAnimalInCalendar(_data, function (_results) {
+        if (typeof _testcallback == 'function')
+            _testcallback(_results);
+        var res = {}
+        res.result = 1;
+        res.list = _results;
+        _callback(res);
+    });
+}
 exports.getVolunteerToday = function (_data, _callback) {
     dbFacade.getVolunteerToday(_data, function (_results) {
         var res = {};

@@ -24,6 +24,13 @@ router.post('/getVolunteerInCalendar', insertIdxIntoBody, function (_req, _res) 
     });
 });
 
+router.post('/getAnimalInCalendar', insertIdxIntoBody, function (_req, _res) {
+    var schedule = require('../../../model/erp/schedule');
+    schedule.getAnimalInCalendar(_req.body, function (_result) {
+        _res.send(_result);
+    });
+});
+
 router.post('/getVolunteerToday', insertIdxIntoBody, function (_req, _res) {
     var schedule = require('../../../model/erp/schedule');
     schedule.getVolunteerToday(_req.body, function (_result) {

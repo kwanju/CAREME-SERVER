@@ -40,7 +40,7 @@
                     <div class="form-group">
                         <label for="exampleFormControlInput1">상태</label>
                         <div class="form-group">
-                            <select class="form-control" id="animalState">
+                            <select class="form-control editDropdown" id="animalState">
                             </select>
                         </div>
                         <!-- <input type="text" class="form-control" id="animalState" aria-label="state"> -->
@@ -133,15 +133,30 @@
         })
     }
 
+
     $(document).on('click', '.update-animal', function (e) {
         var idx = selectedAnimal;
-        var species = selectedSpecies;
-        var state = selectedState;
-        $('#update_species_code').val(species)
-        $('#update_state').val(state)
-
         updateAnimal(idx);
     });
+
+    function fetchEditState(stateList) {
+        var edit = $('#animalState');
+        edit.append($('<option selected="false" disabled></option>'));
+        $.each(stateList, function (key, entry) {
+            edit.append($('<option value = ' + key + '>' + entry + '</option>'))
+        })
+
+    }
+
+
+    $(document).on('change', '.editDropdown', function (e) {
+        var edittedSpecies = document.getElementById("animalState");
+        var edittedKey = edittedSpecies.options[edittedSpecies.selectedIndex].value;
+        var edittedText = edittedSpecies.options[edittedSpecies.selectedIndex].text;
+
+        $('#update_state').val(edittedKey);
+
+    })
 
 </script>
 

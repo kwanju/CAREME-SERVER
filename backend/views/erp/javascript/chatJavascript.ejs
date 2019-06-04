@@ -1,5 +1,34 @@
-<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
-<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var shelter_idx;
+    var socket = io();
+
+    socket.on('message', function (_msg) {
+        var message = JSON.parse(_msg);
+        console.log(message);
+        newMessage(0, message.message);
+        // 여기서 없을 때 있을 때 구분해서 한다.
+    });
+
+
+    $.ajax({
+        url: "/erp/chat/json/getShelterIdx",
+        method: "POST",
+        data: {},
+        success: function (data) {
+            shelter_idx = data.shelter_idx;
+            var message = {
+                type: "shelter",
+                idx: shelter_idx
+            }
+            socket.emit('participate', JSON.stringify(message)); // 들어왔다고 통보.
+        }
+    });
+
+
+
+</script>
+
 <script>$(".messages").animate({ scrollTop: $(document).height() }, "fast");
 
     $("#profile-img").click(function () {
@@ -34,24 +63,34 @@
         $("#status-options").removeClass("active");
     });
 
-    function newMessage() {
-        message = $(".message-input input").val();
-        if ($.trim(message) == '') {
-            return false;
-        }
-        $('<li class="sent"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
-        $('.message-input input').val(null);
-        $('.contact.active .preview').html('<span>You: </span>' + message);
+    function newMessage(_type, _message) {
+        type = _type == 1 ? "sent" : "replies";
+        $('<li class="' + type + '"><p>' + _message + '</p></li>').appendTo($('.messages ul'));
+        //$('.contact.active .preview').html('<span>You: </span>' + message);
         $(".messages").animate({ scrollTop: $(document).height() }, "fast");
     };
 
-    $('.submit').click(function () {
-        newMessage();
-    });
+    function sendMessage() {
+        var message = $(".message-input input").val();
+        if ($.trim(message) == '') {
+            return false;
+        }
+        newMessage(1, message);
+        $('.message-input input').val(null);
+
+        var socektMessage = {
+            type: "1",
+            user_idx: mSelected_user_idx,
+            shelter_idx: shelter_idx,
+            message: message
+        }
+        socket.emit('message', JSON.stringify(socektMessage));
+    }
+    $('.submit').click(sendMessage);
 
     $(window).on('keydown', function (e) {
         if (e.which == 13) {
-            newMessage();
+            sendMessage();
             return false;
         }
     });

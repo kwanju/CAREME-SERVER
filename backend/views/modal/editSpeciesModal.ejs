@@ -49,6 +49,7 @@
             }
         })
     }
+    var edit_code;
 
     function register_edit_species() {
         //selected가 없으면 선택하시오 alert
@@ -59,10 +60,9 @@
         }
         //shelterName에 값 추가
         var editName = selected.innerText;
-        //console.log(editName)
-        var edit_code = $(selected).find('span').html();
+        edit_code = $(selected).find('span').html();
         $('#animalCode').val(editName);
-        $('#species_code').val(edit_code);
+        $('#update_species_code').val(edit_code);
         //modal 초기화
         clear_result();
     }

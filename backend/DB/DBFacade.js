@@ -296,6 +296,21 @@ exports.updateAdoptNotRead = function (_data, _callback) {
     adopt.updateAdoptNotRead(_data, _callback);
 }
 
+exports.getNewChatList = function (_data, _callback) {
+    var chat = require('./erp/chat');
+    chat.getNewChatList(_data, _callback);
+}
+
+exports.getChatList = function (_data, _callback) {
+    var chat = require('./erp/chat');
+    chat.getChatList(_data, _callback);
+}
+
+exports.getChat = function (_data, _callback) {
+    var chat = require('./erp/chat');
+    chat.getChat(_data, _callback);
+}
+
 exports.getScheduleDate = function (_data, _callback) {
     var date = require('./erp/chart');
     date.getScheduleDate(_data, _callback);

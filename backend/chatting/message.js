@@ -20,7 +20,7 @@ exports.getMessage = function (_socket) {
                 user_idx: message.user_idx,
                 message: message.message
             }
-            socket.send('message', soketId, JSON.stringify(sendMessage));
+            socket.send('message', socketId, JSON.stringify(sendMessage));
         }
         messageModel.saveMessage(message, function () {
 

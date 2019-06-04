@@ -1,0 +1,108 @@
+<div class="modal fade" id="animal_edit2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"
+     style="overflow-y: initial !important">
+    <div class="modal-dialog modal-dialog-centered modal-lg" style="overflow-y: initial !important;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">유기견 수정</h5>
+                <button class="btn btn-default btn" data-toggle="modal" data-target="#animalSchedule">
+                    <i class='fa fa-calendar' style='font-size:24px; color:blue'></i>
+                </button>
+            </div>
+            <form id="form2" name="form2" method="POST" enctype="multipart/form-data">
+                <div class="modal-body" style="overflow-y: auto; height:500px;">
+                    <label for="animal_img">유기견 사진</label>
+                    <div class="form-group">
+                        <img src="" id="animalImg" width="250" height="200" />
+                        <input disabled type="file" class="form-control-file" id="animal_img" name="animalImage">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">견명*</label>
+                        <input disabled type="text" class="form-control" id="animalName" name="name" aria-label="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">견종</label>
+                        <div class="input-group mb-3">
+                            <input type="text" disabled class="form-control" id="animalCode" aria-label="species_code">
+                            <div class="input-group-append">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input disabled id="update_species_code" name="species_code" type="text" style="display:none;">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">무게</label>
+                        <input disabled type="text" class="form-control" id="animalWeight" name="weight" aria-label="weight">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">상태</label>
+                        <div class="form-group">
+                            <select disabled class="form-control" id="animalState">
+                            </select>
+                        </div>
+                        <!-- <input type="text" class="form-control" id="animalState" aria-label="state"> -->
+                    </div>
+                    <div class="form-group">
+                        <input disabled id="update_state" name="state" type="text" style="display:none;">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">유기견 발견장소</label>
+                        <div class="input-group mb-3">
+                            <input disabled id="edit_animal_discovered_spot" type="text" name="discovered_spot" class="form-control" aria-label="Recipient's username"
+                                   aria-describedby="basic-addon2" readonly>
+                            <div class="input-group-append">
+
+                            </div>
+                        </div>
+                        <input id="edit_animal_latitude" type="text" name="discovered_spot_latitude" style="display: none;">
+                        <input id="edit_animal_longitude" type="text" name="discovered_spot_longitude" style="display: none;">
+                    </div>
+                    <div class="form-group">
+                        <fieldset>
+                            <label for="exampleFormControlSelect1">성별</label>
+                            <br>
+                            <input disabled type="radio" name="sex" id="male" value="m" /> 남
+                            <input disabled type="radio" name="sex" id="female" value="w" /> 여
+                        </fieldset>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Comment:</label>
+                        <textarea disabled class="form-control" id="animalDesc" name="description" rows="4"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var sel_file;
+
+    $(document).ready(function () {
+        $("#animal_img").on('change', handleImage);
+    });
+
+    function handleImage(e) {
+        var files = e.target.files;
+        var filesArr = Array.prototype.slice.call(files);
+
+        filesArr.forEach(function (f) {
+            if (!f.type.match("image.*")) {
+                alert("이미지 확장자만 가능합니다");
+                return
+            }
+            sel_file = f;
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#animalImg').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(f);
+        });
+    }
+</script>
+

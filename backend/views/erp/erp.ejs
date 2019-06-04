@@ -104,7 +104,9 @@
                 $('#volunteer_user').html('');
                 $.each(data.volunteer, function (idx, volunteer) {
                     $('#volunteer_animal').append(
-                        "<li>" + volunteer.animalName + "</li>"
+                        "<li class='getAnimal'>" + volunteer.animalName +
+                            "<div style='display: none;'>"+volunteer.animalIdx+"</div>"
+                        +"</li>"
                     )
                     $('#volunteer_user').append(
                         "<li>" + volunteer.userName + "</li>"
@@ -136,6 +138,68 @@
             }
         })
     }
+</script>
+<script>
+    var animalList;
+    var stateList;
+
+    $(document).ready(function () {
+        $.ajax({
+            url: '/data/species_code.json',
+            type: 'GET',
+            data: {},
+            success: function (data) {
+                animalList = data
+                $.ajax({
+                    url: '/data/state.json',
+                    type: 'GET',
+                    data: {},
+                    success: function (data) {
+                        stateList = data;
+                    }
+                })
+            }
+        })
+    });
+
+    var selectedAnimal;
+    var selectedSpecies;
+    var selectedState;
+
+    function getAnimalInfo(idx) {
+        $.ajax({
+            url: "/erp/animal/json/getAnimal",
+            method: "POST",
+            data: { animal_idx: idx },
+            success: function (data) {
+                selectedAnimal = data.animal.idx;
+                selectedSpecies = data.animal.species_code;
+                selectedState = data.animal.state
+                $("#animalName").val(data.animal.name);
+                $("#animalCode").val(animalList[data.animal.species_code]);
+                $("#animalState").val(stateList[data.animal.state]);
+                $("#animalWeight").val(data.animal.weight);
+                $("#animalImg").attr('src', "/" + data.animal.url_picture);
+                $("#animalDesc").val(data.animal.description);
+                $('#edit_animal_discovered_spot').val(data.animal.discovered_spot)
+                $('#edit_animal_latitude').val(data.animal.discovered_spot_latitude)
+                $('#edit_animal_longitude').val(data.animal.discovered_spot_longitude)
+                if (data.animal.sex = 'w') {
+                    $('#female').prop("checked", true)
+                }
+                else {
+                    $('#male').prop("checked", true)
+                }
+                $("#animal_edit2").modal("show")
+            }
+        })
+    }
+
+    $(document).on('click', '.getAnimal', function (e) {
+        var idx = $(this).find('div').html();
+        //console.log(idx);
+        getAnimalInfo(idx);
+    });
 </script>
 <script>
     //barChart
@@ -313,3 +377,6 @@
         chart_data[idx].reverse();
     }
 </script>
+
+<% include ./../modal/animalInfoModal.ejs%>
+<% include ./../modal/animalScheduleModal.ejs%>

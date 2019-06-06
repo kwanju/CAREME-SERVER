@@ -28,6 +28,21 @@ exports.getChat = function (_data, _callback, _testcallback) {
             list: _results
         }
         _callback(res);
+        if (_results.length > 0)
+            dbFacade.updateChatNotRead({ user_idx: _results[0].user_idx }, function () { });
+    });
+}
+
+exports.getShelter = function (_data, _callback, _testcallback) {
+    dbFacade.getShelterInChat(_data, function (_results) {
+        if (typeof _testcallback == 'function')
+            _testcallback(_results);
+        var res = {
+            result: 1,
+            shelter: _results[0]
+        };
+
+        _callback(res);
     });
 }
 

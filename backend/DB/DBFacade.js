@@ -331,6 +331,20 @@ exports.setAdoptState = function (_data, _callback) {
     date.setAdoptState(_data, _callback);
 }
 
+exports.updateChatNotRead = function (_data, _callback) {
+    var chat = require('./erp/chat');
+    chat.updateChatNotRead(_data, _callback);
+}
+
+exports.ackMessage = function (_data, _callback) {
+    var chat = require('./chat/chat');
+    chat.ackMessage(_data, _callback);
+}
+
+exports.getShelterInChat = function (_data, _callback) {
+    var chat = require('./erp/chat');
+    chat.getShelter(_data, _callback);
+}
 exports.getUserScheduleList = function (_data, _callback) {
     var schedule = require('./erp/user');
     schedule.getUserScheduleList(_data, _callback);

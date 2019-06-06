@@ -9,23 +9,27 @@ exports.getMessage = function (_socket) {
         var message = JSON.parse(_message);
         console.log(message)
         var socketId = member.getMember(message.type, message.user_idx, message.shelter_idx);
+        message.read_state = 0
+        messageModel.saveMessage(message, function (_idx) { // 디비에 먼저 등록
+            if (socketId != null) { // 현재 소켓연결이 되어있을 때(현재 채팅창에 있음)
 
-        if (socketId == null) // 현재 소켓 연결이 안되어 있을 때(현재 채팅창에 없음)
-            message.read_state = 0
-        else { // 현재 소켓연결이 되어있을 때(현재 채팅창에 있음)
-            message.read_state = 1
-
-            var sendMessage = {
-                shelter_idx: message.shelter_idx,
-                user_idx: message.user_idx,
-                message: message.message,
-                send_time: require('../utils/date')()
+                var sendMessage = {
+                    message_idx: _idx,
+                    shelter_idx: message.shelter_idx,
+                    user_idx: message.user_idx,
+                    message: message.message,
+                    send_time: require('../utils/date')()
+                }
+                console.log(sendMessage);
+                socket.send('message', socketId, JSON.stringify(sendMessage));
             }
-            socket.send('message', socketId, JSON.stringify(sendMessage));
-        }
-        messageModel.saveMessage(message, function () {
-
         });
-
     });
+
+    _socket.on('ack', function (_msg) {
+        var message = JSON.parse(_msg);
+        console.log("ACK : " + message.message_idx);
+        messageModel.ackMessage({ message_idx: message.message_idx }, function () { });
+    });
+
 }

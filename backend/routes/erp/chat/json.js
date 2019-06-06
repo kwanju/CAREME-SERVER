@@ -9,8 +9,10 @@ router.post('/getChatList', insertIdxIntoBody, function (_req, _res) {
     });
 });
 
-router.post('/getShelterIdx', insertIdxIntoBody, function (_req, _res) {
-    _res.send(_req.body);
+router.post('/getShelter', insertIdxIntoBody, function (_req, _res) {
+    chat.getShelter(_req.body, function (_result) {
+        _res.send(_result);
+    });
 });
 
 router.post('/getChat', insertIdxIntoBody, function (_req, _res) {

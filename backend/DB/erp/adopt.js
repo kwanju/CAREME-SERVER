@@ -1,6 +1,6 @@
 var poolAdapter = require('../poolAdapter'); // get poolAdapter
 
-exports.addAdopt = function (_data, _callback) {
+exports.addAdoptAnimal = function (_data, _callback) {
     var query = "INSERT INTO " +
         "adopt(" +
         "animal_idx, user_idx, datetime, user_name, address, address2, phone_number, user_email, " +
@@ -27,6 +27,14 @@ exports.addAdopt = function (_data, _callback) {
             _callback();
         });
 }
+
+exports.setAdoptState = function (_data, _callback) {
+    var update = "UPDATE animal SET state=2 ";
+    var where = "WHERE idx=?";
+    poolAdapter.execute(update+where, [_data.animalIdx], function (_results) {
+        _callback();
+    });
+};
 
 exports.userLogin = function (_data, _callback) {
     var select = "SELECT idx,id from user "
@@ -72,17 +80,26 @@ exports.permitAdopt = function (_data, _callback) {
     var update = "UPDATE adopt SET permit=1 ";
     var where = "WHERE idx=?";
 
-    poolAdapter.execute(update + where, [_data.idx], function (_results) { //adopt idx
-        _callback();
+    var update2 = "UPDATE animal INNER JOIN adopt ON animal.idx=adopt.animal_idx SET animal.state=3 ";
+    var where2 = "WHERE adopt.idx=?";
+
+    poolAdapter.execute(update + where, [_data.idx], function () { //adopt idx
+        poolAdapter.execute(update2+where2, [_data.idx], function () {
+            _callback();
+        })
     });
 };
 
 exports.rejectAdopt = function (_data, _callback) {
     var update = "UPDATE adopt SET permit=-1 ";
     var where = "WHERE idx=?";
+    var update2 = "UPDATE animal INNER JOIN adopt ON animal.idx=adopt.animal_idx SET animal.state=1 ";
+    var where2 = "WHERE adopt.idx=?";
 
-    poolAdapter.execute(update + where, [_data.idx], function (_results) { //adopt idx
-        _callback();
+    poolAdapter.execute(update + where, [_data.idx], function () { //adopt idx
+        poolAdapter.execute(update2+where2, [_data.idx], function () {
+            _callback();
+        })
     });
 };
 

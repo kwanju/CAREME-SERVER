@@ -1,11 +1,27 @@
 var dbFacade = require('../../DB/DBFacade');
 
 exports.addAdopt = function (_data, _callback) {
-    dbFacade.addAdopt(_data, function (_results) {
-        var res = { result: 1 };
-        _callback(res);
-    });
+    var res = { result: 1 };
+    addAdoptAnimal(_data, res, function () {
+        setAdoptState(_data, res, function () {
+            _callback(res);
+        })
+    })
 };
+var addAdoptAnimal = function (_data, _res, _callback) {
+    dbFacade.addAdoptAnimal(_data, function (_results) {
+        _res.adopt = _results;
+        if (typeof _callback == 'function')
+            _callback();
+    });
+}
+var setAdoptState = function(_data, _res, _callback){
+    dbFacade.setAdoptState(_data, function (_results) {
+        _res.adopt = _results;
+        if (typeof _callback == 'function')
+            _callback();
+    });
+}
 
 exports.userLogin = function (_data, _callback) {
     dbFacade.userLogin(_data, function (_results) {

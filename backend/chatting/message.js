@@ -28,7 +28,8 @@ exports.getMessage = function (_socket) {
                     messageModel.getPushInfoInChat({ idx: _idx }, function (_push) {
                         fcm.send(_push.token, _push.name + " : " + _push.message, "0", {
                             shelter_idx: _push.shelter_idx,
-                            shelter_name: _push.name
+                            shelter_name: _push.name,
+                            message: _push.message
                         });
                     });
 

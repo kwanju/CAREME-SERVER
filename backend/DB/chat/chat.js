@@ -17,3 +17,13 @@ exports.ackMessage = function (_data, _callback) {
         _callback();
     });
 }
+
+exports.getPushInfoInChat = function (_data, _callback) {
+    var select = "SELECT u.token, she.name, cus.message ";
+    var from = "FROM user AS u INNER JOIN shelter AS she INNER JOIN chat_user_shelter AS cus ";
+    var on = "ON cus.user_idx = u.idx AND cus.shelter_idx=she.idx ";
+    var where = "WHERE cus.idx = ?"
+    poolAdapter.execute(select + from + on + where, [_data.idx], function (_results) {
+        _callback(_results);
+    });
+}

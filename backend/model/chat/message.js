@@ -14,3 +14,11 @@ exports.ackMessage = function (_data, _callback) {
         _callback();
     });
 }
+
+exports.getPushInfoInChat = function (_data, _callback, _testcallback) {
+    dbFacade.getPushInfoInChat(_data, function (_push) {
+        if (typeof _testcallback == 'function')
+            _testcallback(_push[0]);
+        _callback(_push[0]);
+    });
+}

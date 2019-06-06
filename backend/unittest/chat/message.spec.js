@@ -17,7 +17,7 @@ describe("saveMessage Test", function () {
     });
 });
 
-describe.only("ackMessage Test", function () {
+describe("ackMessage Test", function () {
     it("insert chat table test", function (done) {
         message.ackMessage(
             {
@@ -25,6 +25,20 @@ describe.only("ackMessage Test", function () {
             }
             , function () { done(); }, function () {
 
+            });
+    });
+});
+
+describe.only("getPushInfoInChat Test", function () {
+    it("get data", function (done) {
+        message.getPushInfoInChat(
+            {
+                idx: 84
+            }
+            , function () { }, function (_push) {
+                console.log(_push)
+                assert(_push);
+                done();
             });
     });
 });

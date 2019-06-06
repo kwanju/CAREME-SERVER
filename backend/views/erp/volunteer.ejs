@@ -38,20 +38,20 @@
             <div class="table-responsive">
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="waitList" style="margin-top:20px">
-                        <table id="waitTable" class="table table-bordered table-hover display">
+                        <table id="waitTable" class="table table-bordered table-hover display" style="text-align: center">
                             <thead>
                                 <tr>
                                     <th scope="col">번호</th>
                                     <th scope="col">봉사일정</th>
                                     <th scope="col">신청일정</th>
                                     <th scope="col">확인여부</th>
-                                    <th scope="col">animal_idx</th>
+                                    <!-- <th scope="col">animal_idx</th> -->
                                     <th scope="col">유기견명</th>
                                     <th scope="col">견종</th>
                                     <th scope="col">닉네임</th>
                                     <th scope="col">폰번호</th>
                                     <th scope="col">이메일</th>
-                                    <th scope="col" style="width: 8%;">승인여부</th>
+                                    <th scope="col" style="width: 10%;">승인여부</th>
                                 </tr>
 
                             </thead>
@@ -60,13 +60,13 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="permittedList" style="margin-top:20px">
-                        <table id="permitTable" class="table table-bordered table-hover display">
+                        <table id="permitTable" class="table table-bordered table-hover display" style="text-align: center">
                             <thead>
                                 <tr>
                                     <th scope="col">번호</th>
                                     <th scope="col">봉사날짜</th>
                                     <th scope="col">신청날짜</th>
-                                    <th scope="col">animal_idx</th>
+                                    <!-- <th scope="col">animal_idx</th> -->
                                     <th scope="col">유기견명</th>
                                     <th scope="col">견종</th>
                                     <th scope="col">닉네임</th>
@@ -121,7 +121,7 @@
                 $.each(data.list, function (idx, list) {
                     // **** 추후에 수정할 때 animal idx 없앨 때 다른데 안에 넣어서 style display none 해줘야 함수가 동작함 ****
                     $('#permit').append("<tr><th>" + list.idx + "</th><td>" + formatDate(list.date, DATE) + "</th><td>" + formatDate(list.apply_datetime, DATETIME) +
-                        "</td><td><div>" + list.animal_idx + "</div></td><td><a href='#' class='getAnimal'>" + list.animalName + "</a></td><td>" + animalList[list.species_code] + "</td><td>" + list.userNickName +
+                        "</td><td><a href='#' class='getAnimal'>" + list.animalName + "</a><div style='display: none;'>" + list.animal_idx + "</div></td><td>" + animalList[list.species_code] + "</td><td>" + list.userNickName +
                         "</td><td>" + list.userPhoneNumber + "</td><td>" + list.userEmail + "</td>"
                     )
                 })
@@ -162,10 +162,10 @@
 
                     // **** 추후에 수정할 때 animal idx 없앨 때 다른데 안에 넣어서 style display none 해줘야 함수가 동작함 ****
                     $('#waiting').append(tr + "<th>" + list.idx + "</th><td>" + formatDate(list.date, DATE) + "</th><td>" + formatDate(list.apply_datetime, DATETIME) + "</td><td>" +
-                        list.read_state + "</td><td><div>" + list.animal_idx + "</div></td><td><a href='#' class='getAnimal'>" + list.animalName + "</a></td><td>" + animalList[list.species_code] + "</td><td>" + list.userNickName +
+                        list.read_state + "</td><td><a href='#' class='getAnimal'>" + list.animalName + "</a><div style='display: none;'>" + list.animal_idx + "</div></td><td>" + animalList[list.species_code] + "</td><td>" + list.userNickName +
                         "</td><td>" + list.userPhoneNumber + "</td><td>" + list.userEmail +
-                        "</td><td><button class='permit-button btn btn-default btn' style='color:green;'><i class='fa fa-check' style='font-size:24px'></i></button>" +
-                        "<button class='reject-button btn btn-default btn' style='color:red;'><i class='fa fa-remove' style='font-size:24px'></i></button></td>"
+                        "</td><td><button class='permit-button btn btn-default btn' style='color:green;'><i class='fa fa-check' style='font-size:20px'></i></button>" +
+                        "<button class='reject-button btn btn-default btn' style='color:red;'><i class='fa fa-remove' style='font-size:20px'></i></button></td>"
                     )
                 })
                 var dataTable = $('#waitTable').DataTable(

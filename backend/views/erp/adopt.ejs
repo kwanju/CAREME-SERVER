@@ -37,7 +37,7 @@
             <div class="table-responsive">
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="adopt_applyList" style="margin-top:20px">
-                        <table class="table table-bordered table-hover display" id="adopt_waitTable">
+                        <table class="table table-bordered table-hover display" id="adopt_waitTable" style="text-align: center">
                             <thead>
                                 <tr>
                                     <th scope="col">신청번호</th>
@@ -46,7 +46,7 @@
                                     <th scope="col">입양신청자 이름</th>
                                     <th scope="col">핸드폰 번호</th>
                                     <th scope="col">이메일</th>
-                                    <th scope="col">입양신청서 보기</th>
+                                    <th scope="col">입양 신청서 확인</th>
                                     <th scope="col" style="width: 10%;">허가/거부</th>
                                 </tr>
                             </thead>
@@ -55,7 +55,7 @@
                         </table>
                     </div>
                     <div class="ui segment tab-pane fade" id="adopt_permittedList" style="margin-top:20px">
-                        <table class="table table-bordered table-hover display" id="adopt_permitTable">
+                        <table class="table table-bordered table-hover display" id="adopt_permitTable" style="text-align: center">
                             <thead>
                                 <tr>
                                     <th scope="col">신청번호</th>
@@ -64,7 +64,7 @@
                                     <th scope="col">입양자 이름</th>
                                     <th scope="col">핸드폰 번호</th>
                                     <th scope="col">이메일</th>
-                                    <th scope="col">입양신청서 보기</th>
+                                    <th scope="col">입양 신청서 확인</th>
                                 </tr>
                             </thead>
                             <tbody id="adopt_permit">
@@ -84,17 +84,19 @@
             method: "POST",
             data: {},
             success: function (data) {
-                console.log(data);
                 $('#adopt_waiting').html('');
+                var dropdown ="<div class='dropdown-menu dropdown-menu-left ' aria-labelledby='dropdownMenuLink'>" +
+                        "<a class='dropdown-item'>Action</a>" +
+                        "<a class='dropdown-item'>Another action</a>"
+
                 $.each(data.adopt, function (idx, adopt) {
                     $('#adopt_waiting').append(
-                        "<tr><th>" + adopt.idx + "</th><td>" + adopt.name + "</td><td>" + formatDate(adopt.datetime, DATE) + "</td><td>" +
-                        adopt.user_name + "</td><td>" + adopt.phone_number + "</td><td>" + adopt.user_email +
-                        "</td><td>" +
-                        "<button class='btn btn-info info-button'>신청서 보기</button></a>" +
-                        "</td><td>" +
-                        "<button class='permit-button btn btn-default btn' style='color:green;'><i class='fa fa-check' style='font-size:24px'></i></button>" +
-                        "<button class='reject-button btn btn-default btn' style='color:red;'><i class='fa fa-remove' style='font-size:24px'></i></button>" +
+                        "<tr><th>" + adopt.idx + "</th><td>" + adopt.name + "</td><td>" + formatDate(adopt.datetime, DATE) +
+                        "</td><td class='dropdown notif'><a class='dropdown-toggle notif' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>" +
+                        adopt.user_name + "</a>"+ dropdown +"</td><td>" + adopt.phone_number + "</td><td>" + adopt.user_email +
+                        "</td><td><button class='btn btn-info btn-sm info-button'>신청서 보기</button></a></td><td>" +
+                        "<button class='permit-button btn btn-default btn' style='color:green;'><i class='fa fa-check' style='font-size:20px'></i></button>" +
+                        "<button class='reject-button btn btn-default btn' style='color:red;'><i class='fa fa-remove' style='font-size:20px'></i></button>" +
                         "</td>"
                     )
                 });
@@ -134,7 +136,7 @@
                     $('#adopt_permit').append(
                         "<tr><th>" + adopt.idx + "</th><td>" + adopt.name + "</td><td>" + formatDate(adopt.datetime, DATE) + "</td><td>" +
                         adopt.user_name + "</td><td>" + adopt.phone_number + "</td><td>" + adopt.user_email +
-                        "</td><td><button class='btn btn-info info-button'>신청서 보기</button></td></tr>"
+                        "</td><td><button class='btn btn-info btn-sm info-button'>신청서 보기</button></td></tr>"
                     )
                 });
 
@@ -197,7 +199,7 @@
             "입양신청서", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes")
     }
 
-    $(document).on('click', '.info-button', function(e){
+    $(document).on('click', '.info-button', function (e) {
         var idx = $(this).closest('tr').find('th').html();
         openWindow(idx);
     })

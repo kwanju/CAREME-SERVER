@@ -1,0 +1,45 @@
+<div class="modal fade" id="userScheduleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="overflow-y: initial !important">
+    <div class="modal-dialog modal-dialog-centered modal-lg" style="overflow-y: initial !important;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userScheduleModalTitle">사용자 활동 기록</h5>
+            </div>
+            <div class="modal-body">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="card mb-3 p-3">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6"></div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">검색</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="search..." aria-label="Username" aria-describedby="basic-addon1" id="userScheduleSearch">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="userSchedule" style="margin-top:20px">
+                                    <table id="userScheduleTable" class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">봉사활동 번호</th>
+                                            <th scope="col">활동 날짜</th>
+                                            <th scope="col">활동 대상</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="userScheduleTableContent">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

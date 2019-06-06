@@ -345,3 +345,7 @@ exports.getShelterInChat = function (_data, _callback) {
     var chat = require('./erp/chat');
     chat.getShelter(_data, _callback);
 }
+exports.getUserScheduleList = function (_data, _callback) {
+    var schedule = require('./erp/user');
+    schedule.getUserScheduleList(_data, _callback);
+}

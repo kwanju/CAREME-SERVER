@@ -118,10 +118,17 @@
             data: {},
             success: function (data) {
                 $('#permit').html('');
+
+                var permitUserDropdown = "<div class='dropdown-menu dropdown-menu-left'>" +
+                    "<a class='dropdown-item getPermitUser'>봉사기록확인</a>" +
+                    "<a class='dropdown-item'>채팅</a>"
+
                 $.each(data.list, function (idx, list) {
                     // **** 추후에 수정할 때 animal idx 없앨 때 다른데 안에 넣어서 style display none 해줘야 함수가 동작함 ****
                     $('#permit').append("<tr><th>" + list.idx + "</th><td>" + formatDate(list.date, DATE) + "</th><td>" + formatDate(list.apply_datetime, DATETIME) +
-                        "</td><td><a href='#' class='getAnimal'>" + list.animalName + "</a><div style='display: none;'>" + list.animal_idx + "</div></td><td>" + animalList[list.species_code] + "</td><td>" + list.userNickName +
+                        "</td><td><a href='#' class='getAnimal'>" + list.animalName + "</a><div style='display: none;'>" + list.animal_idx + "</div></td><td>" + animalList[list.species_code] + "</td>" +
+                        "<td><a href='#' class='dropdown' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>" + list.userNickName + "</a>" + permitUserDropdown +
+                        "<span style='display: none;'>" + list.userIdx + "</span></td>" +
                         "</td><td>" + list.userPhoneNumber + "</td><td>" + list.userEmail + "</td>"
                     )
                 })
@@ -160,12 +167,18 @@
                     else
                         tr = "<tr>"
 
+
+                    var waitUserDropdown = "<div class='dropdown-menu dropdown-menu-left'>" +
+                        "<a class='dropdown-item getUser'>봉사기록확인</a>" +
+                        "<a class='dropdown-item'>채팅</a>"
+
+
                     // **** 추후에 수정할 때 animal idx 없앨 때 다른데 안에 넣어서 style display none 해줘야 함수가 동작함 ****
                     $('#waiting').append(tr + "<th>" + list.idx + "</th><td>" + formatDate(list.date, DATE) + "</th><td>" + formatDate(list.apply_datetime, DATETIME) + "</td>" +
                         "<td><a href='#' class='getAnimal'>" + list.animalName + "</a>" +
                         "<div style='display: none;'>" + list.animal_idx + "</div></td>" +
                         "<td>" + animalList[list.species_code] + "</td>" +
-                        "<td><a href='#' class='getUser'>" + list.userNickName + "</a><span style='display: none;'>"+list.userIdx+"</span></td>" +
+                        "<td><a href='#' class='dropdown' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>" + list.userNickName + "</a>" + waitUserDropdown + "<span style='display: none;'>" + list.userIdx + "</span></td>" +
                         "<td>" + list.userPhoneNumber + "</td><td>" + list.userEmail +
                         "</td><td><button class='permit-button btn btn-default btn' style='color:green;'><i class='fa fa-check' style='font-size:20px'></i></button>" +
                         "<button class='reject-button btn btn-default btn' style='color:red;'><i class='fa fa-remove' style='font-size:20px'></i></button></td>"
@@ -289,12 +302,12 @@
     });
 </script>
 <script>
-    window.alert = function(){};
+    window.alert = function () { };
     function getUserScheduleList(user_idx) {
         $.ajax({
             url: "/erp/user/json/getUserScheduleList",
             method: "POST",
-            data: {idx: user_idx}, // user idx
+            data: { idx: user_idx }, // user idx
             success: function (data) {
                 $('#userScheduleTableContent').html('');
                 $.each(data.schedule, function (idx, schedule) {
@@ -325,10 +338,16 @@
     }
     $(document).on('click', '.getUser', function (e) {
         var idx = $(this).closest('tr').find('span').html();
-        console.log("user : "+idx);
+        console.log("user : " + idx);
+        getUserScheduleList(idx);
+    });
+
+    $(document).on('click', '.getPermitUser', function (e) {
+        var idx = $(this).closest('tr').find('span').html();
+        console.log("user : " + idx);
         getUserScheduleList(idx);
     });
 </script>
 <% include ./../modal/animalInfoModal.ejs%>
-<% include ./../modal/animalScheduleModal.ejs%>
-<% include ./../modal/userScheduleList.ejs%>
+    <% include ./../modal/animalScheduleModal.ejs%>
+        <% include ./../modal/userScheduleList.ejs%>

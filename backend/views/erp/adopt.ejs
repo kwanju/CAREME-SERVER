@@ -78,8 +78,6 @@
 </div>
 
 <script>
-    var dropdown;
-
     function getAdoptList() {
         $.ajax({
             url: "/erp/adopt/json/getAdoptList",
@@ -88,15 +86,15 @@
             success: function (data) {
                 $('#adopt_waiting').html('');
 
-                dropdown = "<div class='dropdown-menu dropdown-menu-left'>" +
-                    "<a class='dropdown-item'>봉사기록확인</a>" +
+                var waitDropdown = "<div class='dropdown-menu dropdown-menu-left'>" +
+                    "<a class='dropdown-item waitUserSchedule'>봉사기록확인</a>" +
                     "<a class='dropdown-item'>채팅</a>"
 
                 $.each(data.adopt, function (idx, adopt) {
                     $('#adopt_waiting').append(
                         "<tr><th>" + adopt.idx + "</th><td>" + adopt.name + "</td><td>" + formatDate(adopt.datetime, DATE) +
-                        "</td><td><a class='dropdown' id='waitingItem' onmouseover='mouseover()' onmouseout='mouseout()' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' style='color:#0ca4ca;'>" +
-                        adopt.user_name + "</a>" + dropdown + "</td><td>" + adopt.phone_number + "</td><td>" + adopt.user_email +
+                        "</td><td><a href='#' class='dropdown' id='waitingItem' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>" +
+                        adopt.user_name + "</a>" + waitDropdown + "<span style='display: none;'>" + adopt.user_idx + "</span></td></td><td>" + adopt.phone_number + "</td><td>" + adopt.user_email +
                         "</td><td><button class='btn btn-info btn-sm info-button'>신청서 보기</button></a></td><td>" +
                         "<button class='permit-button btn btn-default btn' style='color:green;'><i class='fa fa-check' style='font-size:20px'></i></button>" +
                         "<button class='reject-button btn btn-default btn' style='color:red;'><i class='fa fa-remove' style='font-size:20px'></i></button>" +
@@ -135,11 +133,17 @@
             data: {},
             success: function (data) {
                 $('#adopt_permit').html('');
+
+                var permitDropdown = "<div class='dropdown-menu dropdown-menu-left'>" +
+                    "<a class='dropdown-item permitUserSchedule'>봉사기록확인</a>" +
+                    "<a class='dropdown-item'>채팅</a>"
+
                 $.each(data.adopt, function (idx, adopt) {
+                    console.log(data.adopt)
                     $('#adopt_permit').append(
                         "<tr><th>" + adopt.idx + "</th><td>" + adopt.name + "</td><td>" + formatDate(adopt.datetime, DATE) + "</td><td>" +
-                        "<a class='dropdown' id='permitedItem' onmouseover='mouseover()' onmouseout='mouseout()' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' style='color:#0ca4ca;'>" +
-                        adopt.user_name + "</a>" + dropdown + "</td><td>" + adopt.phone_number + "</td><td>" + adopt.user_email +
+                        "<a href='#' class='dropdown' id='permitedItem' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>" +
+                        adopt.user_name + "</a>" + permitDropdown + "<span style='display: none;'>" + adopt.user_idx + "</span></td>" + "</td><td>" + adopt.phone_number + "</td><td>" + adopt.user_email +
                         "</td><td><button class='btn btn-info btn-sm info-button'>신청서 보기</button></td></tr>"
                     )
                 });
@@ -208,16 +212,54 @@
         openWindow(idx);
     })
 
-    function mouseover() {
-        document.getElementById("waitingItem").style.color = "#007bff";
-        document.getElementById("permitedItem").style.color = "#007bff";
+    window.alert = function () { };
+    function getUserScheduleList(user_idx) {
+        $.ajax({
+            url: "/erp/user/json/getUserScheduleList",
+            method: "POST",
+            data: { idx: user_idx }, // user idx
+            success: function (data) {
+                $('#userScheduleTableContent').html('');
+                $.each(data.schedule, function (idx, schedule) {
+                    $('#userScheduleTableContent').append(
+                        "<tr><th>" + schedule.idx + "</th><td>" + formatDate(schedule.data, DATE) + "</td><td>" +
+                        schedule.animalName + "</td>"
+                    )
+                });
 
+                var dataTable = $('#userScheduleTable').DataTable(
+                    {
+                        "searching": true,
+                        "language": {
+                            "lengthMenu": "_MENU_개씩 보기",
+                            "zeroRecords": "Nothing found - sorry",
+                            "info": " _PAGES_ 페이지 중 _PAGE_ 페이지",
+                            "infoEmpty": "No records available",
+                            "infoFiltered": "(filtered from _MAX_ total records)"
+                        }
+                    }
+                );
+                $('#userScheduleSearch').on('keyup', function () {
+                    dataTable.search(this.value).draw();
+                });
+                $("#userScheduleModal").modal("show");
+            }
+        })
     }
-    function mouseout() {
-        document.getElementById("waitingItem").style.color = "#0ca4ca";
-        document.getElementById("permitedItem").style.color = "#0ca4ca";
+    $(document).on('click', '.waitUserSchedule', function (e) {
+        var idx = $(this).closest('tr').find('span').html();
+        console.log($(this));
+        console.log("user : " + idx);
+        getUserScheduleList(idx);
+    });
 
-    }
-
+        $(document).on('click', '.permitUserSchedule', function (e) {
+        var idx = $(this).closest('tr').find('span').html();
+        console.log($(this));
+        console.log("user : " + idx);
+        getUserScheduleList(idx);
+    });
 
 </script>
+
+<% include ./../modal/userScheduleList.ejs%>

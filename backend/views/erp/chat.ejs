@@ -42,7 +42,7 @@
             <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
             <p id="chat_user_nickname">Harvey Specter</p>
         </div>
-        <div class="messages">
+        <div class="messages" id="chat_message_screen">
             <ul id="chat_message_list">
                 <li class="sent">
                     <p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
@@ -109,6 +109,10 @@
                 }
 
                 $('#chat_content').css("display", "block");
+
+                setTimeout(function () {
+                    $('#chat_message_screen').scrollTop($('#chat_message_screen')[0].scrollHeight);
+                }, 100)
             }
         });
     });

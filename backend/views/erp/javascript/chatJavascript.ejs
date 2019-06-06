@@ -67,7 +67,9 @@
         type = _type == 1 ? "sent" : "replies";
         $('<li class="' + type + '"><p>' + _message + '</p></li>').appendTo($('.messages ul'));
         //$('.contact.active .preview').html('<span>You: </span>' + message);
-        $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+        setTimeout(function () {
+            $('#chat_message_screen').scrollTop($('#chat_message_screen')[0].scrollHeight);
+        }, 100)
     };
 
     function sendMessage() {

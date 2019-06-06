@@ -312,7 +312,7 @@
                 $('#userScheduleTableContent').html('');
                 $.each(data.schedule, function (idx, schedule) {
                     $('#userScheduleTableContent').append(
-                        "<tr><th>" + schedule.idx + "</th><td>" + formatDate(schedule.data, DATE) + "</td><td>" +
+                        "<tr><th>" + schedule.idx + "</th><td>" + formatDate(schedule.date, DATE) + "</td><td>" +
                         schedule.animalName + "</td>"
                     )
                 });

@@ -104,9 +104,9 @@
                 $('#volunteer_user').html('');
                 $.each(data.volunteer, function (idx, volunteer) {
                     $('#volunteer_animal').append(
-                        "<li class='getAnimal'>" + volunteer.animalName +
+                        "<li class='getAnimal'><a href='#'>" + volunteer.animalName +
                             "<div style='display: none;'>"+volunteer.animalIdx+"</div>"
-                        +"</li>"
+                        +"</a></li>"
                     )
                     $('#volunteer_user').append(
                         "<li>" + volunteer.userName + "</li>"

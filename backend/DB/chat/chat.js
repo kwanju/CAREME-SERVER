@@ -6,7 +6,14 @@ exports.saveMessage = function (_data, _callback) {
     var values = "VALUES (?,?,?,?,?,?)";
 
     var date = require('../../utils/date')();
-    poolAdapter.execute(sql + values, [_data.type, _data.user_idx, _data.shelter_idx, _data.message, date,_data.read_state], function (_results) {
+    poolAdapter.execute(sql + values, [_data.type, _data.user_idx, _data.shelter_idx, _data.message, date, _data.read_state], function (_results) {
         _callback(_results.insertId);
     });
 }//discover_request에 insert
+
+exports.ackMessage = function (_data, _callback) {
+    var update = "UPDATE chat_user_shelter SET read_state=1 WHERE idx=?";
+    poolAdapter.execute(update, [_data.message_idx], function () {
+        _callback();
+    });
+}

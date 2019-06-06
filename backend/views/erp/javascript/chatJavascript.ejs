@@ -1,31 +1,131 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
+    var mSelected_user_idx;
     var shelter_idx;
+
+    $(document).on('click', '.contact', function (e) {
+        var contact = $(this);
+        var user_idx = $(this).find('.hide-user-idx').html()
+        var user_nickname = $(this).find('.name').html()
+        console.log(user_idx);
+        console.log(user_nickname);
+        mSelected_user_idx = user_idx;
+
+        $.ajax({
+            url: "/erp/chat/json/getChat",
+            method: "POST",
+            data: { user_idx: user_idx },
+            success: function (data) {
+
+                $('#chat_user_nickname').html(user_nickname);
+                $('#chat_message_list').html("");
+                console.log(data);
+
+                for (var i = 0; i < data.list.length; i++) {
+                    var chat = data.list[i];
+                    newMessage(parseInt(chat.type), chat.message);
+                }
+
+                $('#chat_content').css("display", "block");
+                setTimeout(function () {
+                    $('#chat_message_screen').scrollTop($('#chat_message_screen')[0].scrollHeight);
+                }, 100);
+
+                var chatBadge = contact.find('.chat-badge');
+                console.log(chatBadge);
+                if (chatBadge.hasClass("label")) {
+                    chatBadge.html("")
+                    chatBadge.removeClass("label bg-danger float-right")
+                }
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "/erp/chat/json/getShelter",
+            method: "POST",
+            data: {},
+            success: function (data) {
+                shelter_idx = data.shelter.idx;
+                $('#chat_shelter_img').attr("src", "/" + data.shelter.url_picture);
+                $('#chat_shelter_name').html(data.shelter.name)
+                var message = {
+                    type: "shelter",
+                    idx: shelter_idx
+                }
+                socket.emit('participate', JSON.stringify(message)); // 들어왔다고 통보.
+            }
+        });
+
+        $.ajax({
+            url: "/erp/chat/json/getChatList",
+            method: "POST",
+            data: {},
+            success: function (data) {
+                console.log(data);
+                $('#chat_chatList').html('');
+                for (var i = 0; i < data.list.length; i++) {
+                    var chat = data.list[i];
+                    $('#chat_chatList').append(
+                        '<li class="contact">' +
+                        '<span class="hide-user-idx" style="display:none">' + chat.user_idx + '</span>' +
+                        '<div class="wrap">' +
+                        '<div class="meta row"><div class="col-sm-9">' +
+                        '<p class="name">' + chat.nickname + '</p>' +
+                        '<p class="preview">' + chat.message + '</p>' +
+                        '</div><div class="col-sm-3"><span class="chat-badge ' + (chat.count == undefined ? "" : "label bg-danger float-right") + '">' + (chat.count == undefined ? "" : chat.count) + '</span></div></div></div></li>'
+                    )
+                }
+
+
+            }
+        });
+
+
+    });
+
     var socket = io();
 
     socket.on('message', function (_msg) {
         var message = JSON.parse(_msg);
         console.log(message);
-        newMessage(0, message.message);
+        if (message.user_idx == mSelected_user_idx) { // 현재 있는 채팅방에서 메시지가 들어왔을 때
+            newMessage(0, message.message);
+            socket.emit('ack', JSON.stringify({ message_idx: message.message_idx }));
+            findContact(message.user_idx, function (_badge, _preview) {
+                _preview.html(message.message);
+            });
+        } else { // 다른 채팅방에서 메시지가 들어올 때
+            findContact(message.user_idx, function (_badge, _preview) {
+                if (_badge.hasClass('label')) {
+                    _badge.html(parseInt(_badge.html()) + 1)
+                } else {
+                    _badge.addClass('label bg-danger float-right');
+                    _badge.html("1");
+                }
+                _preview.html(message.message);
+            });
+        }
         // 여기서 없을 때 있을 때 구분해서 한다.
     });
 
 
-    $.ajax({
-        url: "/erp/chat/json/getShelterIdx",
-        method: "POST",
-        data: {},
-        success: function (data) {
-            shelter_idx = data.shelter_idx;
-            var message = {
-                type: "shelter",
-                idx: shelter_idx
+
+
+    function findContact(_idx, _callback) {
+        var useridxSpans = $('.hide-user-idx');
+
+        var target;
+        for (var i = 0; i < useridxSpans.length; i++)
+            if ($(useridxSpans[i]).html() == _idx) {
+                target = $(useridxSpans[i])
+                break;
             }
-            socket.emit('participate', JSON.stringify(message)); // 들어왔다고 통보.
-        }
-    });
-
-
+        var badge = target.closest('.contact').find('.chat-badge');
+        var preview = target.closest('.contact').find('.preview')
+        _callback(badge, preview);
+    }
 
 </script>
 

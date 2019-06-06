@@ -2,8 +2,8 @@
     <div id="sidepanel">
         <div id="profile">
             <div class="wrap">
-                <img id="profile-img" src="" class="online" alt="" />
-                <p>Mike Ross</p>
+                <img id="chat_shelter_img" src="" class="online" alt="" style="width:50px; height:50px;" />
+                <p id="chat_shelter_name">Mike Ross</p>
             </div>
         </div>
         <div id="search">
@@ -85,65 +85,5 @@
 </div>
 
 <script>
-    var mSelected_user_idx;
-    $(document).on('click', '.contact', function (e) {
-        var user_idx = $(this).find('.hide-user-idx').html()
-        var user_nickname = $(this).find('.name').html()
-        console.log(user_idx);
-        console.log(user_nickname);
-        mSelected_user_idx = user_idx;
 
-        $.ajax({
-            url: "/erp/chat/json/getChat",
-            method: "POST",
-            data: { user_idx: user_idx },
-            success: function (data) {
-
-                $('#chat_user_nickname').html(user_nickname);
-                $('#chat_message_list').html("");
-                console.log(data);
-
-                for (var i = 0; i < data.list.length; i++) {
-                    var chat = data.list[i];
-                    newMessage(parseInt(chat.type), chat.message);
-                }
-
-                $('#chat_content').css("display", "block");
-
-                setTimeout(function () {
-                    $('#chat_message_screen').scrollTop($('#chat_message_screen')[0].scrollHeight);
-                }, 100)
-            }
-        });
-    });
-
-    $(document).ready(function () {
-        $.ajax({
-            url: "/erp/chat/json/getChatList",
-            method: "POST",
-            data: {},
-            success: function (data) {
-                console.log(data);
-                $('#chat_chatList').html('');
-                for (var i = 0; i < data.list.length; i++) {
-                    var chat = data.list[i];
-                    $('#chat_chatList').append(
-                        '<li class="contact">' +
-                        '<span class="hide-user-idx" style="display:none">' + chat.user_idx + '</span>' +
-                        '<div class="wrap">' +
-                        '<span class="contact-status online"></span>' +
-                        '<img src="" alt="" />' +
-                        '<div class="meta">' +
-                        '<p class="name">' + chat.nickname + '</p>' +
-                        '<p class="preview">' + chat.message + '</p>' +
-                        '</div></div></li>'
-                    )
-                }
-
-
-            }
-        });
-
-
-    });
 </script>

@@ -1,6 +1,6 @@
 const assert = require('assert');
 var chat = require('../../../model/erp/chat');
-describe.only("getChatList Test", function () {
+describe("getChatList Test", function () {
     it("get list", function (done) {
         chat.getChatList(
             {
@@ -27,12 +27,38 @@ describe.only("getChatList Test", function () {
     });
 });
 
+describe.only("getShelter Test", function () {
+    it("get data", function (done) {
+        chat.getShelter(
+            {
+                shelter_idx: 1
+            }
+            , function () { }, function (_shelter) {
+                console.log(_shelter);
+                assert(_shelter);
+                done();
+            });
+    });
+
+    it("result", function (done) {
+        chat.getShelter(
+            {
+                shelter_idx: 1,
+            }
+            , function (_result) {
+                console.log(_result)
+                assert.equal(_result.result, 1);
+                done();
+            });
+    });
+});
+
 describe("getChat Test", function () {
     it("get list", function (done) {
         chat.getChat(
             {
                 shelter_idx: 1,
-                user_idx: 1
+                user_idx: 4
             }
             , function () { }, function (_chatList) {
                 console.log(_chatList);
@@ -45,7 +71,7 @@ describe("getChat Test", function () {
         chat.getChat(
             {
                 shelter_idx: 1,
-                user_idx: 1
+                user_idx: 4
             }
             , function (_result) {
                 console.log(_result)

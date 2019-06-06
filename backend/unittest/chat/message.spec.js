@@ -1,7 +1,7 @@
 const assert = require('assert');
+var message = require('../../model/chat/message');
 
-describe.only("saveMessage Test", function () {
-    var message = require('../../model/chat/message');
+describe("saveMessage Test", function () {
     it("insert chat table test", function (done) {
         message.saveMessage(
             {
@@ -13,6 +13,18 @@ describe.only("saveMessage Test", function () {
             , function () { }, function (_idx) {
                 assert(_idx);
                 done();
+            });
+    });
+});
+
+describe.only("ackMessage Test", function () {
+    it("insert chat table test", function (done) {
+        message.ackMessage(
+            {
+                message_idx: "85"
+            }
+            , function () { done(); }, function () {
+
             });
     });
 });

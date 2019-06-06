@@ -47,6 +47,7 @@ app.use('/adoptDetail', adoptDetailRouter);
 app.use('/erp', erpRouter);
 app.use('/android', androidRouter);
 app.use('/mapTest', mapRouter);
+app.use('/chattest',require('./routes/chattest'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,6 +1,6 @@
 const assert = require('assert');
 
-describe.only("getDiscover Test", function () {
+describe("getDiscover Test", function () {
     var discover = require('../../../model/android/discover/discover');
     var data = {
         idx: "25"
@@ -39,7 +39,7 @@ describe("GetDiscoverRecord Test", function () {
     });
 });
 
-describe("registerDiscover Test", function () {
+describe.only("registerDiscover Test", function () {
     var discover = require('../../../model/android/discover/discover');
     it("result is 1", function (done) {
         discover.registerDiscover({},

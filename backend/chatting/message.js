@@ -18,7 +18,8 @@ exports.getMessage = function (_socket) {
             var sendMessage = {
                 shelter_idx: message.shelter_idx,
                 user_idx: message.user_idx,
-                message: message.message
+                message: message.message,
+                send_time: require('../utils/date')()
             }
             socket.send('message', socketId, JSON.stringify(sendMessage));
         }

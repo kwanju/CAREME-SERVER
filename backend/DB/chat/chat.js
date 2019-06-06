@@ -19,7 +19,7 @@ exports.ackMessage = function (_data, _callback) {
 }
 
 exports.getPushInfoInChat = function (_data, _callback) {
-    var select = "SELECT u.token, she.name, cus.message ";
+    var select = "SELECT u.token, she.name, cus.message, cus.shelter_idx ";
     var from = "FROM user AS u INNER JOIN shelter AS she INNER JOIN chat_user_shelter AS cus ";
     var on = "ON cus.user_idx = u.idx AND cus.shelter_idx=she.idx ";
     var where = "WHERE cus.idx = ?"

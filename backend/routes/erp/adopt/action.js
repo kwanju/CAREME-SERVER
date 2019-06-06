@@ -10,7 +10,7 @@ router.post('/permitAdopt', function (_req, _res) { // body = adopt idx
 
 router.post('/rejectAdopt', function (_req, _res) { // body = adopt idx
     var adopt = require('../../../model/erp/adopt');
-    adopt.getAdopt(_req.body, function (_result) {
+    adopt.rejectAdopt(_req.body, function (_result) {
         _res.send(_result);
     });
 })

@@ -246,9 +246,9 @@ exports.getAlarmNumb = function (_data, _callback) {
     schedule.getAlarmNumb(_data, _callback);
 }
 
-exports.addAdopt = function (_data, _callback) {
+exports.addAdoptAnimal = function (_data, _callback) {
     var adopt = require('./erp/adopt');
-    adopt.addAdopt(_data, _callback);
+    adopt.addAdoptAnimal(_data, _callback);
 }
 
 exports.userLogin = function (_data, _callback) {
@@ -324,4 +324,9 @@ exports.getAdoptDate = function (_data, _callback) {
 exports.getDiscoverDate = function (_data, _callback) {
     var date = require('./erp/chart');
     date.getDiscoverDate(_data, _callback);
+}
+
+exports.setAdoptState = function (_data, _callback) {
+    var date = require('./erp/adopt');
+    date.setAdoptState(_data, _callback);
 }

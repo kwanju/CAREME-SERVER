@@ -44,18 +44,19 @@ CREATE TABLE animal(
     estimated_birth_age int(10) COMMENT '추정 태어난 연도',
     name varchar(100),
     sex char(1) COMMENT 'M:남 / W:여',
-    weight int(10),
+    weight varchar(10),
     url_picture varchar(400) COMMENT '사진 url',
     register_data date COMMENT '보호소에 등록된 날짜',
     discovered_spot varchar(400) COMMENT '발견된 장소',
     discovered_spot_latitude varchar(20) COMMENT '발견된 장소 latitude',
     discovered_spot_longitude varchar(20) COMMENT '발견된 장소 longitude',
-    state int(3) COMMENT '견종 상태 - 0:안락사 / 1:보호소 보호중 / 2: 입양 대기중 / 3: 입양 허가 (점차 추가해야함)',
+    state int(3) COMMENT '견종 상태 - 0:안락사 / 1:보호소 보호중 / 2:입양 대기중 / 3:입양 허가 / 4:입양 완료 / 5:입소 대기',
     shelter_idx int(10) not null COMMENT '보호중인 보호소 id',
     discover_idx int(10) COMMENT '발견했어요 id - null:발견했어요로 보호소에 가져오지 않았을 때 - 발견했어요 만들었을 때 FOREIGNKEY설정필요',
     description varchar(1000) COMMENT '유기동물 설명',
     PRIMARY KEY(idx),
-    FOREIGN KEY(shelter_idx) REFERENCES shelter(idx)
+    FOREIGN KEY(shelter_idx) REFERENCES shelter(idx),
+    FOREIGN KEY(discover_idx) REFERENCES discover(idx)
 );
 
 CREATE TABLE schedule(
@@ -75,7 +76,7 @@ CREATE TABLE discover(
     idx int(10) not null AUTO_INCREMENT,
     discover_datetime datetime COMMENT '유기동물을 발견한 날짜 및 시간',
     discovered_spot varchar(1000) COMMENT '유기동물을 발견한 장소',
-    description varchar(1000) COMMENT '발견한 유기동물 특징',
+    description varchar(1000) COMMENT '발견한 유기동물 상세정보',
     species_code int(10) COMMENT '견종 코드',
     animal_sex char(1) COMMENT '발견된 유기동물 성별',
     url_picture varchar(1000) COMMENT '발견된 유기동물 사진',

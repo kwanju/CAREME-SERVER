@@ -3,7 +3,7 @@ var poolAdapter = require('../poolAdapter');
 exports.getScheduleListPermitted = function (_data, _callback) {
     var sql = "SELECT schd.idx, schd.date, schd.apply_datetime, " +
         "schd.animal_idx, a.name AS animalName, a.species_code, " +
-        "u.nickname AS userNickName,u.phone_number AS userPhoneNumber, u.email AS userEmail "
+        "u.nickname AS userNickName,u.phone_number AS userPhoneNumber, u.email AS userEmail, u.idx AS userIdx "
     var join = "FROM schedule AS schd INNER JOIN animal AS a INNER JOIN shelter AS slt INNER JOIN user AS u ";
     var on = "ON schd.animal_idx = a.idx AND slt.idx = a.shelter_idx AND u.idx=schd.user_idx ";
     var where = "WHERE slt.idx = ? AND permit=1";
@@ -16,7 +16,7 @@ exports.getScheduleListPermitted = function (_data, _callback) {
 exports.getScheduleListWaiting = function (_data, _callback) {
     var sql = "SELECT schd.idx, schd.date, schd.apply_datetime, schd.read_state, " +
         "schd.animal_idx, a.name AS animalName, a.species_code, " +
-        "u.nickname AS userNickName,u.phone_number AS userPhoneNumber, u.email AS userEmail "
+        "u.nickname AS userNickName,u.phone_number AS userPhoneNumber, u.email AS userEmail, u.idx AS userIdx "
     var join = "FROM schedule AS schd INNER JOIN animal AS a INNER JOIN shelter AS slt INNER JOIN user AS u ";
     var on = "ON schd.animal_idx = a.idx AND slt.idx = a.shelter_idx AND u.idx=schd.user_idx ";
     var where = "WHERE slt.idx = ? AND permit=0";

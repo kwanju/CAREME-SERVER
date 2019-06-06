@@ -330,3 +330,8 @@ exports.setAdoptState = function (_data, _callback) {
     var date = require('./erp/adopt');
     date.setAdoptState(_data, _callback);
 }
+
+exports.getUserScheduleList = function (_data, _callback) {
+    var schedule = require('./erp/user');
+    schedule.getUserScheduleList(_data, _callback);
+}

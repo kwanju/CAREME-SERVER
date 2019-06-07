@@ -38,7 +38,7 @@ exports.addAnimal = function (_data, _callback) {
         _data.discovered_spot, _data.state, _data.shelter_idx, _data.description, _data.discovered_spot_latitude, _data.discovered_spot_longitude
     ],
         function (_results) {
-            _callback();
+            _callback(_results.insertId);
         });
 }
 

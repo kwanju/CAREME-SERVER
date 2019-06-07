@@ -39,8 +39,9 @@ exports.permitDiscoverRequest = function (_data, _callback) {
         dbFacade.updateDiscoverShelter(_data, function () {
             _callback(res);
             dbFacade.getAppPushInfoWhenPermitDiscoverRequest(_data, function (_token) {
-                fcm.send(_token, "등록하신 발견했어요에 대한 보호소 매칭이 완료되었습니다.",config.mode.DISCOVERMATHCING,{
-                    discover_idx:discover_idx
+                fcm.send(_token, "등록하신 발견했어요에 대한 보호소 매칭이 완료되었습니다.", config.mode.DISCOVERMATHCING, {
+                    discover_idx: discover_idx,
+                    message: "등록하신 발견했어요에 대한 보호소 매칭이 완료되었습니다."
                 });
             });
         });

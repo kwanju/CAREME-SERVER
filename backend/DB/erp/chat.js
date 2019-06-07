@@ -44,3 +44,13 @@ exports.getShelter = function (_data, _callback) {
         _callback(_results)
     });
 }
+
+exports.checkChatReadState = function (_data, _callback) {
+    var select = "SELECT idx ";
+    var from = "FROM chat_user_shelter "
+    var where = "WHERE read_state = 0 AND shelter_idx=? AND type=0";
+
+    poolAdapter.execute(select + from + where, [_data.idx], function (_results) {
+        _callback(_results);
+    });
+}

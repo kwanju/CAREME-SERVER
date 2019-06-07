@@ -355,3 +355,8 @@ exports.getPushInfoInChat = function (_data, _callback) {
     var chat = require('./chat/chat');
     chat.getPushInfoInChat(_data, _callback);
 }
+
+exports.checkChatReadState = function (_data, _callback) {
+    var chat = require('./erp/chat');
+    chat.checkChatReadState(_data, _callback);
+}

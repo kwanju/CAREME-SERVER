@@ -31,6 +31,11 @@ function checkNewSchedule() {
             else    
                 setAdoptBadge(0)
 
+            if(result.chat.length>0)
+                setChatBadge(result.chat.length)
+            else
+                setChatBadge(0)
+
 
         },
         error: function () {
@@ -54,8 +59,8 @@ function setScheduleBadge(_number) {
 
     if (_number == 0) 
         badge.html("");
-     else 
-        badge.html(_number);
+    else 
+        badge.html(_number);    
     
 }
 
@@ -81,6 +86,23 @@ function setAdoptBadge(_number){
         badge.html("");
      else 
         badge.html(_number);
+}
+
+function setChatBadge(_number){
+    var badge = $('#chat_badge');
+    if (badge.length == 0)
+        return;
+
+    if (_number == 0) {
+        badge.html("");
+        if(badge.hasClass('notify-number'))
+            badge.removeClass('notify-number');
+    }
+    else {
+        badge.html(_number);
+        if(!badge.hasClass('notify-number'))
+            badge.addClass('notify-number')
+    }
 }
 
     /*

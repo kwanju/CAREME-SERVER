@@ -1,4 +1,5 @@
 var dbFacade = require('../../DB/DBFacade');
+var config = require('../../config').fcm
 exports.addAnimal = function (_req, _data, _callback, _testCallback) {
 
     if (_req.file) // 이미지 파일이 있을 때만 url_picture 설정
@@ -12,6 +13,8 @@ exports.addAnimal = function (_req, _data, _callback, _testCallback) {
         var res = { result: 1 };
         _callback(res);
         find.matchingFind({
+            mode:config.mode.ANIMALFIND,
+            idx:_idx,
             date: new Date(require('../../utils/date')()),
             latitude: _data.discovered_spot_latitude,
             longitude: _data.discovered_spot_longitude,

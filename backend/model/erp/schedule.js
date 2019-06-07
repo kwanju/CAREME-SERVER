@@ -105,6 +105,7 @@ exports.getAlarmNumb = function (_data, _callback) {
 }
 
 var sendPush = function (_data, _permit) {
+    var config = require('../../config').fcm;
     var permit = _permit == 1 ? "허가" : "거부";
     dbFacade.getPushInfoAboutSchedule(_data, function (_results) {
         var token = _results[0].token;
@@ -112,7 +113,9 @@ var sendPush = function (_data, _permit) {
         var body = _results[0].animalName + "(" + _results[0].shelterName + ") " + date + " " + permit + " 되었습니다.";
 
         var fcm = require('../../utils/android/fcm');
-        fcm.send(token, body);
+        fcm.send(token, body,config.mode.SCHEDULE,{
+            message : body
+        });
     });
 }
 

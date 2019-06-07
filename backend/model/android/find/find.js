@@ -1,5 +1,5 @@
 var dbFacade = require('../../../DB/DBFacadeAndroid');
-
+var config = require('../../../config').fcm;
 
 exports.registerFind = function (_req, _data, _callback, _testcallback) {
     if (_req.file) // 이미지 파일이 있을 때만 url_picture 설정
@@ -54,7 +54,10 @@ exports.matchingFind = function (_data, _callback, _testcallback) {
         if (typeof _testcallback == 'function')
             _testcallback(_results);
         for (var i = 0; i < _results.length; i++)
-            fcm.send(_results[i].token, "찾아요에 올린 유기동물과 비슷할 가능성이 있는 유기동물이 발견되었습니다.");
+            fcm.send(_results[i].token, "찾아요에 올린 유기동물과 비슷할 가능성이 있는 유기동물이 발견되었습니다.",_data.mode,{
+                idx : _data.idx,
+                message : "찾아요에 올린 유기동물과 비슷할 가능성이 있는 유기동물이 발견되었습니다."
+            });
     });
 }
 

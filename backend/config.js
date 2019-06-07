@@ -18,7 +18,14 @@ config.server = {
 
 config.fcm = {
     serverKey: "AAAAJBu8XZo:APA91bE8mYsbShl51atI0nfUHnMuORbfKHXRia6qBQ4sYS6zHdstT2P7uhbWRtPPX3Ux3XuuEoF6fRTftNwtqxDRy38dxs3BX7JREBPN2YovdUeY5xShNJZq0omVnOdIUvW8ZToFf7lV",
-    package: "zangdol.careme"
+    package: "zangdol.careme",
+    mode:{
+        CHAT : "0",
+        DISCOVERFIND:"1",
+        ANIMALFIND : "2",
+        SCHEDULE : "3",
+        DISCOVERMATHCING:"4"
+    }
 }
 
 config.animalImageUpload = {

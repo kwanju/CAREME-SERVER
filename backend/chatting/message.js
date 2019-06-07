@@ -2,6 +2,7 @@ var messageModel = require('../model/chat/message');
 var member = require('./member');
 var socket = require('./socket');
 var fcm = require('../utils/android/fcm');
+var config = require('../config').fcm
 
 exports.getMessage = function (_socket) {
 
@@ -26,7 +27,7 @@ exports.getMessage = function (_socket) {
             } else { // 현재 소켓연결이 안되어있을 때
                 if (message.type == 1) // 사용자로 보내는 것일 때
                     messageModel.getPushInfoInChat({ idx: _idx }, function (_push) {
-                        fcm.send(_push.token, _push.name + " : " + _push.message, "0", {
+                        fcm.send(_push.token, _push.name + " : " + _push.message, config.mode.CHAT, {
                             shelter_idx: _push.shelter_idx,
                             shelter_name: _push.name,
                             message: _push.message

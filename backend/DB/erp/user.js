@@ -1,7 +1,7 @@
 var poolAdapter = require('../poolAdapter');
 
 exports.getUserScheduleList = function (_data, _callback) {
-    var sql = "SELECT *, a.name AS animalName ";
+    var sql = "SELECT schd.*, a.name AS animalName ";
     var join = "FROM schedule AS schd INNER JOIN user AS u INNER JOIN animal AS a ";
     var on = "ON u.idx = schd.user_idx AND a.idx = schd.animal_idx ";
     var where = "WHERE u.idx = ? AND schd.permit=1";

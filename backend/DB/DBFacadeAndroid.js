@@ -122,3 +122,8 @@ exports.getInfo = function (_data, _callback) {
     var user = require('./android/user');
     user.getInfo(_data, _callback);
 }
+
+exports.getAdoptList = function (_data, _callback) {
+    var adopt = require('./android/adopt');
+    adopt.getAdoptList(_data, _callback);
+}

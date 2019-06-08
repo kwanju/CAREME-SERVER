@@ -137,3 +137,8 @@ exports.getNewChatList = function (_data, _callback) {
     var chat = require('./android/chat');
     chat.getNewChatList(_data, _callback);
 }
+
+exports.updateChatNotRead = function (_data, _callback) {
+    var chat = require('./android/chat');
+    chat.updateChatNotRead(_data, _callback);
+}

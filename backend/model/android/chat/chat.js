@@ -11,6 +11,8 @@ exports.getChat = function (_data, _callback, _testcallback) {
             list: _results
         }
         _callback(res);
+        if (_results.length > 0)
+            dbFacadeAndroid.updateChatNotRead({ shelter_idx: _results[0].shelter_idx }, function () { });
     });
 }
 
@@ -26,7 +28,7 @@ exports.getChatList = function (_data, _callback, _testcallback) {
             for (var i = 0; i < _chatList.length; i++)
                 if (_chatList[i].count == undefined)
                     _chatList[i].count = 0
-            
+
             var res = {
                 result: 1,
                 list: _chatList

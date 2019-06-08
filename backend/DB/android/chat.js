@@ -17,7 +17,14 @@ exports.getChatList = function (_data, _callback) {
     var on = "ON cus.shelter_idx = she.idx AND maxCus.recent_send_time = cus.send_time "
     var where = "WHERE cus.user_idx = ? "
     var groupBy = "GROUP BY cus.shelter_idx ORDER BY shelter_idx "
-    poolAdapter.execute(select + from + maxSelect + on + where + groupBy, [_data.user_idx,_data.user_idx], function (_results) {
+    poolAdapter.execute(select + from + maxSelect + on + where + groupBy, [_data.user_idx, _data.user_idx], function (_results) {
         _callback(_results);
     });
 };
+
+exports.updateChatNotRead = function (_data, _callback) {
+    var update = "UPDATE chat_user_shelter SET read_state=1 WHERE shelter_idx=? AND type=1"
+    poolAdapter.execute(update, [_data.shelter_idx], function () {
+
+    });
+}

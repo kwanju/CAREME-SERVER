@@ -127,3 +127,13 @@ exports.getAdoptList = function (_data, _callback) {
     var adopt = require('./android/adopt');
     adopt.getAdoptList(_data, _callback);
 }
+
+exports.getChatList = function (_data, _callback) {
+    var chat = require('./android/chat');
+    chat.getChatList(_data, _callback);
+}
+
+exports.getNewChatList = function (_data, _callback) {
+    var chat = require('./android/chat');
+    chat.getNewChatList(_data, _callback);
+}

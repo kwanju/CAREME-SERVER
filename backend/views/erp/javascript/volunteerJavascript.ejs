@@ -82,7 +82,7 @@
     });
 </script>
 <script>
-    $(document).ready(function () {
+    function showCalendar() {
         /* initialize the external events
         -----------------------------------------------------------------*/
         $('#external-events .fc-event').each(function () {
@@ -104,16 +104,18 @@
 
         /* initialize the calendar
         -----------------------------------------------------------------*/
+        $('#calendar').fullCalendar('removeEvents');
         setTimeout(function () {
+            //console.log("2");
             $.ajax({
                 url: '/erp/volunteer/json/getAnimalInCalendar',
                 method: 'POST',
-                data: {animal_idx : selectedAnimal},
+                data: {animal_idx: selectedAnimal},
                 success: function (data) {
                     var events = []
-                    $.each(data.list,function(idx, list){
+                    $.each(data.list, function (idx, list) {
                         events.push({
-                            title: list.animalName + " / "+ list.nickname,
+                            title: list.animalName + " / " + list.nickname,
                             start: formatDate(list.date, DATE)
                         })
                     })
@@ -148,8 +150,12 @@
                         events: events,
                         droppable: true, // this allows things to be dropped onto the calendar
                     })
+                    $('#calendar').fullCalendar('removeEvents');
+                    $('#calendar').fullCalendar('addEventSource', events);
+                    $('#calendar').fullCalendar('rerenderEvents');
                 }
             })
-        }, 3000)
-    });
+        }, 1000)
+        //});
+    };
 </script>

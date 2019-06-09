@@ -7,7 +7,9 @@ exports.checkReadState = function (_data, _callback) {
     checkScheduleReadState(_data, res, function () {
         checkDiscoverReadState(_data, res, function () {
             checkAdoptReadState(_data, res, function () {
-                _callback(res);
+                checkChatReadState(_data, res, function () {
+                    _callback(res);
+                })
             });
         })
     });
@@ -32,6 +34,14 @@ var checkDiscoverReadState = function (_data, _res, _callback) {
 var checkAdoptReadState = function (_data, _res, _callback) {
     dbFacade.checkAdoptReadState(_data, function (_results) {
         _res.adopt = _results;
+        if (typeof _callback == 'function')
+            _callback();
+    });
+}
+
+var checkChatReadState = function (_data, _res, _callback, _testcallback) {
+    dbFacade.checkChatReadState(_data, function (_results) {
+        _res.chat = _results;
         if (typeof _callback == 'function')
             _callback();
     });

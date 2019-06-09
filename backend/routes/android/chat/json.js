@@ -9,5 +9,10 @@ router.post('/getChat', function (_req, _res) {
     });
 });
 
+router.post('/getChatList', function (_req, _res) {
+    chat.getChatList(_req.body, function (_result) {
+        _res.send(_result)
+    });
+});
 
 module.exports = router;

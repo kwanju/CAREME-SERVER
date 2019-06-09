@@ -37,7 +37,7 @@ exports.permitDiscoverRequest = function (_data, _callback) {
     var update = "UPDATE discover_request SET permit=1 ";
     var where = "WHERE idx=?";
 
-    var sql ="INSERT INTO animal (species_code, sex, url_picture, discovered_spot, " +
+    var sql = "INSERT INTO animal (species_code, sex, url_picture, discovered_spot, " +
         "discovered_spot_latitude, discovered_spot_longitude, shelter_idx, discover_idx, name, register_data, state, description) " +
         "SELECT d.species_code, d.animal_sex, d.url_picture, d.discovered_spot, d.latitude, " +
         "d.longitude, dr.shelter_idx, d.idx, '없음', '" + cur_date + "', 5, description " +
@@ -48,9 +48,13 @@ exports.permitDiscoverRequest = function (_data, _callback) {
     // d.url_picture, d.discovered_spot, d.latitude, d.longitude, dr.shelter_idx, d.idx, '없음', '2019-06-04'
     // FROM discover d INNER JOIN discover_request dr WHERE d.idx=dr.discover_idx
 
+    var select = "SELECT discover_idx FROM discover_request WHERE idx = ?";
+
     poolAdapter.execute(update + where, [_data.idx], function (_results) { //discover_request의 idx
         poolAdapter.execute(sql, [_data.idx], function () {
-            _callback();
+            poolAdapter.execute(select, [_data.idx], function (_results) {
+                _callback(_results[0].discover_idx)
+            })
         })
     });
 };
@@ -110,7 +114,7 @@ exports.getDiscoverInfo = function (_data, _callback) {
     var select = "SELECT d.* FROM discover AS d INNER JOIN discover_request AS dr ";
     var on = "ON d.idx = dr.discover_idx ";
     var where = "WHERE dr.idx = ?";
-    poolAdapter.execute(select +on+ where, [_data.idx], function (_results) {
+    poolAdapter.execute(select + on + where, [_data.idx], function (_results) {
         _callback(_results);
     });
 }

@@ -32,9 +32,9 @@ exports.participate = function (_socket) {
     //소켓이 종료 되었을 때
     _socket.on('disconnect', function () {
         var idx
-        if (!(idx = findShelterIdx(_socket.id)))
+        if (idx = findShelterIdx(_socket.id))
             delete shelterList[idx];
-        else if (!(idx = findUserIdx(_socket.id)))
+        else if (idx = findUserIdx(_socket.id))
             delete userList[idx];
 
         console.log("delete : " + _socket.id);

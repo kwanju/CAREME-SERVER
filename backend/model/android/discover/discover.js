@@ -1,7 +1,7 @@
 // test :  .\unittest\android\discover\discover.spec.js
 
 var dbFacade = require('../../../DB/DBFacadeAndroid');
-
+var config = require('../../../config').fcm;
 exports.registerDiscover = function (_req, _data, _callback) {
     if (_req.file) // 이미지 파일이 있을 때만 url_picture 설정
         _req.body.url_picture = _req.file.destination + _req.file.filename;
@@ -25,6 +25,8 @@ exports.registerDiscover = function (_req, _data, _callback) {
         );
 
         find.matchingFind({
+            mode: config.mode.DISCOVERFIND,
+            idx: _idx,
             date: new Date(_data.discover_datetime),
             latitude: _data.latitude,
             longitude: _data.longitude,

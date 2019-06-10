@@ -357,6 +357,9 @@
         var j = 0;
         var tmp;
         var comp_date;
+        while(parseInt((data.date[j].m).substr(5,6)) > month){
+            j++;
+        }
         for (var i = 0; i < 12; i++) {
             tmp = String((month - i + 12) % 12);
             if (parseInt(tmp) === 0) tmp = String(12);

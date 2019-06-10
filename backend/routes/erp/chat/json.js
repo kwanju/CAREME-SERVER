@@ -20,4 +20,10 @@ router.post('/getChat', insertIdxIntoBody, function (_req, _res) {
         _res.send(_result);
     });
 });
+
+router.post('/getUserInChat', function (_req, _res) {
+    chat.getUserInChat(_req.body, function (_user) {
+        _res.send(_user);
+    });
+});
 module.exports = router;

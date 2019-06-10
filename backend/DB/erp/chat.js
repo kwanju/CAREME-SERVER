@@ -18,7 +18,7 @@ exports.getChatList = function (_data, _callback) {
     var on = "ON cus.user_idx = u.idx AND maxCus.recent_send_time = cus.send_time "
     var where = "WHERE cus.shelter_idx = ? "
     var groupBy = "GROUP BY cus.user_idx ORDER BY user_idx "
-    poolAdapter.execute(select + from + maxSelect + on + where + groupBy, [_data.shelter_idx,_data.shelter_idx], function (_results) {
+    poolAdapter.execute(select + from + maxSelect + on + where + groupBy, [_data.shelter_idx, _data.shelter_idx], function (_results) {
         _callback(_results);
     });
 };
@@ -52,5 +52,12 @@ exports.checkChatReadState = function (_data, _callback) {
 
     poolAdapter.execute(select + from + where, [_data.idx], function (_results) {
         _callback(_results);
+    });
+}
+
+exports.getUserInChat = function (_data, _callback) {
+    var select = "SELECT nickname FROM user WHERE idx=?";
+    poolAdapter.execute(select, [_data.idx], function (_results) {
+        _callback(_results[0]);
     });
 }

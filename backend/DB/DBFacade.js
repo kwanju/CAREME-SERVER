@@ -360,3 +360,8 @@ exports.checkChatReadState = function (_data, _callback) {
     var chat = require('./erp/chat');
     chat.checkChatReadState(_data, _callback);
 }
+
+exports.getUserInChat = function (_data, _callback) {
+    var chat = require('./erp/chat');
+    chat.getUserInChat(_data, _callback);
+}

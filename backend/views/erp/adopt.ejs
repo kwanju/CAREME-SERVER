@@ -12,10 +12,10 @@
 
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-wait-tab" data-toggle="tab" href="#adopt_applyList" role="tab" aria-controls="nav-wait"
-            aria-selected="true">입양 신청자</a>
-        <a class="nav-item nav-link" id="nav-permit-tab" data-toggle="tab" href="#adopt_permittedList" role="tab" aria-controls="nav-permit"
-            aria-selected="false">승인된 입양자</a>
+        <a class="nav-item nav-link active" id="nav-wait-tab" data-toggle="tab" href="#adopt_applyList" role="tab"
+            aria-controls="nav-wait" aria-selected="true">입양 신청자</a>
+        <a class="nav-item nav-link" id="nav-permit-tab" data-toggle="tab" href="#adopt_permittedList" role="tab"
+            aria-controls="nav-permit" aria-selected="false">승인된 입양자</a>
     </div>
 </nav>
 
@@ -30,14 +30,16 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">검색</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="search..." aria-label="Username" aria-describedby="basic-addon1" id="adopt_search">
+                        <input type="text" class="form-control" placeholder="search..." aria-label="Username"
+                            aria-describedby="basic-addon1" id="adopt_search">
                     </div>
                 </div>
             </div>
             <div class="table-responsive">
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="adopt_applyList" style="margin-top:20px">
-                        <table class="table table-bordered table-hover display" id="adopt_waitTable" style="text-align: center">
+                        <table class="table table-bordered table-hover display" id="adopt_waitTable"
+                            style="text-align: center">
                             <thead>
                                 <tr>
                                     <th scope="col">신청번호</th>
@@ -55,7 +57,8 @@
                         </table>
                     </div>
                     <div class="ui segment tab-pane fade" id="adopt_permittedList" style="margin-top:20px">
-                        <table class="table table-bordered table-hover display" id="adopt_permitTable" style="text-align: center">
+                        <table class="table table-bordered table-hover display" id="adopt_permitTable"
+                            style="text-align: center">
                             <thead>
                                 <tr>
                                     <th scope="col">신청번호</th>
@@ -88,7 +91,7 @@
 
                 var waitDropdown = "<div class='dropdown-menu dropdown-menu-left'>" +
                     "<a class='dropdown-item waitUserSchedule'>봉사기록확인</a>" +
-                    "<a class='dropdown-item'>채팅</a>"
+                    "<a class='dropdown-item adopt-chat'>채팅</a>"
 
                 $.each(data.adopt, function (idx, adopt) {
                     $('#adopt_waiting').append(
@@ -136,7 +139,7 @@
 
                 var permitDropdown = "<div class='dropdown-menu dropdown-menu-left'>" +
                     "<a class='dropdown-item permitUserSchedule'>봉사기록확인</a>" +
-                    "<a class='dropdown-item'>채팅</a>"
+                    "<a class='dropdown-item adopt-chat'>채팅</a>"
 
                 $.each(data.adopt, function (idx, adopt) {
                     console.log(data.adopt)
@@ -253,11 +256,16 @@
         getUserScheduleList(idx);
     });
 
-        $(document).on('click', '.permitUserSchedule', function (e) {
+    $(document).on('click', '.permitUserSchedule', function (e) {
         var idx = $(this).closest('tr').find('span').html();
         console.log($(this));
         console.log("user : " + idx);
         getUserScheduleList(idx);
+    });
+
+    $(document).on('click', '.adopt-chat', function () {
+        var idx = $(this).closest('tr').find('span').html();
+        openChatWithUser(idx);
     });
 
 </script>

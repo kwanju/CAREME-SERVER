@@ -357,8 +357,11 @@
         var j = 0;
         var tmp;
         var comp_date;
-        while((parseInt((data.date[j].m).substr(0,4)) === year && parseInt((data.date[j].m).substr(5,6)) > month) //해당년도에 이번달 이후의 데이터는 pass
-            || parseInt((data.date[j].m).substr(0,4)) > year){ //내년 이후의 데이터는 pass
+        while(parseInt((data.date[j].m).substr(0,4)) > year){
+            j++;
+        }
+        while((parseInt((data.date[j].m).substr(0,4)) === year && parseInt((data.date[j].m).substr(5,6)) > month)) //해당년도에 이번달 이후의 데이터는 pass
+        { //내년 이후의 데이터는 pass
             j++;
         }
         for (var i = 0; i < 12; i++) {

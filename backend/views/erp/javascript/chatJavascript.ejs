@@ -78,6 +78,29 @@
                     )
                 }
 
+                var idx = new URL(location.href).searchParams.get("user_idx");
+                if (idx != null) {
+                    console.log(idx);
+                    if (!openChat(idx)) {
+                        $.ajax({
+                            url: "/erp/chat/json/getUserInChat",
+                            method: "POST",
+                            data: { idx: idx },
+                            success: function (data) {
+                                $('#chat_chatList').append(
+                                    '<li class="contact">' +
+                                    '<span class="hide-user-idx" style="display:none">' + idx + '</span>' +
+                                    '<div class="wrap">' +
+                                    '<div class="meta row"><div class="col-sm-9">' +
+                                    '<p class="name">' + data.nickname + '</p>' +
+                                    '<p class="preview">' + '</p>' +
+                                    '</div><div class="col-sm-3"><span class="chat-badge ' + (chat.count == undefined ? "" : "label bg-danger float-right") + '">' + (chat.count == undefined ? "" : chat.count) + '</span></div></div></div></li>'
+                                );
+                                openChat(idx)
+                            }
+                        });
+                    }
+                }
 
             }
         });
@@ -111,7 +134,24 @@
     });
 
 
+    function openChat(_idx) {
+        var useridxSpans = $('.hide-user-idx');
 
+        var target = null;
+        for (var i = 0; i < useridxSpans.length; i++)
+            if ($(useridxSpans[i]).html() == _idx) {
+                target = $(useridxSpans[i])
+                break;
+            }
+        if (target == null)
+            return false
+        else {
+            console.log(target.closest('.contact'))
+            target.closest('.contact').trigger('click')
+            return true
+        }
+
+    }
 
     function findContact(_idx, _callback) {
         var useridxSpans = $('.hide-user-idx');
@@ -167,7 +207,7 @@
         type = _type == 1 ? "sent" : "replies";
         $('<li class="' + type + '"><p>' + _message + '</p></li>').appendTo($('.messages ul'));
         //$('.contact.active .preview').html('<span>You: </span>' + message);
-        findContact(mSelected_user_idx,function(_badge,_preview){
+        findContact(mSelected_user_idx, function (_badge, _preview) {
             _preview.html(_message)
         });
         setTimeout(function () {

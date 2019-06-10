@@ -46,6 +46,12 @@ exports.getShelter = function (_data, _callback, _testcallback) {
     });
 }
 
+exports.getUserInChat = function (_data, _callback, _testcallback) {
+    dbFacade.getUserInChat(_data, function (_user) {
+        _callback(_user)
+    });
+}
+
 var combine = function (_chatList, _chatNewList) {
     var j = 0;
     for (var i = 0; i < _chatNewList.length; i++) {

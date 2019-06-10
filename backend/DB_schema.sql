@@ -156,7 +156,7 @@ CREATE TABLE adopt(
     read_state int(1) default 0 COMMENT '1: 처리, 0: 처리안함',
     PRIMARY KEY(idx),
     FOREIGN KEY(animal_idx) REFERENCES animal(idx),
-    FOREIGN KEY(user_idx) REFERENCES user(idx),
+    FOREIGN KEY(user_idx) REFERENCES user(idx)
 );
 
 CREATE TABLE chat_user_shelter(

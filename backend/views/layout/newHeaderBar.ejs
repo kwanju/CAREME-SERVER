@@ -52,7 +52,12 @@
 <script>
     function openChat() {
         window.open("/erp/chat/chat",
-            "채팅창", "width=800, height=500, toolbar=no, menubar=no, scrollbars=no, resizable=yes")
+            "채팅창", "width=800, height=500, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no")
+    }
+
+    function openChatWithUser(_idx) {
+        window.open("/erp/chat/chat?user_idx=" + _idx,
+            "채팅창", "width=800, height=500, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no")
     }
     $(document).on('click', '#new_header_btn_message', function () {
         console.log("hello");
@@ -61,4 +66,6 @@
         //var idx = $(this).closest('tr').find('th').html();
         openChat();
     })
+
+
 </script>

@@ -12,12 +12,12 @@
 
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-wait-tab" data-toggle="tab" href="#waitList" role="tab" aria-controls="nav-wait"
-            aria-selected="true">봉사대기자</a>
-        <a class="nav-item nav-link" id="nav-permit-tab" data-toggle="tab" href="#permittedList" role="tab" aria-controls="nav-permit"
-            aria-selected="false">승인된 봉사자</a>
-        <a class="nav-item nav-link" id="nav-calendar-tab" data-toggle="tab" href="#volunteerCalendar" role="tab" aria-controls="nav-calendar"
-            aria-selected="false">일정관리</a>
+        <a class="nav-item nav-link active" id="nav-wait-tab" data-toggle="tab" href="#waitList" role="tab"
+            aria-controls="nav-wait" aria-selected="true">봉사대기자</a>
+        <a class="nav-item nav-link" id="nav-permit-tab" data-toggle="tab" href="#permittedList" role="tab"
+            aria-controls="nav-permit" aria-selected="false">승인된 봉사자</a>
+        <a class="nav-item nav-link" id="nav-calendar-tab" data-toggle="tab" href="#volunteerCalendar" role="tab"
+            aria-controls="nav-calendar" aria-selected="false">일정관리</a>
     </div>
 </nav>
 
@@ -31,14 +31,16 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">검색</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="search..." aria-label="Username" aria-describedby="basic-addon1" id="volunteer_search">
+                        <input type="text" class="form-control" placeholder="search..." aria-label="Username"
+                            aria-describedby="basic-addon1" id="volunteer_search">
                     </div>
                 </div>
             </div>
             <div class="table-responsive">
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="waitList" style="margin-top:20px">
-                        <table id="waitTable" class="table table-bordered table-hover display" style="text-align: center">
+                        <table id="waitTable" class="table table-bordered table-hover display"
+                            style="text-align: center">
                             <thead>
                                 <tr>
                                     <th scope="col">번호</th>
@@ -60,7 +62,8 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="permittedList" style="margin-top:20px">
-                        <table id="permitTable" class="table table-bordered table-hover display" style="text-align: center">
+                        <table id="permitTable" class="table table-bordered table-hover display"
+                            style="text-align: center">
                             <thead>
                                 <tr>
                                     <th scope="col">번호</th>
@@ -121,7 +124,7 @@
 
                 var permitUserDropdown = "<div class='dropdown-menu dropdown-menu-left'>" +
                     "<a class='dropdown-item getPermitUser'>봉사기록확인</a>" +
-                    "<a class='dropdown-item'>채팅</a>"
+                    "<a class='dropdown-item volunteer-chat'>채팅</a>"
 
                 $.each(data.list, function (idx, list) {
                     // **** 추후에 수정할 때 animal idx 없앨 때 다른데 안에 넣어서 style display none 해줘야 함수가 동작함 ****
@@ -170,7 +173,7 @@
 
                     var waitUserDropdown = "<div class='dropdown-menu dropdown-menu-left'>" +
                         "<a class='dropdown-item getUser'>봉사기록확인</a>" +
-                        "<a class='dropdown-item'>채팅</a>"
+                        "<a class='dropdown-item volunteer-chat'>채팅</a>"
 
 
                     // **** 추후에 수정할 때 animal idx 없앨 때 다른데 안에 넣어서 style display none 해줘야 함수가 동작함 ****
@@ -341,6 +344,10 @@
         console.log("user : " + idx);
         getUserScheduleList(idx);
     });
+    $(document).on('click', '.volunteer-chat', function (e) {
+        var idx = $(this).closest('tr').find('span').html();
+        openChatWithUser(idx);
+    });
 
     $(document).on('click', '.getPermitUser', function (e) {
         var idx = $(this).closest('tr').find('span').html();
@@ -349,5 +356,5 @@
     });
 </script>
 <% include ./../modal/animalInfoModal.ejs%>
-    <% include ./../modal/animalScheduleModal.ejs%>
-        <% include ./../modal/userScheduleList.ejs%>
+<% include ./../modal/animalScheduleModal.ejs%>
+<% include ./../modal/userScheduleList.ejs%>

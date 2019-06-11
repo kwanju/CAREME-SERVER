@@ -65,7 +65,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="1310" />
-          <entry key="ejs" value="13610" />
+          <entry key="ejs" value="14199" />
           <entry key="html" value="1" />
           <entry key="js" value="13649" />
           <entry key="json" value="38" />
@@ -75,7 +75,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="1310" />
-          <entry key="EJS" value="13610" />
+          <entry key="EJS" value="14199" />
           <entry key="HTML" value="1" />
           <entry key="JSON" value="38" />
           <entry key="JavaScript" value="13649" />
@@ -137,8 +137,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/erp/erp.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="361" column="9" lean-forward="true" selection-start-line="361" selection-start-column="9" selection-end-line="361" selection-end-column="9" />
+            <state relative-caret-position="46">
+              <caret line="365" column="13" lean-forward="true" selection-start-line="365" selection-start-column="13" selection-end-line="365" selection-end-column="13" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#a#0;n#li#0;n#!!top" expanded="true" />
               </folding>
@@ -510,7 +510,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="230536000" />
+    <option name="totallyTimeSpent" value="234881000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -901,8 +901,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/erp/erp.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="361" column="9" lean-forward="true" selection-start-line="361" selection-start-column="9" selection-end-line="361" selection-end-column="9" />
+        <state relative-caret-position="46">
+          <caret line="365" column="13" lean-forward="true" selection-start-line="365" selection-start-column="13" selection-end-line="365" selection-end-column="13" />
           <folding>
             <element signature="n#style#0;n#div#0;n#a#0;n#li#0;n#!!top" expanded="true" />
           </folding>

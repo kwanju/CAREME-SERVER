@@ -356,13 +356,14 @@
     function lableNchartDataSet(data, idx) {
         var j = 0;
         var tmp;
+        var tmp_year = year;
         var comp_date;
-        while(parseInt((data.date[j].m).substr(0,4)) > year){
-            j++;
-        }
-        while((parseInt((data.date[j].m).substr(0,4)) === year && parseInt((data.date[j].m).substr(5,6)) > month)) //해당년도에 이번달 이후의 데이터는 pass
-        { //내년 이후의 데이터는 pass
-            j++;
+
+        if(data.date[j] !== undefined) {
+            while ((parseInt((data.date[j].m).substr(0, 4)) === year && parseInt((data.date[j].m).substr(5, 6)) > month)){
+                j++;
+                if(data.date[j] === undefined) break;
+            }
         }
         for (var i = 0; i < 12; i++) {
             tmp = String((month - i + 12) % 12);
@@ -370,8 +371,9 @@
             if (tmp.length === 1) {
                 tmp = "0" + tmp;
             }
-            comp_date = String(year) + '-' + tmp; // 2019-01이면 다음연산때 year -1
-            if (parseInt(tmp) === 1) year--;
+            comp_date = String(tmp_year) + '-' + tmp;
+            if (parseInt(tmp) === 1) tmp_year--;// 2019-01이면 다음연산때 year -1
+
             if (data.date[j] === undefined || data.date[j].m !== comp_date) {
                 lable_data[idx].push(months[parseInt(tmp)]);
                 chart_data[idx].push(0);

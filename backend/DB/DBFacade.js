@@ -365,3 +365,8 @@ exports.getUserInChat = function (_data, _callback) {
     var chat = require('./erp/chat');
     chat.getUserInChat(_data, _callback);
 }
+
+exports.getPushDataInAdopt = function (_data, _callback) {
+    var adopt = require('./erp/adopt');
+    adopt.getPushData(_data, _callback)
+}

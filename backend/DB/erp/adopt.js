@@ -31,7 +31,7 @@ exports.addAdoptAnimal = function (_data, _callback) {
 exports.setAdoptState = function (_data, _callback) {
     var update = "UPDATE animal SET state=2 ";
     var where = "WHERE idx=?";
-    poolAdapter.execute(update+where, [_data.animalIdx], function (_results) {
+    poolAdapter.execute(update + where, [_data.animalIdx], function (_results) {
         _callback();
     });
 };
@@ -84,7 +84,7 @@ exports.permitAdopt = function (_data, _callback) {
     var where2 = "WHERE adopt.idx=?";
 
     poolAdapter.execute(update + where, [_data.idx], function () { //adopt idx
-        poolAdapter.execute(update2+where2, [_data.idx], function () {
+        poolAdapter.execute(update2 + where2, [_data.idx], function () {
             _callback();
         })
     });
@@ -97,7 +97,7 @@ exports.rejectAdopt = function (_data, _callback) {
     var where2 = "WHERE adopt.idx=?";
 
     poolAdapter.execute(update + where, [_data.idx], function () { //adopt idx
-        poolAdapter.execute(update2+where2, [_data.idx], function () {
+        poolAdapter.execute(update2 + where2, [_data.idx], function () {
             _callback();
         })
     });
@@ -120,5 +120,15 @@ exports.updateAdoptNotRead = function (_data, _callback) {
 
     poolAdapter.execute(update + where, [_data], function () {
         _callback();
+    });
+}
+
+exports.getPushData = function (_data, _callback) {
+    var select = "SELECT  u.token, ani.name AS animalName, she.name AS shelterName "
+    var from = "FROM adopt AS ad INNER JOIN user AS u INNER JOIN animal AS ani INNER JOIN shelter AS she "
+    var on = "ON ad.user_idx = u.idx AND ad.animal_idx = ani.idx AND ani.shelter_idx = she.idx "
+    var where = "WHERE ad.idx = ?"
+    poolAdapter.execute(select + from + on + where, [_data.idx], function (_results) {
+        _callback(_results[0]);
     });
 }

@@ -1,4 +1,5 @@
 var dbFacade = require('../../DB/DBFacade');
+var fcm = require('../../utils/android/fcm');
 
 exports.addAdopt = function (_data, _callback) {
     var res = { result: 1 };
@@ -15,7 +16,7 @@ var addAdoptAnimal = function (_data, _res, _callback) {
             _callback();
     });
 }
-var setAdoptState = function(_data, _res, _callback){
+var setAdoptState = function (_data, _res, _callback) {
     dbFacade.setAdoptState(_data, function (_results) {
         _res.adopt = _results;
         if (typeof _callback == 'function')
@@ -73,10 +74,19 @@ exports.getAdopt = function (_data, _callback) {
     });
 };
 
-exports.permitAdopt = function (_data, _callback) {
+exports.permitAdopt = function (_data, _callback, _testcallback) {
     dbFacade.permitAdopt(_data, function (_results) {
         var res = { result: 1 };
         _callback(res);
+        dbFacade.getPushDataInAdopt(_data, function (_push) {
+            var config = require('../../config').fcm;
+            if (typeof _testcallback == 'function')
+                _testcallback(_push)
+            fcm.send(_push.token, "", config.mode.ADOPT, {
+                message: _push.animalName + "(" + _push.shelterName + ") 입양신청이 허가되었습니다."
+            })
+        });
+
     });
 };
 
@@ -84,5 +94,13 @@ exports.rejectAdopt = function (_data, _callback) {
     dbFacade.rejectAdopt(_data, function (_results) {
         var res = { result: 1 };
         _callback(res);
+        dbFacade.getPushDataInAdopt(_data, function (_push) {
+            var config = require('../../config').fcm;
+            if (typeof _testcallback == 'function')
+                _testcallback(_push)
+            fcm.send(_push.token, "", config.mode.ADOPT, {
+                message: _push.animalName + "(" + _push.shelterName + ") 입양신청이 거절되었습니다."
+            })
+        });
     });
 };

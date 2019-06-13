@@ -48,7 +48,7 @@ function runCheckNewSchedule() {
     checkNewSchedule();
     setInterval(function () {
         checkNewSchedule();
-    }, 5000);
+    }, 2000);
 }
 
 function setScheduleBadge(_number) {

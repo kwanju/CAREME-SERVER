@@ -1,6 +1,6 @@
 const assert = require('assert');
 
-describe.only("permitDiscoverRequest Test", function () {
+describe("permitDiscoverRequest Test", function () {
     var adopt = require('../../../model/erp/adopt');
     it("result is 1", function (done) {
         adopt.userLogin(
@@ -23,6 +23,21 @@ describe.only("permitDiscoverRequest Test", function () {
             }
             , function (_result) {
                 assert.equal(_result.result, 0);
+                done();
+            });
+    });
+});
+
+describe.only("permitDiscoverRequest Test", function () {
+    var adopt = require('../../../model/erp/adopt');
+    it("fcm test", function (done) {
+        adopt.permitAdopt(
+            {
+                idx: "3"
+            }
+            , function () { }, function (_push) {
+                console.log(_push)
+                assert(_push)
                 done();
             });
     });

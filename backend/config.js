@@ -24,7 +24,8 @@ config.fcm = {
         DISCOVERFIND:"1",
         ANIMALFIND : "2",
         SCHEDULE : "3",
-        DISCOVERMATHCING:"4"
+        DISCOVERMATHCING:"4",
+        ADOPT:"5"
     }
 }
 

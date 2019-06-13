@@ -18,7 +18,9 @@ exports.registerDiscover = function (_req, _data, _callback) {
             {
                 longitude: _data.longitude,
                 latitude: _data.latitude,
-                discover_idx: _idx
+                discover_idx: _idx,
+                latitude: _data.latitude,
+                longitude: _data.longitude
             }, function () {
 
             }

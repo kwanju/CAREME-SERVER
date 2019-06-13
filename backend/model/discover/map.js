@@ -22,15 +22,15 @@ var getDistanceFromLatLonInKm = function (lat1, lng1, lat2, lng2) {//y1 x1 y2 x2
     return d;
 }
 
-exports.getSortedShelter = function (_location, callback) {
+exports.getSortedShelter = function (_data, callback) {
     //var addr = '서울 종로구 경교장1길 7-1'; //주소는 DB에서 받아오고, req는 앱 사용자의 좌표값\
     var shelterAry = new Array();
 
-    dbFacade.getAllShelterLocation(function (_result) {
+    dbFacade.getAllShelterLocation(_data,function (_result) {
         for (var i = 0; i < _result.length; i++) {
             shelterAry.push({
                 idx: _result[i].idx,
-                distance: getDistanceFromLatLonInKm(_result[i].longitude, _result[i].latitude, _location.longitude, _location.latitude)
+                distance: getDistanceFromLatLonInKm(_result[i].longitude, _result[i].latitude, _data.longitude, _data.latitude)
             });
         }
         shelterAry.sort(distanceSort);

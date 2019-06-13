@@ -86,9 +86,9 @@ exports.checkScheduleReadState = function (_data, _callback) {
     schedule.checkScheduleReadState(_data, _callback);
 }
 
-exports.getAllShelterLocation = function (_callback) {
+exports.getAllShelterLocation = function (_data,_callback) {
     var addr = require('./discover/map');
-    addr.getAllShelterLocation(_callback);
+    addr.getAllShelterLocation(_data,_callback);
 }
 
 exports.getScheduleListPermitted = function (_data, _callback) {

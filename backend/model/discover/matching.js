@@ -14,6 +14,8 @@ exports.matching = function (_data, _callback) {
         dbFacade.getAllDiscoverRequestInDiscover({ discover_idx: _data.discover_idx }, function (_results) {
             var shelter = closestShelterInNew(_shelters, _results);
             //discover_request 요청
+            if (shelter == undefined)
+                return;
             dbFacade.createDiscoverRequest(
                 {
                     discover_idx: _data.discover_idx,

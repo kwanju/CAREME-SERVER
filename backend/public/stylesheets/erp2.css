@@ -1,12 +1,17 @@
-.container-volunteer{
+.container-volunteer {
     background-color: white;
     text-align: center;
     height: 35px;
     line-height: 35px;
+    overflow: auto;
+    -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+    display: none !important; // 윈도우 크롬 등
 }
 #volunteer_user{
-    overflow: auto;
+    overflow-y: auto;
 }
 #volunteer_animal{
-    overflow: auto;
+    overflow-y: auto;
 }

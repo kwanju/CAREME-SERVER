@@ -305,7 +305,17 @@
     }
     function form_ajax() {
         var formData = $('#form-adoptRegister').serialize();
+        var userIdxCheck = $('#adopt_user_idx').val();
+        var animalNameCheck = $('#animalName').val();
 
+        if(userIdxCheck === ''){
+             alert('로그인 해주세요');
+             return;
+        }
+        if(animalNameCheck=== ''){
+            alert('유기견을 선택해주세요');
+            return;
+        }
         $.ajax({
             url: '/adoptRegister/action/addAdopt',
             method: 'POST',

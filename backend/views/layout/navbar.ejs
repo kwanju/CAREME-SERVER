@@ -10,11 +10,13 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="mr-auto"></ul>
     <ul class="navbar-nav navbar-right navbar_list">
+    <% if(csession!=0) { %>
       <li class="nav-item active">
         <a class="nav-link" href="/erp/main/main">관리 프로그램
           <span class="sr-only">(current)</span>
         </a>
       </li>
+      <% } %>
       <li class="nav-item active">
         <a class="nav-link" href="/adoptRegister/adoptRegister">입양 신청
           <span class="sr-only">(current)</span>
